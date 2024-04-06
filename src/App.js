@@ -1,15 +1,15 @@
 import './styles/styles.css';
-import styles from './App.module.css';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import * as S from './App.styles.js';
+import Header from './components/Header/Header.container.js';
+import Footer from './components/Footer/Footer.container.js';
 
 const App = () => {
   return (
-    <div className={styles.container}>
+    <S.AppContainer>
       <Header />
       <div>asdf</div>
       <Footer />
-    </div>
+    </S.AppContainer>
   );
 };
 
