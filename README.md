@@ -5,7 +5,6 @@
 ### 📌 Branch Naming Convention (Github-Flow)
 ```
 main ── feature
-└── hotfix
 ```
 
 - main : 배포 중인 서비스 브랜치
