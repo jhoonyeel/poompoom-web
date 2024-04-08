@@ -1,9 +1,9 @@
 import HeaderUI from './Header.presenter';
 
-const Header = () => {
+function Header() {
   console.log('header');
   const name = 'asdf';
   return <HeaderUI name={name} />;
-};
+}
 
 export default Header;

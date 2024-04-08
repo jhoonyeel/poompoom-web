@@ -1,8 +1,8 @@
 import FooterUI from './Footer.presenter';
 
-const Footer = () => {
+function Footer() {
   console.log('footer');
   return <FooterUI />;
-};
+}
 
 export default Footer;
