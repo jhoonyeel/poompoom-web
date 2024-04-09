@@ -1,16 +1,15 @@
-import './styles/styles.css';
-import styles from './App.module.css';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import * as S from './App.styles';
+import HeaderUI from './components/Header/Header.presenter';
+import FooterUI from './components/Footer/Footer.presenter';
 
-const App = () => {
+function App() {
   return (
-    <div className={styles.container}>
-      <Header />
+    <S.AppContainer>
+      <HeaderUI />
       <div>asdf</div>
-      <Footer />
-    </div>
+      <FooterUI />
+    </S.AppContainer>
   );
-};
+}
 
 export default App;
