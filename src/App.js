@@ -1,14 +1,18 @@
+import { ThemeProvider } from 'styled-components';
 import * as S from './App.styles';
-import HeaderUI from './components/Header/Header.presenter';
-import FooterUI from './components/Footer/Footer.presenter';
+import Header from './components/Header/Header.container';
+import Footer from './components/Footer/Footer.container';
+import { basicTheme } from './shared/Theme';
 
 function App() {
   return (
-    <S.AppContainer>
-      <HeaderUI />
-      <div>asdf</div>
-      <FooterUI />
-    </S.AppContainer>
+    <ThemeProvider theme={basicTheme}>
+      <S.AppContainer>
+        <Header />
+        <div>asdf</div>
+        <Footer />
+      </S.AppContainer>
+    </ThemeProvider>
   );
 }
 

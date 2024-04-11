@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
-  width: 80%;
-  margin: 0 auto;
+  width: ${({ theme }) => theme.width};
+  margin: ${({ theme }) => theme.margin};
+  color: ${({ theme }) => theme.colors.themeTestHeader};
 `;
