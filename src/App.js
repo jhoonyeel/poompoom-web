@@ -9,7 +9,7 @@ function App() {
     <ThemeProvider theme={basicTheme}>
       <S.AppContainer>
         <Header />
-        <div>asdf</div>
+        <div>본문입니다.</div>
         <Footer />
       </S.AppContainer>
     </ThemeProvider>
