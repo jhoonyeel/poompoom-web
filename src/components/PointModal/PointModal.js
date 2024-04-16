@@ -3,8 +3,8 @@ function PointModal({ post, onClose, onConfirm }) {
     <div className="modal">
       <div className="modal-content">
         <h2>포스트 확인</h2>
-        <p>{post.title}</p>
-        <p>{post.content}</p>
+        <p>{post && post.title}</p>
+        <p>{post && post.content}</p>
         <button type="button" onClick={onClose}>
           닫기
         </button>

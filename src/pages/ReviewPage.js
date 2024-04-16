@@ -4,7 +4,7 @@ import ReviewPost from '../components/ReviewPost/ReviewPost';
 import QuickGift from '../components/QuickGift/QuickGift';
 import ReviewPostHeader from '../components/ReviewPostHeader/ReviewPostHeader';
 
-function Review() {
+function ReviewPage() {
   const [selectedPost, setSelectedPost] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -48,16 +48,17 @@ function Review() {
   return (
     <div className="app">
       <ReviewPostHeader />
-      {isModalOpen && <PointModal post={selectedPost} onClose={handleCloseModal} onConfirm={handleConfirmPost} />}
       <div className="post-list">
+        {console.log('실행')}
         {/* 포스트 목록을 렌더링 */}
         {posts.map((post) => (
           <ReviewPost key={post.id} post={post} onPostClick={handlePostClick} />
         ))}
       </div>
+      {isModalOpen && <PointModal post={selectedPost} onClose={handleCloseModal} onConfirm={handleConfirmPost} />}
       <QuickGift />
     </div>
   );
 }
 
-export default Review;
+export default ReviewPage;
