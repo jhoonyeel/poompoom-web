@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import PointModal from '../components/PointModal/PointModal';
 import ReviewPost from '../components/ReviewPost/ReviewPost';
+import QuickGift from '../components/QuickGift/QuickGift';
+import ReviewPostHeader from '../components/ReviewPostHeader/ReviewPostHeader';
 
 function Review() {
   const [selectedPost, setSelectedPost] = useState(null);
@@ -45,6 +47,7 @@ function Review() {
 
   return (
     <div className="app">
+      <ReviewPostHeader />
       {isModalOpen && <PointModal post={selectedPost} onClose={handleCloseModal} onConfirm={handleConfirmPost} />}
       <div className="post-list">
         {/* 포스트 목록을 렌더링 */}
@@ -52,6 +55,7 @@ function Review() {
           <ReviewPost key={post.id} post={post} onPostClick={handlePostClick} />
         ))}
       </div>
+      <QuickGift />
     </div>
   );
 }
