@@ -9,6 +9,7 @@ function CommentWrite() {
     </Wrapper>
   );
 }
+export default CommentWrite;
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,5 +30,3 @@ const SubmitBtn = styled.button`
   width: 6rem;
   height: 2rem;
 `;
-
-export default CommentWrite;
