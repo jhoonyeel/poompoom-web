@@ -15,10 +15,16 @@ function ReviewPost({ post, onPostClick }) {
   };
   return (
     <div className="post-item">
-      <ReviewPostBackground onClick={() => onPostClick(post)} onMouseEnter={handleMouseEnter} />
+      <ReviewPostBackground
+        post={post}
+        onPostClick={onPostClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      />
       <ReviewPostBody expanded={isExpanded} />
       <ReviewPostShortcut
-        onClick={() => onPostClick(post)}
+        post={post}
+        onPostClick={onPostClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />

@@ -1,6 +1,8 @@
+import styled from 'styled-components';
+
 function PointModal({ post, onClose, onConfirm }) {
   return (
-    <div className="modal">
+    <Container className="modal">
       <div className="modal-content">
         <h2>포스트 확인</h2>
         <p>{post && post.title}</p>
@@ -12,8 +14,19 @@ function PointModal({ post, onClose, onConfirm }) {
           확인
         </button>
       </div>
-    </div>
+    </Container>
   );
 }
 
 export default PointModal;
+
+const Container = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.1); /* 배경에 투명도 추가 */
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 1000; /* 다른 요소 위에 나타나도록 높은 값 설정 */
+`;
