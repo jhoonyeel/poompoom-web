@@ -30,6 +30,30 @@ function ReviewPage() {
       excerpt: '세 번째 포스트의 요약입니다.',
       content: '세 번째 포스트의 내용입니다.',
     },
+    {
+      id: 4,
+      title: '네 번째 포스트',
+      excerpt: '네 번째 포스트의 요약입니다.',
+      content: '네 번째 포스트의 내용입니다.',
+    },
+    {
+      id: 5,
+      title: '다섯 번째 포스트',
+      excerpt: '다섯 번째 포스트의 요약입니다.',
+      content: '다섯 번째 포스트의 내용입니다.',
+    },
+    {
+      id: 6,
+      title: '여섯 번째 포스트',
+      excerpt: '여섯 번째 포스트의 요약입니다.',
+      content: '여섯 번째 포스트의 내용입니다.',
+    },
+    {
+      id: 7,
+      title: '일곱 번째 포스트',
+      excerpt: '일곱 번째 포스트의 요약입니다.',
+      content: '일곱 번째 포스트의 내용입니다.',
+    },
   ];
 
   const handlePostClick = (post) => {
@@ -51,11 +75,11 @@ function ReviewPage() {
   return (
     <Container>
       <ReviewPostHeader />
-      <div className="post-list">
+      <PostList className="post-list">
         {posts.map((post) => (
           <ReviewPost key={post.id} post={post} onPostClick={handlePostClick} />
         ))}
-      </div>
+      </PostList>
       {isModalOpen && (
         <>
           <ModalBackdrop />
@@ -75,6 +99,14 @@ export default ReviewPage;
 const Container = styled.div`
   width: 80%;
   margin: 0 auto;
+`;
+
+const PostList = styled.div`
+  display: flex;
+  flex-wrap: wrap; /* 내용이 넘칠 때 줄바꿈 설정 */
+  justify-content: space-between;
+  padding: 10%;
+  border: 3px solid #aaa;
 `;
 
 const ModalBackdrop = styled.div`
