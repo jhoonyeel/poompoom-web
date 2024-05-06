@@ -1,14 +1,11 @@
 import styled from 'styled-components';
-import QuickGift from '../components/QuickGift/QuickGift';
-import ReviewPostHeader from '../components/ReviewPostHeader/ReviewPostHeader';
-import ReviewPostBox from '../components/ReviewPostBox/ReviewPostBox';
 
-function ReviewPage() {
+function HomePage() {
   return (
     <Container>
-      <ReviewPostHeader />
-      <ReviewPostBox />
-      <QuickGift />
+      <ImgBox src="http://via.placeholder.com/1240x520" alt="캘린더 이미지" />
+      <ImgBox src="http://via.placeholder.com/1240x520" alt="기능 소개 이미지" />
+      <ImgBox src="http://via.placeholder.com/1240x520" alt="트렌드 대시보드 이미지" />
       <ButtonBox>
         <button type="button">↑</button> {/** 추후에 컴포넌트 사용 */}
       </ButtonBox>
@@ -16,11 +13,16 @@ function ReviewPage() {
   );
 }
 
-export default ReviewPage;
+export default HomePage;
 
 const Container = styled.div`
   width: 80%;
   margin: 0 auto;
+`;
+
+const ImgBox = styled.img`
+  width: 100%;
+  border: 3px solid #aaa;
 `;
 
 const ButtonBox = styled.div`
