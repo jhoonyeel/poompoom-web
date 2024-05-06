@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import * as S from './Header.styles';
+import PostSearch from '../PostSearch/PostSearch';
 
 function HeaderUI() {
   return (
@@ -8,6 +9,10 @@ function HeaderUI() {
       <LogoBox>
         <span>로고</span> {/** 추후에 컴포넌트 사용 */}
       </LogoBox>
+      <div>
+        <input type="text" />
+      </div>
+      <PostSearch />
       <ProfileBox>
         <span>프로필 버튼</span> {/** 추후에 컴포넌트 사용 */}
       </ProfileBox>
