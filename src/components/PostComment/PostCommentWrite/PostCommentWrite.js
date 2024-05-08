@@ -1,7 +1,9 @@
 import { styled } from 'styled-components';
 
-function CommentWrite() {
-  const onClickSubmit = () => {};
+function PostCommentWrite() {
+  const onClickSubmit = () => {
+    /* 댓글 등록  */
+  };
   return (
     <Container>
       <CommentBox placeholder="댓글을 입력하세요." />
@@ -9,24 +11,34 @@ function CommentWrite() {
     </Container>
   );
 }
-export default CommentWrite;
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 40rem;
+
+  position: relative;
+
+  width: 617px;
+  height: 50px;
+
   margin: auto;
+  border-radius: 6px;
 `;
 
 const CommentBox = styled.textarea`
-  width: 90%;
-  height: 3rem;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
   resize: none;
 `;
 
 const SubmitBtn = styled.button`
+  position: absolute;
+  right: 10px;
   width: 6rem;
   height: 2rem;
 `;
+
+export default PostCommentWrite;

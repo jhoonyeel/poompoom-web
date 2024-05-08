@@ -38,7 +38,7 @@ function CommunityWrite({ isEdit }) {
     }
   };
   return (
-    <Wrapper>
+    <Container>
       <Title>{isEdit ? '게시글 수정' : '게시글 등록'}</Title>
       <Content placeholder="내용을 입력해 주세요" onChange={onChangeContent} />
       <Error>{contentError}</Error>
@@ -46,13 +46,13 @@ function CommunityWrite({ isEdit }) {
       <SubmitBtn onClick={isEdit ? onClickUpdate : onClickSubmit} isActive={isEdit ? true : isActive}>
         {isEdit ? '게시글 수정하기' : '게시글 등록하기'}
       </SubmitBtn>
-    </Wrapper>
+    </Container>
   );
   // 커뮤니티 글 등록 후 수정 가능하게 할건지?!
 }
 export default CommunityWrite;
 
-const Wrapper = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

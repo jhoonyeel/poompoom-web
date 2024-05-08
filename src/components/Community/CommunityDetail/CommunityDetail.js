@@ -8,10 +8,10 @@ function CommunityDetail() {
   const onClickToDelete = () => {};
   return (
     <div>
-      <Wrapper>
+      <Container>
         <Writer>{data.writer}</Writer>
         <Content>{data.Content}</Content>
-      </Wrapper>
+      </Container>
       <Button onClick={onClickToBoardList}>목록으로</Button>
       <Button onClick={onClickToBoardEdit}>수정하기</Button>
       <Button onClick={onClickToDelete}>삭제하기</Button>
@@ -20,7 +20,7 @@ function CommunityDetail() {
 }
 
 export default CommunityDetail;
-const Wrapper = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
