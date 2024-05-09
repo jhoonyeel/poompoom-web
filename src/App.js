@@ -1,16 +1,31 @@
 import { ThemeProvider } from 'styled-components';
+import { Route, Routes } from 'react-router-dom';
 import * as S from './App.styles';
+
 import Header from './components/Header/Header.container';
 import Footer from './components/Footer/Footer.container';
 import { basicTheme } from './shared/Theme';
+
+import ProfilePage from './pages/ProfilePage';
 import ReviewPage from './pages/ReviewPage';
+import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
+import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
+import CommunityList from './components/Community/CommunityList/CommunityList';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
     <ThemeProvider theme={basicTheme}>
       <S.AppContainer>
         <Header />
-        <ReviewPage />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/review" element={<ReviewPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/community" element={<CommunityList />} />
+          <Route path="/Community/detail" element={<CommunityDetailPage />} />
+          <Route path="/Community/write" element={<CommunityWrite />} />
+        </Routes>
         <Footer />
       </S.AppContainer>
     </ThemeProvider>

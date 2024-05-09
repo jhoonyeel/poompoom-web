@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import ReviewPostHeader from '../components/ReviewPostHeader/ReviewPostHeader';
+import ReviewPostBox from '../components/ReviewPostBox/ReviewPostBox';
 
 function ProfilePage() {
   return (
@@ -7,10 +9,13 @@ function ProfilePage() {
         <LogoBox>
           <span>로고</span> {/** 추후에 컴포넌트 사용 */}
         </LogoBox>
+
         <MenuBox>
           <span>메뉴바</span> {/** 추후에 컴포넌트 사용 */}
         </MenuBox>
       </ProfileHeader>
+      <ReviewPostHeader />
+      <ReviewPostBox />
     </Container>
   );
 }

@@ -12,14 +12,13 @@ import PostCommentList from '../PostComment/PostCommentList/PostCommentList';
 const boardImages = Array(3).fill('http://via.placeholder.com/388x510.png');
 const profileImage = 'http://via.placeholder.com/105x105.png';
 const profileName = '작성자';
-const isLike = false;
-const isBookMark = false;
-// DB post에서 가져오는 데이터
+
+// DB currentPosts에서 가져오는 데이터
 
 function PostDetail({ post }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [like, setLike] = useState(isLike);
-  const [bookMark, setBookMark] = useState(isBookMark);
+  const [like, setLike] = useState(post.isLike || false);
+  const [bookMark, setBookMark] = useState(post.isBookMark || false);
 
   /* 사진 슬라이드 효과
   const [style, setStyle] = useState({
