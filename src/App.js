@@ -21,6 +21,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/review" element={<ReviewPage />} />
+          <Route path="/profile/like" element={<ProfilePage />} />
+          <Route path="/profile/bookmark" element={<ProfilePage />} />
+          <Route path="/profile/recent" element={<ProfilePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/community" element={<CommunityList />} />
           <Route path="/Community/detail" element={<CommunityDetailPage />} />

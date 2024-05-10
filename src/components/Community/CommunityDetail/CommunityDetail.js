@@ -1,10 +1,14 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 function CommunityDetail() {
+  const navigate = useNavigate();
   const data = { writer: '작성자', Content: '내용' };
 
   const onClickToBoardEdit = () => {};
-  const onClickToBoardList = () => {};
+  const onClickToBoardList = (path) => () => {
+    navigate(path);
+  };
   const onClickToDelete = () => {};
   return (
     <div>
@@ -12,7 +16,7 @@ function CommunityDetail() {
         <Writer>{data.writer}</Writer>
         <Content>{data.Content}</Content>
       </Container>
-      <Button onClick={onClickToBoardList}>목록으로</Button>
+      <Button onClick={onClickToBoardList('/community')}>목록으로</Button>
       <Button onClick={onClickToBoardEdit}>수정하기</Button>
       <Button onClick={onClickToDelete}>삭제하기</Button>
     </div>

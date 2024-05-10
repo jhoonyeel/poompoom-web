@@ -1,3 +1,4 @@
+/* 페이지 주소를 받아와서 다른 data 전송 */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
@@ -18,7 +19,6 @@ const myPosts = Array.from({ length: 7 }, (_, index) => ({
   title: `${[index + 1]} 번째 내 포스트`,
   excerpt: `${[index + 1]} 번째 포스트의 요약입니다.`,
   content: `${[index + 1]} 번째 포스트의 내용입니다.`,
-  isLike: 'true',
 }));
 
 const likePosts = Array.from({ length: 7 }, (_, index) => ({
@@ -26,7 +26,7 @@ const likePosts = Array.from({ length: 7 }, (_, index) => ({
   title: `${[index + 1]} 번째 좋아요 포스트`,
   excerpt: `${[index + 1]} 번째 포스트의 요약입니다.`,
   content: `${[index + 1]} 번째 포스트의 내용입니다.`,
-  isLike: true,
+  isLike: 'true',
 }));
 
 const bookmarkPosts = Array.from({ length: 7 }, (_, index) => ({
@@ -34,7 +34,7 @@ const bookmarkPosts = Array.from({ length: 7 }, (_, index) => ({
   title: `${[index + 1]} 번째 북마크 포스트`,
   excerpt: `${[index + 1]} 번째 포스트의 요약입니다.`,
   content: `${[index + 1]} 번째 포스트의 내용입니다.`,
-  isBookMark: true,
+  isBookMark: 'true',
 }));
 
 const recentPosts = Array.from({ length: 7 }, (_, index) => ({
@@ -42,7 +42,6 @@ const recentPosts = Array.from({ length: 7 }, (_, index) => ({
   title: `${[index + 1]} 번째 최근본 포스트`,
   excerpt: `${[index + 1]} 번째 포스트의 요약입니다.`,
   content: `${[index + 1]} 번째 포스트의 내용입니다.`,
-  isBookMark: true,
 }));
 
 function ReviewPostBox() {
@@ -52,14 +51,15 @@ function ReviewPostBox() {
 
   const postsMap = {
     '/profile': myPosts,
-    'profile/recent': recentPosts,
-    'profile/like': likePosts,
-    'profile/bookmark': bookmarkPosts,
+    '/profile/recent': recentPosts,
+    '/profile/like': likePosts,
+    '/profile/bookmark': bookmarkPosts,
     '/review': posts,
   };
 
   const currentPosts = postsMap[location.pathname] || posts;
   // 페이지 별 props로 넘겨주는 data 변경 (useRouter, useLocation 사용)
+  console.log(currentPosts);
 
   const handlePostClick = (post) => {
     setSelectedPost(post);

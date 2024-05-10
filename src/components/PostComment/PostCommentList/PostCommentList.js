@@ -7,10 +7,10 @@ const comments = Array(3)
     writer: `작성자${index + 1}`,
     content: `댓글내용${index + 1}: What is Lorem Ipsum?Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the`,
   }));
-// 댓글 페이지네이션 할건지?
+// 댓글 무한스크롤..
 function PostCommentList() {
   const onClickSelect = () => {
-    /* 페이지네이션 시 채택된 댓글을 list배열 맨 앞으로 보내기 */
+    /* 채택된 댓글을 list배열 맨 앞으로 보내기 */
   };
 
   return (
