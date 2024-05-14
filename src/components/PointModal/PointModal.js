@@ -1,12 +1,12 @@
 import styled from 'styled-components';
+import PostDetail from '../PostDetail/PostDetail';
 
 function PointModal({ post, onClose, onConfirm }) {
   return (
     <Container className="modal">
       <div className="modal-content">
         <h2>포스트 확인</h2>
-        <p>{post && post.title}</p>
-        <p>{post && post.content}</p>
+        <PostDetail post={post} />
         <button type="button" onClick={onClose}>
           닫기
         </button>

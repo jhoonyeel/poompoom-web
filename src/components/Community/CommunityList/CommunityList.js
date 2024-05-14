@@ -1,9 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 function CommunityList() {
-  const onClickTokNew = () => {};
-  const onClickToDetail = () => {};
-  // react-router-dom 설치 필요
+  const navigate = useNavigate();
+  const handleOnClick = (path) => () => {
+    navigate(path);
+  };
 
   const communityPosts = [
     {
@@ -36,15 +38,15 @@ function CommunityList() {
       </MapList>
 
       {communityPosts.map((el) => (
-        <MapList key={el.id}>
+        <MapList key={el.id} onClick={handleOnClick('/community/detail')}>
           <List>{el.id}</List>
-          <List onClick={onClickToDetail}>{el.title}</List>
+          <List>{el.title}</List>
           <List>{el.writer}</List>
           <List>{el.createAt}</List>
         </MapList>
       ))}
 
-      <NewPostBtn onClick={onClickTokNew}>새로 작성하기</NewPostBtn>
+      <NewPostBtn onClick={handleOnClick('/community/write')}>새로 작성하기</NewPostBtn>
     </div>
   );
 }

@@ -1,58 +1,65 @@
+/* 페이지 주소를 받아와서 다른 data 전송 */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import ReviewPost from '../ReviewPost/ReviewPost';
 import PointModal from '../PointModal/PointModal';
 import useModal from '../../hooks/useModal';
 
+// 각 페이지에 사용할 정적 데이터 객체들 ( 프로토타입 이후 제대로 된 권한분기 사용.. )
+const posts = Array.from({ length: 7 }, (_, index) => ({
+  id: index + 1,
+  title: `${[index + 1]} 번째 포스트`,
+  excerpt: `${[index + 1]} 번째 포스트의 요약입니다.`,
+  content: `${[index + 1]} 번째 포스트의 내용입니다.`,
+}));
+
+const myPosts = Array.from({ length: 7 }, (_, index) => ({
+  id: index + 1,
+  title: `${[index + 1]} 번째 내 포스트`,
+  excerpt: `${[index + 1]} 번째 포스트의 요약입니다.`,
+  content: `${[index + 1]} 번째 포스트의 내용입니다.`,
+}));
+
+const likePosts = Array.from({ length: 7 }, (_, index) => ({
+  id: index + 1,
+  title: `${[index + 1]} 번째 좋아요 포스트`,
+  excerpt: `${[index + 1]} 번째 포스트의 요약입니다.`,
+  content: `${[index + 1]} 번째 포스트의 내용입니다.`,
+  isLike: 'true',
+}));
+
+const bookmarkPosts = Array.from({ length: 7 }, (_, index) => ({
+  id: index + 1,
+  title: `${[index + 1]} 번째 북마크 포스트`,
+  excerpt: `${[index + 1]} 번째 포스트의 요약입니다.`,
+  content: `${[index + 1]} 번째 포스트의 내용입니다.`,
+  isBookMark: 'true',
+}));
+
+const recentPosts = Array.from({ length: 7 }, (_, index) => ({
+  id: index + 1,
+  title: `${[index + 1]} 번째 최근본 포스트`,
+  excerpt: `${[index + 1]} 번째 포스트의 요약입니다.`,
+  content: `${[index + 1]} 번째 포스트의 내용입니다.`,
+}));
+
 function ReviewPostBox() {
+  const location = useLocation();
   const [selectedPost, setSelectedPost] = useState(null);
   const { isOpen: isModalOpen, openModal, closeModal } = useModal(); // useModal 훅 사용
 
-  // 정적인 콘텐츠를 포함한 posts 배열
-  const posts = [
-    {
-      id: 1,
-      title: '첫 번째 포스트',
-      excerpt: '첫 번째 포스트의 요약입니다.',
-      content: '첫 번째 포스트의 내용입니다.',
-    },
-    {
-      id: 2,
-      title: '두 번째 포스트',
-      excerpt: '두 번째 포스트의 요약입니다.',
-      content: '두 번째 포스트의 내용입니다.',
-    },
-    {
-      id: 3,
-      title: '세 번째 포스트',
-      excerpt: '세 번째 포스트의 요약입니다.',
-      content: '세 번째 포스트의 내용입니다.',
-    },
-    {
-      id: 4,
-      title: '네 번째 포스트',
-      excerpt: '네 번째 포스트의 요약입니다.',
-      content: '네 번째 포스트의 내용입니다.',
-    },
-    {
-      id: 5,
-      title: '다섯 번째 포스트',
-      excerpt: '다섯 번째 포스트의 요약입니다.',
-      content: '다섯 번째 포스트의 내용입니다.',
-    },
-    {
-      id: 6,
-      title: '여섯 번째 포스트',
-      excerpt: '여섯 번째 포스트의 요약입니다.',
-      content: '여섯 번째 포스트의 내용입니다.',
-    },
-    {
-      id: 7,
-      title: '일곱 번째 포스트',
-      excerpt: '일곱 번째 포스트의 요약입니다.',
-      content: '일곱 번째 포스트의 내용입니다.',
-    },
-  ];
+  const postsMap = {
+    '/profile': myPosts,
+    '/profile/recent': recentPosts,
+    '/profile/like': likePosts,
+    '/profile/bookmark': bookmarkPosts,
+    '/review': posts,
+  };
+
+  const currentPosts = postsMap[location.pathname] || posts;
+  // 페이지 별 props로 넘겨주는 data 변경 (useRouter, useLocation 사용)
+  console.log(currentPosts);
 
   const handlePostClick = (post) => {
     setSelectedPost(post);
@@ -73,7 +80,7 @@ function ReviewPostBox() {
   return (
     <>
       <PostList className="post-list">
-        {posts.map((post) => (
+        {currentPosts.map((post) => (
           <ReviewPost key={post.id} post={post} onPostClick={handlePostClick} />
         ))}
       </PostList>

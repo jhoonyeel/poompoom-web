@@ -9,7 +9,7 @@ function CommentList() {
   const onClickSelect = () => {};
 
   return (
-    <Wrapper>
+    <Container>
       {comments.map((el) => (
         <MapList key={el.id}>
           <List>{el.writer}</List>
@@ -17,12 +17,13 @@ function CommentList() {
           <Button onClick={onClickSelect}>채택하기</Button>
         </MapList>
       ))}
-    </Wrapper>
+    </Container>
   );
 }
+
 export default CommentList;
 
-const Wrapper = styled.div`
+const Container = styled.div`
   width: 40rem;
   margin: auto;
 `;
