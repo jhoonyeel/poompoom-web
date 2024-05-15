@@ -1,6 +1,6 @@
 /* 페이지 주소를 받아와서 다른 data 전송 */
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import ReviewPost from '../ReviewPost/ReviewPost';
 import PointModal from '../PointModal/PointModal';
@@ -96,6 +96,15 @@ function ReviewPostBox() {
 
 export default ReviewPostBox;
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
 const PostList = styled.div`
   display: flex;
   flex-wrap: wrap; /* 내용이 넘칠 때 줄바꿈 설정 */
@@ -112,4 +121,5 @@ const ModalBackdrop = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* 배경에 투명도 추가 */
   z-index: 1000; /* 모달보다 앞에 표시되도록 높은 값 설정 */
+  animation: ${fadeIn} 0.3s ease-out forwards; // Fade in 애니메이션 적용
 `;
