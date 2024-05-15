@@ -9124,7 +9124,7 @@ style-loader@^3.3.1:
   resolved "https://registry.npmjs.org/style-loader/-/style-loader-3.3.4.tgz"
   integrity sha512-0WqXzrsMTyb8yjZJHDqwmnwRJvhALK9LfRtRc6B4UTWe8AijYLZYZ9thuJTZc2VfQWINADW/j+LiJnfy2RoC1w==
 
-styled-components@^6.1.8:
+styled-components@^6.1.8, "styled-components@>=4.0.0 || >=5.0.0 || >=6.0.0":
   version "6.1.8"
   resolved "https://registry.npmjs.org/styled-components/-/styled-components-6.1.8.tgz"
   integrity sha512-PQ6Dn+QxlWyEGCKDS71NGsXoVLKfE1c3vApkvDYS5KAK+V8fNWGhbSUEo9Gg2iaID2tjLXegEW3bZDUGpofRWw==
@@ -9138,6 +9138,11 @@ styled-components@^6.1.8:
     shallowequal "1.1.0"
     stylis "4.3.1"
     tslib "2.5.0"
+
+styled-reset@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.npmjs.org/styled-reset/-/styled-reset-4.5.2.tgz"
+  integrity sha512-dbAaaVEhweBs2FGfqGBdW6oMcMK8238C2X5KCxBhUQJX92m/QyUfzRADOXhdXiXNkIPELtMCd72YY9eCdORfIw==
 
 stylehacks@^5.1.1:
   version "5.1.1"

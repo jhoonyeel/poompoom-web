@@ -41,9 +41,4 @@ const Container = styled.div`
   border-radius: 5px;
   z-index: 1001; // 모달이 백드롭 위에 나타나도록
   animation: ${zoomIn} 0.3s ease-out forwards; // Zoom in 애니메이션 적용
-  width: 50vw; // 모달의 폭을 화면 폭의 50%로 설정
-  max-width: 600px; // 모달의 최대 폭 설정
-  max-height: 80vh; // 모달의 최대 높이 설정
-  overflow: auto; // 내용이 넘치면 스크롤 표시
-  transform-origin: center center;
 `;

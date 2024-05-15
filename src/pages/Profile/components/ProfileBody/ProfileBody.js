@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import ReviewPostHeader from '../ReviewPostHeader/ReviewPostHeader';
-import ProfileMenuBox from '../profileMenuBox/profileMenuBox';
-import ReviewPostBox from '../ReviewPostBox/ReviewPostBox';
+import ReviewPostHeader from '../../../Review/components/ReviewPostHeader/ReviewPostHeader';
+import ProfileMenuBox from '../../pages/Profile/components/ProfileMenuBox/profileMenuBox';
+import ReviewPostBox from '../../../Review/components/ReviewPostBox/ReviewPostBox';
 
 function ProfileBody() {
   return (

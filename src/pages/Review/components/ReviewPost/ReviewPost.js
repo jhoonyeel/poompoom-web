@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import ReviewPostBackground from '../ReviewPostBackground/ReviewPostBackground';
-import ReviewPostShortcut from '../ReviewPostShortcut/ReviewPostShortcut';
-import ReviewPostBody from '../ReviewPostBody/ReviewPostBody';
+import ReviewPostBackground from '../../../../components/ReviewPostBackground/ReviewPostBackground';
+import ReviewPostShortcut from '../../../../components/ReviewPostShortcut/ReviewPostShortcut';
+import ReviewPostBody from '../../../../components/ReviewPostBody/ReviewPostBody';
 
 function ReviewPost({ post, onPostClick }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -14,7 +14,7 @@ function ReviewPost({ post, onPostClick }) {
     setIsExpanded(false);
   };
   return (
-    <div className="post-item">
+    <div>
       <ReviewPostBackground
         post={post}
         onPostClick={onPostClick}

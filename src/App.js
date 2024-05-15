@@ -1,17 +1,22 @@
-import { ThemeProvider } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import reset from 'styled-reset';
 import * as S from './App.styles';
 
 import Header from './components/Header/Header.container';
 import Footer from './components/Footer/Footer.container';
 import { basicTheme } from './shared/Theme';
 
-import ProfilePage from './pages/ProfilePage';
-import ReviewPage from './pages/ReviewPage';
+import ProfilePage from './pages/Profile/ProfilePage';
+import ReviewPage from './pages/Review/ReviewPage';
 import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
 import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
 import CommunityList from './components/Community/CommunityList/CommunityList';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/Home/HomePage';
+
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+`;
 
 function App() {
   const location = useLocation();
@@ -21,6 +26,7 @@ function App() {
 
   return (
     <ThemeProvider theme={basicTheme}>
+      <GlobalStyle />
       <S.AppContainer>
         {showHeader && <Header />}
         <Routes>

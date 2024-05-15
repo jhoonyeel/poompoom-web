@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import ReviewPost from '../ReviewPost/ReviewPost';
-import PointModal from '../PointModal/PointModal';
-import useModal from '../../hooks/useModal';
+import PointModal from '../../../../components/PointModal/PointModal';
+import useModal from '../../../../hooks/useModal';
 
 // 각 페이지에 사용할 정적 데이터 객체들 ( 프로토타입 이후 제대로 된 권한분기 사용.. )
 const posts = Array.from({ length: 7 }, (_, index) => ({
@@ -79,7 +79,7 @@ function ReviewPostBox() {
 
   return (
     <>
-      <PostList className="post-list">
+      <PostList>
         {currentPosts.map((post) => (
           <ReviewPost key={post.id} post={post} onPostClick={handlePostClick} />
         ))}

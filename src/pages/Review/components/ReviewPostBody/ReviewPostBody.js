@@ -1,6 +1,6 @@
 function ReviewPostBody({ expanded }) {
   return (
-    <div className="body">
+    <div>
       {expanded ? (
         <div>
           <p>본문 내용입니다.</p>
