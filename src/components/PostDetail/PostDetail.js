@@ -94,7 +94,7 @@ const Container = styled.div`
   width: 1440px;
   height: 1024px;
 
-  margin: auto;
+  margin: 0;
 `;
 
 const CurrentImage = styled.div`

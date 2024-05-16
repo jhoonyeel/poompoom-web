@@ -37,8 +37,8 @@ function App() {
           <Route path="/profile/recent" element={<ProfilePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/community" element={<CommunityList />} />
-          <Route path="/Community/detail" element={<CommunityDetailPage />} />
-          <Route path="/Community/write" element={<CommunityWrite />} />
+          <Route path="/community/detail" element={<CommunityDetailPage />} />
+          <Route path="/community/write" element={<CommunityWrite />} />
         </Routes>
         <Footer />
       </S.AppContainer>
