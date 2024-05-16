@@ -33,8 +33,8 @@ const zoomIn = keyframes`
 
 const Container = styled.div`
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 10%;
+  left: 16%;
   transform: translate(-50%, -50%);
   background-color: #fff; /* 배경에 투명도 추가 */
   padding: 20px;

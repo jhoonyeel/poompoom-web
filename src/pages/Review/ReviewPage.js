@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import QuickGift from '../../components/QuickGift/QuickGift';
 import ReviewPostHeader from './components/ReviewPostHeader/ReviewPostHeader';
 import ReviewPostBox from './components/ReviewPostBox/ReviewPostBox';
+import QuickGift from './components/QuickGift/QuickGift';
 
 function ReviewPage() {
   return (
