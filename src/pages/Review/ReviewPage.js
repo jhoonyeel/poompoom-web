@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import QuickGift from './components/QuickGift/QuickGift';
-import ReviewPostHeader from './components/ReviewContent/ReviewPostFilter/ReviewPostFilter.container';
-import ReviewPostBox from './components/ReviewContent/ReviewPostGallery/ReviewPostGallery.container';
+import ReviewPostFilter from './components/ReviewContent/ReviewPostFilter/ReviewPostFilter.container';
+import ReviewPostGallery from './components/ReviewContent/ReviewPostGallery/ReviewPostGallery.container';
 
 function ReviewPage() {
   return (
     <Layout>
-      <ReviewPostHeader />
-      <ReviewPostBox />
+      <ReviewPostFilter />
+      <ReviewPostGallery />
       <QuickGift />
       <ButtonBox>
         <button type="button">↑</button> {/** 추후에 컴포넌트 사용 */}

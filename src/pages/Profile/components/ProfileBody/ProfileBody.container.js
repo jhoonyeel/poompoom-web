@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import ReviewPostHeader from '../../../Review/components/ReviewContent/ReviewPostHeader/ReviewPostHeader';
-import ProfileMenuBox from '../../pages/Profile/components/ProfileMenuBox/profileMenuBox';
-import ReviewPostBox from '../../../Review/components/ReviewPostBox/ReviewPostBox';
+import ReviewPostFilter from '../../../Review/components/ReviewContent/ReviewPostFilter/ReviewPostFilter.container';
+import ProfileMenuBox from '../ProfileMenuBox/ProfileMenuBox.container';
+import ReviewPostCard from '../../../Review/components/ReviewContent/ReviewPostCard/ReviewPostCard.container';
 
 function ProfileBody() {
   return (
@@ -14,8 +14,8 @@ function ProfileBody() {
           <ProfileMenuBox />
         </MenuBox>
       </ProfileHeader>
-      <ReviewPostHeader />
-      <ReviewPostBox />
+      <ReviewPostFilter />
+      <ReviewPostCard />
     </Container>
   );
 }

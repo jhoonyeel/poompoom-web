@@ -1,8 +1,8 @@
 /* 페이지 주소를 받아와서 다른 data 전송 */
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import ReviewPost from '../ReviewPostCard/ReviewPostCard.container';
 import PointModal from '../../../../../components/PointModal/PointModal.container';
+import ReviewPostCard from '../ReviewPostCard/ReviewPostCard.container';
 
 function ReviewPostGalleryUI({
   currentPosts,
@@ -12,11 +12,12 @@ function ReviewPostGalleryUI({
   isModalOpen,
   closeModal,
 }) {
+  // ReviewPostCard 가로로도 나타내기.
   return (
     <>
       <PostList>
         {currentPosts.map((post) => (
-          <ReviewPost key={post.id} post={post} onPostClick={handlePostClick} />
+          <ReviewPostCard key={post.id} post={post} onPostClick={handlePostClick} />
         ))}
       </PostList>
       {isModalOpen && (

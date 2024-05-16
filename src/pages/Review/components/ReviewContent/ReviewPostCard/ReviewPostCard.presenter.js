@@ -1,23 +1,20 @@
 import ReviewPostBackground from '../ReviewPostBackground/ReviewPostBackground.container';
-import ReviewPostShortcut from '../ReviewPostShortcut/ReviewPostShortcut.container';
-import ReviewPostBody from '../ReviewPostBody/ReviewPostBody.container';
+import ReviewPostPreview from '../ReviewPostPreview/ReviewPostPreview.container';
+import ReviewPostHashtags from '../ReviewPostHashtags/ReviewPostHashtags.container';
+import ReviewPostAuthor from '../ReviewPostAuthor/ReviewPostAuthor.container';
 
 function ReviewPostCardUI({ post, onPostClick, isExpanded, handleMouseEnter, handleMouseLeave }) {
   return (
     <div>
+      <ReviewPostAuthor post={post} />
       <ReviewPostBackground
         post={post}
         onPostClick={onPostClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />
-      <ReviewPostBody expanded={isExpanded} />
-      <ReviewPostShortcut
-        post={post}
-        onPostClick={onPostClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      />
+      <ReviewPostPreview expanded={isExpanded} />
+      <ReviewPostHashtags />
     </div>
   );
 }
