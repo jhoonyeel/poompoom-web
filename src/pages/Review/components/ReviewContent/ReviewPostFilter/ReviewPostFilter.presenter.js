@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-function ReviewPostHeader() {
+function ReviewPostFilterUI() {
   return (
     <Container>
       <ContentBox>
@@ -13,7 +13,7 @@ function ReviewPostHeader() {
   );
 }
 
-export default ReviewPostHeader;
+export default ReviewPostFilterUI;
 
 const Container = styled.div`
   width: 100%;

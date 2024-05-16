@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ReviewPostHeader from '../../../Review/components/ReviewPostHeader/ReviewPostHeader';
+import ReviewPostHeader from '../../../Review/components/ReviewContent/ReviewPostHeader/ReviewPostHeader';
 import ProfileMenuBox from '../../pages/Profile/components/ProfileMenuBox/profileMenuBox';
 import ReviewPostBox from '../../../Review/components/ReviewPostBox/ReviewPostBox';
 

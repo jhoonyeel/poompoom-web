@@ -1,4 +1,4 @@
-function ReviewPostShortcut({ post, onPostClick, onMouseEnter, onMouseLeave }) {
+function ReviewPostShortcutUI({ post, onPostClick, onMouseEnter, onMouseLeave }) {
   return (
     <div>
       <h3>{post && post.title}</h3> {/** 프로필 사진 */}
@@ -9,4 +9,4 @@ function ReviewPostShortcut({ post, onPostClick, onMouseEnter, onMouseLeave }) {
   );
 }
 
-export default ReviewPostShortcut;
+export default ReviewPostShortcutUI;

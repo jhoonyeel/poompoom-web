@@ -1,24 +1,24 @@
 import styled from 'styled-components';
-import QuickGift from '../../components/QuickGift/QuickGift';
-import ReviewPostHeader from './components/ReviewPostHeader/ReviewPostHeader';
-import ReviewPostBox from './components/ReviewPostBox/ReviewPostBox';
+import QuickGift from './components/QuickGift/QuickGift';
+import ReviewPostHeader from './components/ReviewContent/ReviewPostFilter/ReviewPostFilter.container';
+import ReviewPostBox from './components/ReviewContent/ReviewPostGallery/ReviewPostGallery.container';
 
 function ReviewPage() {
   return (
-    <Container>
+    <Layout>
       <ReviewPostHeader />
       <ReviewPostBox />
       <QuickGift />
       <ButtonBox>
         <button type="button">↑</button> {/** 추후에 컴포넌트 사용 */}
       </ButtonBox>
-    </Container>
+    </Layout>
   );
 }
 
 export default ReviewPage;
 
-const Container = styled.div`
+const Layout = styled.div`
   width: 80%;
   margin: 0 auto;
 `;

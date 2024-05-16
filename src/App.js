@@ -27,7 +27,7 @@ function App() {
   return (
     <ThemeProvider theme={basicTheme}>
       <GlobalStyle />
-      <S.AppContainer>
+      <S.AppLayout>
         {showHeader && <Header />}
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -41,7 +41,7 @@ function App() {
           <Route path="/Community/write" element={<CommunityWrite />} />
         </Routes>
         <Footer />
-      </S.AppContainer>
+      </S.AppLayout>
     </ThemeProvider>
   );
 }
