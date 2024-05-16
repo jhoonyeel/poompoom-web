@@ -6,6 +6,7 @@ import ReviewPostGallery from './components/ReviewContent/ReviewPostGallery/Revi
 function ReviewPage() {
   return (
     <Layout>
+      {/* <RankingProfileCard /> */}
       <ReviewPostFilter />
       <ReviewPostGallery />
       <QuickGift />
