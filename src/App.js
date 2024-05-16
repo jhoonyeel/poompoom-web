@@ -1,23 +1,34 @@
-import { ThemeProvider } from 'styled-components';
-import { Route, Routes } from 'react-router-dom';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import reset from 'styled-reset';
 import * as S from './App.styles';
 
 import Header from './components/Header/Header.container';
 import Footer from './components/Footer/Footer.container';
 import { basicTheme } from './shared/Theme';
 
-import ProfilePage from './pages/ProfilePage';
-import ReviewPage from './pages/ReviewPage';
+import ProfilePage from './pages/Profile/ProfilePage';
+import ReviewPage from './pages/Review/ReviewPage';
 import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
 import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
 import CommunityList from './components/Community/CommunityList/CommunityList';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/Home/HomePage';
+
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+`;
 
 function App() {
+  const location = useLocation();
+  const noHeaderRoutes = ['/community', '/Community/detail', '/Community/write']; // Header를 포함하지 않을 경로 목록
+
+  const showHeader = !noHeaderRoutes.includes(location.pathname); // 현재 경로가 Header를 포함하지 않을 목록에 있는지 확인
+
   return (
     <ThemeProvider theme={basicTheme}>
+      <GlobalStyle />
       <S.AppContainer>
-        <Header />
+        {showHeader && <Header />}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/review" element={<ReviewPage />} />

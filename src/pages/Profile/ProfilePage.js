@@ -1,4 +1,4 @@
-import ProfileBody from '../components/ProfileBody/ProfileBody';
+import ProfileBody from './components/ProfileBody/ProfileBody';
 
 function ProfilePage() {
   return <ProfileBody />;

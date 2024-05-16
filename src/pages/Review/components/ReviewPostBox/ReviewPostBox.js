@@ -1,10 +1,10 @@
 /* 페이지 주소를 받아와서 다른 data 전송 */
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import ReviewPost from '../ReviewPost/ReviewPost';
-import PointModal from '../PointModal/PointModal';
-import useModal from '../../hooks/useModal';
+import PointModal from '../../../../components/PointModal/PointModal';
+import useModal from '../../../../hooks/useModal';
 
 // 각 페이지에 사용할 정적 데이터 객체들 ( 프로토타입 이후 제대로 된 권한분기 사용.. )
 const posts = Array.from({ length: 7 }, (_, index) => ({
@@ -79,7 +79,7 @@ function ReviewPostBox() {
 
   return (
     <>
-      <PostList className="post-list">
+      <PostList>
         {currentPosts.map((post) => (
           <ReviewPost key={post.id} post={post} onPostClick={handlePostClick} />
         ))}
@@ -95,6 +95,15 @@ function ReviewPostBox() {
 }
 
 export default ReviewPostBox;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 const PostList = styled.div`
   display: flex;
@@ -112,4 +121,5 @@ const ModalBackdrop = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* 배경에 투명도 추가 */
   z-index: 1000; /* 모달보다 앞에 표시되도록 높은 값 설정 */
+  animation: ${fadeIn} 0.3s ease-out forwards; // Fade in 애니메이션 적용
 `;
