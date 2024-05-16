@@ -1,4 +1,4 @@
-function ReviewPostBackground({ post, onPostClick, onMouseEnter, onMouseLeave }) {
+function ReviewPostBackgroundUI({ post, onPostClick, onMouseEnter, onMouseLeave }) {
   return (
     <div>
       <button type="button" onClick={() => onPostClick(post)} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
@@ -8,4 +8,4 @@ function ReviewPostBackground({ post, onPostClick, onMouseEnter, onMouseLeave })
   );
 }
 
-export default ReviewPostBackground;
+export default ReviewPostBackgroundUI;

@@ -1,10 +1,8 @@
 /* 페이지 주소를 받아와서 다른 data 전송 */
 import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
 import { useLocation } from 'react-router-dom';
-import ReviewPost from '../ReviewPost/ReviewPost';
-import PointModal from '../../../../components/PointModal/PointModal';
-import useModal from '../../../../hooks/useModal';
+import useModal from '../../../../../hooks/useModal';
+import ReviewPostGalleryUI from './ReviewPostGallery.presenter';
 
 // 각 페이지에 사용할 정적 데이터 객체들 ( 프로토타입 이후 제대로 된 권한분기 사용.. )
 const posts = Array.from({ length: 7 }, (_, index) => ({
@@ -44,7 +42,7 @@ const recentPosts = Array.from({ length: 7 }, (_, index) => ({
   content: `${[index + 1]} 번째 포스트의 내용입니다.`,
 }));
 
-function ReviewPostBox() {
+function ReviewPostGallery() {
   const location = useLocation();
   const [selectedPost, setSelectedPost] = useState(null);
   const { isOpen: isModalOpen, openModal, closeModal } = useModal(); // useModal 훅 사용
@@ -78,48 +76,15 @@ function ReviewPostBox() {
   };
 
   return (
-    <>
-      <PostList>
-        {currentPosts.map((post) => (
-          <ReviewPost key={post.id} post={post} onPostClick={handlePostClick} />
-        ))}
-      </PostList>
-      {isModalOpen && (
-        <>
-          <ModalBackdrop />
-          <PointModal post={selectedPost} onClose={closeModal} onConfirm={handleConfirmPost} />
-        </>
-      )}
-    </>
+    <ReviewPostGalleryUI
+      currentPosts={currentPosts}
+      handlePostClick={handlePostClick}
+      handleConfirmPost={handleConfirmPost}
+      selectedPost={selectedPost}
+      isModalOpen={isModalOpen}
+      closeModal={closeModal}
+    />
   );
 }
 
-export default ReviewPostBox;
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
-const PostList = styled.div`
-  display: flex;
-  flex-wrap: wrap; /* 내용이 넘칠 때 줄바꿈 설정 */
-  justify-content: space-between;
-  padding: 0 10%;
-  border: 3px solid #aaa;
-`;
-
-const ModalBackdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 배경에 투명도 추가 */
-  z-index: 1000; /* 모달보다 앞에 표시되도록 높은 값 설정 */
-  animation: ${fadeIn} 0.3s ease-out forwards; // Fade in 애니메이션 적용
-`;
+export default ReviewPostGallery;

@@ -1,4 +1,4 @@
-function ReviewPostBody({ expanded }) {
+function ReviewPostPreviewUI({ expanded }) {
   return (
     <div>
       {expanded ? (
@@ -11,4 +11,4 @@ function ReviewPostBody({ expanded }) {
   );
 }
 
-export default ReviewPostBody;
+export default ReviewPostPreviewUI;
