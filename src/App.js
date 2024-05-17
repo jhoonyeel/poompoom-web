@@ -1,4 +1,5 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import reset from 'styled-reset';
 import * as S from './App.styles';
@@ -18,6 +19,8 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
 `;
 
+const queryClient = new QueryClient();
+
 function App() {
   const location = useLocation();
   const noHeaderRoutes = ['/community', '/Community/detail', '/Community/write']; // Header를 포함하지 않을 경로 목록
@@ -25,24 +28,26 @@ function App() {
   const showHeader = !noHeaderRoutes.includes(location.pathname); // 현재 경로가 Header를 포함하지 않을 목록에 있는지 확인
 
   return (
-    <ThemeProvider theme={basicTheme}>
-      <GlobalStyle />
-      <S.AppLayout>
-        {showHeader && <Header />}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/review" element={<ReviewPage />} />
-          <Route path="/profile/like" element={<ProfilePage />} />
-          <Route path="/profile/bookmark" element={<ProfilePage />} />
-          <Route path="/profile/recent" element={<ProfilePage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/community" element={<CommunityList />} />
-          <Route path="/community/detail" element={<CommunityDetailPage />} />
-          <Route path="/community/write" element={<CommunityWrite />} />
-        </Routes>
-        <Footer />
-      </S.AppLayout>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={basicTheme}>
+        <GlobalStyle />
+        <S.AppLayout>
+          {showHeader && <Header />}
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/review" element={<ReviewPage />} />
+            <Route path="/profile/like" element={<ProfilePage />} />
+            <Route path="/profile/bookmark" element={<ProfilePage />} />
+            <Route path="/profile/recent" element={<ProfilePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/community" element={<CommunityList />} />
+            <Route path="/community/detail" element={<CommunityDetailPage />} />
+            <Route path="/community/write" element={<CommunityWrite />} />
+          </Routes>
+          <Footer />
+        </S.AppLayout>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 

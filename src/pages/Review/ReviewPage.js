@@ -2,18 +2,21 @@ import styled from 'styled-components';
 import QuickGift from './components/QuickGift/QuickGift';
 import ReviewPostFilter from './components/ReviewContent/ReviewPostFilter/ReviewPostFilter.container';
 import ReviewPostGallery from './components/ReviewContent/ReviewPostGallery/ReviewPostGallery.container';
+import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
 
 function ReviewPage() {
   return (
-    <Layout>
-      {/* <RankingProfileCard /> */}
-      <ReviewPostFilter />
-      <ReviewPostGallery />
-      <QuickGift />
-      <ButtonBox>
-        <button type="button">↑</button> {/** 추후에 컴포넌트 사용 */}
-      </ButtonBox>
-    </Layout>
+    <>
+      <RankingProfileCard />
+      <Layout>
+        <ReviewPostFilter />
+        <ReviewPostGallery />
+        <QuickGift />
+        <ButtonBox>
+          <button type="button">↑</button> {/** 추후에 컴포넌트 사용 */}
+        </ButtonBox>
+      </Layout>
+    </>
   );
 }
 
