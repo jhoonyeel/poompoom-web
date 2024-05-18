@@ -57,7 +57,7 @@ function ReviewPostGallery() {
 
   const currentPosts = postsMap[location.pathname] || posts;
   // 페이지 별 props로 넘겨주는 data 변경 (useRouter, useLocation 사용)
-  console.log(currentPosts);
+  console.log(`currentPosts: ${currentPosts}`);
 
   const handlePostClick = (post) => {
     setSelectedPost(post);

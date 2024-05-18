@@ -1,5 +1,22 @@
+import axios from 'axios';
+// import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
+const transformData = (data) => {
+  return data.values.map((item) => ({
+    id: item.communityId,
+    title: item.title,
+    createAt: '날짜', // 필요에 따라 실제 날짜로 변경하세요
+    writer: '작성자', // 필요에 따라 실제 작성자로 변경하세요
+  }));
+};
+
+const fetchCommunityPosts = async () => {
+  const response = await axios.get('http://ec2-3-37-97-52.ap-northeast-2.compute.amazonaws.com/community?page=1');
+  return transformData(response.data);
+};
 
 function CommunityList() {
   const navigate = useNavigate();
@@ -7,26 +24,28 @@ function CommunityList() {
     navigate(path);
   };
 
-  const communityPosts = [
-    {
-      id: 1,
-      title: '첫 번째 포스트',
-      createAt: '날짜',
-      writer: '작성자',
-    },
-    {
-      id: 2,
-      title: '두 번째 포스트',
-      createAt: '날짜',
-      writer: '작성자',
-    },
-    {
-      id: 3,
-      title: '세 번째 포스트',
-      createAt: '날짜',
-      writer: '작성자',
-    },
-  ];
+  // const [communityPosts, setCommunityPosts] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(`http://ec2-3-37-97-52.ap-northeast-2.compute.amazonaws.com/community?page=1
+  //       `); // 백엔드 API 엔드포인트
+  //       const { data } = response;
+  //       const transformedData = transformData(data);
+  //       setCommunityPosts(transformedData);
+  //     } catch (error) {
+  //       console.error('Error fetching community lists:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  const { data: communityPosts, error, isLoading } = useQuery('communityPosts', fetchCommunityPosts);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error fetching community lists</div>;
 
   return (
     <div>
