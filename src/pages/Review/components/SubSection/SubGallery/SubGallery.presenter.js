@@ -1,18 +1,8 @@
-/* 페이지 주소를 받아와서 다른 data 전송 */
-import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import ReviewPostCard from '../../Card/ReviewPostCard/ReviewPostCard.container';
 import PointModal from '../../../../../components/PointModal/PointModal.container';
-import ReviewPostCard from '../ReviewPostCard/ReviewPostCard.container';
 
-function ReviewPostGalleryUI({
-  currentPosts,
-  handlePostClick,
-  handleConfirmPost,
-  selectedPost,
-  isModalOpen,
-  closeModal,
-}) {
-  // ReviewPostCard 가로로도 나타내기.
+function SubGalleryUI({ currentPosts, handlePostClick, handleConfirmPost, selectedPost, isModalOpen, closeModal }) {
   return (
     <>
       <PostList>
@@ -30,7 +20,7 @@ function ReviewPostGalleryUI({
   );
 }
 
-export default ReviewPostGalleryUI;
+export default SubGalleryUI;
 
 const fadeIn = keyframes`
   from {
@@ -41,6 +31,7 @@ const fadeIn = keyframes`
   }
 `;
 
+// gap으로 수정
 const PostList = styled.div`
   display: flex;
   flex-wrap: wrap; /* 내용이 넘칠 때 줄바꿈 설정 */

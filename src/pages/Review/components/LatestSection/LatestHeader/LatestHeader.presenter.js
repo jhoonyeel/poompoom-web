@@ -1,19 +1,16 @@
 import styled from 'styled-components';
 
-function ReviewPostFilterUI() {
+function LatestHeaderUI() {
   return (
     <Container>
       <ContentBox>
-        <span>구독한 계정</span> {/** 추후에 컴포넌트 사용 */}
+        <span>최근 본 게시글</span> {/** 추후에 컴포넌트 사용 */}
       </ContentBox>
-      <AlignBox>
-        <button type="button">깔대기 아이콘</button> {/** 추후에 컴포넌트 사용 */}
-      </AlignBox>
     </Container>
   );
 }
 
-export default ReviewPostFilterUI;
+export default LatestHeaderUI;
 
 const Container = styled.div`
   width: 100%;
@@ -25,9 +22,5 @@ const Container = styled.div`
 `;
 
 const ContentBox = styled.div`
-  width: 25%;
-`;
-
-const AlignBox = styled.div`
   width: 25%;
 `;

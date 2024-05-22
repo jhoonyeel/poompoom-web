@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import ReviewPostFilter from '../../../Review/components/ReviewContent/ReviewPostFilter/ReviewPostFilter.container';
 import ProfileMenuBox from '../ProfileMenuBox/ProfileMenuBox.container';
-import ReviewPostCard from '../../../Review/components/ReviewContent/ReviewPostCard/ReviewPostCard.container';
+import ReviewPostCard from '../../../Review/components/Card/ReviewPostCard/ReviewPostCard.container';
 
 function ProfileBody() {
   return (
@@ -14,7 +13,6 @@ function ProfileBody() {
           <ProfileMenuBox />
         </MenuBox>
       </ProfileHeader>
-      <ReviewPostFilter />
       <ReviewPostCard />
     </Container>
   );

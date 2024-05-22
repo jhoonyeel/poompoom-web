@@ -13,8 +13,8 @@ function ReviewPostCardUI({ post, onPostClick, isExpanded, handleMouseEnter, han
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />
-      <ReviewPostPreview expanded={isExpanded} />
       <ReviewPostHashtags />
+      <ReviewPostPreview expanded={isExpanded} />
     </div>
   );
 }

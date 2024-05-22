@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import useModal from '../../../../../hooks/useModal';
-import ReviewPostGalleryUI from './ReviewPostGallery.presenter';
+import SearchGalleryUI from './SearchGallery.presenter';
 
 // 각 페이지에 사용할 정적 데이터 객체들 ( 프로토타입 이후 제대로 된 권한분기 사용.. )
 const posts = Array.from({ length: 7 }, (_, index) => ({
@@ -42,7 +42,7 @@ const recentPosts = Array.from({ length: 7 }, (_, index) => ({
   content: `${[index + 1]} 번째 포스트의 내용입니다.`,
 }));
 
-function ReviewPostGallery() {
+function SearchGallery() {
   const location = useLocation();
   const [selectedPost, setSelectedPost] = useState(null);
   const { isOpen: isModalOpen, openModal, closeModal } = useModal(); // useModal 훅 사용
@@ -76,7 +76,7 @@ function ReviewPostGallery() {
   };
 
   return (
-    <ReviewPostGalleryUI
+    <SearchGalleryUI
       currentPosts={currentPosts}
       handlePostClick={handlePostClick}
       handleConfirmPost={handleConfirmPost}
@@ -87,4 +87,4 @@ function ReviewPostGallery() {
   );
 }
 
-export default ReviewPostGallery;
+export default SearchGallery;
