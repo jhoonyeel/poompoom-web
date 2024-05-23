@@ -1,7 +1,6 @@
 import * as S from './ProfileBody.styles';
-import ReviewPostFilter from '../../../Review/components/ReviewContent/ReviewPostFilter/ReviewPostFilter.container';
 import ProfileMenuBox from '../ProfileMenuBox/ProfileMenuBox.container';
-import ReviewPostGallery from '../../../Review/components/ReviewContent/ReviewPostGallery/ReviewPostGallery.container';
+import PostFilter from '../../../Review/components/PostFilter/PostFilter.container';
 
 export default function ProfileBodyUI() {
   return (
@@ -14,8 +13,7 @@ export default function ProfileBodyUI() {
           <ProfileMenuBox />
         </S.MenuBox>
       </S.ProfileNev>
-      <ReviewPostFilter />
-      <ReviewPostGallery />
+      <PostFilter />
     </S.Container>
   );
 }

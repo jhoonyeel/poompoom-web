@@ -3,14 +3,14 @@ import ReviewPostCardUI from './ReviewPostCard.presenter';
 import Confetti from '../../ReviewContent/ReviewConfetti/ReviewConfetti.container';
 
 function ReviewPostCard({ post, onPostClick }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
-    setIsExpanded(true);
+    setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
-    setIsExpanded(false);
+    setIsHovered(false);
   };
 
   return (
@@ -18,12 +18,12 @@ function ReviewPostCard({ post, onPostClick }) {
       <ReviewPostCardUI
         post={post}
         onPostClick={onPostClick}
-        isExpanded={isExpanded}
-        setIsExpanded={setIsExpanded}
+        isHovered={isHovered}
+        setIsHovered={setIsHovered}
         handleMouseEnter={handleMouseEnter}
         handleMouseLeave={handleMouseLeave}
       />
-      <Confetti isExpanded={isExpanded} />
+      <Confetti isHovered={isHovered} />
     </div>
   );
 }

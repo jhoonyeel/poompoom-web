@@ -1,6 +1,6 @@
 import ReviewPostBackgroundUI from './ReviewPostBackground.presenter';
 
-function ReviewPostBackground({ post, onPostClick, onMouseEnter, onMouseLeave, expanded, setIsExpanded }) {
+function ReviewPostBackground({ post, onPostClick, onMouseEnter, onMouseLeave, isHovered, setIsHovered }) {
   return (
     <div>
       <ReviewPostBackgroundUI
@@ -8,8 +8,8 @@ function ReviewPostBackground({ post, onPostClick, onMouseEnter, onMouseLeave, e
         onPostClick={onPostClick}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        expanded={expanded}
-        setIsExpanded={setIsExpanded}
+        isHovered={isHovered}
+        setIsHovered={setIsHovered}
       />
     </div>
   );

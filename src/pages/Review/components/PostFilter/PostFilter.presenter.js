@@ -22,7 +22,7 @@ export default function PostFilterUI() {
 
 const Layout = styled.div`
   width: 100%;
-  height: 80px;
+  height: 50px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
