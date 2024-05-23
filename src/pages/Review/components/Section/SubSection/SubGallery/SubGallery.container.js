@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SubGalleryUI from './SubGallery.presenter';
-import useModal from '../../../../../hooks/useModal';
+import useModal from '../../../../../../hooks/useModal';
 
 function SubGallery() {
   const [selectedPost, setSelectedPost] = useState(null);

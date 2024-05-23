@@ -1,7 +1,7 @@
 /* 페이지 주소를 받아와서 다른 data 전송 */
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import useModal from '../../../../../hooks/useModal';
+import useModal from '../../../../../../hooks/useModal';
 import SearchGalleryUI from './SearchGallery.presenter';
 
 // 각 페이지에 사용할 정적 데이터 객체들 ( 프로토타입 이후 제대로 된 권한분기 사용.. )

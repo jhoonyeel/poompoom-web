@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import ReviewPostCard from '../../Card/ReviewPostCard/ReviewPostCard.container';
-import PostDetail from '../../../../../components/PostDetail/PostDetail.container';
+import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.container';
+import PostDetail from '../../../../../../components/PostDetail/PostDetail.container';
 
 function LatestGalleryUI({ posts, handlePostClick, handleConfirmPost, selectedPost, isModalOpen, closeModal }) {
   return (

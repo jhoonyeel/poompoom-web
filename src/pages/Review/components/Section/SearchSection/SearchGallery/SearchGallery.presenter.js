@@ -1,8 +1,8 @@
 /* 페이지 주소를 받아와서 다른 data 전송 */
 import React from 'react';
 import styled from 'styled-components';
-import PointModal from '../../../../../components/PointModal/PointModal.container';
-import ReviewPostCard from '../../Card/ReviewPostCard/ReviewPostCard.container';
+import PointModal from '../../../../../../components/PointModal/PointModal.container';
+import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.container';
 
 export default function SearchGalleryUI({
   currentPosts,
