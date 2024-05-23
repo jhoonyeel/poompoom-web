@@ -1,6 +1,5 @@
 import * as S from './ProfileBody.styles';
 import ProfileMenuBox from '../ProfileMenuBox/ProfileMenuBox.container';
-import ReviewPostGallery from '../../../Review/components/ReviewContent/ReviewPostGallery/ReviewPostGallery.presenter';
 import PostFilter from '../../../Review/components/PostFilter/PostFilter.container';
 
 export default function ProfileBodyUI() {
@@ -15,7 +14,6 @@ export default function ProfileBodyUI() {
         </S.MenuBox>
       </S.ProfileNev>
       <PostFilter />
-      <ReviewPostGallery />
     </S.Container>
   );
 }

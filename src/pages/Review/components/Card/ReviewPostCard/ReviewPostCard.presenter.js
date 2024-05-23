@@ -13,7 +13,7 @@ function ReviewPostCardUI({ post, onPostClick, isHovered, setIsHovered, handleMo
         onPostClick={onPostClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        expanded={isHovered}
+        isHovered={isHovered}
         setIsHovered={setIsHovered}
       />
       <ReviewPostHashtags />
