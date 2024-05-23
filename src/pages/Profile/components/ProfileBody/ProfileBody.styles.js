@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
-export const ProfileHeader = styled.div`
+export const ProfileNev = styled.div`
   background-color: #e6e6e6;
   border: 3px solid #ccc;
   display: flex;

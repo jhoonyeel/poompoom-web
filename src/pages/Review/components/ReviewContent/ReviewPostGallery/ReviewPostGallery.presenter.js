@@ -22,7 +22,7 @@ function ReviewPostGalleryUI({
       </S.PostList>
       {isModalOpen && (
         <>
-          <S.ModalBackdrop />
+          <S.ModalBackdrop onClick={closeModal} />
           <PointModal post={selectedPost} onClose={closeModal} onConfirm={handleConfirmPost} />
         </>
       )}

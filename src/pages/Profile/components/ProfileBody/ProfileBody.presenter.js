@@ -6,14 +6,14 @@ import ReviewPostGallery from '../../../Review/components/ReviewContent/ReviewPo
 export default function ProfileBodyUI() {
   return (
     <S.Container>
-      <S.ProfileHeader>
+      <S.ProfileNev>
         <S.LogoBox>
           <span>로고</span> {/** 추후에 컴포넌트 사용 */}
         </S.LogoBox>
         <S.MenuBox>
           <ProfileMenuBox />
         </S.MenuBox>
-      </S.ProfileHeader>
+      </S.ProfileNev>
       <ReviewPostFilter />
       <ReviewPostGallery />
     </S.Container>

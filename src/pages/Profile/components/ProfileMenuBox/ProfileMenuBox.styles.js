@@ -10,4 +10,6 @@ export const Container = styled.div`
 export const Button = styled.button`
   width: 6rem;
   height: 2rem;
+  background-color: ${(props) => (props.isActive ? 'black' : 'white')};
+  color: ${(props) => (props.isActive ? 'white' : 'black')};
 `;

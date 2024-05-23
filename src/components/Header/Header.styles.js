@@ -9,3 +9,15 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const LogoBox = styled.div`
+  width: 15%;
+`;
+
+export const ProfileBtn = styled.button`
+  width: 15%;
+`;
+
+export const MenuBox = styled.div`
+  width: 15%;
+`;
