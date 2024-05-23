@@ -1,25 +1,30 @@
 import { useState } from 'react';
 import ReviewPostCardUI from './ReviewPostCard.presenter';
+import Confetti from '../../ReviewContent/ReviewConfetti/ReviewConfetti.container';
 
 function ReviewPostCard({ post, onPostClick }) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
+    setIsExpanded(true);
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
+    setIsExpanded(false);
   };
+
   return (
-    <ReviewPostCardUI
-      post={post}
-      onPostClick={onPostClick}
-      isHovered={isHovered}
-      handleMouseEnter={handleMouseEnter}
-      handleMouseLeave={handleMouseLeave}
-    />
+    <div>
+      <ReviewPostCardUI
+        post={post}
+        onPostClick={onPostClick}
+        isExpanded={isExpanded}
+        setIsExpanded={setIsExpanded}
+        handleMouseEnter={handleMouseEnter}
+        handleMouseLeave={handleMouseLeave}
+      />
+      <Confetti isExpanded={isExpanded} />
+    </div>
   );
 }
-
 export default ReviewPostCard;

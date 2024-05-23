@@ -14,9 +14,11 @@ export const HeaderContainer = styled.div`
 export const LogoBox = styled.div`
   width: 15%;
 `;
-export const ProfileBox = styled.div`
+
+export const ProfileBtn = styled.button`
   width: 15%;
 `;
+
 export const MenuBox = styled.div`
   width: 15%;
 `;

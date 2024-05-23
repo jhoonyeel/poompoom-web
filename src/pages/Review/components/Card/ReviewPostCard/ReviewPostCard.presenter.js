@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import ReviewPostBackground from '../ReviewPostBackground/ReviewPostBackground.container';
-import ReviewPostPreview from '../ReviewPostPreview/ReviewPostPreview.container';
+
 import ReviewPostHashtags from '../ReviewPostHashtags/ReviewPostHashtags.container';
 import ReviewPostAuthor from '../ReviewPostAuthor/ReviewPostAuthor.container';
 
-function ReviewPostCardUI({ post, onPostClick, isHovered, handleMouseEnter, handleMouseLeave }) {
+function ReviewPostCardUI({ post, onPostClick, isHovered, setIsHovered, handleMouseEnter, handleMouseLeave }) {
   return (
     <Container>
       <ReviewPostAuthor post={post} />
@@ -13,9 +13,10 @@ function ReviewPostCardUI({ post, onPostClick, isHovered, handleMouseEnter, hand
         onPostClick={onPostClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-      >
-        {isHovered ? <ReviewPostPreview /> : <ReviewPostHashtags />}
-      </ReviewPostBackground>
+        expanded={isHovered}
+        setIsHovered={setIsHovered}
+      />
+      <ReviewPostHashtags />
     </Container>
   );
 }

@@ -8,12 +8,17 @@ import Header from './components/Header/Header.container';
 import Footer from './components/Footer/Footer.container';
 import { basicTheme } from './shared/Theme';
 
-import ProfilePage from './pages/Profile/ProfilePage';
+import HomePage from './pages/Home/HomePage';
+
 import ReviewPage from './pages/Review/ReviewPage';
+import ReviewWritePage from './pages/Review/ReviewWritePage';
+
+import ProfilePage from './pages/Profile/ProfilePage';
+import ProfileEditPage from './pages/Profile/ProfileEditPage';
+
 import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
 import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
 import CommunityList from './components/Community/CommunityList/CommunityList';
-import HomePage from './pages/Home/HomePage';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -36,10 +41,12 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/review" element={<ReviewPage />} />
+            <Route path="/review/write" element={<ReviewWritePage />} />
             <Route path="/profile/like" element={<ProfilePage />} />
             <Route path="/profile/bookmark" element={<ProfilePage />} />
             <Route path="/profile/recent" element={<ProfilePage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile/edit" element={<ProfileEditPage />} />
             <Route path="/community" element={<CommunityList />} />
             <Route path="/community/detail" element={<CommunityDetailPage />} />
             <Route path="/community/write" element={<CommunityWrite />} />
@@ -56,4 +63,6 @@ export default App;
 // <CommunityWrite /> 커뮤니티 글 작성 페이지
 // <CommunityList /> 커뮤니티 리스트 (메인)페이지
 // <ReviewPage /> 선물 리뷰글 페이지
+// <ReviewWritePage> 리뷰글 작성, 수정 페이지
 // <ProfilePage /> 프로필 페이지
+// <UserSetting /> 사용자 설정 페이지
