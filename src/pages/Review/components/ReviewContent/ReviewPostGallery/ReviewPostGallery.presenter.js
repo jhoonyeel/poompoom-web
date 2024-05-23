@@ -2,7 +2,7 @@
 import React from 'react';
 import * as S from './ReviewPostGallery.styles';
 import PointModal from '../../../../../components/PointModal/PointModal.container';
-import ReviewPostCard from '../ReviewPostCard/ReviewPostCard.container';
+import ReviewPostCard from '../ReviewConfetti/ReviewConfetti.container';
 
 function ReviewPostGalleryUI({
   currentPosts,

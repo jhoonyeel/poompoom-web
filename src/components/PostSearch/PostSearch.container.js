@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import useDebounce from '../../hooks/useDebounce'; // useDebounce 훅 임포트
 
-function PostSearch() {
+export default function PostSearch() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [results, setResults] = useState([]);
-  const [recommendations, setRecommendations] = useState([]);
+  const [recommendations, setRecommendations] = useState([
+    { id: 1, keyword: 'React' },
+    { id: 2, keyword: 'JavaScript' },
+    { id: 3, keyword: 'CSS' },
+    { id: 4, keyword: 'HTML' },
+  ]);
+  const [isFocused, setIsFocused] = useState(false);
   const debouncedSearchTerm = useDebounce(searchTerm, 500); // 입력값을 0.5초 지연시킴
 
   useEffect(() => {
@@ -15,13 +20,12 @@ function PostSearch() {
         .then((response) => response.json())
         .then((data) => {
           setRecommendations(data);
-          setResults([...results]); // 지울 예정
         })
         .catch((error) => {
           console.error('Error fetching recommendations:', error);
         });
     } else {
-      setRecommendations([]);
+      // setRecommendations([]);
     }
   }, [debouncedSearchTerm]);
 
@@ -29,21 +33,25 @@ function PostSearch() {
     setSearchTerm(e.target.value);
   };
 
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    // handleBlur가 너무 빨리 실행되어 클릭 이벤트를 놓치는 경우 방지하기 위해 타임아웃 설정
+    setTimeout(() => setIsFocused(false), 100);
+  };
+
   return (
     <div>
-      <input type="text" value={searchTerm} onChange={handleChange} />
-      <ul>
-        {recommendations.map((recommendation) => (
-          <li key={recommendation.id}>{recommendation.keyword}</li>
-        ))}
-      </ul>
-      <ul>
-        {results.map((result) => (
-          <li key={result.id}>{result.name}</li>
-        ))}
-      </ul>
+      <input type="text" value={searchTerm} onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+      {(isFocused || searchTerm) && (
+        <ul>
+          {recommendations.map((recommendation) => (
+            <li key={recommendation.id}>{recommendation.keyword}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
-
-export default PostSearch;

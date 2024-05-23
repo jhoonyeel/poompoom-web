@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import HeaderUI from './Header.presenter';
 
-function Header() {
+export default function Header() {
   const navigate = useNavigate();
 
   const handleOnClick = (path) => () => {
@@ -10,5 +10,3 @@ function Header() {
 
   return <HeaderUI handleOnClick={handleOnClick} />;
 }
-
-export default Header;

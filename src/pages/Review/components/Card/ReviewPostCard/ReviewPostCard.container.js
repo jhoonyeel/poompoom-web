@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ReviewPostCardUI from './ReviewPostCard.presenter';
-import Confetti from '../ReviewConfetti/ReviewConfetti.container';
+import Confetti from '../../ReviewContent/ReviewConfetti/ReviewConfetti.container';
 
 function ReviewPostCard({ post, onPostClick }) {
   const [isExpanded, setIsExpanded] = useState(false);
