@@ -1,7 +1,5 @@
 import HeaderUI from './Header.presenter';
 
-function Header() {
+export default function Header() {
   return <HeaderUI />;
 }
-
-export default Header;

@@ -1,25 +1,31 @@
 import styled, { keyframes } from 'styled-components';
-import PostDetail from '../PostDetail/PostDetail';
 
-function PointModalUI({ post, onClose, onConfirm }) {
+export default function PointModalUI({ post, onClose, onConfirm }) {
   return (
-    <Container className="modal">
-      <div className="modal-content">
+    <ModalBackdrop>
+      <Container>
         <h2>포스트 확인</h2>
-        <PostDetail post={post} />
-        <button type="button" onClick={onClose}>
-          닫기
-        </button>
-        <button type="button" onClick={() => onConfirm(post)}>
-          확인
-        </button>
-      </div>
-    </Container>
+        <div>
+          <button type="button" onClick={onClose}>
+            닫기
+          </button>
+          <button type="button" onClick={() => onConfirm(post)}>
+            확인
+          </button>
+        </div>
+      </Container>
+    </ModalBackdrop>
   );
 }
 
-export default PointModalUI;
-
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 const zoomIn = keyframes`
   from {
     transform: scale(0.5);
@@ -31,11 +37,21 @@ const zoomIn = keyframes`
   }
 `;
 
-const Container = styled.div`
+const ModalBackdrop = styled.div`
   position: fixed;
-  top: 10%;
-  left: 16%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 배경에 투명도 추가 */
+  z-index: 1000; /* 모달보다 앞에 표시되도록 높은 값 설정 */
+  animation: ${fadeIn} 0.3s ease-out forwards; // Fade in 애니메이션 적용
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Container = styled.div`
   background-color: #fff; /* 배경에 투명도 추가 */
   padding: 20px;
   border-radius: 5px;

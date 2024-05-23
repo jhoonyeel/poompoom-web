@@ -1,22 +1,27 @@
+import styled from 'styled-components';
 import ReviewPostBackground from '../ReviewPostBackground/ReviewPostBackground.container';
 import ReviewPostPreview from '../ReviewPostPreview/ReviewPostPreview.container';
 import ReviewPostHashtags from '../ReviewPostHashtags/ReviewPostHashtags.container';
 import ReviewPostAuthor from '../ReviewPostAuthor/ReviewPostAuthor.container';
 
-function ReviewPostCardUI({ post, onPostClick, isExpanded, handleMouseEnter, handleMouseLeave }) {
+function ReviewPostCardUI({ post, onPostClick, isHovered, handleMouseEnter, handleMouseLeave }) {
   return (
-    <div>
+    <Container>
       <ReviewPostAuthor post={post} />
       <ReviewPostBackground
         post={post}
         onPostClick={onPostClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-      />
-      <ReviewPostHashtags />
-      <ReviewPostPreview expanded={isExpanded} />
-    </div>
+      >
+        {isHovered ? <ReviewPostPreview /> : <ReviewPostHashtags />}
+      </ReviewPostBackground>
+    </Container>
   );
 }
 
 export default ReviewPostCardUI;
+
+const Container = styled.div`
+  width: calc(80% / 3); /* 아이템이 한 줄에 3개 들어가도록 설정 | calc((80% - 20px * 2) / 3); column-gap: 20px;*/
+`;

@@ -26,6 +26,8 @@ function SubGallery() {
     console.log('포스트 확인:', post.title);
   };
 
+  // sub리스트
+
   return (
     <SubGalleryUI
       currentPosts={currentPosts}

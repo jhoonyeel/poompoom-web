@@ -1,12 +1,20 @@
-function ReviewPostAuthorUI({ internal }) {
+import { Link } from 'react-router-dom';
+
+function ReviewPostAuthorUI({ internal, navigate, handleSub }) {
   return (
     <div>
       {internal ? (
         <>
-          <span>프로필사진</span>
-          <span>닉네임</span>
           <span>
-            <button type="button">구독</button> {/** 추후에 컴포넌트 사용 */}
+            <button type="button" onClick={() => navigate('/profile')}>
+              프로필 사진
+            </button>
+          </span>
+          <Link to="/profile">닉네임</Link>
+          <span>
+            <button type="button" onClick={handleSub}>
+              구독{/** 추후에 컴포넌트 사용 */}
+            </button>
           </span>
         </>
       ) : (

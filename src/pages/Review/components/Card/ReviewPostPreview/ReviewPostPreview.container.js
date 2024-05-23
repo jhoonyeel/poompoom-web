@@ -1,7 +1,5 @@
 import ReviewPostPreviewUI from './ReviewPostPreview.presenter';
 
-function ReviewPostPreview({ expanded }) {
-  return <ReviewPostPreviewUI expanded={expanded} />;
+export default function ReviewPostPreview() {
+  return <ReviewPostPreviewUI />;
 }
-
-export default ReviewPostPreview;

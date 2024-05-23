@@ -7,12 +7,14 @@ import SubHeader from './components/SubSection/SubHeader/SubHeader.container';
 import SubGallery from './components/SubSection/SubGallery/SubGallery.container';
 import SearchHeader from './components/SearchSection/SearchHeader/SearchHeader.container';
 import SearchGallery from './components/SearchSection/SearchGallery/SearchGallery.container';
+import PostFilter from './components/PostFilter/PostFilter.container';
 
 function ReviewPage() {
   return (
     <>
       <RankingProfileCard />
       <Layout>
+        <PostFilter />
         <LatestHeader />
         <LatestGallery />
         <SubHeader />

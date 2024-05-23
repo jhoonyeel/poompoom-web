@@ -1,14 +1,10 @@
-function ReviewPostPreviewUI({ expanded }) {
+export default function ReviewPostPreviewUI() {
   return (
     <div>
-      {expanded ? (
-        <div>
-          <p>본문 내용입니다.</p>
-          <p>추가적인 내용</p>
-        </div>
-      ) : null}
+      <div>
+        <p>본문 내용입니다.</p>
+        <p>추가적인 내용</p>
+      </div>
     </div>
   );
 }
-
-export default ReviewPostPreviewUI;

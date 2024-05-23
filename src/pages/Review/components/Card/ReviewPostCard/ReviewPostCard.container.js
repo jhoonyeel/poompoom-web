@@ -2,20 +2,20 @@ import { useState } from 'react';
 import ReviewPostCardUI from './ReviewPostCard.presenter';
 
 function ReviewPostCard({ post, onPostClick }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
-    setIsExpanded(true);
+    setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
-    setIsExpanded(false);
+    setIsHovered(false);
   };
   return (
     <ReviewPostCardUI
       post={post}
       onPostClick={onPostClick}
-      isExpanded={isExpanded}
+      isHovered={isHovered}
       handleMouseEnter={handleMouseEnter}
       handleMouseLeave={handleMouseLeave}
     />
