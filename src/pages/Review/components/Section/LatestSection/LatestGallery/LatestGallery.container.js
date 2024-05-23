@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import LatestGalleryUI from './LatestGallery.presenter';
-import useModal from '../../../../../hooks/useModal';
+import useModal from '../../../../../../hooks/useModal';
 
 const fetchPosts = async () => {
   const response = await axios.get(`http://ec2-3-37-97-52.ap-northeast-2.compute.amazonaws.com/review`);

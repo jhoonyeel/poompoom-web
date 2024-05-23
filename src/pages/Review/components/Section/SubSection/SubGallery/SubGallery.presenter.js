@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import ReviewPostCard from '../../Card/ReviewPostCard/ReviewPostCard.container';
-import PointModal from '../../../../../components/PointModal/PointModal.container';
-import ReviewPostAuthor from '../../Card/ReviewPostAuthor/ReviewPostAuthor.container';
-import ReviewPostHashtags from '../../Card/ReviewPostHashtags/ReviewPostHashtags.container';
+import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.container';
+import PointModal from '../../../../../../components/PointModal/PointModal.container';
+import ReviewPostAuthor from '../../../Card/ReviewPostAuthor/ReviewPostAuthor.container';
+import ReviewPostHashtags from '../../../Card/ReviewPostHashtags/ReviewPostHashtags.container';
 
 function SubGalleryUI({ currentPosts, handlePostClick, handleConfirmPost, selectedPost, isModalOpen, closeModal }) {
   return (

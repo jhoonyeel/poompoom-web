@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import QuickGift from './components/QuickGift/QuickGift';
 import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
-import LatestHeader from './components/LatestSection/LatestHeader/LatestHeader.container';
-import LatestGallery from './components/LatestSection/LatestGallery/LatestGallery.container';
-import SubHeader from './components/SubSection/SubHeader/SubHeader.container';
-import SubGallery from './components/SubSection/SubGallery/SubGallery.container';
-import SearchHeader from './components/SearchSection/SearchHeader/SearchHeader.container';
-import SearchGallery from './components/SearchSection/SearchGallery/SearchGallery.container';
+import LatestHeader from './components/Section/LatestSection/LatestHeader/LatestHeader.container';
+import LatestGallery from './components/Section/LatestSection/LatestGallery/LatestGallery.container';
+import SubHeader from './components/Section/SubSection/SubHeader/SubHeader.container';
+import SubGallery from './components/Section/SubSection/SubGallery/SubGallery.container';
+import SearchHeader from './components/Section/SearchSection/SearchHeader/SearchHeader.container';
+import SearchGallery from './components/Section/SearchSection/SearchGallery/SearchGallery.container';
 import PostFilter from './components/PostFilter/PostFilter.container';
 
 function ReviewPage() {
