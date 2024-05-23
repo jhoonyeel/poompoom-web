@@ -1,38 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
 import * as S from './Header.styles';
 import PostSearch from '../PostSearch/PostSearch';
 
-function HeaderUI() {
+function HeaderUI({ handleOnClick }) {
   return (
     <S.HeaderContainer>
-      <LogoBox>
+      <S.LogoBox>
         <span>로고</span> {/** 추후에 컴포넌트 사용 */}
-      </LogoBox>
+      </S.LogoBox>
       <div>
         <input type="text" />
       </div>
       <PostSearch />
-      <ProfileBox>
+      <S.ProfileBtn onClick={handleOnClick('/profile')}>
         <span>프로필 버튼</span> {/** 추후에 컴포넌트 사용 */}
-      </ProfileBox>
-      <MenuBox>
+      </S.ProfileBtn>
+      <S.MenuBox>
         <span>메뉴바</span> {/** 추후에 컴포넌트 사용 */}
-      </MenuBox>
+      </S.MenuBox>
     </S.HeaderContainer>
   );
 }
 
 export default HeaderUI;
-
-const LogoBox = styled.div`
-  width: 15%;
-`;
-
-const ProfileBox = styled.div`
-  width: 15%;
-`;
-
-const MenuBox = styled.div`
-  width: 15%;
-`;
