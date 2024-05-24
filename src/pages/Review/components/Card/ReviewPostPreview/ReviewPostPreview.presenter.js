@@ -1,19 +1,19 @@
-import * as S from './ReviewPostPreview.styles';
+import styled from 'styled-components';
 
-export default function ReviewPostPreviewUI({ isHovered, setIsHovered }) {
-  const onMouseEnter = () => {
-    setIsHovered(true);
-  };
-
+export default function ReviewPostPreviewUI() {
   // preview 깜빡임 현상 제거
   return (
-    <div>
-      {isHovered && (
-        <S.Box onMouseEnter={onMouseEnter}>
-          <p>본문 내용입니다. </p>
-          <p>추가적인 내용</p>
-        </S.Box>
-      )}
-    </div>
+    <Box>
+      <p>본문 내용입니다. </p>
+      <p>추가적인 내용</p>
+    </Box>
   );
 }
+
+const Box = styled.div`
+  width: 200px;
+  height: 280px;
+  background-color: rgba(0, 0, 0, 0.56);
+  z-index: 99999;
+  position: absolute;
+`;

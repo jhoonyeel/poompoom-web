@@ -42,7 +42,7 @@ const recentPosts = Array.from({ length: 7 }, (_, index) => ({
   content: `${[index + 1]} 번째 포스트의 내용입니다.`,
 }));
 
-function SearchGallery() {
+export default function SearchGallery() {
   const location = useLocation();
   const [selectedPost, setSelectedPost] = useState(null);
   const { isOpen: isModalOpen, openModal, closeModal } = useModal(); // useModal 훅 사용
@@ -86,5 +86,3 @@ function SearchGallery() {
     />
   );
 }
-
-export default SearchGallery;

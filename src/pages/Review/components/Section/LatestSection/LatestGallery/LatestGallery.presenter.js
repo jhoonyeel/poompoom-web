@@ -2,7 +2,14 @@ import styled from 'styled-components';
 import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.container';
 import PostDetail from '../../../../../../components/PostDetail/PostDetail.container';
 
-function LatestGalleryUI({ posts, handlePostClick, handleConfirmPost, selectedPost, isModalOpen, closeModal }) {
+export default function LatestGalleryUI({
+  posts,
+  selectedPost,
+  handlePostClick,
+  handleConfirmPost,
+  isModalOpen,
+  closeModal,
+}) {
   return (
     <>
       <PostList>
@@ -10,12 +17,10 @@ function LatestGalleryUI({ posts, handlePostClick, handleConfirmPost, selectedPo
           <ReviewPostCard key={post.id} post={post} onPostClick={handlePostClick} />
         ))}
       </PostList>
-      {isModalOpen && <PostDetail post={selectedPost} onClose={closeModal} onConfirm={handleConfirmPost} />}
+      {isModalOpen && <PostDetail selectedPost={selectedPost} onClose={closeModal} onConfirm={handleConfirmPost} />}
     </>
   );
 }
-
-export default LatestGalleryUI;
 
 const PostList = styled.div`
   display: flex;

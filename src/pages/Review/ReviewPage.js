@@ -9,7 +9,7 @@ import SearchHeader from './components/Section/SearchSection/SearchHeader/Search
 import SearchGallery from './components/Section/SearchSection/SearchGallery/SearchGallery.container';
 import PostFilter from './components/PostFilter/PostFilter.container';
 
-function ReviewPage() {
+export default function ReviewPage() {
   return (
     <>
       <RankingProfileCard />
@@ -29,8 +29,6 @@ function ReviewPage() {
     </>
   );
 }
-
-export default ReviewPage;
 
 const Layout = styled.div`
   width: 80%;

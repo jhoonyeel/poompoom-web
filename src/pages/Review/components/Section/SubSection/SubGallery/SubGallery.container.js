@@ -1,36 +1,58 @@
 import { useState } from 'react';
+import axios from 'axios';
+import { useQuery } from 'react-query';
 import SubGalleryUI from './SubGallery.presenter';
 import useModal from '../../../../../../hooks/useModal';
 
-function SubGallery() {
-  const [selectedPost, setSelectedPost] = useState(null);
-  const { isOpen: isModalOpen, openModal, closeModal } = useModal(); // useModal 훅 사용
+const fetchPosts = async () => {
+  const response = await axios.get(
+    `http://ec2-3-37-97-52.ap-northeast-2.compute.amazonaws.com/subscribe?page=1&size=5`,
+  );
+  return response.data.values;
+};
 
-  const currentPosts = [1, 2];
-  // 페이지 별 props로 넘겨주는 data 변경 (useRouter, useLocation 사용)
-  console.log(`currentPosts: ${currentPosts}`);
+const transformData = (data) => {
+  return data.map((item) => ({
+    profilePhotoPath: item.profilePhotoPath,
+    nickname: item.nickname,
+    subscribeId: item.subscribeId,
+    followingMemberId: item.followingMemberId,
+    subscribeDate: item.subscribeDate,
+  }));
+};
+
+export default function SubGallery() {
+  const {
+    data: posts,
+    error,
+    isLoading,
+  } = useQuery('posts', fetchPosts, {
+    select: transformData,
+  });
+
+  const [selectedPost, setSelectedPost] = useState(null);
+  const { isOpen: isModalOpen, openModal, closeModal } = useModal();
 
   const handlePostClick = (post) => {
     setSelectedPost(post);
-    openModal(); // 모달 열기 함수 호출
+    openModal();
   };
 
   const handleConfirmPost = (post) => {
-    /**
-     * 여기서 포스트 확인 동작을 수행하거나 추가적인 로직을 수행할 수 있습니다.
-     * 포스트를 서버에 저장하거나 업데이트합니다.
-     * 포스트를 삭제합니다.
-     * 포스트에 대한 추가적인 정보를 보여줍니다.
-     * 모달이 아닌 다른 UI 요소를 업데이트합니다.
-     */
-    console.log('포스트 확인:', post.title);
+    console.log('포스트 확인:', post.nickname);
   };
 
-  // sub리스트
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error fetching posts</div>;
+  }
 
   return (
     <SubGalleryUI
-      currentPosts={currentPosts}
+      posts={posts}
       handlePostClick={handlePostClick}
       handleConfirmPost={handleConfirmPost}
       selectedPost={selectedPost}
@@ -39,5 +61,3 @@ function SubGallery() {
     />
   );
 }
-
-export default SubGallery;

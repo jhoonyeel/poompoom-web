@@ -7,7 +7,7 @@ import PostCommentWrite from '../PostComment/PostCommentWrite/PostCommentWrite';
 import PostCommentList from '../PostComment/PostCommentList/PostCommentList';
 
 export default function PostDetailUI({
-  post,
+  selectedPost,
   onClose,
   onConfirm,
   currentIndex,
@@ -38,8 +38,8 @@ export default function PostDetailUI({
             <Name> {profileName} </Name>
           </BoardContainerHeader>
           <Board>
-            <Title>{post && post.title}</Title>
-            {post && post.content}
+            <Title>{selectedPost && selectedPost.title}</Title>
+            {selectedPost && selectedPost.content}
           </Board>
           <BoardNav>
             <FontAwesomeIcon
@@ -63,7 +63,7 @@ export default function PostDetailUI({
         <button type="button" onClick={onClose}>
           닫기
         </button>
-        <button type="button" onClick={() => onConfirm(post)}>
+        <button type="button" onClick={() => onConfirm(selectedPost)}>
           확인
         </button>
       </div>
