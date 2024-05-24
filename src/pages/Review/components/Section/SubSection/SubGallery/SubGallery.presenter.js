@@ -4,29 +4,59 @@ import PointModal from '../../../../../../components/PointModal/PointModal.conta
 import ReviewPostAuthor from '../../../Card/ReviewPostAuthor/ReviewPostAuthor.container';
 import ReviewPostHashtags from '../../../Card/ReviewPostHashtags/ReviewPostHashtags.container';
 
-function SubGalleryUI({ currentPosts, handlePostClick, handleConfirmPost, selectedPost, isModalOpen, closeModal }) {
+export default function SubGalleryUI({
+  posts,
+  handlePostClick,
+  handleConfirmPost,
+  selectedPost,
+  isModalOpen,
+  closeModal,
+}) {
+  const ex = [1, 2];
   return (
-    <>
+    <Layout>
       <PostList>
-        {currentPosts.map((post) => (
+        {ex.map((post) => (
           <ReviewPostCard key={post.id} post={post} onPostClick={handlePostClick} />
         ))}
-        <div>
-          <ReviewPostAuthor post={currentPosts} /> {/* sub 리스트, currentPosts 삭제 및 수정 */}
-          <ReviewPostHashtags />
-        </div>
       </PostList>
+      <SubList>
+        {posts.map((post) => (
+          <SubItem key={post.id}>
+            <SubAuthorBox>
+              <ReviewPostAuthor nickName={post.nickName} /> {/* sub 리스트, currentPosts 삭제 및 수정 */}
+            </SubAuthorBox>
+            <ReviewPostHashtags post={post} />
+          </SubItem>
+        ))}
+      </SubList>
+      {/* post를 selectedPost로 수정 */}
       {isModalOpen && <PointModal post={selectedPost} onClose={closeModal} onConfirm={handleConfirmPost} />}
-    </>
+    </Layout>
   );
 }
 
-export default SubGalleryUI;
-
-const PostList = styled.div`
+const Layout = styled.div`
   display: flex;
-  flex-wrap: wrap; /* 내용이 넘칠 때 줄바꿈 설정 */
-  gap: 30px;
-  padding: 0 10%;
   border: 3px solid #aaa;
+`;
+const PostList = styled.div`
+  width: 75%;
+  display: flex;
+  column-gap: calc(30% / 3);
+  padding: 0 2%;
+  border-right: 2px dotted brown;
+`;
+const SubList = styled.div`
+  width: 25%;
+  padding: 1% 0;
+`;
+const SubItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8%;
+`;
+const SubAuthorBox = styled.div`
+  margin-bottom: 5%;
 `;

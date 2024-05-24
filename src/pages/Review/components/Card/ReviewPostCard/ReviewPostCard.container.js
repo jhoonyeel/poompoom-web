@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import ReviewPostCardUI from './ReviewPostCard.presenter';
-import Confetti from '../ReviewConfetti/ReviewConfetti.container';
 
-function ReviewPostCard({ post, onPostClick }) {
+export default function ReviewPostCard({ post, onPostClick }) {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -13,18 +12,17 @@ function ReviewPostCard({ post, onPostClick }) {
     setIsHovered(false);
   };
 
+  // post 속성 여러 개로 나누어 보내기
   return (
-    <div>
+    <>
       <ReviewPostCardUI
         post={post}
         onPostClick={onPostClick}
         isHovered={isHovered}
-        setIsHovered={setIsHovered}
         handleMouseEnter={handleMouseEnter}
         handleMouseLeave={handleMouseLeave}
       />
-      <Confetti isHovered={isHovered} />
-    </div>
+      {/* <Confetti isHovered={isHovered} /> */}
+    </>
   );
 }
-export default ReviewPostCard;

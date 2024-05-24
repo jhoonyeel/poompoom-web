@@ -56,9 +56,9 @@ export default function LatestGallery() {
   return (
     <LatestGalleryUI
       posts={posts}
+      selectedPost={selectedPost}
       handlePostClick={handlePostClick}
       handleConfirmPost={handleConfirmPost}
-      selectedPost={selectedPost}
       isModalOpen={isModalOpen}
       closeModal={closeModal}
     />

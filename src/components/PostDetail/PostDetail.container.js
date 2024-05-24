@@ -5,10 +5,10 @@ const boardImages = Array(3).fill('http://via.placeholder.com/388x510.png');
 const profileImage = 'http://via.placeholder.com/105x105.png';
 const profileName = '작성자';
 
-export default function PostDetail({ post, onClose, onConfirm }) {
+export default function PostDetail({ selectedPost, onClose, onConfirm }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [like, setLike] = useState(post.isLike || false);
-  const [bookMark, setBookMark] = useState(post.isBookMark || false);
+  const [like, setLike] = useState(selectedPost.isLike || false);
+  const [bookMark, setBookMark] = useState(selectedPost.isBookMark || false);
 
   /* 사진 슬라이드 효과
   const [style, setStyle] = useState({
@@ -32,7 +32,7 @@ export default function PostDetail({ post, onClose, onConfirm }) {
 
   return (
     <PostDetailUI
-      post={post}
+      selectedPost={selectedPost}
       onClose={onClose}
       onConfirm={onConfirm}
       currentIndex={currentIndex}

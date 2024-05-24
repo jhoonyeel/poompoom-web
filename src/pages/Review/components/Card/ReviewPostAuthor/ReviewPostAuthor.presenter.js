@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function ReviewPostAuthorUI({ internal, navigate, handleSub }) {
+function ReviewPostAuthorUI({ nickName, internal = true, navigate, handleSub }) {
   return (
     <div>
       {internal ? (
@@ -10,7 +10,7 @@ function ReviewPostAuthorUI({ internal, navigate, handleSub }) {
               프로필 사진
             </button>
           </span>
-          <Link to="/profile">닉네임</Link>
+          <Link to="/profile">{nickName || '닉네임'}</Link> {/** 버그 수정 필요 */}
           <span>
             <button type="button" onClick={handleSub}>
               구독{/** 추후에 컴포넌트 사용 */}
