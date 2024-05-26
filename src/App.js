@@ -19,6 +19,7 @@ import ProfileEditPage from './pages/Profile/ProfileEditPage';
 import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
 import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
 import CommunityList from './components/Community/CommunityList/CommunityList';
+import PostDetail from './components/PostDetail/PostDetail.container';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -41,6 +42,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/review" element={<ReviewPage />} />
+            <Route path="/review/post/:id" element={<PostDetail />} />
             <Route path="/review/write" element={<ReviewWritePage />} />
             <Route path="/profile/like" element={<ProfilePage />} />
             <Route path="/profile/bookmark" element={<ProfilePage />} />

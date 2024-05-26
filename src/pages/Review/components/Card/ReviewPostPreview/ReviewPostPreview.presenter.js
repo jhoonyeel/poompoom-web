@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export default function ReviewPostPreviewUI() {
-  // preview 깜빡임 현상 제거
   return (
     <Box>
       <p>본문 내용입니다. </p>
