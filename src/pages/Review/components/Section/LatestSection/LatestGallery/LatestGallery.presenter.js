@@ -24,8 +24,8 @@ export default function LatestGalleryUI({
 
 const PostList = styled.div`
   display: flex;
-  flex-wrap: wrap; /* 내용이 넘칠 때 줄바꿈 설정 */
   gap: 30px;
   padding: 0 10%;
   border: 3px solid #aaa;
+  height: 400px;
 `;

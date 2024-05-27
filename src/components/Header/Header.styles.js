@@ -4,7 +4,7 @@ export const HeaderContainer = styled.div`
   width: ${({ theme }) => theme.width};
   margin: ${({ theme }) => theme.margin};
   color: ${({ theme }) => theme.colors.themeTestHeader};
-  height: 100px;
+  height: 10vh;
   background-color: #e6e6e6;
   border: 3px solid #ccc;
   display: flex;

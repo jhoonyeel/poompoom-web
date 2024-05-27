@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import RankingProfileCardUI from './RankingProfileCard.presenter';
 
-function RankingProfileCard() {
+export default function RankingProfileCard() {
   const [cards] = useState(Array.from({ length: 16 }, (_, i) => i + 1));
   const cardsContainerRef = useRef(null);
   const [rotation, setRotation] = useState(0);
@@ -43,5 +43,3 @@ function RankingProfileCard() {
     />
   );
 }
-
-export default RankingProfileCard;

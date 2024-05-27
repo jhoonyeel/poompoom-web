@@ -8,8 +8,6 @@ import PostCommentList from '../PostComment/PostCommentList/PostCommentList';
 
 export default function PostDetailUI({
   selectedPost,
-  onClose,
-  onConfirm,
   currentIndex,
   prevSlide,
   nextSlide,
@@ -23,24 +21,35 @@ export default function PostDetailUI({
 }) {
   return (
     <Container>
-      <CurrentImage> {`현재 ${currentIndex + 1}번째 이미지`}</CurrentImage>
-      <DetailContainer>
-        <ImageContainer>
-          <SliderBtn onClick={prevSlide}>이전</SliderBtn>
-          <ImageWrapper>
+      <ContentBox>
+        <LeftBox>
+          <div>
+            <SliderBtn onClick={prevSlide}>이전</SliderBtn> {/** 추후에 컴포넌트 사용 */}
+          </div>
+          <ContentImageWrapper>
             <Image src={boardImages[currentIndex]} alt={`이미지 ${currentIndex + 1}`} />;
-          </ImageWrapper>
-          <SliderBtn onClick={nextSlide}>다음</SliderBtn>
-        </ImageContainer>
-        <BoardContainer>
-          <BoardContainerHeader>
-            <Image src={profileImage} />
-            <Name> {profileName} </Name>
-          </BoardContainerHeader>
-          <Board>
-            <Title>{selectedPost && selectedPost.title}</Title>
+          </ContentImageWrapper>
+          <div>
+            <SliderBtn onClick={nextSlide}>다음</SliderBtn> {/** 추후에 컴포넌트 사용 */}
+          </div>
+        </LeftBox>
+        <RightBox>
+          <BoardHeader>
+            <AuthorImageWrapper>
+              <Image src={profileImage} />
+            </AuthorImageWrapper>
+            <b>{profileName}</b>
+          </BoardHeader>
+          <BoardBody>
+            <Title>누가 누구에게 주는 선물</Title>
             {selectedPost && selectedPost.content}
-          </Board>
+            <div>
+              <div>#여러 태그들</div>
+              <div>#여러 태그들</div>
+              <div>#여러 태그들</div>
+            </div>
+            <div>제품 출처: 다이소</div>
+          </BoardBody>
           <BoardNav>
             <FontAwesomeIcon
               icon={like ? solidHeart : regularHeart}
@@ -53,20 +62,12 @@ export default function PostDetailUI({
               style={{ margin: '1rem' }}
             />
           </BoardNav>
-        </BoardContainer>
-        <CommentWrapper>
-          <PostCommentWrite /> {/* 댓글 작성 */}
-        </CommentWrapper>
-      </DetailContainer>
+          <div>
+            <PostCommentWrite /> {/* 댓글 작성 */}
+          </div>
+        </RightBox>
+      </ContentBox>
       <PostCommentList /> {/* 댓글 확인 */}
-      <div>
-        <button type="button" onClick={onClose}>
-          닫기
-        </button>
-        <button type="button" onClick={() => onConfirm(selectedPost)}>
-          확인
-        </button>
-      </div>
     </Container>
   );
 }
@@ -74,66 +75,53 @@ export default function PostDetailUI({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 1440px;
-  height: 1024px;
-  margin: 0;
+  justify-content: center;
+  height: 80vh;
+  margin-top: 2%;
 `;
 
-const CurrentImage = styled.div`
-  transform: translateX(-20rem);
-`;
-
-const DetailContainer = styled.div`
+const ContentBox = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  position: relative;
+  border: 1px solid red;
 `;
+const LeftBox = styled.div`
+  margin-right: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const RightBox = styled.div``;
 
-const Title = styled.div`
+const Title = styled.h2`
   padding: 1rem;
-  margin: 1rem;
   border: 1px solid black;
 `;
 
-const Name = styled.div`
-  margin: 0 1rem;
-`;
-const ImageContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-`;
-const ImageWrapper = styled.div`
-  width: 388px;
+const ContentImageWrapper = styled.div`
+  width: 390px;
   height: 510px;
+  margin: 0 15px;
 `;
-
+const AuthorImageWrapper = styled.div`
+  width: 90px;
+  height: 90px;
+  margin-right: 15px;
+`;
 const Image = styled.img`
   object-fit: cover;
 `;
 
-const BoardContainer = styled.div`
+const BoardHeader = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-`;
-const BoardContainerHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
 `;
 
-const Board = styled.div`
-  width: 617px;
-  height: 303.07px;
+const BoardBody = styled.div`
+  width: 100%;
+  height: 40vh;
   padding: 1rem;
   border: 1px solid gainsboro;
   overflow-y: auto;
@@ -142,26 +130,12 @@ const Board = styled.div`
 
 const BoardNav = styled.nav`
   display: flex;
-  flex-direction: row;
 `;
 
 const SliderBtn = styled.button`
   background-color: rgba(255, 255, 255, 0.5);
-  border: none;
   cursor: pointer;
   &:hover {
     background-color: gainsboro;
   }
 `;
-
-const CommentWrapper = styled.div`
-  position: absolute;
-  top: 460px;
-  right: 0px;
-`;
-
-/*
- {placeholderImages.map((imageUrl, index) => (
-  <Image src={imageUrl} alt={`이미지 ${index + 1}`} />
-))}
-*/

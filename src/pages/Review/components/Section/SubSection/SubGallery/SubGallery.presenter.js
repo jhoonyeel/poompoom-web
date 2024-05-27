@@ -39,6 +39,7 @@ export default function SubGalleryUI({
 const Layout = styled.div`
   display: flex;
   border: 3px solid #aaa;
+  height: 400px;
 `;
 const PostList = styled.div`
   width: 75%;

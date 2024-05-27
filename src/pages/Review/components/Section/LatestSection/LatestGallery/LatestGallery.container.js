@@ -48,7 +48,6 @@ export default function LatestGallery() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
   if (error) {
     return <div>Error fetching posts</div>;
   }
