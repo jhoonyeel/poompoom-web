@@ -9,16 +9,16 @@ export const schema = yup.object().shape({
       /^[가-힣a-zA-Z][^!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?\s]*$/,
       '이름에 특수문자가 포함되거나 숫자로 시작하면 안됩니다.',
     )
-    .required('이름을 입력해주세요'),
-  checkNickname: yup.boolean().required('중복체크해주세요'),
+    .required('이름을 입력해주세요.'),
+  checkNickname: yup.boolean().required('중복체크해주세요.'),
   id: yup
     .string()
-    .min(3, '3자 이상 입력해주세요!')
+    .min(3, '3자 이상 입력해주세요.!')
     .matches(
       /^[가-힣a-zA-Z][^!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?\s]*$/,
       'id에 특수문자가 포함되거나 숫자로 시작하면 안됩니다.',
     )
-    .required('아이디를 입력해주세요'),
+    .required('아이디를 입력해주세요.'),
   password: yup
     .string()
     .max(16, '비밀번호는 최대 16자리입니다!')
@@ -30,5 +30,5 @@ export const schema = yup.object().shape({
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다')
-    .required('비밀번호를 한번 더 입력해주세요'),
+    .required('비밀번호를 한번 더 입력해주세요.'),
 });
