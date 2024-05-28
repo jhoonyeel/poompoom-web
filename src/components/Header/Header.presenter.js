@@ -1,17 +1,17 @@
 import React from 'react';
 import * as S from './Header.styles';
-import PostSearch from '../PostSearch/PostSearch.container';
+import SearchBar from '../SearchBar/SearchBar.container';
 
 export default function HeaderUI({ handleOnClick }) {
   return (
     <S.HeaderContainer>
-      <S.LogoBox>
-        <span>로고</span> {/** 추후에 컴포넌트 사용 */}
-      </S.LogoBox>
-      <PostSearch />
-      <S.ProfileBtn onClick={handleOnClick('/profile')}>
-        <span>프로필 버튼</span> {/** 추후에 컴포넌트 사용 */}
-      </S.ProfileBtn>
+      <S.LogoImgBox>
+        로고 <S.LogoImg src="" alt="로고 사진" /> {/** 추후에 컴포넌트 사용 */}
+      </S.LogoImgBox>
+      <SearchBar />
+      <S.ProfileImgBox onClick={handleOnClick('/profile')}>
+        프로필 버튼 <S.ProfileImg src="" alt="프로필 사진" /> {/** 추후에 컴포넌트 사용 */}
+      </S.ProfileImgBox>
       <S.MenuBox>
         <span>메뉴바</span> {/** 추후에 컴포넌트 사용 */}
       </S.MenuBox>

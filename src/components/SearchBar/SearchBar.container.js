@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import useDebounce from '../../hooks/useDebounce'; // useDebounce 훅 임포트
+import React, { useEffect, useState } from 'react';
+import SearchBarUI from './SearchBar.presenter';
+import useDebounce from '../../hooks/useDebounce';
 
-export default function PostSearch() {
+export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('');
   const [recommendations, setRecommendations] = useState([
     { id: 1, keyword: 'React' },
@@ -43,15 +44,13 @@ export default function PostSearch() {
   };
 
   return (
-    <div>
-      <input type="text" value={searchTerm} onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-      {(isFocused || searchTerm) && (
-        <ul>
-          {recommendations.map((recommendation) => (
-            <li key={recommendation.id}>{recommendation.keyword}</li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <SearchBarUI
+      isFocused={isFocused}
+      searchTerm={searchTerm}
+      handleChange={handleChange}
+      handleFocus={handleFocus}
+      handleBlur={handleBlur}
+      recommendations={recommendations}
+    />
   );
 }

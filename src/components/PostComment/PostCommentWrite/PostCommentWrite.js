@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-function PostCommentWrite() {
+export default function PostCommentWrite() {
   const onClickSubmit = () => {
     /* 댓글 등록  */
   };
@@ -17,12 +17,9 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
   position: relative;
-
   width: 617px;
   height: 50px;
-
   margin: auto;
   border-radius: 6px;
 `;
@@ -40,5 +37,3 @@ const SubmitBtn = styled.button`
   width: 6rem;
   height: 2rem;
 `;
-
-export default PostCommentWrite;

@@ -5,9 +5,7 @@ import SubGalleryUI from './SubGallery.presenter';
 import useModal from '../../../../../../hooks/useModal';
 
 const fetchPosts = async () => {
-  const response = await axios.get(
-    `http://ec2-3-37-97-52.ap-northeast-2.compute.amazonaws.com/subscribe?page=1&size=5`,
-  );
+  const response = await axios.get(`${process.env.REACT_APP_API_URL}/subscribe?page=1&size=5`);
   return response.data.values;
 };
 

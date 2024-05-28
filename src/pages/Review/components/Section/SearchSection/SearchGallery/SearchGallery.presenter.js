@@ -1,13 +1,11 @@
-/* 페이지 주소를 받아와서 다른 data 전송 */
 import React from 'react';
 import styled from 'styled-components';
 import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.container';
-// import PostDetail from '../../../../../../components/PostDetail/PostDetail.container';
 
-export default function SearchGalleryUI({ currentPosts, handlePostClick }) {
+export default function SearchGalleryUI({ searchPosts, handlePostClick }) {
   return (
     <PostList>
-      {currentPosts.map((post) => (
+      {searchPosts.map((post) => (
         <ReviewPostCard key={post.id} post={post} onPostClick={handlePostClick} />
       ))}
     </PostList>

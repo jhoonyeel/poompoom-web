@@ -1,32 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import PostDetailUI from './PostDetail.persenter';
 
-const boardImages = Array(3).fill('http://via.placeholder.com/390x510.png');
-const profileImage = 'http://via.placeholder.com/90x90.png';
-const profileName = '작성자';
+const boardImages = Array(3).fill('http://via.placeholder.com/390x510.png') && [];
+const profileImage = 'http://via.placeholder.com/90x90.png' && '';
+const profileName = '작성자' && null;
 
 export default function PostDetail() {
   const { id } = useParams();
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [like, setLike] = useState(false);
   const [bookMark, setBookMark] = useState(false);
 
-  useEffect(() => {
-    const fetchPostData = async () => {
-      try {
-        const res = await axios.get(`http://ec2-3-37-97-52.ap-northeast-2.compute.amazonaws.com/review/${id}`);
-        const { data } = res;
-        setSelectedPost(data);
-        setLike(data.isLike);
-        setBookMark(data.isBookMark);
-      } catch (error) {
-        console.error('Error fetching post data:', error);
-      }
-    };
+  const fetchPostData = async () => {
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/review/${id}`);
+      const { data } = res;
+      setSelectedPost(data);
+      setLike(data.isLike);
+      setBookMark(data.isBookMark);
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching post data:', error);
+    }
+  };
 
+  useEffect(() => {
     fetchPostData();
   }, [id]);
 
