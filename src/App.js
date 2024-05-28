@@ -20,6 +20,8 @@ import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
 import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
 import CommunityList from './components/Community/CommunityList/CommunityList';
 import PostDetail from './components/PostDetail/PostDetail.container';
+import SignUpPage from './pages/Login/SignUpPage';
+import LoginPage from './pages/Login/LoginPage';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -52,6 +54,8 @@ function App() {
             <Route path="/community" element={<CommunityList />} />
             <Route path="/community/detail" element={<CommunityDetailPage />} />
             <Route path="/community/write" element={<CommunityWrite />} />
+            <Route path="/signUp" element={<SignUpPage />} />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
           <Footer />
         </S.AppLayout>
