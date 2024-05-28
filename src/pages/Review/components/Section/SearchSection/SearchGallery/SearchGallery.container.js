@@ -1,33 +1,37 @@
-/* 페이지 주소를 받아와서 다른 data 전송 */
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import SearchGalleryUI from './SearchGallery.presenter';
 
-const posts = Array.from({ length: 7 }, (_, index) => ({
-  id: index + 1,
-  title: `${[index + 1]} 번째 포스트`,
-  excerpt: `${[index + 1]} 번째 포스트의 요약입니다.`,
-  content: `${[index + 1]} 번째 포스트의 내용입니다.`,
-}));
-
 export default function SearchGallery() {
+  const [searchPosts, setSearchPosts] = useState([]);
+
   const navigate = useNavigate();
-  const [selectedPost, setSelectedPost] = useState(null);
-
-  const location = useLocation();
-
-  const postsMap = {
-    '/review': posts,
-  };
-
-  const currentPosts = postsMap[location.pathname] || posts;
-  // 페이지 별 props로 넘겨주는 data 변경 (useRouter, useLocation 사용)
-  console.log(`currentPosts: ${currentPosts}`);
 
   const handlePostClick = (post) => {
-    setSelectedPost(post);
-    navigate(`/review/post/1${post.id}`, { state: { post } });
+    navigate(`/review/post/${post.id}`);
   };
 
-  return <SearchGalleryUI currentPosts={currentPosts} handlePostClick={handlePostClick} selectedPost={selectedPost} />;
+  const fetchPostData = async () => {
+    try {
+      // api 변경
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/review`);
+      const { data } = res;
+      setSearchPosts(data.values);
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching post data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPostData();
+  }, []);
+
+  return (
+    <SearchGalleryUI
+      searchPosts={searchPosts.length === 0 ? [1, 2, 3, 4, 5, 6, 7] : searchPosts}
+      handlePostClick={handlePostClick}
+    />
+  );
 }

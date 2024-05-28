@@ -1,24 +1,13 @@
 import styled from 'styled-components';
 import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.container';
-import PostDetail from '../../../../../../components/PostDetail/PostDetail.container';
 
-export default function LatestGalleryUI({
-  posts,
-  selectedPost,
-  handlePostClick,
-  handleConfirmPost,
-  isModalOpen,
-  closeModal,
-}) {
+export default function LatestGalleryUI({ posts, handlePostClick }) {
   return (
-    <>
-      <PostList>
-        {posts.map((post) => (
-          <ReviewPostCard key={post.id} post={post} onPostClick={handlePostClick} />
-        ))}
-      </PostList>
-      {isModalOpen && <PostDetail selectedPost={selectedPost} onClose={closeModal} onConfirm={handleConfirmPost} />}
-    </>
+    <PostList>
+      {posts.map((post) => (
+        <ReviewPostCard key={post.id} post={post} onPostClick={handlePostClick} />
+      ))}
+    </PostList>
   );
 }
 

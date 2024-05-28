@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import ReviewPostBackground from '../ReviewPostBackground/ReviewPostBackground.container';
-
 import ReviewPostHashtags from '../ReviewPostHashtags/ReviewPostHashtags.container';
 import ReviewPostAuthor from '../ReviewPostAuthor/ReviewPostAuthor.container';
 import ReviewPostPreview from '../ReviewPostPreview/ReviewPostPreview.container';

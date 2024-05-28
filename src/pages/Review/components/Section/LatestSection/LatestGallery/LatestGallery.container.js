@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import axios from 'axios';
-import { useQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import LatestGalleryUI from './LatestGallery.presenter';
-import useModal from '../../../../../../hooks/useModal';
 
-const fetchPosts = async () => {
-  const response = await axios.get(`http://ec2-3-37-97-52.ap-northeast-2.compute.amazonaws.com/review`);
+const fetchPosts = async ({ pageParam = 0 }) => {
+  const response = await axios.get(`${process.env.REACT_APP_API_URL}/view/my`, {
+    params: { cursorId: pageParam },
+  });
   return response.data.values;
 };
 
 const transformData = (data) => {
-  return data.map((item) => ({
+  return data.values.map((item) => ({
     body: item.body,
     price: item.price,
     createTime: item.createTime,
@@ -21,29 +23,54 @@ const transformData = (data) => {
     isLikedPost: item.isLikedPost,
     isBookmarked: item.isBookmarked,
     hashTags: item.hashTags,
+    reviewType: item.reviewType,
+    startPoint: item.startPoint,
+    whereBuy: item.whereBuy,
   }));
 };
 
 export default function LatestGallery() {
   const {
-    data: posts,
+    data: postData,
     error,
     isLoading,
-  } = useQuery('posts', fetchPosts, {
-    select: transformData,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery('posts', fetchPosts, {
+    getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.cursorId : undefined),
+    select: (data) => ({
+      pages: data.pages.flatMap((page) => transformData(page.values)),
+    }),
   });
 
-  const [selectedPost, setSelectedPost] = useState(null);
-  const { isOpen: isModalOpen, openModal, closeModal } = useModal();
+  const observerRef = useRef();
+
+  const navigate = useNavigate();
 
   const handlePostClick = (post) => {
-    setSelectedPost(post);
-    openModal();
+    navigate(`/review/post/${post.id}`);
   };
 
-  const handleConfirmPost = (post) => {
-    console.log('포스트 확인:', post.title);
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 1.0 },
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, [fetchNextPage, hasNextPage]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -53,13 +80,9 @@ export default function LatestGallery() {
   }
 
   return (
-    <LatestGalleryUI
-      posts={posts}
-      selectedPost={selectedPost}
-      handlePostClick={handlePostClick}
-      handleConfirmPost={handleConfirmPost}
-      isModalOpen={isModalOpen}
-      closeModal={closeModal}
-    />
+    <>
+      <LatestGalleryUI posts={postData.pages} handlePostClick={handlePostClick} />
+      <div ref={observerRef} style={{ height: '20px' }} />
+    </>
   );
 }

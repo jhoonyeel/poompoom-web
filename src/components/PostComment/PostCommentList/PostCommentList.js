@@ -8,7 +8,7 @@ const comments = Array(3)
     content: `댓글내용${index + 1}: What is Lorem Ipsum?Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the`,
   }));
 // 댓글 무한스크롤..
-function PostCommentList() {
+export default function PostCommentList() {
   const onClickSelect = () => {
     /* 채택된 댓글을 list배열 맨 앞으로 보내기 */
   };
@@ -28,8 +28,6 @@ function PostCommentList() {
     </Container>
   );
 }
-
-export default PostCommentList;
 
 const Container = styled.div`
   width: fit-content;
