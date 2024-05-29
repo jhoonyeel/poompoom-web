@@ -39,6 +39,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={basicTheme}>
         <GlobalStyle />
+        {/* <RecoilRoot> */}
         <S.AppLayout>
           {showHeader && <Header />}
           <Routes>
@@ -59,6 +60,7 @@ function App() {
           </Routes>
           <Footer />
         </S.AppLayout>
+        {/* </RecoilRoot> */}
       </ThemeProvider>
     </QueryClientProvider>
   );
