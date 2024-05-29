@@ -1,16 +1,18 @@
 import * as yup from 'yup';
 
 export const schema = yup.object().shape({
-  name: yup
-    .string()
-    .min(2, '이름은 최소 2글자 이상입니다!')
-    .max(10, '이름은 최대 10글자입니다!')
-    .matches(
-      /^[가-힣a-zA-Z][^!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?\s]*$/,
-      '이름에 특수문자가 포함되거나 숫자로 시작하면 안됩니다.',
-    )
-    .required('이름을 입력해주세요.'),
-  checkNickname: yup.boolean().required('중복체크해주세요.'),
+  // name: yup
+  //   .string()
+  //   .min(2, '이름은 최소 2글자 이상입니다!')
+  //   .max(10, '이름은 최대 10글자입니다!')
+  //   .matches(
+  //     /^[가-힣a-zA-Z][^!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?\s]*$/,
+  //     '이름에 특수문자가 포함되거나 숫자로 시작하면 안됩니다.',
+  //   )
+  //   .required('이름을 입력해주세요.'),
+
+  email: yup.string().email('이메일형식이 적합하지 않습니다.').required('이메일을 입력해주세요'),
+
   id: yup
     .string()
     .min(3, '3자 이상 입력해주세요.!')

@@ -26,9 +26,9 @@ export default function SignUp() {
           <S.ErrorMessage>{errors.id?.message}</S.ErrorMessage>
         </S.InputWrapper>
         <S.InputWrapper>
-          <S.InputLabel>이름</S.InputLabel>
-          <input type="text" {...register('name')} />
-          <S.ErrorMessage>{errors.name?.message}</S.ErrorMessage>
+          <S.InputLabel>이메일</S.InputLabel>
+          <input type="email" {...register('email')} />
+          <S.ErrorMessage>{errors.email?.message}</S.ErrorMessage>
         </S.InputWrapper>
         <S.InputWrapper>
           <S.InputLabel>비밀번호</S.InputLabel>
