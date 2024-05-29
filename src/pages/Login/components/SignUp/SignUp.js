@@ -8,14 +8,16 @@ export default function SignUp() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'onChange', // onchange 당 체크
   });
 
-  const onSubmit = () => {
-    console.log('전송');
+  const onSubmit = (data) => {
+    console.log(data);
+    reset();
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -40,7 +42,9 @@ export default function SignUp() {
           <input type="password" {...register('confirmPassword')} />
           <S.ErrorMessage>{errors.confirmPassword?.message}</S.ErrorMessage>
         </S.InputWrapper>
-        <button type="submit">등록하기</button>
+        <button style={{ backgroundColor: isValid ? 'yellow' : '' }} type="submit">
+          회원가입
+        </button>
       </S.SignUpContainer>
     </form>
   );
