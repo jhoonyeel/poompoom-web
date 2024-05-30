@@ -2,6 +2,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import reset from 'styled-reset';
+
 import * as S from './App.styles';
 
 import Header from './components/Header/Header.container';
@@ -20,7 +21,7 @@ import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
 import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
 import CommunityList from './components/Community/CommunityList/CommunityList';
 import PostDetail from './components/PostDetail/PostDetail.container';
-import SignUpPage from './pages/Login/SignUpPage';
+import SignUpPage from './pages/SignUp/SignUpPage';
 import LoginPage from './pages/Login/LoginPage';
 
 const GlobalStyle = createGlobalStyle`
@@ -39,9 +40,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={basicTheme}>
         <GlobalStyle />
-        {/* <RecoilRoot> */}
         <S.AppLayout>
           {showHeader && <Header />}
+
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/review" element={<ReviewPage />} />
@@ -58,9 +59,9 @@ function App() {
             <Route path="/signUp" element={<SignUpPage />} />
             <Route path="/login" element={<LoginPage />} />
           </Routes>
+
           <Footer />
         </S.AppLayout>
-        {/* </RecoilRoot> */}
       </ThemeProvider>
     </QueryClientProvider>
   );
