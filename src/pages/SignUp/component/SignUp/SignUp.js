@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
 import { schema } from './SignUp.validation';
 import * as S from './SignUp.style';
 
@@ -15,10 +16,19 @@ export default function SignUp() {
     mode: 'onChange', // onchange 당 체크
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit = async (data) => {
+    try {
+      const result = await axios.post(`${process.env.REACT_APP_API_URL}/member/join`, {
+        req: { username: data.email, password: data.password, nickname: data.id, profileTagIds: [0] },
+        profileImage: '',
+      });
+      console.log('회원가입 성공', result.data);
+      reset();
+    } catch (error) {
+      console.error('회원가입 실패', error.response?.data);
+    }
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <S.SignUpContainer>
@@ -49,3 +59,10 @@ export default function SignUp() {
     </form>
   );
 }
+
+/* useForm =()=> {
+  const [value, setValue] = useState("");
+  const onChange = (e) => {
+    setValue(e.target.value);
+  }; return [value, onChange];
+} */
