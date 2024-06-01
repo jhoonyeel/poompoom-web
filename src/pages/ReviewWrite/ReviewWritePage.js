@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import styled from 'styled-components';
 
 export default function ReviewWritePage() {
   const [giftType, setGiftType] = useState('RECEIVED');
@@ -51,8 +52,8 @@ export default function ReviewWritePage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="received">
+    <Form onSubmit={handleSubmit}>
+      <Label htmlFor="received">
         <input
           id="received"
           type="radio"
@@ -61,8 +62,8 @@ export default function ReviewWritePage() {
           onChange={() => setGiftType('RECEIVED')}
         />
         받은 선물
-      </label>
-      <label htmlFor="given">
+      </Label>
+      <Label htmlFor="given">
         <input
           id="given"
           type="radio"
@@ -71,21 +72,21 @@ export default function ReviewWritePage() {
           onChange={() => setGiftType('GIVEN')}
         />
         보낸 선물
-      </label>
+      </Label>
       <br />
-      <label htmlFor="senderReceiver">
+      <Label htmlFor="senderReceiver">
         누가 누구한테 보내는지:
-        <input
+        <Input
           id="senderReceiver"
           type="text"
           value={senderReceiver}
           onChange={(e) => setSenderReceiver(e.target.value)}
         />
-      </label>
+      </Label>
       <br />
-      <label htmlFor="category">
+      <Label htmlFor="category">
         카테고리:
-        <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+        <Select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="">카테고리 선택</option>
           <option value="100일">100일</option>
           <option value="n주년">n주년</option>
@@ -95,35 +96,89 @@ export default function ReviewWritePage() {
           <option value="가벼운 선물">가벼운 선물</option>
           <option value="사과의 선물">사과의 선물</option>
           <option value="청혼">청혼</option>
-        </select>
-      </label>
+        </Select>
+      </Label>
       <br />
-      <label htmlFor="content">
+      <Label htmlFor="content">
         본문 내용:
-        <textarea id="content" value={content} onChange={(e) => setContent(e.target.value)} />
-      </label>
+        <Textarea id="content" value={content} onChange={(e) => setContent(e.target.value)} />
+      </Label>
       <br />
-      <label htmlFor="image">
+      <Label htmlFor="image">
         사진:
-        <input id="image" type="file" multiple onChange={handleImageChange} />
-      </label>
+        <Input id="image" type="file" multiple onChange={handleImageChange} />
+      </Label>
       <br />
-      <label htmlFor="price">
+      <Label htmlFor="price">
         선물 가격:
-        <input id="price" type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
-      </label>
+        <Input id="price" type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
+      </Label>
       <br />
-      <label htmlFor="rating">
+      <Label htmlFor="rating">
         별점:
-        <input id="rating" type="number" min="1" max="5" value={rating} onChange={(e) => setRating(e.target.value)} />
-      </label>
+        <Input id="rating" type="number" min="1" max="5" value={rating} onChange={(e) => setRating(e.target.value)} />
+      </Label>
       <br />
-      <label htmlFor="source">
+      <Label htmlFor="source">
         선물 출처:
-        <input id="source" type="text" value={source} onChange={(e) => setSource(e.target.value)} />
-      </label>
+        <Input id="source" type="text" value={source} onChange={(e) => setSource(e.target.value)} />
+      </Label>
       <br />
-      <button type="submit">리뷰 작성 완료</button>
-    </form>
+      <Button type="submit">리뷰 작성 완료</Button>
+    </Form>
   );
 }
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+`;
+
+const Label = styled.label`
+  margin-bottom: 10px;
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+`;
+
+const Textarea = styled.textarea`
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+`;
+
+const Select = styled.select`
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+`;
+
+const Button = styled.button`
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
