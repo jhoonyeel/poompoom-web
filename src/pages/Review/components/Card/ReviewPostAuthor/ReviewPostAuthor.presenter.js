@@ -1,3 +1,5 @@
+import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
 function ReviewPostAuthorUI({ nickName, internal = true, navigate, handleSub }) {
@@ -5,11 +7,7 @@ function ReviewPostAuthorUI({ nickName, internal = true, navigate, handleSub }) 
     <div>
       {internal ? (
         <>
-          <span>
-            <button type="button" onClick={() => navigate('/profile')}>
-              프로필 사진
-            </button>
-          </span>
+          <FontAwesomeIcon icon={faCircleUser} onClick={() => navigate('/profile')} />
           <Link to="/profile">{nickName || '닉네임'}</Link> {/** 버그 수정 필요 */}
           <span>
             <button type="button" onClick={handleSub}>

@@ -20,5 +20,13 @@
     "react/prop-types": "off",
     "import/prefer-default-export": "off",
     "no-console": "off"
+  },
+  "settings": {
+    // import/resolver` 는 `eslint-plugin-import` 의 경로 설정 옵션
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }

@@ -1,21 +1,28 @@
+import { faFilter, faSliders, faAlignCenter } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import styled from 'styled-components';
+import * as S from './PostFilter.styles';
 
-export default function PostFilterUI() {
+export default function PostFilterUI({ handleOnClick }) {
   return (
     <Layout>
       <div>
-        <span>깔대기 아이콘</span> {/** 추후에 컴포넌트 사용 */}
+        <S.FilterIcon icon={faFilter} />
+        <span>정렬</span>
       </div>
       <div>
-        <span>스르륵 아이콘</span> {/** 추후에 컴포넌트 사용 */}
-      </div>
-      <div>
+        <S.SortIcon icon={faAlignCenter} rotation={180} />
         <span>인기순</span>
         <span>최신순</span>
         <span>추천순</span>
       </div>
-      <span>가격대 정렬</span>
+      <div>
+        <S.SliderIcon icon={faSliders} />
+        <span>가격대</span>
+      </div>
+      <button type="button" onClick={handleOnClick('/review/writetest')}>
+        리뷰글 작성
+      </button>
     </Layout>
   );
 }

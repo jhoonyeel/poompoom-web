@@ -1,20 +1,27 @@
 import React from 'react';
+import { faBars, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as S from './Header.styles';
 import SearchBar from '../SearchBar/SearchBar.container';
 
-export default function HeaderUI({ handleOnClick }) {
+export default function HeaderUI({ showSearchBar, handleOnClick }) {
   return (
-    <S.HeaderContainer>
-      <S.LogoImgBox>
-        로고 <S.LogoImg src="" alt="로고 사진" /> {/** 추후에 컴포넌트 사용 */}
-      </S.LogoImgBox>
-      <SearchBar />
-      <S.ProfileImgBox onClick={handleOnClick('/profile')}>
-        프로필 버튼 <S.ProfileImg src="" alt="프로필 사진" /> {/** 추후에 컴포넌트 사용 */}
-      </S.ProfileImgBox>
-      <S.MenuBox>
-        <span>메뉴바</span> {/** 추후에 컴포넌트 사용 */}
-      </S.MenuBox>
-    </S.HeaderContainer>
+    <S.HeaderWrapper>
+      <S.HeaderContent>
+        <S.LogoImgBox onClick={handleOnClick('/')}>
+          <S.LogoImg src="" alt="로고 사진" /> {/** 추후에 컴포넌트 사용 */}
+        </S.LogoImgBox>
+        {showSearchBar && <SearchBar />}
+        <S.IconBox>
+          <S.ProfileImgBox onClick={handleOnClick('/profile')}>
+            <FontAwesomeIcon icon={faUserPlus} />
+            <S.ProfileImg src="" alt="프로필 사진" /> {/** 추후에 컴포넌트 사용 */}
+          </S.ProfileImgBox>
+          <S.MenuBox>
+            <S.MenuIcon icon={faBars} />
+          </S.MenuBox>
+        </S.IconBox>
+      </S.HeaderContent>
+    </S.HeaderWrapper>
   );
 }

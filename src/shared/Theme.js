@@ -28,6 +28,10 @@ export const layout = {
   margin: '0 auto',
 };
 
+export const component = {
+  border: '0 solid gray',
+};
+
 export const basicTheme = {
   colors, // 색상 설정
   fonts, // 폰트 설정
