@@ -13,9 +13,11 @@ export const schema = yup.object().shape({
 
   email: yup.string().email('이메일형식이 적합하지 않습니다.').required('이메일을 입력해주세요'),
 
+  verificationCode: yup.string().required('이메일 인증을 완료해주세요'),
+
   id: yup
     .string()
-    .min(3, '3자 이상 입력해주세요.!')
+    .min(4, '4자 이상 입력해주세요.')
     .matches(
       /^[가-힣a-zA-Z][^!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?\s]*$/,
       'id에 특수문자가 포함되거나 숫자로 시작하면 안됩니다.',
