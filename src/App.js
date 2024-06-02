@@ -18,6 +18,7 @@ import CommunityList from './components/Community/CommunityList/CommunityList';
 import PostDetail from './components/PostDetail/PostDetail.container';
 import SignUpPage from './pages/SignUp/SignUpPage';
 import LoginPage from './pages/Login/LoginPage';
+import SignUpTagPage from './pages/SignUp/SignUpTagPage';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -41,6 +42,8 @@ function AppRoutes() {
       <Route path="/community" element={<CommunityList />} />
       <Route path="/community/detail" element={<CommunityDetailPage />} />
       <Route path="/community/write" element={<CommunityWrite />} />
+      <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/signup/tag" element={<SignUpTagPage />} />
     </Routes>
   );
 }
