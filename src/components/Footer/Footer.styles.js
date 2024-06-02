@@ -6,4 +6,5 @@ export const FooterContainer = styled.div`
   color: ${({ theme }) => theme.colors.themeTestFooter};
   background-color: #e6e6e6;
   border: 3px solid #ccc;
+  height: 10vh;
 `;

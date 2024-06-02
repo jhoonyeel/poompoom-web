@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import LatestGalleryUI from './LatestGallery.presenter';
 
 const fetchPosts = async ({ pageParam = 0 }) => {
-  const response = await axios.get(`${process.env.REACT_APP_API_URL}/view/my`, {
+  const response = await axios.get(`/view/my`, {
     params: { cursorId: pageParam },
   });
   return response.data.values;

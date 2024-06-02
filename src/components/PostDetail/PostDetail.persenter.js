@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as regularHeart, faBookmark as regularBookMark } from '@fortawesome/free-regular-svg-icons'; // ♡
 import { faHeart as solidHeart, faBookmark as solidBookMark } from '@fortawesome/free-solid-svg-icons'; // ♥︎
-import PostCommentWrite from '../PostComment/PostCommentWrite/PostCommentWrite';
-import PostCommentList from '../PostComment/PostCommentList/PostCommentList';
 
 export default function PostDetailUI({
   selectedPost,
@@ -62,12 +60,10 @@ export default function PostDetailUI({
               style={{ margin: '1rem' }}
             />
           </BoardNav>
-          <div>
-            <PostCommentWrite /> {/* 댓글 작성 */}
-          </div>
+          <div>{/* 댓글 작성 */}</div>
         </RightBox>
       </ContentBox>
-      <PostCommentList /> {/* 댓글 확인 */}
+      <div>{/* 댓글 확인 */}</div>
     </Container>
   );
 }

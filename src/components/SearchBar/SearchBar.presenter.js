@@ -1,23 +1,57 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
+import { faMagnifyingGlass, faMinus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import * as S from './SearchBar.styles';
 
-export default function SearchBarUI({ isFocused, searchTerm, handleChange, handleFocus, handleBlur, recommendations }) {
-  return (
-    <div>
-      <div>
-        돋보기 아이콘
-        <input type="text" value={searchTerm} onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-      </div>
-      <div>
-        추천 키워드
-        <br />
-        {(isFocused || searchTerm) && (
-          <ul>
-            {recommendations.map((recommendation) => (
-              <li key={recommendation.id}>{recommendation.keyword}</li>
-            ))}
-          </ul>
+const SearchBarUI = forwardRef(
+  (
+    {
+      isFocused,
+      searchTerm,
+      handleChange,
+      handleFocus,
+      handleBlur,
+      handleKeyDown,
+      handleRecommendationClick,
+      handleClearInput,
+      recommendations,
+    },
+    ref,
+  ) => (
+    <S.Wrapper>
+      <S.SearchInputBox>
+        <S.SearchIcon icon={faMagnifyingGlass} />
+        <S.MinusIcon icon={faMinus} rotation={90} />
+        <S.SearchInput
+          type="text"
+          placeholder="사용자 검색 시 검색어 앞에 @를 붙여주세요."
+          value={searchTerm}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          ref={ref}
+        />
+        <S.XCircleIcon icon={faCircleXmark} onClick={handleClearInput} />
+      </S.SearchInputBox>
+      <S.RecommendBox>
+        {isFocused && searchTerm.length === 0 && (
+          <>
+            <S.RecommendParagraph>지금 다른 분들이 많이 검색해요</S.RecommendParagraph>
+            <S.RecommendList>
+              {recommendations.map((recommendation) => (
+                <S.RecommendItem
+                  key={recommendation.id}
+                  onClick={() => handleRecommendationClick(recommendation.keyword)}
+                >
+                  {recommendation.keyword}
+                </S.RecommendItem>
+              ))}
+            </S.RecommendList>
+          </>
         )}
-      </div>
-    </div>
-  );
-}
+      </S.RecommendBox>
+    </S.Wrapper>
+  ),
+);
+
+export default SearchBarUI;
