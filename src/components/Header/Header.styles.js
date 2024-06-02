@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 export const HeaderWrapper = styled.header`
   width: 100%;
   height: 12vh;
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   z-index: 100;

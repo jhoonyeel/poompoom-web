@@ -67,8 +67,8 @@
     "prettier": "^3.2.5"
   },
   "main": "index.js",
-  "repository": "https://github.com/TwoSSome/FE.git",
+  "repository": "https://github.com/TwoSSome/poompoom-web.git",
   "author": "dekoms <dekoms@naver.com>",
   "license": "MIT",
-  "homepage": "https://TwoSSome.github.io/FE"
+  "homepage": "https://TwoSSome.github.io/poompoom-web"
 }

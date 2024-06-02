@@ -50,9 +50,7 @@ function MainLayout() {
   return (
     <>
       <Header />
-      <S.MainContent>
-        <AppRoutes />
-      </S.MainContent>
+      <AppRoutes />
       <Footer />
     </>
   );
