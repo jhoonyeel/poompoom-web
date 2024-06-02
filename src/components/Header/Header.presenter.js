@@ -18,7 +18,7 @@ export default function HeaderUI({ showSearchBar, handleOnClick }) {
             <S.ProfileImg src="" alt="프로필 사진" /> {/** 추후에 컴포넌트 사용 */}
           </S.ProfileImgBox>
           <S.MenuBox>
-            <S.MenuIcon icon={faBars} />
+            <S.MenuIcon icon={faBars} onClick={handleOnClick('/review')} />
           </S.MenuBox>
         </S.IconBox>
       </S.HeaderContent>
