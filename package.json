@@ -2,6 +2,7 @@
   "name": "poompoom",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://wossome.github.io/poompoom-web",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
@@ -37,7 +38,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "serve": "serve -s build"
   },
   "eslintConfig": {
     "extends": [
@@ -73,6 +75,5 @@
     "url": "https://github.com/TwoSSome/poompoom-web.git"
   },
   "author": "dekoms <dekoms@naver.com>",
-  "license": "MIT",
-  "homepage": "https://twossome.github.io/poompoom-web"
+  "license": "MIT"
 }
