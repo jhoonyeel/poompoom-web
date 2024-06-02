@@ -15,6 +15,7 @@
     "axios": "^1.6.8",
     "canvas-confetti": "^1.9.3",
     "eslint-config-react-app": "^7.0.1",
+    "gh-pages": "^6.1.1",
     "matter-js": "^0.19.0",
     "react": "^18.2.0",
     "react-canvas-confetti": "^2.0.7",
@@ -33,7 +34,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -66,5 +69,6 @@
   "main": "index.js",
   "repository": "https://github.com/TwoSSome/FE.git",
   "author": "dekoms <dekoms@naver.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://TwoSSome.github.io/FE"
 }
