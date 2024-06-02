@@ -31,8 +31,7 @@ function AppRoutes() {
       <Route path="/" element={<HomePage />} />
       <Route path="/review" element={<ReviewPage />} />
       <Route path="/review/:id" element={<PostDetail />} />
-      {/* <Route path="/review/write" element={<ReviewWritePage />} /> */}
-      <Route path="/review/writetest" element={<ReviewWritePage />} />
+      <Route path="/review/write" element={<ReviewWritePage />} />
       <Route path="/review/query-result" element={<QueryResultPage />} />
       <Route path="/profile/like" element={<ProfilePage />} />
       <Route path="/profile/bookmark" element={<ProfilePage />} />

@@ -20,7 +20,7 @@ export default function PostFilterUI({ handleOnClick }) {
         <S.SliderIcon icon={faSliders} />
         <span>가격대</span>
       </div>
-      <button type="button" onClick={handleOnClick('/review/writetest')}>
+      <button type="button" onClick={handleOnClick('/review/write')}>
         리뷰글 작성
       </button>
     </Layout>
