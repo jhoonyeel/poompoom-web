@@ -5,7 +5,7 @@ module.exports = {
       // Webpack 설정 변경 예시
       webpackConfig.output = {
         ...webpackConfig.output,
-        publicPath: '/poompoom-web/',
+        publicPath: process.env.PUBLIC_URL || '/',
       };
       return webpackConfig;
     },
