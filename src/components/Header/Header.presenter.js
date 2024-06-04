@@ -1,6 +1,6 @@
 import React from 'react';
-import { faBars, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 import * as S from './Header.styles';
 import SearchBar from '../SearchBar/SearchBar.container';
 
@@ -13,10 +13,10 @@ export default function HeaderUI({ showSearchBar, handleOnClick }) {
         </S.LogoImgBox>
         {showSearchBar && <SearchBar />}
         <S.IconBox>
-          <S.ProfileImgBox onClick={handleOnClick('/profile')}>
-            <FontAwesomeIcon icon={faUserPlus} />
-            <S.ProfileImg src="" alt="프로필 사진" /> {/** 추후에 컴포넌트 사용 */}
-          </S.ProfileImgBox>
+          <S.ProfileBox onClick={handleOnClick('/profile')}>
+            <S.ProfileIcon icon={faUser} />
+            <S.ProfileButton type="button">연인 프로필 생성 +</S.ProfileButton>
+          </S.ProfileBox>
           <S.MenuBox>
             <S.MenuIcon icon={faBars} onClick={handleOnClick('/review')} />
           </S.MenuBox>

@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import React, { forwardRef } from 'react';
-import ReviewPostPreview from '../../Card/ReviewPostPreview/ReviewPostPreview.container';
 // import Card from '../Card/Card.conatiner';
 
 const RankingProfileCardUI = forwardRef(({ cards, handleMouseDown, handleMouseMove, handleMouseUp }, ref) => (
@@ -11,7 +10,6 @@ const RankingProfileCardUI = forwardRef(({ cards, handleMouseDown, handleMouseMo
           <h1>1등!!!</h1>
           <p>asdf</p>
           <span>awofji</span>
-          <ReviewPostPreview />
         </Card>
       ))}
     </CardContainer>

@@ -14,7 +14,6 @@ export default function SearchGallery() {
 
   const fetchPostData = async () => {
     try {
-      // api 변경
       const res = await axios.get(`/review`);
       const { data } = res;
       setSearchPosts(data.values);

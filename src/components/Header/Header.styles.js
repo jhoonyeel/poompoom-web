@@ -31,7 +31,7 @@ export const HeaderContent = styled.div`
         `}
 `;
 export const IconBox = styled.div`
-  width: 30%;
+  width: 20%;
   height: 100%;
   display: flex;
 `;
@@ -45,21 +45,28 @@ export const LogoImg = styled.img`
   object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
 `;
 
-export const ProfileImgBox = styled.div`
-  width: 50%;
-  aspect-ratio: 1 / 1;
+export const ProfileBox = styled.div`
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
-export const ProfileImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
+
+export const ProfileIcon = styled(FontAwesomeIcon)`
+  font-size: 48px;
+  cursor: pointer;
+`;
+export const ProfileButton = styled.button`
+  width: 70%;
+  border: 0;
 `;
 
 export const MenuBox = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 50%;
+  width: 30%;
 `;
 
 export const MenuIcon = styled(FontAwesomeIcon)`
