@@ -9,13 +9,13 @@ export default function SearchGallery() {
   const navigate = useNavigate();
 
   const handlePostClick = (post) => {
-    navigate(`/review/post/${post.id}`);
+    navigate(`/review/${post.id}`);
   };
 
   const fetchPostData = async () => {
     try {
       // api 변경
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/review`);
+      const res = await axios.get(`/review`);
       const { data } = res;
       setSearchPosts(data.values);
       console.log(data);

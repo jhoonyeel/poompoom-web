@@ -16,7 +16,7 @@ export default function PostDetail() {
 
   const fetchPostData = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/review/${id}`);
+      const res = await axios.get(`/review/${id}`);
       const { data } = res;
       setSelectedPost(data);
       setLike(data.isLike);
