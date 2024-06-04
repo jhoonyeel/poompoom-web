@@ -4,7 +4,7 @@ import * as S from './Footer.styles';
 function FooterUI() {
   return (
     <S.FooterContainer>
-      <div>footer입니다.</div>
+      <div />
     </S.FooterContainer>
   );
 }

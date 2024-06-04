@@ -19,6 +19,7 @@ import PostDetail from './components/PostDetail/PostDetail.container';
 import SignUpPage from './pages/SignUp/SignUpPage';
 import LoginPage from './pages/Login/LoginPage';
 import SignUpTagPage from './pages/SignUp/SignUpTagPage';
+import LoverProfilePage from './pages/LoverProfile/LoverProfilePage';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -34,6 +35,7 @@ function AppRoutes() {
       <Route path="/review/:id" element={<PostDetail />} />
       <Route path="/review/write" element={<ReviewWritePage />} />
       <Route path="/review/query-result" element={<QueryResultPage />} />
+      <Route path="/lovers-profile" element={<LoverProfilePage />} />
       <Route path="/profile/like" element={<ProfilePage />} />
       <Route path="/profile/bookmark" element={<ProfilePage />} />
       <Route path="/profile/recent" element={<ProfilePage />} />

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import QuickGift from './components/QuickGift/QuickGift';
 import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
 import LatestHeader from './components/Section/LatestSection/LatestHeader/LatestHeader.container';
 import LatestGallery from './components/Section/LatestSection/LatestGallery/LatestGallery.container';
@@ -21,7 +20,7 @@ export default function ReviewPage() {
         <SubGallery />
         <SearchHeader />
         <SearchGallery />
-        <QuickGift />
+        {/* <QuickGift /> */}
         <ButtonBox>
           <button type="button">↑</button> {/** 추후에 컴포넌트 사용 */}
         </ButtonBox>

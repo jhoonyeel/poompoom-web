@@ -2,9 +2,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  width: 45%;
+  width: 40%;
   height: 100%;
-  padding-left: 10%;
+  margin-left: 5%;
 `;
 export const SearchInputBox = styled.div`
   height: 100%;
