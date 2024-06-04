@@ -12,7 +12,8 @@ export default function ReviewWritePage() {
   const [rating, setRating] = useState(1);
   const [source, setSource] = useState('');
 
-  const ACCESS_TOKEN = 'your_access_token_here'; // 여기에 본인의 ACCESS_TOKEN을 넣어주세요
+  const accessToken = localStorage.getItem('AccessToken');
+  const ACCESS_TOKEN = accessToken; // 여기에 본인의 ACCESS_TOKEN을 넣어주세요
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +34,7 @@ export default function ReviewWritePage() {
       .post('/review/create', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          access: `${ACCESS_TOKEN}`,
         },
       })
       .then((response) => {
