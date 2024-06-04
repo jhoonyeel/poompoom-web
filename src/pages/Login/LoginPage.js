@@ -1,11 +1,9 @@
-// import LoginForm from './components/SignUp/Login.container';
+import Login from './components/Login';
 
-// function LoginPage() {
-//   return (
-//     <div>
-//       <LoginForm />
-//     </div>
-//   );
-// }
-
-// export default LoginPage;
+export default function LoginPage() {
+  return (
+    <div>
+      <Login />
+    </div>
+  );
+}

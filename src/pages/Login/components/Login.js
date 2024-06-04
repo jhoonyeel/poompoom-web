@@ -1,61 +1,89 @@
 import styled from 'styled-components';
-import Link, { Router } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { login } from '../../../apis/login';
-
-export default function Login() {
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-
-  const onChangeEmail = (event) => {
-    setId(event.target.value);
-  };
-  const onChangePassword = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const onClickLogin = async () => {
-    const result = await login(id, password);
-    console.log(result);
-    const { accessToken, refreshToken } = result;
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('refreshToken', refreshToken);
-    Router('../../Profile/ProfilePage.js');
-  };
-
-  return (
-    <Container>
-      <Title>로그인하기</Title>
-      <Form>
-        <inputs>
-          아이디 : <input type="text" value={id} placeholder="이메일" onChange={onChangeEmail} /> <br />
-          비밀번호 : <input type="password" value={password} placeholder="비밀번호" onChange={onChangePassword} />
-        </inputs>
-        <button type="button" onClick={onClickLogin}>
-          로그인하기
-        </button>
-      </Form>
-      <CustomLink to="../../SignUp/SignUpPage.js">회원가입</CustomLink>
-    </Container>
-  );
-}
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+// import { useCookies } from 'react-cookie';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  overflow: auto; /* Enable scrolling */
 `;
-const Title = styled.div``;
+
+const FormContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  margin-top: 20px;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+`;
+
+const Label = styled.label`
+  margin-bottom: 5px;
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
+
+const Button = styled.button`
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+const TokenContainer = styled.div`
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const TokenTitle = styled.h2`
+  margin: 0 0 10px 0;
+`;
+
+const TokenValue = styled.p`
+  word-break: break-all;
+`;
 
 const CustomLink = styled(Link)`
   margin-top: 20px;
   text-decoration: none;
   color: black;
   font-weight: bold;
+  &:hover {
+    font-size: 20px;
+  }
   &:visited {
     text-decoration: none;
     color: black;
@@ -63,40 +91,83 @@ const CustomLink = styled(Link)`
   }
 `;
 
-/* import { useState } from 'react';
-import { useRecoilState } from 'recoil';
-
 export default function Login() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [accessToken, setAccessToken] = useRecoilState();
+  const [access, setAccess] = useState('');
+  // const [cookies, setCookie] = useCookies(['refresh']);
+  const navigate = useNavigate();
 
+  const handleLogin = async (url) => {
+    const data = new URLSearchParams();
+    data.append('username', username);
+    data.append('password', password);
 
-  const onClickLogin = () => {
     try {
-      // 1. 로그인 요청 날려서 토큰 받아오기
-      const accessToken = result.data?.loginUser.accessToken;
-      console.log(accessToken);
-      // 2. 토큰을 globalstate에 저장
-      if (accessToken === undefined) {
-        alert('error');
-        return;
-      } // 문제 있을땐 무ㅜ조건 return하고 종료. 아래로 내려온건 !==란 뜻.
-      setAccessToken(accessToken);
-      // 3. 로그인 성공 시 성공 페이지로 이동 !
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: data.toString(),
+      });
+
+      if (response.ok) {
+        const accessValue = response.headers.get('access');
+        setAccess(accessValue);
+
+        console.log('Access:', accessValue);
+        // console.log('Refresh:', cookies.refresh);
+        localStorage.setItem('AccessToken', accessValue);
+        navigate('/login/success');
+      } else {
+        console.error('Login failed');
+      }
     } catch (error) {
-      alert(error.message);
+      console.error('Error:', error);
     }
   };
 
+  const handleSubmitLogin = async (e) => {
+    e.preventDefault();
+    await handleLogin('/login');
+  };
+
+  const handleRefreshToken = async (e) => {
+    e.preventDefault();
+    await handleLogin('/reissue');
+  };
+
   return (
-    <div>
-      이메일 : <input type="text" onChange={onChangeEmail} /> <br />
-      비밀번호 : <input type="password" onChange={onChangePassword} />
-      <button type="button" onClick={onClickLogin}>
-        로그인하기
-      </button>
-    </div>
+    <Container>
+      <CustomLink to=" ">로그인 페이지</CustomLink>
+      <FormContainer>
+        <Form onSubmit={handleSubmitLogin}>
+          <div>
+            <Label>Username:</Label>
+            <Input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          </div>
+          <div>
+            <Label>Password:</Label>
+            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <Button type="submit">Login</Button>
+          <Button onClick={handleRefreshToken}>Refresh</Button>
+        </Form>
+      </FormContainer>
+      {access && (
+        <TokenContainer>
+          <TokenTitle>Access Token</TokenTitle>
+          <TokenValue>{access}</TokenValue>
+        </TokenContainer>
+      )}
+      {/* {cookies.refresh && (
+        <TokenContainer>
+          <TokenTitle>Refresh Token</TokenTitle>
+          <TokenValue>{cookies.refresh}</TokenValue>
+        </TokenContainer>
+      )} */}
+      <CustomLink to="../../SignUp">회원가입으로 이동</CustomLink>
+    </Container>
   );
 }
-*/
