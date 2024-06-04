@@ -4,11 +4,22 @@ import { useInfiniteQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import LatestGalleryUI from './LatestGallery.presenter';
 
+const accessToken = localStorage.getItem('accessToken');
+
 const fetchPosts = async ({ pageParam = 0 }) => {
-  const response = await axios.get(`/view/my`, {
-    params: { cursorId: pageParam },
-  });
-  return response.data.values;
+  try {
+    const response = await axios.get(`/view/my`, {
+      headers: {
+        access: `${accessToken}`,
+      },
+      params: { cursorId: pageParam },
+    });
+    console.log('성공');
+    return response.data.values;
+  } catch (error) {
+    console.log('문제', error);
+    return null;
+  }
 };
 
 const transformData = (data) => {

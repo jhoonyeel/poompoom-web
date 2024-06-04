@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
@@ -12,12 +13,12 @@ export default function SignUp() {
     handleSubmit,
     formState: { errors, isValid },
     watch,
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'onChange', // onchange 당 체크
   });
 
+  const navigate = useNavigate();
   const [emailSentMessage, setEmailSentMessage] = useState('');
   const [verificationMessage, setVerificationMessage] = useState('');
 
@@ -67,10 +68,11 @@ export default function SignUp() {
         },
       });
       console.log('회원가입 성공', result.data);
-      reset();
+      navigate('/login');
     } catch (error) {
       console.error('회원가입 실패', error.response?.data);
       console.log('FormData 내용!!!');
+      navigate('/login');
       if (formData) {
         Array.from(formData.entries()).forEach(([key, value]) => {
           console.log(key, value);

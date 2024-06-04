@@ -1,7 +1,7 @@
 import { faFilter, faSliders, faAlignCenter } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import styled from 'styled-components';
-import ReactSlider from 'react-slider';
+// import ReactSlider from 'react-slider';
 import * as S from './PostFilter.styles';
 
 export default function PostFilterUI({ marks, priceRange, setPriceRange, handleOnClick }) {
@@ -66,6 +66,7 @@ const Layout = styled.div`
   gap: 50px;
   border: 3px solid #aaa;
 `;
+const ReactSlider = styled.div``;
 
 const PriceFilter = styled.div`
   display: flex;
