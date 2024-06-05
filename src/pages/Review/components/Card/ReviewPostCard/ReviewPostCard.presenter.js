@@ -34,7 +34,6 @@ const HoveredLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
 `;
 const HoveredBox = styled.div`
   width: 380px;
