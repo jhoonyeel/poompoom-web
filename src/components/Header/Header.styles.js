@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled, { css } from 'styled-components';
+import { ReactComponent as Logo } from '../../assets/PoomPoom.svg';
 
 export const HeaderWrapper = styled.header`
   width: 100%;
@@ -35,11 +36,12 @@ export const IconBox = styled.div`
   height: 100%;
   display: flex;
 `;
-export const LogoImgBox = styled.div`
+export const LogoBox = styled.div`
   width: 15%;
   height: 100%;
+  padding: 0.5% 0%;
 `;
-export const LogoImg = styled.img`
+export const LogoSvg = styled(Logo)`
   width: 100%;
   height: 100%;
   object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
@@ -51,15 +53,16 @@ export const ProfileBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const ProfileIcon = styled(FontAwesomeIcon)`
   font-size: 48px;
-  cursor: pointer;
 `;
-export const ProfileButton = styled.button`
+export const ProfileParagraph = styled.p`
   width: 70%;
-  border: 0;
+  margin-top: 5%;
+  font-weight: bold;
 `;
 
 export const MenuBox = styled.div`
@@ -67,9 +70,9 @@ export const MenuBox = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 30%;
+  cursor: pointer;
 `;
 
 export const MenuIcon = styled(FontAwesomeIcon)`
   font-size: 48px;
-  cursor: pointer;
 `;

@@ -79,7 +79,7 @@ export default function HomePage() {
             <PlusIconBox>
               <PlusIcon icon={faPlus} />
             </PlusIconBox>
-            <ProfileParagraph>프로필 생성하러 가기</ProfileParagraph>
+            <PlusParagraph>프로필 생성하러 가기</PlusParagraph>
           </CreateProfileBox>
         </ProfileContent>
       </ProfileSection>
@@ -156,9 +156,10 @@ const PlusIcon = styled(FontAwesomeIcon)`
   color: gray;
   font-size: 100px;
 `;
-const ProfileParagraph = styled.p`
+const PlusParagraph = styled.p`
   font-size: 28px;
   margin-top: 1rem;
+  font-weight: bold;
 `;
 
 const SearchSection = styled.section`

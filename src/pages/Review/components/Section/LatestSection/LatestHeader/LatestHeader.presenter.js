@@ -1,16 +1,15 @@
 import styled from 'styled-components';
+import { ReactComponent as Recent } from '../../../../../../assets/RECENT_VIEW.svg';
 
-function LatestHeaderUI() {
+export default function LatestHeaderUI() {
   return (
     <Container>
       <ContentBox>
-        <span>최근 본 게시글</span> {/** 추후에 컴포넌트 사용 */}
+        <RecentSvg />
       </ContentBox>
     </Container>
   );
 }
-
-export default LatestHeaderUI;
 
 const Container = styled.div`
   width: 100%;
@@ -24,4 +23,9 @@ const Container = styled.div`
 
 const ContentBox = styled.div`
   width: 25%;
+`;
+const RecentSvg = styled(Recent)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
 `;
