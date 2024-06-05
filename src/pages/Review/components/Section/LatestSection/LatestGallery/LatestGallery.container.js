@@ -8,7 +8,7 @@ const accessToken = localStorage.getItem('accessToken');
 
 const fetchPosts = async ({ pageParam = 0 }) => {
   try {
-    const response = await axios.get(`/view/my`, {
+    const response = await axios.get(`/profile/my`, {
       headers: {
         access: `${accessToken}`,
       },
