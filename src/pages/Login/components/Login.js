@@ -119,7 +119,7 @@ export default function Login() {
         console.log('Access:', accessValue);
         // console.log('Refresh:', cookies.refresh);
         localStorage.setItem('AccessToken', accessValue);
-        navigate('/login/success');
+        navigate('/');
       } else {
         console.error('Login failed');
       }
