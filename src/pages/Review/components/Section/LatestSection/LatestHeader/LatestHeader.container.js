@@ -1,7 +1,5 @@
 import LatestHeaderUI from './LatestHeader.presenter';
 
-function LatestHeader() {
+export default function LatestHeader() {
   return <LatestHeaderUI />;
 }
-
-export default LatestHeader;

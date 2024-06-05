@@ -1,7 +1,5 @@
 import SubHeaderUI from './SubHeader.presenter';
 
-function SubHeader() {
+export default function SubHeader() {
   return <SubHeaderUI />;
 }
-
-export default SubHeader;

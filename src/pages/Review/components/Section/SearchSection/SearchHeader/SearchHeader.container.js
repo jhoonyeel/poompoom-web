@@ -1,7 +1,5 @@
 import SearchHeaderUI from './SearchHeader.presenter';
 
-function SearchHeader() {
+export default function SearchHeader() {
   return <SearchHeaderUI />;
 }
-
-export default SearchHeader;

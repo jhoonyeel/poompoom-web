@@ -1,16 +1,15 @@
 import styled from 'styled-components';
+import { ReactComponent as Subscribed } from '../../../../../../assets/SUBSCRIBED_VIEW.svg';
 
-function SubHeaderUI() {
+export default function SubHeaderUI() {
   return (
     <Container>
       <ContentBox>
-        <span>구독한 게시글</span> {/** 추후에 컴포넌트 사용 */}
+        <SubscribedSvg />
       </ContentBox>
     </Container>
   );
 }
-
-export default SubHeaderUI;
 
 const Container = styled.div`
   width: 100%;
@@ -24,4 +23,9 @@ const Container = styled.div`
 
 const ContentBox = styled.div`
   width: 25%;
+`;
+const SubscribedSvg = styled(Subscribed)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
 `;

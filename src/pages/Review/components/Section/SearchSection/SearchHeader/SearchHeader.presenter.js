@@ -1,16 +1,15 @@
 import styled from 'styled-components';
+import { ReactComponent as All } from '../../../../../../assets/ALL_MOOD_VIEW.svg';
 
-function SearchHeaderUI() {
+export default function SearchHeaderUI() {
   return (
     <Container>
       <ContentBox>
-        <span>검색한 게시글</span> {/** 추후에 컴포넌트 사용 */}
+        <AllSvg />
       </ContentBox>
     </Container>
   );
 }
-
-export default SearchHeaderUI;
 
 const Container = styled.div`
   width: 100%;
@@ -24,4 +23,9 @@ const Container = styled.div`
 
 const ContentBox = styled.div`
   width: 25%;
+`;
+const AllSvg = styled(All)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
 `;

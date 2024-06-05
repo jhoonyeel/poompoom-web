@@ -8,7 +8,7 @@ function ReviewPostAuthorUI({ nickName, internal = true, navigate, handleSub }) 
       {internal ? (
         <>
           <FontAwesomeIcon icon={faCircleUser} onClick={() => navigate('/profile')} />
-          <Link to="/profile">{nickName || '닉네임'}</Link> {/** 버그 수정 필요 */}
+          <Link to="/profile">{nickName || '@닉네임'}</Link>
           <span>
             <button type="button" onClick={handleSub}>
               구독{/** 추후에 컴포넌트 사용 */}

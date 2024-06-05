@@ -1,25 +1,25 @@
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import reset from 'styled-reset';
 import * as S from './App.styles';
-import Header from './components/Header/Header.container';
+import CommunityList from './components/Community/CommunityList/CommunityList';
+import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
 import Footer from './components/Footer/Footer.container';
-import { basicTheme } from './shared/Theme';
+import Header from './components/Header/Header.container';
+import PostDetail from './components/PostDetail/PostDetail.container';
+import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
 import HomePage from './pages/Home/HomePage';
+import LoginPage from './pages/Login/LoginPage';
+import LoverProfilePage from './pages/LoverProfile/LoverProfilePage';
+import ProfileEditPage from './pages/Profile/ProfileEditPage';
+import ProfilePage from './pages/Profile/ProfilePage';
+import QueryResultPage from './pages/QueryResult/QueryResultPage';
 import ReviewPage from './pages/Review/ReviewPage';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
-import QueryResultPage from './pages/QueryResult/QueryResultPage';
-import ProfilePage from './pages/Profile/ProfilePage';
-import ProfileEditPage from './pages/Profile/ProfileEditPage';
-import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
-import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
-import CommunityList from './components/Community/CommunityList/CommunityList';
-import PostDetail from './components/PostDetail/PostDetail.container';
 import SignUpPage from './pages/SignUp/SignUpPage';
-import LoginPage from './pages/Login/LoginPage';
 import SignUpTagPage from './pages/SignUp/SignUpTagPage';
-import LoverProfilePage from './pages/LoverProfile/LoverProfilePage';
+import { basicTheme } from './shared/Theme';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
