@@ -18,7 +18,7 @@ import QueryResultPage from './pages/QueryResult/QueryResultPage';
 import ReviewPage from './pages/Review/ReviewPage';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
 import SignupPage from './pages/Signup/SignupPage';
-import SignUpTagPage from './pages/Signup/SignupTagPage';
+import SignupTagPage from './pages/Signup/SignupTagPage';
 import { basicTheme } from './shared/Theme';
 
 const GlobalStyle = createGlobalStyle`
@@ -44,8 +44,6 @@ function AppRoutes() {
       <Route path="/community" element={<CommunityList />} />
       <Route path="/community/detail" element={<CommunityDetailPage />} />
       <Route path="/community/write" element={<CommunityWrite />} />
-      <Route path="/signup" element={<SignupPage />} />
-      <Route path="/signup/tag" element={<SignUpTagPage />} />
     </Routes>
   );
 }
@@ -68,6 +66,7 @@ export default function App() {
         <S.AppLayout>
           <Routes>
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="/signup/tag" element={<SignupTagPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route element={<MainLayout />}>
               <Route path="/*" element={<AppRoutes />} />
