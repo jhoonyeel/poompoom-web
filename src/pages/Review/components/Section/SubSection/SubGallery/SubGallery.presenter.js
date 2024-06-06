@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.container';
 import PointModal from '../../../../../../components/PointModal/PointModal.container';
 import ReviewPostAuthor from '../../../Card/ReviewPostAuthor/ReviewPostAuthor.container';
+import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.container';
 import ReviewPostHashtags from '../../../Card/ReviewPostHashtags/ReviewPostHashtags.container';
 
 export default function SubGalleryUI({
@@ -24,13 +24,12 @@ export default function SubGalleryUI({
         {posts.map((post) => (
           <SubItem key={post.id}>
             <SubAuthorBox>
-              <ReviewPostAuthor nickName={post.nickName} /> {/* sub 리스트, currentPosts 삭제 및 수정 */}
+              <ReviewPostAuthor nickName={post.nickName} />
             </SubAuthorBox>
             <ReviewPostHashtags post={post} />
           </SubItem>
         ))}
       </SubList>
-      {/* post를 selectedPost로 수정 */}
       {isModalOpen && <PointModal post={selectedPost} onClose={closeModal} onConfirm={handleConfirmPost} />}
     </Layout>
   );
@@ -44,6 +43,9 @@ const Layout = styled.div`
 const PostList = styled.div`
   width: 75%;
   display: flex;
+  flex-wrap: nowrap; /* 가로로 나열 */
+  overflow-x: auto; /* 가로 스크롤 활성화 */
+  cursor: url('../../../../../../assets/HorizontalCursor.svg'), auto; /* SVG 커서 설정 */
   column-gap: calc(30% / 3);
   padding: 0 2%;
   border-right: 2px dotted brown;

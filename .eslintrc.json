@@ -20,7 +20,8 @@
     "react/prop-types": "off",
     "import/prefer-default-export": "off",
     "no-console": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-underscore-dangle": ["error", { "allow": ["_retry"] }]
   },
   "settings": {
     // import/resolver` 는 `eslint-plugin-import` 의 경로 설정 옵션

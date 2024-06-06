@@ -4,7 +4,7 @@ import Gender from './component/Gender';
 import Interest from './component/Interest';
 import Job from './component/Job';
 
-export default function SignupTag() {
+export default function SignUpTagPage() {
   const initialButtons = [
     { id: 1, value: '' },
     { id: 2, value: '' },

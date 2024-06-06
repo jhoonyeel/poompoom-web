@@ -4,19 +4,18 @@ import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.containe
 
 export default function SearchGalleryUI({ searchPosts, handlePostClick }) {
   return (
-    <PostList>
+    <Wrapper>
       {searchPosts.map((post) => (
         <ReviewPostCard key={post.id} post={post} onPostClick={handlePostClick} />
       ))}
-    </PostList>
+    </Wrapper>
   );
 }
 
-const PostList = styled.div`
-  display: flex;
-  flex-wrap: wrap; /* 내용이 넘칠 때 줄바꿈 설정 */
-  row-gap: 50px;
-  column-gap: 11%; // calc(30% / 3), 11.5%
-  padding: 2% 10%;
-  border: 3px solid #aaa;
+const Wrapper = styled.div`
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 4개의 열을 가지도록 설정 */
+  column-gap: 1.5rem;
+  row-gap: 2.5rem;
 `;

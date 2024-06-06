@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
 import { useQuery } from 'react-query';
-import SubGalleryUI from './SubGallery.presenter';
 import useModal from '../../../../../../hooks/useModal';
+import SubGalleryUI from './SubGallery.presenter';
 
 const fetchPosts = async () => {
-  const response = await axios.get(`${process.env.REACT_APP_API_URL}/subscribe?page=1&size=5`);
+  const response = await axios.get(`/subscribe?page=1&size=5`);
   return response.data.values;
 };
 

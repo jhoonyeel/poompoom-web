@@ -1,7 +1,83 @@
-import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-// import { useCookies } from 'react-cookie';
+import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { axios, login, logout } from '../../../apis/authService';
+
+export default function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [access, setAccess] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmitLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const { accessToken } = await login(username, password);
+      console.log('Access Token: ', accessToken); // Debug log
+      setAccess(accessToken);
+      navigate('/');
+    } catch (error) {
+      console.error('Login failed', error);
+    }
+  };
+
+  const handleRefreshToken = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        '/reissue',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('refreshToken')}`,
+          },
+        },
+      );
+      const { access: accessToken, refresh: refreshToken } = response.data;
+      localStorage.setItem('accessToken', accessToken);
+      if (refreshToken) {
+        localStorage.setItem('refreshToken', refreshToken);
+      }
+      setAccess(accessToken);
+    } catch (error) {
+      console.error('Refresh token failed', error);
+    }
+  };
+
+  const handleLogout = () => {
+    logout();
+    setAccess('');
+    navigate('/login');
+  };
+
+  return (
+    <Container>
+      <CustomLink to="#">로그인 페이지</CustomLink>
+      <FormContainer>
+        <Form onSubmit={handleSubmitLogin}>
+          <div>
+            <Label>Username:</Label>
+            <Input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          </div>
+          <div>
+            <Label>Password:</Label>
+            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <Button type="submit">Login</Button>
+          <Button onClick={handleRefreshToken}>Refresh</Button>
+          <Button onClick={handleLogout}>Logout</Button>
+        </Form>
+      </FormContainer>
+      {access && (
+        <TokenContainer>
+          <TokenTitle>Access Token</TokenTitle>
+          <TokenValue>{access}</TokenValue>
+        </TokenContainer>
+      )}
+      <CustomLink to="../../SignUp">회원가입으로 이동</CustomLink>
+    </Container>
+  );
+}
 
 const Container = styled.div`
   display: flex;
@@ -90,84 +166,3 @@ const CustomLink = styled(Link)`
     font-weight: bold;
   }
 `;
-
-export default function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [access, setAccess] = useState('');
-  // const [cookies, setCookie] = useCookies(['refresh']);
-  const navigate = useNavigate();
-
-  const handleLogin = async (url) => {
-    const data = new URLSearchParams();
-    data.append('username', username);
-    data.append('password', password);
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: data.toString(),
-      });
-
-      if (response.ok) {
-        const accessValue = response.headers.get('access');
-        setAccess(accessValue);
-
-        console.log('Access:', accessValue);
-        // console.log('Refresh:', cookies.refresh);
-        localStorage.setItem('AccessToken', accessValue);
-        navigate('/');
-      } else {
-        console.error('Login failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-
-  const handleSubmitLogin = async (e) => {
-    e.preventDefault();
-    await handleLogin('/login');
-  };
-
-  const handleRefreshToken = async (e) => {
-    e.preventDefault();
-    await handleLogin('/reissue');
-  };
-
-  return (
-    <Container>
-      <CustomLink to=" ">로그인 페이지</CustomLink>
-      <FormContainer>
-        <Form onSubmit={handleSubmitLogin}>
-          <div>
-            <Label>Username:</Label>
-            <Input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-          </div>
-          <div>
-            <Label>Password:</Label>
-            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-          </div>
-          <Button type="submit">Login</Button>
-          <Button onClick={handleRefreshToken}>Refresh</Button>
-        </Form>
-      </FormContainer>
-      {access && (
-        <TokenContainer>
-          <TokenTitle>Access Token</TokenTitle>
-          <TokenValue>{access}</TokenValue>
-        </TokenContainer>
-      )}
-      {/* {cookies.refresh && (
-        <TokenContainer>
-          <TokenTitle>Refresh Token</TokenTitle>
-          <TokenValue>{cookies.refresh}</TokenValue>
-        </TokenContainer>
-      )} */}
-      <CustomLink to="../../SignUp">회원가입으로 이동</CustomLink>
-    </Container>
-  );
-}

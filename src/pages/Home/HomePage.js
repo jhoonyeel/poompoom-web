@@ -167,7 +167,7 @@ const SearchSection = styled.section`
   border: 3px solid #aaa;
   margin-top: 5rem;
 `;
-const KeywordBox = styled.p`
+const KeywordBox = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
@@ -186,7 +186,7 @@ const KeywordItem = styled.li`
   padding: 0.3rem;
   cursor: pointer;
 `;
-const CategoryBox = styled.p`
+const CategoryBox = styled.div`
   width: 80%;
   margin: 0 auto;
   margin-top: 3rem;
