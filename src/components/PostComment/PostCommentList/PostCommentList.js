@@ -1,70 +1,66 @@
-import styled from 'styled-components';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import axios from 'axios';
 
-const comments = Array(3)
-  .fill()
-  .map((_, index) => ({
-    id: index,
-    writer: `작성자${index + 1}`,
-    content: `댓글내용${index + 1}: What is Lorem Ipsum?Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the`,
-  }));
-// 댓글 무한스크롤..
 export default function PostCommentList() {
-  const onClickSelect = () => {
-    /* 채택된 댓글을 list배열 맨 앞으로 보내기 */
+  const [comments, setComments] = useState([]);
+  const [cursorId, setCursorId] = useState(null);
+  const [hasNext, setHasNext] = useState(true);
+  const observer = useRef();
+  const accessToken = localStorage.getItem('AccessToken');
+  const fetchComments = async () => {
+    const response = await axios.get(`/review/1/comments`, {
+      headers: {
+        access: `${accessToken}`,
+      },
+      params: {
+        reviewId: 1,
+        cursorId,
+        sort: 'asc',
+        size: '5',
+      },
+    });
+
+    const newComments = response.data.values;
+    setComments((prevComments) => [...prevComments, ...newComments]);
+    setCursorId(response.data.cursorId);
+    setHasNext(response.data.hasNext);
   };
 
-  return (
-    <Container>
-      {comments.map((el) => (
-        <MapList key={el.id}>
-          <Header>
-            <div>{el.writer}</div>
-            <Button onClick={onClickSelect}>채택하기</Button>
-          </Header>
+  const lastCommentElementRef = useCallback(
+    (node) => {
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasNext) {
+          fetchComments(cursorId);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [cursorId, hasNext],
+  );
 
-          <List>{el.content}</List>
-        </MapList>
-      ))}
-    </Container>
+  useEffect(() => {
+    fetchComments();
+  }, []);
+
+  return (
+    <div>
+      {comments.map((comment, index) => {
+        if (comments.length === index + 1) {
+          return (
+            <div ref={lastCommentElementRef} key={comment.commentId}>
+              <p>{comment.body}</p>
+              <small>{new Date(comment.createDate).toLocaleString()}</small>
+            </div>
+          );
+        }
+        return (
+          <div key={comment.commentId}>
+            <p>{comment.body}</p>
+            <small>{new Date(comment.createDate).toLocaleString()}</small>
+          </div>
+        );
+      })}
+    </div>
   );
 }
-
-const Container = styled.div`
-  width: fit-content;
-  max-width: inherit;
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-`;
-
-const MapList = styled.div`
-  margin: 1rem;
-  width: fit-content;
-  max-width: 25rem;
-  padding: 2rem;
-  height: auto;
-  max-height: 20rem;
-  border: 1px solid gainsboro;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const List = styled.div`
-  word-wrap: break-word;
-`;
-
-const Header = styled.header`
-  width: inherit;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-`;
-const Button = styled.button`
-  width: 4rem;
-  height: 2rem;
-  margin: 0 1rem;
-`;
