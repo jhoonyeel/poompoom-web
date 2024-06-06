@@ -10,8 +10,8 @@ export const HeaderWrapper = styled.header`
   left: 0;
   z-index: 100;
 
-  background-color: #e6e6e6;
-  border: 3px solid #ccc;
+  background-color: #ffeaea;
+  border-bottom: 3px solid #ffaaaa;
 `;
 export const HeaderContent = styled.div`
   width: 80%;

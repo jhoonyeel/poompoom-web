@@ -1,12 +1,12 @@
 import React from 'react';
 import * as S from './Footer.styles';
 
-function FooterUI() {
+export default function FooterUI() {
   return (
     <S.FooterContainer>
-      <div />
+      <S.FooterContent>
+        <S.FooterSvg />
+      </S.FooterContent>
     </S.FooterContainer>
   );
 }
-
-export default FooterUI;
