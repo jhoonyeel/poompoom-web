@@ -1,10 +1,11 @@
-import { useState } from 'react';
 import styled from 'styled-components';
+import { useState } from 'react';
 import Gender from './component/Gender';
-import Interest from './component/Interest';
 import Job from './component/Job';
+import Interest from './component/Interest';
+import AgeSlider from '../../Review/components/QuickGift/AgeSlider';
 
-export default function SignUpTagPage() {
+export default function SignupPage() {
   const initialButtons = [
     { id: 1, value: '' },
     { id: 2, value: '' },
@@ -13,6 +14,7 @@ export default function SignUpTagPage() {
   ];
 
   const [buttons, setButtons] = useState(initialButtons);
+  const [selectedAgeLabel, setSelectedAgeLabel] = useState('10대 후반');
 
   const setSelectedButton = (id, value) => {
     setButtons(buttons.map((button) => (button.id === id ? { ...button, value } : button)));
@@ -33,12 +35,21 @@ export default function SignUpTagPage() {
       </BasketContainer>
       <Container>
         <Wrapper>
+          1. 나이
+          <AgeSlider
+            setSelectedButton={(value) => setSelectedButton(1, value)}
+            setSelectedAgeLabel={setSelectedAgeLabel}
+          />
+          <div>{selectedAgeLabel}</div>
+        </Wrapper>
+        <Wrapper>
           2. 성별
           <Gender setSelectedButton={(value) => setSelectedButton(2, value)} />
         </Wrapper>
         3. 직업 <Job setSelectedButton={(value) => setSelectedButton(3, value)} /> 4. 관심사{' '}
         <Interest setSelectedButton={(value) => setSelectedButton(4, value)} />
       </Container>
+
       <SubmitButton>회원가입</SubmitButton>
     </Container>
   );
