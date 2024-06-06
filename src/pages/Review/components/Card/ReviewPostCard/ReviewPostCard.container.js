@@ -6,9 +6,10 @@ export default function ReviewPostCard({ post }) {
   const [isHovered, setIsHovered] = useState(false);
 
   const navigate = useNavigate();
-  const handlePostClick = (p) => {
-    navigate(`/review/${p.id}`);
+  const handlePostClick = (path) => () => {
+    navigate(path);
   };
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };

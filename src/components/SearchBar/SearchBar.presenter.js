@@ -1,5 +1,5 @@
+import { faCircleXmark, faMagnifyingGlass, faMinus } from '@fortawesome/free-solid-svg-icons';
 import React, { forwardRef } from 'react';
-import { faMagnifyingGlass, faMinus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import * as S from './SearchBar.styles';
 
 const SearchBarUI = forwardRef(
@@ -39,7 +39,12 @@ const SearchBarUI = forwardRef(
             <S.RecommendParagraph>지금 다른 분들이 많이 검색해요</S.RecommendParagraph>
             <S.RecommendList>
               {recommendations.map((recommendation) => (
-                <S.RecommendItem key={recommendation.id} onClick={() => handleRecommendationClick(recommendation.name)}>
+                <S.RecommendItem
+                  key={recommendation.id}
+                  onClick={() => {
+                    handleRecommendationClick(recommendation.name);
+                  }}
+                >
                   {recommendation.name}
                 </S.RecommendItem>
               ))}

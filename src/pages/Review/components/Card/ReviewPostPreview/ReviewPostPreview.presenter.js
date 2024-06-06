@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
-export default function ReviewPostPreviewUI() {
+export default function ReviewPostPreviewUI({ body }) {
   return (
     <Wrapper>
-      <p>본문 내용입니다. </p>
-      <p>추가적인 내용</p>
+      <Paragraph>{`${body}`}</Paragraph>
     </Wrapper>
   );
 }
@@ -16,4 +15,11 @@ const Wrapper = styled.div`
   z-index: 99999;
   position: absolute;
   border-radius: 20px;
+`;
+const Paragraph = styled.p`
+  font-size: 24px;
+  color: white;
+  padding: 10px 20px;
+  text-align: left;
+  line-height: 1.2;
 `;

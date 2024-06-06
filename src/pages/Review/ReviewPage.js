@@ -5,8 +5,11 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PostFilter from './components/PostFilter/PostFilter.container';
 import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
+import LatestGallery from './components/Section/LatestSection/LatestGallery/LatestGallery.container';
+import LatestHeader from './components/Section/LatestSection/LatestHeader/LatestHeader.container';
 import SearchGallery from './components/Section/SearchSection/SearchGallery/SearchGallery.container';
 import SearchHeader from './components/Section/SearchSection/SearchHeader/SearchHeader.container';
+import SubAccount from './components/Section/SubSection/SubAccount/SubAccount.container';
 import SubGallery from './components/Section/SubSection/SubGallery/SubGallery.container';
 import SubHeader from './components/Section/SubSection/SubHeader/SubHeader.container';
 
@@ -45,15 +48,21 @@ export default function ReviewPage() {
         <PostFilterWrapper ref={postFilterRef} isSticky={isSticky}>
           <PostFilter />
         </PostFilterWrapper>
-        {/* <LatestHeader />
-        <LatestGallery /> */}
+        <section>
+          <LatestHeader />
+          <LatestGallery />
+        </section>
         <section>
           <SubHeader />
-          <SubGallery />
+          <SubContent>
+            <SubGallery />
+            <SubAccount />
+          </SubContent>
         </section>
-        <SearchHeader />
-        <SearchGallery />
-        <Box />
+        <section>
+          <SearchHeader />
+          <SearchGallery />
+        </section>
         <ButtonBox onClick={scrollToTop}>
           <UpIcon icon={faChevronUp} />
         </ButtonBox>
@@ -66,16 +75,18 @@ const Layout = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
+const SubContent = styled.div`
+  display: flex;
+  border: 3px solid #aaa;
+  height: 500px;
+`;
 
 const PostFilterWrapper = styled.div`
   position: ${({ isSticky }) => (isSticky ? 'sticky' : 'relative')};
-  top: ${({ isSticky }) => (isSticky ? '12vh' : 'auto')};
+  top: ${({ isSticky }) => (isSticky ? '15vh' : 'auto')};
   z-index: 6; /* 헤더와 함께 보이도록 z-index 조정 */
   background-color: white; /* 배경색 지정하여 다른 콘텐츠와 구분 */
   transition: top 0.3s ease; /* 부드러운 이동을 위한 transition 속성 추가 */
-`;
-const Box = styled.div`
-  height: 200vh;
 `;
 
 const ButtonBox = styled.div`

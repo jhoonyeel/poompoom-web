@@ -3,16 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import { ReactComponent as FireCracker } from '../assets/FireCraker.svg';
 
-export default function AuthorComponent({ isHovered }) {
+export default function AuthorComponent({ isHovered, profilePhoto }) {
   return (
     <Wrapper>
       <AuthorCircleBox>
         <WhiteCircleIcon icon={faCircle} />
         <AuthorImgBox>
-          <AuthorImg
-            src="https://flexible.img.hani.co.kr/flexible/normal/970/777/imgdb/resize/2019/0926/00501881_20190926.JPG"
-            alt="프로필 사진"
-          />
+          <AuthorImg src={profilePhoto} alt="프로필 사진" />
         </AuthorImgBox>
       </AuthorCircleBox>
       <FireCrackerBox isHovered={isHovered}>

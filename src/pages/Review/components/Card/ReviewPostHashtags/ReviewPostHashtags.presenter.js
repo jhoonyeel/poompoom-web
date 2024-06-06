@@ -1,17 +1,7 @@
 import styled from 'styled-components';
 
-export default function ReviewPostHashtagsUI() {
-  return (
-    <Wrapper>
-      <HashtagItem>#여러 태그들</HashtagItem>
-      <HashtagItem>#여러 태그들</HashtagItem>
-      <HashtagItem>#여러 태그들</HashtagItem>
-      <HashtagItem>#여러 태그들</HashtagItem>
-      <HashtagItem>#여러 태그들</HashtagItem>
-      <HashtagItem>#여러 태그들</HashtagItem>
-      <HashtagItem>#여러 태그들</HashtagItem>
-    </Wrapper>
-  );
+export default function ReviewPostHashtagsUI({ hashTags }) {
+  return <Wrapper>{hashTags && hashTags.map((hashTag) => <HashtagItem>{`#${hashTag}`}</HashtagItem>)}</Wrapper>;
 }
 
 const Wrapper = styled.ul`
@@ -22,15 +12,11 @@ const Wrapper = styled.ul`
   padding: 0 10px;
 `;
 
-// const KeywordList = styled.ul`
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: center;
-// `;
 const HashtagItem = styled.li`
-  border: 3px solid #f2f2f2;
   border-radius: 20px;
   margin: 0.3rem 0.7rem;
-  padding: 0.3rem;
-  background-color: #f2f2f2;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 16px;
 `;

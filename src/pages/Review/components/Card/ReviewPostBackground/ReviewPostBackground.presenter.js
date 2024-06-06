@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
-export default function ReviewPostBackgroundUI({ post }) {
+export default function ReviewPostBackgroundUI({ bodyPhoto }) {
   return (
     <Wrapper>
-      <BackgroundImg src="https://cdn.imweb.me/thumbnail/20240112/19ca28a224773.jpg" alt={`Post ${post} 사진`} />
+      <BackgroundImg
+        src={bodyPhoto || `https://cdn.imweb.me/thumbnail/20240112/19ca28a224773.jpg`}
+        alt={`Post ${bodyPhoto} 사진`}
+      />
     </Wrapper>
   );
 }

@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from '../../assets/PoomPoom.svg';
 
 export const HeaderWrapper = styled.header`
   width: 100%;
-  height: 12vh;
+  height: 15vh;
   position: sticky;
   top: 0;
   left: 0;
@@ -75,4 +75,26 @@ export const MenuBox = styled.div`
 
 export const MenuIcon = styled(FontAwesomeIcon)`
   font-size: 48px;
+`;
+
+export const MenuSpreadBox = styled.div`
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0;
+`;
+export const MenuSpan = styled.span`
+  font-family: 'Shrikhand', serif;
+  font-weight: bold;
+  font-size: 20px;
+  font-style: italic;
+  margin: 8px;
+  color: #072623;
+  &:hover {
+    color: #c52c27;
+  }
 `;

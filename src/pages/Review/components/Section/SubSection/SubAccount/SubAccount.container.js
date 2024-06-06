@@ -51,5 +51,10 @@ export default function SubAccount() {
     };
   }, [currentPage, hasNext]);
 
-  return <SubAccountUI subAccounts={subAccounts} />;
+  return (
+    <>
+      <SubAccountUI subAccounts={subAccounts} />
+      <div ref={loader} style={{ height: '20px' }} />
+    </>
+  );
 }
