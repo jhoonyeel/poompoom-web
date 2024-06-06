@@ -28,7 +28,6 @@ export default function ReviewPostCardUI({ post, onPostClick, isHovered, handleM
 
 const Wrapper = styled.div`
   width: 100%;
-  border: red solid 1px;
 `;
 const HoveredLayout = styled.div`
   display: flex;

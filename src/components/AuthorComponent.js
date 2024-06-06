@@ -76,7 +76,7 @@ const FireCrackerBox = styled.div`
   display: flex;
   justify-content: flex-end;
   transform: ${({ isHovered }) => (isHovered ? 'translate(-10%, -150%) rotate(90deg)' : 'translateY(-40px)')};
-  transition: transform 1s ease-in-out;
+  transition: transform 0.25s ease-in-out;
 `;
 // const FireCrackerIcon = styled(FireCracker)`
 //   width: 100%;

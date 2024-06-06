@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReviewPostAuthorUI from './ReviewPostAuthor.presenter';
 
-function ReviewPostAuthor({ nickName, isHovered }) {
+export default function ReviewPostAuthor({ nickName, isHovered }) {
   const [internal, setInternal] = useState(true);
 
   const navigate = useNavigate();
@@ -21,5 +21,3 @@ function ReviewPostAuthor({ nickName, isHovered }) {
     />
   );
 }
-
-export default ReviewPostAuthor;

@@ -2,7 +2,6 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import { ReactComponent as Query } from '../../assets/QUERY_VIEW.svg';
-import AuthorComponent from '../../components/AuthorComponent';
 import ReviewPostCard from '../Review/components/Card/ReviewPostCard/ReviewPostCard.container';
 import PostFilter from '../Review/components/PostFilter/PostFilter.container';
 
@@ -18,7 +17,6 @@ export default function QueryResultPage() {
   const ex = [1, 2, 3, 4, 5, 6, 7];
   return (
     <Wrapper>
-      <AuthorComponent />
       <QuerySection>
         <QueryContent>
           <PostFilter />
