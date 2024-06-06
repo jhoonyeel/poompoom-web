@@ -1,20 +1,20 @@
-import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import AuthorComponent from '../../../../../components/AuthorComponent';
 
-function ReviewPostAuthorUI({ nickName, internal = true, navigate, handleSub }) {
+export default function ReviewPostAuthorUI({ nickName, internal = true, navigate, handleSub }) {
   return (
     <div>
       {internal ? (
-        <>
-          <FontAwesomeIcon icon={faCircleUser} onClick={() => navigate('/profile')} />
-          <Link to="/profile">{nickName || '@닉네임'}</Link>
+        <Wrapper>
+          <AuthorComponent onClick={() => navigate('/profile')} />
+          <Nickname to="/profile">{nickName || '@닉네임'}</Nickname>
           <span>
             <button type="button" onClick={handleSub}>
               구독{/** 추후에 컴포넌트 사용 */}
             </button>
           </span>
-        </>
+        </Wrapper>
       ) : (
         <div>from Instagram</div>
       )}
@@ -22,4 +22,12 @@ function ReviewPostAuthorUI({ nickName, internal = true, navigate, handleSub }) 
   );
 }
 
-export default ReviewPostAuthorUI;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 53px;
+`;
+const Nickname = styled(Link)`
+  font-size: 28px;
+`;

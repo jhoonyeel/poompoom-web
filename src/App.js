@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import * as S from './App.styles';
 import CommunityList from './components/Community/CommunityList/CommunityList';
@@ -17,8 +17,8 @@ import ProfilePage from './pages/Profile/ProfilePage';
 import QueryResultPage from './pages/QueryResult/QueryResultPage';
 import ReviewPage from './pages/Review/ReviewPage';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
-import SignUpPage from './pages/SignUp/SignUpPage';
-import SignUpTagPage from './pages/SignUp/SignUpTagPage';
+import SignupPage from './pages/Signup/SignupPage';
+import SignUpTagPage from './pages/Signup/SignupTagPage';
 import { basicTheme } from './shared/Theme';
 
 const GlobalStyle = createGlobalStyle`
@@ -44,7 +44,7 @@ function AppRoutes() {
       <Route path="/community" element={<CommunityList />} />
       <Route path="/community/detail" element={<CommunityDetailPage />} />
       <Route path="/community/write" element={<CommunityWrite />} />
-      <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/signup" element={<SignupPage />} />
       <Route path="/signup/tag" element={<SignUpTagPage />} />
     </Routes>
   );
@@ -67,7 +67,7 @@ export default function App() {
         <GlobalStyle />
         <S.AppLayout>
           <Routes>
-            <Route path="/signUp" element={<SignUpPage />} />
+            <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route element={<MainLayout />}>
               <Route path="/*" element={<AppRoutes />} />

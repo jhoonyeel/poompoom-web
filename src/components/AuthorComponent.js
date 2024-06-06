@@ -35,6 +35,8 @@ export default function AuthorComponent() {
 const Wrapper = styled.div`
   width: 80px;
   height: 80px;
+  margin-left: 5px;
+  margin-top: 5px;
 `;
 const AuthorCircleBox = styled.div`
   width: 60px;
@@ -47,7 +49,6 @@ const AuthorCircleBox = styled.div`
 `;
 const WhiteCircleIcon = styled(FontAwesomeIcon)`
   color: black;
-  background-color: white;
   font-size: 60px;
   position: absolute;
   z-index: 1;

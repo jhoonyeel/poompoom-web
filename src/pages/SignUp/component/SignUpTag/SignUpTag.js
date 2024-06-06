@@ -1,10 +1,10 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
 import Gender from './component/Gender';
-import Job from './component/Job';
 import Interest from './component/Interest';
+import Job from './component/Job';
 
-export default function QuickGift() {
+export default function SignupTag() {
   const initialButtons = [
     { id: 1, value: '' },
     { id: 2, value: '' },

@@ -11,6 +11,8 @@ export default function ReviewPostCardUI({ post, onPostClick, isHovered, handleM
       <HoveredLayout>
         <HoveredBox onClick={() => onPostClick(post)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <ReviewPostBackground post={post} />
+          {/* <img src="http://via.placeholder.com/380x430.png" alt={`Post ${post} 사진`} />{' '}
+          320x450, 250x330, 220x300 */}
           {isHovered ? (
             <PreviewBox>
               <ReviewPostPreview post={post} />
@@ -34,7 +36,6 @@ const HoveredLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
 `;
 const HoveredBox = styled.div`
   width: 380px;
@@ -52,5 +53,7 @@ const PreviewBox = styled.div`
 const HashtagsBox = styled.div`
   display: flex;
   justify-content: center;
-  transform: translateY(-50px);
+  transform: translateY(-80px);
+  overflow: hidden;
+  height: 80px;
 `;

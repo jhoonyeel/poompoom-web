@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
-import { schema } from './SignUp.validation';
-import * as S from './SignUp.style';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import * as S from './Signup.style';
+import { schema } from './Signup.validation';
 
-export default function SignUp() {
+export default function Signup() {
   const {
     register,
     handleSubmit,
@@ -27,7 +27,7 @@ export default function SignUp() {
 
   const sendEmailVerification = async () => {
     try {
-      const result = await axios.post(`${process.env.REACT_APP_API_URL}/${email}/send`);
+      const result = await axios.post(`/${email}/send`);
       console.log('이메일 인증 요청 성공', result.data);
       setEmailSentMessage('이메일 인증 코드가 발송되었습니다.');
     } catch (error) {
@@ -37,7 +37,7 @@ export default function SignUp() {
   };
   const submitVerification = async () => {
     try {
-      const result = await axios.post(`${process.env.REACT_APP_API_URL}/${email}/check`, { authNum: verificationCode });
+      const result = await axios.post(`/${email}/check`, { authNum: verificationCode });
       console.log('인증번호 확인 성공', result.data);
       setVerificationMessage('인증번호 확인에 성공했습니다.');
     } catch (error) {
@@ -62,7 +62,7 @@ export default function SignUp() {
       formData.append('req', req);
       formData.append('profileImage', data.file[0]);
 
-      const result = await axios.post(`${process.env.REACT_APP_API_URL}/member/join`, formData, {
+      const result = await axios.post(`/member/join`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
