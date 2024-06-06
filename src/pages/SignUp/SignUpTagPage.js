@@ -1,9 +1,9 @@
-import SignUpTag from './component/SignUpTag/SignUpTag';
+import SignupTag from './component/SignupTag/SignupTag';
 
 export default function SignUpTagPage() {
   return (
     <div>
-      <SignUpTag />
+      <SignupTag />
     </div>
   );
 }

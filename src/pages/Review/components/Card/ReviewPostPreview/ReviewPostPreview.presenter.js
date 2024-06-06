@@ -15,4 +15,5 @@ const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.56);
   z-index: 99999;
   position: absolute;
+  border-radius: 20px;
 `;
