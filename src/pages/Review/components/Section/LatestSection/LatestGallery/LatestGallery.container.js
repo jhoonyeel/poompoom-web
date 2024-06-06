@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
 import axios from 'axios';
+import React, { useEffect, useRef } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import LatestGalleryUI from './LatestGallery.presenter';
@@ -59,7 +59,7 @@ export default function LatestGallery() {
   const navigate = useNavigate();
 
   const handlePostClick = (post) => {
-    navigate(`/review/post/${post.id}`);
+    navigate(`/review/${post.id}`);
   };
 
   useEffect(() => {

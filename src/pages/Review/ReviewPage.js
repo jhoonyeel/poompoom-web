@@ -5,8 +5,6 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PostFilter from './components/PostFilter/PostFilter.container';
 import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
-import LatestGallery from './components/Section/LatestSection/LatestGallery/LatestGallery.container';
-import LatestHeader from './components/Section/LatestSection/LatestHeader/LatestHeader.container';
 import SearchGallery from './components/Section/SearchSection/SearchGallery/SearchGallery.container';
 import SearchHeader from './components/Section/SearchSection/SearchHeader/SearchHeader.container';
 import SubGallery from './components/Section/SubSection/SubGallery/SubGallery.container';
@@ -47,10 +45,12 @@ export default function ReviewPage() {
         <PostFilterWrapper ref={postFilterRef} isSticky={isSticky}>
           <PostFilter />
         </PostFilterWrapper>
-        <LatestHeader />
-        <LatestGallery />
-        <SubHeader />
-        <SubGallery />
+        {/* <LatestHeader />
+        <LatestGallery /> */}
+        <section>
+          <SubHeader />
+          <SubGallery />
+        </section>
         <SearchHeader />
         <SearchGallery />
         <Box />

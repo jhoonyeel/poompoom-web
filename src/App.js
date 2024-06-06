@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import * as S from './App.styles';
@@ -10,6 +10,8 @@ import Header from './components/Header/Header.container';
 import PostDetail from './components/PostDetail/PostDetail.container';
 import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
 import HomePage from './pages/Home/HomePage';
+import SignupPage from './pages/Join/Signup/SignupPage';
+import SignupTagPage from './pages/Join/SignupTag/SignupTagPage';
 import LoginPage from './pages/Login/LoginPage';
 import LoverProfilePage from './pages/LoverProfile/LoverProfilePage';
 import ProfileEditPage from './pages/Profile/ProfileEditPage';
@@ -17,8 +19,6 @@ import ProfilePage from './pages/Profile/ProfilePage';
 import QueryResultPage from './pages/QueryResult/QueryResultPage';
 import ReviewPage from './pages/Review/ReviewPage';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
-import SignupPage from './pages/Signup/SignupPage';
-import SignupTagPage from './pages/Signup/SignupTagPage';
 import { basicTheme } from './shared/Theme';
 
 const GlobalStyle = createGlobalStyle`
@@ -52,7 +52,7 @@ function MainLayout() {
   return (
     <>
       <Header />
-      <AppRoutes />
+      <Outlet />
       <Footer />
     </>
   );
@@ -68,8 +68,8 @@ export default function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/signup/tag" element={<SignupTagPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route element={<MainLayout />}>
-              <Route path="/*" element={<AppRoutes />} />
+            <Route path="/*" element={<MainLayout />}>
+              <Route path="*" element={<AppRoutes />} />
             </Route>
           </Routes>
         </S.AppLayout>
@@ -84,4 +84,3 @@ export default function App() {
 // <ReviewPage /> 선물 리뷰글 페이지
 // <ReviewWritePage> 리뷰글 작성, 수정 페이지
 // <ProfilePage /> 프로필 페이지
-// <UserSetting /> 사용자 설정 페이지

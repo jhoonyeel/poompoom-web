@@ -52,7 +52,6 @@ export default function HomePage() {
       const res = await axios.get(`/hashtag/rank`);
       const { data } = res;
       setRecommendations(data);
-      console.log(data);
     } catch (error) {
       console.error('Error fetching post data:', error);
     }
@@ -122,6 +121,9 @@ const ProfileSection = styled.section`
   width: 100%;
   border: 3px solid #aaa;
   margin-top: 5rem;
+
+  border-radius: 20px;
+  overflow: hidden;
 `;
 const ProfileContent = styled.div`
   width: 80%;
@@ -167,7 +169,7 @@ const SearchSection = styled.section`
   border: 3px solid #aaa;
   margin-top: 5rem;
 `;
-const KeywordBox = styled.p`
+const KeywordBox = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
@@ -186,7 +188,7 @@ const KeywordItem = styled.li`
   padding: 0.3rem;
   cursor: pointer;
 `;
-const CategoryBox = styled.p`
+const CategoryBox = styled.div`
   width: 80%;
   margin: 0 auto;
   margin-top: 3rem;

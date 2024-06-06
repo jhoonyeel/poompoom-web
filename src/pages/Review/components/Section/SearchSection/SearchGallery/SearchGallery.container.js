@@ -1,13 +1,12 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import SearchGalleryUI from './SearchGallery.presenter';
 
 export default function SearchGallery() {
   const [searchPosts, setSearchPosts] = useState([]);
 
   const navigate = useNavigate();
-
   const handlePostClick = (post) => {
     navigate(`/review/${post.id}`);
   };
@@ -22,7 +21,6 @@ export default function SearchGallery() {
       console.error('Error fetching post data:', error);
     }
   };
-
   useEffect(() => {
     fetchPostData();
   }, []);

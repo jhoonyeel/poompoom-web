@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import * as S from './Signup.style';
 import { schema } from './Signup.validation';
 
-export default function Signup() {
+export default function SignupPage() {
   const {
     register,
     handleSubmit,
