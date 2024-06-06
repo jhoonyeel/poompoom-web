@@ -2,21 +2,27 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import AuthorComponent from '../../../../../components/AuthorComponent';
 
-export default function ReviewPostAuthorUI({ nickName, navigate, isHovered, isFollow, handleFollow }) {
+export default function ReviewPostAuthorUI({
+  profilePhoto,
+  nickname,
+  isHovered,
+  handleOnClick,
+  isFollow,
+  handleFollow,
+}) {
   return (
     <div>
       <Wrapper>
-        <AuthorComponent isHovered={isHovered} onClick={() => navigate('/profile')} />
-        <Nickname to="/profile">{nickName || '@닉네임'}</Nickname>
-
+        <AuthorComponent isHovered={isHovered} onClick={handleOnClick('/profile')} profilePhoto={profilePhoto} />
+        <Nickname to="/profile">{`@${nickname}` || '@닉네임'}</Nickname>
         {isFollow ? (
-          <FollowBtn type="button" onClick={handleFollow}>
-            팔로우
-          </FollowBtn>
-        ) : (
           <FollowedBtn type="button" onClick={handleFollow}>
             팔로잉
           </FollowedBtn>
+        ) : (
+          <FollowBtn type="button" onClick={handleFollow}>
+            팔로우
+          </FollowBtn>
         )}
       </Wrapper>
     </div>
@@ -30,7 +36,12 @@ const Wrapper = styled.div`
   margin: 0 53px;
 `;
 const Nickname = styled(Link)`
+  text-decoration: none;
   font-size: 28px;
+  color: black;
+  &:visited {
+    color: black;
+  }
 `;
 const FollowBtn = styled.button`
   color: #024e46;

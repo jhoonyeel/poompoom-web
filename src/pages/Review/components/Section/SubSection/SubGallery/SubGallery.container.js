@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from '../../../../../../apis/axios';
 import SubGalleryUI from './SubGallery.presenter';
 
@@ -8,11 +7,6 @@ export default function SubGallery() {
   const [cursorId, setCursorId] = useState(null);
   const [hasNext, setHasNext] = useState(true);
   const loader = useRef(null);
-
-  const navigate = useNavigate();
-  const handlePostClick = (post) => {
-    navigate(`/review/${post.id}`);
-  };
 
   const fetchPostData = async (currentCursor = null) => {
     try {
@@ -23,12 +17,14 @@ export default function SubGallery() {
           page,
         },
       });
-      console.log(res.headers);
-      const { values, cursorId: newCursorId, hasNext: newHasNext } = res.data;
+      const { values, hasNext: newHasNext } = res.data;
       setSubPosts((prevPosts) => [...prevPosts, ...values]);
-      setCursorId(newCursorId);
+      // 마지막 reviewId를 cursorId로 설정
+      if (values.length > 0) {
+        const lastPostId = values[values.length - 1].reviewId;
+        setCursorId(lastPostId);
+      }
       setHasNext(newHasNext);
-      console.log('서버로부터 받은 데이터db: ', res.data);
     } catch (error) {
       console.error('Error fetching post data:', error);
     }
@@ -59,5 +55,5 @@ export default function SubGallery() {
     };
   }, [cursorId, hasNext]);
 
-  return <SubGalleryUI subPosts={subPosts} handlePostClick={handlePostClick} loader={loader} />;
+  return <SubGalleryUI subPosts={subPosts} loader={loader} />;
 }

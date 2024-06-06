@@ -1,99 +1,64 @@
-import axios from 'axios';
-import React, { useEffect, useRef } from 'react';
-import { useInfiniteQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import axios from '../../../../../../apis/axios';
 import LatestGalleryUI from './LatestGallery.presenter';
 
-const accessToken = localStorage.getItem('accessToken');
-
-const fetchPosts = async ({ pageParam = 0 }) => {
-  try {
-    const response = await axios.get(`/profile/my`, {
-      headers: {
-        access: `${accessToken}`,
-      },
-      params: { cursorId: pageParam },
-    });
-    console.log('성공');
-    return response.data.values;
-  } catch (error) {
-    console.log('문제', error);
-    return null;
-  }
-};
-
-const transformData = (data) => {
-  return data.values.map((item) => ({
-    body: item.body,
-    price: item.price,
-    createTime: item.createTime,
-    lastModifiedTime: item.lastModifiedTime,
-    memberId: item.memberId,
-    photos: item.photos,
-    isMyPost: item.isMyPost,
-    isLikedPost: item.isLikedPost,
-    isBookmarked: item.isBookmarked,
-    hashTags: item.hashTags,
-    reviewType: item.reviewType,
-    startPoint: item.startPoint,
-    whereBuy: item.whereBuy,
-  }));
-};
-
 export default function LatestGallery() {
-  const {
-    data: postData,
-    error,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-  } = useInfiniteQuery('posts', fetchPosts, {
-    getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.cursorId : undefined),
-    select: (data) => ({
-      pages: data.pages.flatMap((page) => transformData(page.values)),
-    }),
-  });
+  const [latestPosts, setLatestPosts] = useState([]);
+  const [cursorId, setCursorId] = useState(0);
+  const [hasNext, setHasNext] = useState(true);
+  const loader = useRef(null);
 
-  const observerRef = useRef();
-
-  const navigate = useNavigate();
-
-  const handlePostClick = (post) => {
-    navigate(`/review/${post.id}`);
+  const fetchPostData = async (cursor, size = 6) => {
+    try {
+      const res = await axios.get(`/profile/view`, {
+        params: {
+          cursorId: cursor, // cursorId보다 id가 작은 게시글을 가져옴.
+          size, // 가져올 게시글의 개수.
+          sort: 'desc',
+        },
+      });
+      const { values, hasNext: newHasNext } = res.data;
+      setLatestPosts((prevPosts) => [...prevPosts, ...values]);
+      // 마지막 reviewId를 cursorId로 설정
+      if (values.length > 0) {
+        const lastPostId = values[values.length - 1].reviewId;
+        setCursorId(lastPostId);
+      }
+      setHasNext(newHasNext);
+    } catch (error) {
+      console.error('Error fetching post data:', error);
+    }
   };
+  useEffect(() => {
+    fetchPostData();
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasNextPage) {
-          fetchNextPage();
+        const target = entries[0];
+        if (target.isIntersecting && hasNext) {
+          fetchPostData(cursorId, 2); // 추가로 가져오는 데이터
         }
       },
-      { threshold: 1.0 },
+      { threshold: 1 },
     );
 
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
+    if (loader.current) {
+      observer.observe(loader.current);
     }
 
     return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
+      if (loader.current) {
+        observer.unobserve(loader.current);
       }
     };
-  }, [fetchNextPage, hasNextPage]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>Error fetching posts</div>;
-  }
+  }, [cursorId, hasNext]);
 
   return (
     <>
-      <LatestGalleryUI posts={postData.pages} handlePostClick={handlePostClick} />
-      <div ref={observerRef} style={{ height: '20px' }} />
+      <LatestGalleryUI latestPosts={latestPosts} />
+      <div ref={loader} style={{ height: '20px' }} />
     </>
   );
 }

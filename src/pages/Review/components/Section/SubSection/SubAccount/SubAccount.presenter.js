@@ -18,7 +18,7 @@ export default function SubAccountUI({ subAccounts }) {
 }
 const SubList = styled.div`
   width: 25%;
-  padding: 1% 0;
+  padding: 2% 0%;
 `;
 const SubItem = styled.div`
   display: flex;

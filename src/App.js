@@ -32,7 +32,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/review" element={<ReviewPage />} />
-      <Route path="/review/:id" element={<PostDetail />} />
+      <Route path="/review/:reviewId" element={<PostDetail />} />
       <Route path="/review/write" element={<ReviewWritePage />} />
       <Route path="/review/query-result" element={<QueryResultPage />} />
       <Route path="/lovers-profile" element={<LoverProfilePage />} />

@@ -2,19 +2,23 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReviewPostAuthorUI from './ReviewPostAuthor.presenter';
 
-export default function ReviewPostAuthor({ nickName, isHovered }) {
+export default function ReviewPostAuthor({ profilePhoto, nickname, isHovered }) {
   const [isFollow, setIsFollow] = useState(false);
   const handleFollow = () => {
-    setIsFollow((s) => !s);
+    setIsFollow((follow) => !follow);
   };
 
   const navigate = useNavigate();
+  const handleOnClick = (path) => () => {
+    navigate(path);
+  };
 
   return (
     <ReviewPostAuthorUI
-      nickName={nickName}
-      navigate={navigate}
+      profilePhoto={profilePhoto}
+      nickname={nickname}
       isHovered={isHovered}
+      handleOnClick={handleOnClick}
       isFollow={isFollow}
       handleFollow={handleFollow}
     />

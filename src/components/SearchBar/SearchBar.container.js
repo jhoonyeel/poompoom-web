@@ -54,7 +54,7 @@ export default function SearchBar() {
 
   const handleBlur = () => {
     // handleBlur가 너무 빨리 실행되어 클릭 이벤트를 놓치는 경우 방지하기 위해 타임아웃 설정
-    setTimeout(() => setIsFocused(false), 100);
+    setTimeout(() => setIsFocused(false), 500);
   };
 
   const handleRecommendationClick = (keyword) => {
@@ -65,7 +65,7 @@ export default function SearchBar() {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      const params = new URLSearchParams({ search: searchTerm });
+      const params = new URLSearchParams({ searchContent: searchTerm });
       navigate(`/review/query-result?${params.toString()}`);
     }
   };

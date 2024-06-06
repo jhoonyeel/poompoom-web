@@ -1,11 +1,70 @@
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from '../../apis/axios';
 import { ReactComponent as Query } from '../../assets/QUERY_VIEW.svg';
 import ReviewPostCard from '../Review/components/Card/ReviewPostCard/ReviewPostCard.container';
 import PostFilter from '../Review/components/PostFilter/PostFilter.container';
 
 export default function QueryResultPage() {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const searchContent = params.get('searchContent') || ''; // URL에서 searchContent 값을 추출
+
+  const [queryPosts, setQueryPosts] = useState([]);
+  const [cursorId, setCursorId] = useState(0);
+  const [hasNext, setHasNext] = useState(true);
+  const loader = useRef(null);
+
+  const fetchPostData = async (cursor, size = 24) => {
+    try {
+      const res = await axios.get(`/review/search`, {
+        params: {
+          keyword: searchContent,
+          cursorId: cursor, // cursorId보다 id가 작은 게시글을 가져옴.
+          size, // 가져올 게시글의 개수.
+        },
+      });
+      const { values, hasNext: newHasNext } = res.data;
+      setQueryPosts((prevPosts) => [...prevPosts, ...values]);
+      // 마지막 reviewId를 cursorId로 설정
+      if (values.length > 0) {
+        const lastPostId = values[values.length - 1].reviewId;
+        setCursorId(lastPostId);
+      }
+      setHasNext(newHasNext);
+    } catch (error) {
+      console.error('Error fetching post data:', error);
+    }
+  };
+  useEffect(() => {
+    fetchPostData();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const target = entries[0];
+        if (target.isIntersecting && hasNext) {
+          fetchPostData(cursorId, 8); // 추가로 가져오는 데이터
+        }
+      },
+      { threshold: 1 },
+    );
+
+    if (loader.current) {
+      observer.observe(loader.current);
+    }
+
+    return () => {
+      if (loader.current) {
+        observer.unobserve(loader.current);
+      }
+    };
+  }, [cursorId, hasNext]);
+
   // 화면 맨 위로 이동하는 함수
   const scrollToTop = () => {
     window.scrollTo({
@@ -14,7 +73,6 @@ export default function QueryResultPage() {
     });
   };
 
-  const ex = [1, 2, 3, 4, 5, 6, 7];
   return (
     <Wrapper>
       <QuerySection>
@@ -26,10 +84,9 @@ export default function QueryResultPage() {
             </TitleBox>
           </TitleContent>
           <GalleryContent>
-            {ex.map((post) => (
-              <ReviewPostCard key={post.id} post={post} />
-            ))}
+            {queryPosts && queryPosts.map((post) => <ReviewPostCard key={post.id} post={post} />)}
           </GalleryContent>
+          <div ref={loader} style={{ height: '15vh', margin: '10px' }} />
           <ButtonBox onClick={scrollToTop}>
             <UpIcon icon={faChevronUp} />
           </ButtonBox>

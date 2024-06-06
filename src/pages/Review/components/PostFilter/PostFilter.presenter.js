@@ -4,29 +4,31 @@ import styled from 'styled-components';
 // import ReactSlider from 'react-slider';
 import * as S from './PostFilter.styles';
 
-export default function PostFilterUI({ marks, priceRange, setPriceRange, handleOnClick }) {
-  const renderThumb = (props, state) => {
-    const value = state.valueNow === 51 ? '50만원 이상' : `${state.valueNow}만원`;
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    return <Thumb {...props}>{value}</Thumb>;
-  };
+// marks, priceRange, setPriceRange
+export default function PostFilterUI({ handleOnClick }) {
+  // const renderThumb = (props, state) => {
+  //   const value = state.valueNow === 51 ? '50만원 이상' : `${state.valueNow}만원`;
+  //   // eslint-disable-next-line react/jsx-props-no-spreading
+  //   return <Thumb {...props}>{value}</Thumb>;
+  // };
 
   return (
     <Wrapper>
-      <div>
-        <S.FilterIcon icon={faFilter} />
-        <span>정렬</span>
-      </div>
-      <div>
-        <S.SortIcon icon={faBarsStaggered} />
-        <span>인기순</span>
-        <span>최신순</span>
-        <span>추천순</span>
-      </div>
-      <PriceFilter>
-        <S.SliderIcon icon={faSliders} />
-        <span>가격대</span>
-        <ReactSlider
+      <Align>
+        <div>
+          <S.FilterIcon icon={faFilter} />
+          <Span>정렬</Span>
+        </div>
+        <div>
+          <S.SortIcon icon={faBarsStaggered} />
+          <Span>인기순</Span>
+          <Span>최신순</Span>
+          <Span>추천순</Span>
+        </div>
+        <PriceFilter>
+          <S.SliderIcon icon={faSliders} />
+          <Span>가격대</Span>
+          {/* <ReactSlider
           className="horizontal-slider"
           min={0}
           max={51}
@@ -48,29 +50,34 @@ export default function PostFilterUI({ marks, priceRange, setPriceRange, handleO
           <span>{marks[priceRange[0]]}</span>
           <span> - </span>
           <span>{marks[priceRange[1]]}</span>
-        </div>
-      </PriceFilter>
-      <button type="button" onClick={handleOnClick('/review/write')}>
+        </div> */}
+        </PriceFilter>
+      </Align>
+      <Button type="button" onClick={handleOnClick('/review/write')}>
         리뷰글 작성
-      </button>
+      </Button>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 50px;
+  height: 100px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   gap: 50px;
 `;
-const ReactSlider = styled.div``;
-
+// const ReactSlider = styled.div``;
+const Align = styled.div`
+  width: 40%;
+  display: flex;
+  gap: 10%;
+`;
 const PriceFilter = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-direction: column;
   position: relative;
 
   .horizontal-slider {
@@ -79,30 +86,39 @@ const PriceFilter = styled.div`
   }
 `;
 
-const Thumb = styled.div`
-  height: 30px;
-  width: 60px;
-  background-color: #007bff;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  cursor: grab;
-  margin-top: -10px;
-`;
+// const Thumb = styled.div`
+//   height: 30px;
+//   width: 60px;
+//   background-color: #007bff;
+//   border-radius: 5px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   color: white;
+//   cursor: grab;
+//   margin-top: -10px;
+// `;
 
-const PriceMarks = styled.div`
-  position: relative;
-  width: 300px;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-`;
+// const PriceMarks = styled.div`
+//   position: relative;
+//   width: 300px;
+//   display: flex;
+//   justify-content: space-between;
+//   margin-top: 10px;
+// `;
 
-const Mark = styled.div`
-  position: absolute;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  font-size: 12px;
+// const Mark = styled.div`
+//   position: absolute;
+//   transform: translateX(-50%);
+//   white-space: nowrap;
+//   font-size: 12px;
+// `;
+
+const Button = styled.button`
+  font-size: 18px;
+  padding: 5px;
+`;
+const Span = styled.span`
+  font-size: 18px;
+  margin-right: 5px;
 `;

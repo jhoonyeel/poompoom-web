@@ -5,23 +5,22 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // eslint-disable-next-line camelcase, import/no-unresolved
-import { ReactComponent as Mains } from '../../assets/Main.svg';
-import { ReactComponent as One } from '../../assets/One.svg';
-import { ReactComponent as Two } from '../../assets/Two.svg';
-import { ReactComponent as Tre } from '../../assets/Tre.svg';
 import { ReactComponent as Four } from '../../assets/4.svg';
 import { ReactComponent as Five } from '../../assets/5.svg';
 import { ReactComponent as Six } from '../../assets/6.svg';
 import { ReactComponent as Seven } from '../../assets/7.svg';
-
-import { ReactComponent as D100 } from '../../assets/D100.svg';
 import { ReactComponent as Apple } from '../../assets/Apple.svg';
+import { ReactComponent as Calender } from '../../assets/Calender.svg';
+import { ReactComponent as Chres } from '../../assets/Chres.svg';
+import { ReactComponent as D100 } from '../../assets/D100.svg';
 import { ReactComponent as Gift } from '../../assets/Gift.svg';
 import { ReactComponent as Group } from '../../assets/Group.svg';
-import { ReactComponent as Vector } from '../../assets/Vector.svg';
 import { ReactComponent as Lose } from '../../assets/Lose.svg';
-import { ReactComponent as Chres } from '../../assets/Chres.svg';
-import { ReactComponent as Calender } from '../../assets/Calender.svg';
+import { ReactComponent as Mains } from '../../assets/Main.svg';
+import { ReactComponent as One } from '../../assets/One.svg';
+import { ReactComponent as Tre } from '../../assets/Tre.svg';
+import { ReactComponent as Two } from '../../assets/Two.svg';
+import { ReactComponent as Vector } from '../../assets/Vector.svg';
 
 export default function HomePage() {
   const [recommendations, setRecommendations] = useState([]);
@@ -103,10 +102,10 @@ export default function HomePage() {
       <CurationSection>
         <CurationTitle>봄 맞이 선물</CurationTitle>
         <ButtonWrapper>
-          <CurationButton>어버이날기념</CurationButton>
-          <CurationButton>스승의날</CurationButton>
-          <CurationButton>황사대비탬</CurationButton>
-          <CurationButton>봄먹거리</CurationButton>
+          <CurationButton>실내 장식품</CurationButton>
+          <CurationButton>피크닉 세트</CurationButton>
+          <CurationButton>패션 잇템</CurationButton>
+          <CurationButton>봄 먹거리</CurationButton>
         </ButtonWrapper>
         <ISWRapper>
           <IWrapper>
@@ -229,7 +228,6 @@ const PlusParagraph = styled.p`
 
 const SearchSection = styled.section`
   width: 100%;
-  border: 3px solid #aaa;
   margin-top: 5rem;
 `;
 const KeywordBox = styled.div`
@@ -238,8 +236,7 @@ const KeywordBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  align-items: start;
-  padding: 0 10rem;
+  align-items: center;
 `;
 const KeywordParagraph = styled.p`
   padding: 20px;
@@ -274,7 +271,7 @@ const CategoryBox = styled.div`
 `;
 const CategoryList = styled.ul`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   margin-top: 20px;
 `;

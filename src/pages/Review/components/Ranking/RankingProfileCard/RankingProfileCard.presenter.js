@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
 import React, { forwardRef } from 'react';
+import styled, { css } from 'styled-components';
 // import Card from '../Card/Card.conatiner';
 
 const RankingProfileCardUI = forwardRef(({ cards, handleMouseDown, handleMouseMove, handleMouseUp }, ref) => (
@@ -21,7 +21,7 @@ export default RankingProfileCardUI;
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 90vh; /* 적당히 수정. 100vh -> ?*/
+  height: 85vh; /* 적당히 수정. 100vh -> ?*/
   display: flex;
   justify-content: center;
   align-items: flex-end;

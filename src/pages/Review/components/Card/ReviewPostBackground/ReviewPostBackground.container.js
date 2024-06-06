@@ -1,5 +1,5 @@
 import ReviewPostBackgroundUI from './ReviewPostBackground.presenter';
 
-export default function ReviewPostBackground({ post }) {
-  return <ReviewPostBackgroundUI post={post} />;
+export default function ReviewPostBackground({ bodyPhoto }) {
+  return <ReviewPostBackgroundUI bodyPhoto={bodyPhoto} />;
 }
