@@ -1,42 +1,21 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import PostDetailUI from './PostDetail.persenter';
+import PostDetailUI from './PostDetail.presenter';
 
-const boardImages = Array(3).fill('http://via.placeholder.com/390x510.png') && [];
 const profileImage = 'http://via.placeholder.com/90x90.png' && '';
-const profileName = '작성자' && null;
 
 export default function PostDetail() {
-  const { id } = useParams();
-  const [selectedPost, setSelectedPost] = useState(0);
+  const reviewId = 18;
+  console.log('아이디!', reviewId);
+  const [review, setReview] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [like, setLike] = useState(false);
-  const [bookMark, setBookMark] = useState(false);
+  const [bookMark, setBookMark] = useState();
+  const [like, setLike] = useState();
+  const [selectedPost, setSelectedPost] = useState();
 
-  const fetchPostData = async () => {
-    try {
-      const res = await axios.get(`/review/${id}`);
-      const { data } = res;
-      setSelectedPost(data);
-      setLike(data.isLike);
-      setBookMark(data.isBookMark);
-      console.log(data);
-    } catch (error) {
-      console.error('Error fetching post data:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchPostData();
-  }, [id]);
-
-  /* 사진 슬라이드 효과
-  const [style, setStyle] = useState({
-    transform: `translateX(-${currentIndex}00%)`,
-    transition: `all 0.4s ease-in-out`,
-  });
-  */
+  const boardImages = Array(3).fill('http://via.placeholder.com/390x510.png') && [];
 
   // 사진 루프
   const prevSlide = () => {
@@ -47,19 +26,42 @@ export default function PostDetail() {
     setCurrentIndex((prevIndex) => (prevIndex === boardImages.length - 1 ? 0 : prevIndex + 1));
   };
 
+  useEffect(() => {
+    const fetchReview = async () => {
+      try {
+        const response = await axios.get(`/review/${reviewId}`);
+        const { data } = response;
+        setReview(response.data);
+        setSelectedPost(data);
+        setLike(data.isLike);
+        setBookMark(data.isBookMark);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReview();
+  }, [reviewId]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   return (
     <PostDetailUI
-      selectedPost={selectedPost}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...review}
       currentIndex={currentIndex}
       prevSlide={prevSlide}
       nextSlide={nextSlide}
       boardImages={boardImages}
       profileImage={profileImage}
-      profileName={profileName}
       like={like}
       bookMark={bookMark}
       setLike={setLike}
       setBookMark={setBookMark}
+      selectedPost={selectedPost}
     />
   );
 }

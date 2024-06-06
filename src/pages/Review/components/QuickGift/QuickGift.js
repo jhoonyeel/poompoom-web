@@ -1,10 +1,12 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Interest from './component/Interest';
 import Job from './component/Job';
 import Purpose from './component/Purpose';
 import Image from './component/Image';
-import Age from './component/Age';
+import AgeSlider from './AgeSlider';
 
 export default function QuickGift() {
   const initialButtons = [
@@ -16,9 +18,34 @@ export default function QuickGift() {
   ];
 
   const [buttons, setButtons] = useState(initialButtons);
+  const [selectedAgeLabel, setSelectedAgeLabel] = useState('10대 후반');
+  const AccessToken = localStorage.getItem('AccessToken');
 
   const setSelectedButton = (id, value) => {
     setButtons(buttons.map((button) => (button.id === id ? { ...button, value } : button)));
+  };
+
+  const navigate = useNavigate();
+  const onClickSubmit = async () => {
+    const hashtagList = buttons.map((button) => button.value).filter((value) => value); // 빈 값 제외
+
+    console.log(hashtagList);
+    try {
+      const result = await axios.post(
+        'profile/createVirtual',
+        { hashtagList },
+        {
+          headers: {
+            access: `${AccessToken}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      console.log('Response:', result.data);
+      navigate('/lovers-profile-set');
+    } catch (error) {
+      console.error('There was an error!', error);
+    }
   };
 
   return (
@@ -40,13 +67,17 @@ export default function QuickGift() {
           <Basket>.</Basket>
         </BasketWrapper>
       </BasketContainer>
+      <SubText>
+        질문에 대답 시 태그 바구니와 캘린더가 채워지게 됩니다. 이를 토대로 실제 선물 리뷰글이 추천돼 보다 센스있는
+        선물을 하실 수 있습니다!
+      </SubText>
       <Wrapper>
-        <SubText>
-          질문에 대답 시 태그 바구니와 캘린더가 채워지게 됩니다. 이를 토대로 실제 선물 리뷰글이 추천돼 보다 센스있는
-          선물을 하실 수 있습니다!
-        </SubText>
         1. 나이
-        <Age setSelectedButton={(value) => setSelectedButton(1, value)} />
+        <AgeSlider
+          setSelectedButton={(value) => setSelectedButton(1, value)}
+          setSelectedAgeLabel={setSelectedAgeLabel}
+        />
+        <div>{selectedAgeLabel}</div>
       </Wrapper>
       <Wrapper>
         2. 관심사
@@ -65,7 +96,7 @@ export default function QuickGift() {
         <Purpose setSelectedButton={(value) => setSelectedButton(5, value)} />
       </Wrapper>
 
-      <SubmitButton>프로필 저장</SubmitButton>
+      <SubmitButton onClick={onClickSubmit}>프로필 저장</SubmitButton>
     </Container>
   );
 }
@@ -120,11 +151,6 @@ const Basket = styled.div`
   border-radius: 10px;
   margin: 0 1rem;
   padding: 1rem;
-  /* min-height: 30px;
-  position: fixed;
-  top: 200px;
-  right: -10px;
-  z-index: 1000; */
 `;
 
 const Button = styled.button`
