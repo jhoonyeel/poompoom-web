@@ -1,6 +1,6 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import PostDetailUI from './PostDetail.persenter';
 
 const boardImages = Array(3).fill('http://via.placeholder.com/390x510.png') && [];
@@ -8,7 +8,7 @@ const profileImage = 'http://via.placeholder.com/90x90.png' && '';
 const profileName = '작성자' && null;
 
 export default function PostDetail() {
-  const { id } = useParams();
+  const { reviewId } = useParams();
   const [selectedPost, setSelectedPost] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [like, setLike] = useState(false);
@@ -16,7 +16,7 @@ export default function PostDetail() {
 
   const fetchPostData = async () => {
     try {
-      const res = await axios.get(`/review/${id}`);
+      const res = await axios.get(`/review/${reviewId}`);
       const { data } = res;
       setSelectedPost(data);
       setLike(data.isLike);
@@ -29,7 +29,7 @@ export default function PostDetail() {
 
   useEffect(() => {
     fetchPostData();
-  }, [id]);
+  }, [reviewId]);
 
   /* 사진 슬라이드 효과
   const [style, setStyle] = useState({

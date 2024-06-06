@@ -2,13 +2,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import AuthorComponent from '../../../../../components/AuthorComponent';
 
-export default function ReviewPostAuthorUI({ nickName, navigate, isHovered, isFollow, handleFollow }) {
+export default function ReviewPostAuthorUI({ nickName, isHovered, handleOnClick, isFollow, handleFollow }) {
   return (
     <div>
       <Wrapper>
-        <AuthorComponent isHovered={isHovered} onClick={() => navigate('/profile')} />
+        <AuthorComponent isHovered={isHovered} onClick={handleOnClick('/profile')} />
         <Nickname to="/profile">{nickName || '@닉네임'}</Nickname>
-
         {isFollow ? (
           <FollowBtn type="button" onClick={handleFollow}>
             팔로우

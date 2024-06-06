@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.container';
 
-export default function SearchGalleryUI({ searchPosts, handlePostClick }) {
+export default function SearchGalleryUI({ searchPosts }) {
   return (
     <Wrapper>
       {searchPosts.map((post) => (
-        <ReviewPostCard key={post.id} post={post} onPostClick={handlePostClick} />
+        <ReviewPostCard key={post.id} post={post} />
       ))}
     </Wrapper>
   );

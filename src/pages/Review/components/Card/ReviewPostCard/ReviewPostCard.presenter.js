@@ -4,12 +4,12 @@ import ReviewPostBackground from '../ReviewPostBackground/ReviewPostBackground.c
 import ReviewPostHashtags from '../ReviewPostHashtags/ReviewPostHashtags.container';
 import ReviewPostPreview from '../ReviewPostPreview/ReviewPostPreview.container';
 
-export default function ReviewPostCardUI({ post, onPostClick, isHovered, handleMouseEnter, handleMouseLeave }) {
+export default function ReviewPostCardUI({ post, handlePostClick, isHovered, handleMouseEnter, handleMouseLeave }) {
   return (
     <Wrapper>
       <ReviewPostAuthor post={post} isHovered={isHovered} />
       <HoveredLayout>
-        <HoveredBox onClick={() => onPostClick(post)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <HoveredBox onClick={handlePostClick(post)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <ReviewPostBackground post={post} />
           {isHovered ? (
             <PreviewBox>

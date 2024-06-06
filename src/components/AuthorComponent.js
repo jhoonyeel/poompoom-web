@@ -4,16 +4,6 @@ import styled from 'styled-components';
 import { ReactComponent as FireCracker } from '../assets/FireCraker.svg';
 
 export default function AuthorComponent({ isHovered }) {
-  //   const [isHovered, setIsHovered] = useState(false);
-
-  //   const handleMouseEnter = () => {
-  //     setIsHovered(true);
-  //   };
-
-  //   const handleMouseLeave = () => {
-  //     setIsHovered(false);
-  //   };
-
   return (
     <Wrapper>
       <AuthorCircleBox>
