@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import { ReactComponent as FireCracker } from '../assets/FireCraker.svg';
 
-export default function AuthorComponent() {
+export default function AuthorComponent({ isHovered }) {
   //   const [isHovered, setIsHovered] = useState(false);
 
   //   const handleMouseEnter = () => {
@@ -25,7 +25,7 @@ export default function AuthorComponent() {
           />
         </AuthorImgBox>
       </AuthorCircleBox>
-      <FireCrackerBox className="왼쪽 아이콘까지 길이를 가지고, 왼쪽 고정해서 컴퍼스 회전">
+      <FireCrackerBox isHovered={isHovered}>
         <FireCracker />
       </FireCrackerBox>
     </Wrapper>
@@ -75,8 +75,8 @@ const FireCrackerBox = styled.div`
   z-index: 3;
   display: flex;
   justify-content: flex-end;
-  transform: translate(-10%, -150%) rotate(90deg);
-  transition: transform 1s ease-in-out;
+  transform: ${({ isHovered }) => (isHovered ? 'translate(-10%, -150%) rotate(90deg)' : 'translateY(-40px)')};
+  transition: transform 0.25s ease-in-out;
 `;
 // const FireCrackerIcon = styled(FireCracker)`
 //   width: 100%;

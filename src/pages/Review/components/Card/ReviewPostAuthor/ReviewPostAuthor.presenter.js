@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import AuthorComponent from '../../../../../components/AuthorComponent';
 
-export default function ReviewPostAuthorUI({ nickName, internal = true, navigate, handleSub }) {
+export default function ReviewPostAuthorUI({ nickName, internal = true, navigate, handleSub, isHovered }) {
   return (
     <div>
       {internal ? (
         <Wrapper>
-          <AuthorComponent onClick={() => navigate('/profile')} />
+          <AuthorComponent isHovered={isHovered} onClick={() => navigate('/profile')} />
           <Nickname to="/profile">{nickName || '@닉네임'}</Nickname>
           <span>
             <button type="button" onClick={handleSub}>

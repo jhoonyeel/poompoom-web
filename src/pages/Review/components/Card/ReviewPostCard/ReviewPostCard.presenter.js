@@ -7,12 +7,10 @@ import ReviewPostPreview from '../ReviewPostPreview/ReviewPostPreview.container'
 export default function ReviewPostCardUI({ post, onPostClick, isHovered, handleMouseEnter, handleMouseLeave }) {
   return (
     <Wrapper>
-      <ReviewPostAuthor post={post} />
+      <ReviewPostAuthor post={post} isHovered={isHovered} />
       <HoveredLayout>
         <HoveredBox onClick={() => onPostClick(post)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <ReviewPostBackground post={post} />
-          {/* <img src="http://via.placeholder.com/380x430.png" alt={`Post ${post} 사진`} />{' '}
-          320x450, 250x330, 220x300 */}
           {isHovered ? (
             <PreviewBox>
               <ReviewPostPreview post={post} />
@@ -29,8 +27,7 @@ export default function ReviewPostCardUI({ post, onPostClick, isHovered, handleM
 }
 
 const Wrapper = styled.div`
-  width: 100%; /* 아이템이 한 줄에 3개 들어가도록 설정 | calc(80% / 3); column-gap: 20px;*/
-  border: red solid 1px;
+  width: 100%;
 `;
 const HoveredLayout = styled.div`
   display: flex;

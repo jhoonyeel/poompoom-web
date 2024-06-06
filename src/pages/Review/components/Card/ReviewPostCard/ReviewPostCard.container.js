@@ -14,15 +14,12 @@ export default function ReviewPostCard({ post, onPostClick }) {
 
   // post 속성 여러 개로 나누어 보내기
   return (
-    <>
-      <ReviewPostCardUI
-        post={post}
-        onPostClick={onPostClick}
-        isHovered={isHovered}
-        handleMouseEnter={handleMouseEnter}
-        handleMouseLeave={handleMouseLeave}
-      />
-      {/* <Confetti isHovered={isHovered} /> */}
-    </>
+    <ReviewPostCardUI
+      post={post}
+      onPostClick={onPostClick}
+      isHovered={isHovered}
+      handleMouseEnter={handleMouseEnter}
+      handleMouseLeave={handleMouseLeave}
+    />
   );
 }
