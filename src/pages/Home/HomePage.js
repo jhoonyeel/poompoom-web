@@ -52,7 +52,6 @@ export default function HomePage() {
       const res = await axios.get(`/hashtag/rank`);
       const { data } = res;
       setRecommendations(data);
-      console.log(data);
     } catch (error) {
       console.error('Error fetching post data:', error);
     }
@@ -122,6 +121,9 @@ const ProfileSection = styled.section`
   width: 100%;
   border: 3px solid #aaa;
   margin-top: 5rem;
+
+  border-radius: 20px;
+  overflow: hidden;
 `;
 const ProfileContent = styled.div`
   width: 80%;

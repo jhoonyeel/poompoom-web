@@ -10,16 +10,16 @@ axios.interceptors.request.use(
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
+    console.log('Request Headers: ', config.headers); // 요청 헤더를 로그에 출력
     return config;
   },
   (error) => Promise.reject(error),
 );
 
-// console.log('서버로부터 받은 응답: ', respone);
 // 응답 인터셉터
 axios.interceptors.response.use(
   (response) => {
-    console.log('서버로부터 받은 응답: ', response);
+    console.log('Response: ', response);
     return response;
   },
   async (error) => {

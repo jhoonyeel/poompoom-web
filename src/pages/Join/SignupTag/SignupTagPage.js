@@ -39,7 +39,6 @@ export default function SignUpTagPage() {
         3. 직업 <Job setSelectedButton={(value) => setSelectedButton(3, value)} /> 4. 관심사{' '}
         <Interest setSelectedButton={(value) => setSelectedButton(4, value)} />
       </Container>
-
       <SubmitButton>회원가입</SubmitButton>
     </Container>
   );

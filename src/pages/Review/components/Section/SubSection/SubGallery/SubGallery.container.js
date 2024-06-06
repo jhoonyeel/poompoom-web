@@ -1,61 +1,63 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { useQuery } from 'react-query';
-import useModal from '../../../../../../hooks/useModal';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from '../../../../../../apis/axios';
 import SubGalleryUI from './SubGallery.presenter';
 
-const fetchPosts = async () => {
-  const response = await axios.get(`/subscribe?page=1&size=5`);
-  return response.data.values;
-};
-
-const transformData = (data) => {
-  return data.map((item) => ({
-    profilePhotoPath: item.profilePhotoPath,
-    nickname: item.nickname,
-    subscribeId: item.subscribeId,
-    followingMemberId: item.followingMemberId,
-    subscribeDate: item.subscribeDate,
-  }));
-};
-
 export default function SubGallery() {
-  const {
-    data: posts,
-    error,
-    isLoading,
-  } = useQuery('posts', fetchPosts, {
-    select: transformData,
-  });
+  const [subPosts, setSubPosts] = useState([]);
+  const [cursorId, setCursorId] = useState(null);
+  const [hasNext, setHasNext] = useState(true);
+  const loader = useRef(null);
 
-  const [selectedPost, setSelectedPost] = useState(null);
-  const { isOpen: isModalOpen, openModal, closeModal } = useModal();
-
+  const navigate = useNavigate();
   const handlePostClick = (post) => {
-    setSelectedPost(post);
-    openModal();
+    navigate(`/review/${post.id}`);
   };
 
-  const handleConfirmPost = (post) => {
-    console.log('포스트 확인:', post.nickname);
+  const fetchPostData = async (currentCursor = null) => {
+    try {
+      const page = currentCursor ? currentCursor + 1 : 1; // 최소 페이지 값 1로 설정
+
+      const res = await axios.get(`/review/subscribe`, {
+        params: {
+          page,
+        },
+      });
+      console.log(res.headers);
+      const { values, cursorId: newCursorId, hasNext: newHasNext } = res.data;
+      setSubPosts((prevPosts) => [...prevPosts, ...values]);
+      setCursorId(newCursorId);
+      setHasNext(newHasNext);
+      console.log('서버로부터 받은 데이터db: ', res.data);
+    } catch (error) {
+      console.error('Error fetching post data:', error);
+    }
   };
+  useEffect(() => {
+    fetchPostData();
+  }, []);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const target = entries[0];
+        if (target.isIntersecting && hasNext) {
+          fetchPostData(cursorId);
+        }
+      },
+      { threshold: 1 },
+    );
 
-  if (error) {
-    return <div>Error fetching posts</div>;
-  }
+    if (loader.current) {
+      observer.observe(loader.current);
+    }
 
-  return (
-    <SubGalleryUI
-      posts={posts}
-      handlePostClick={handlePostClick}
-      handleConfirmPost={handleConfirmPost}
-      selectedPost={selectedPost}
-      isModalOpen={isModalOpen}
-      closeModal={closeModal}
-    />
-  );
+    return () => {
+      if (loader.current) {
+        observer.unobserve(loader.current);
+      }
+    };
+  }, [cursorId, hasNext]);
+
+  return <SubGalleryUI subPosts={subPosts} handlePostClick={handlePostClick} loader={loader} />;
 }
