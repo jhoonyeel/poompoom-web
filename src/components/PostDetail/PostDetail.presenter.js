@@ -25,78 +25,79 @@ export default function ReviewDetailUI({
   boardImages,
 }) {
   return (
-    <Container>
-      <ContentBox>
-        <Box>
-          <LeftBox>
-            <div>
-              <SliderBtn onClick={prevSlide}>이전</SliderBtn> {/** 추후에 컴포넌트 사용 */}
-            </div>
-            <ContentImageWrapper>
-              <Image src={boardImages[currentIndex]} alt={`이미지 ${currentIndex + 1}`} />;
-            </ContentImageWrapper>
-            <div>
-              <SliderBtn onClick={nextSlide}>다음</SliderBtn> {/** 추후에 컴포넌트 사용 */}
-            </div>
-          </LeftBox>
-          <Types>
-            {' '}
-            <Type>Price:{price}</Type>
-            <Type>구매처:{whereBuy}</Type>
-          </Types>
-        </Box>
-        <RightBox>
-          <BoardHeader>
-            <ID>@{memberId}</ID>
-            <ID>{nickname}</ID>
-            <ID>{reviewType === 'given' ? 'lover에게 주는 선물' : 'lover에게 받은 선물'}</ID>
-            <FollowButton>팔로우</FollowButton>
-          </BoardHeader>
-          <BoardBody>
-            <Title>누가 누구에게 주는 선물</Title>
-            <Body>{body}</Body>
-            <TagsContainer>
-              #
-              {hashTags.map((tag, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <Tag key={index}>{tag}</Tag>
-              ))}
-            </TagsContainer>
-            <DateWrapper>
-              <Dates>
-                작성:
-                {new Date(
-                  createTime[0],
-                  createTime[1] - 1,
-                  createTime[2],
-                  createTime[3],
-                  createTime[4],
-                  createTime[5],
-                  createTime[6],
-                ).toLocaleString()}
-              </Dates>
+    <div>
+      <Container>
+        <ContentBox>
+          <Box>
+            <LeftBox>
+              <div>
+                <SliderBtn onClick={prevSlide}>이전</SliderBtn> {/** 추후에 컴포넌트 사용 */}
+              </div>
+              <ContentImageWrapper>
+                <Image src={boardImages[currentIndex]} alt={`이미지 ${currentIndex + 1}`} />;
+              </ContentImageWrapper>
+              <div>
+                <SliderBtn onClick={nextSlide}>다음</SliderBtn> {/** 추후에 컴포넌트 사용 */}
+              </div>
+            </LeftBox>
+            <Types>
+              {' '}
+              <Type>Price:{price}</Type>
+              <Type>구매처:{whereBuy}</Type>
+            </Types>
+          </Box>
+          <RightBox>
+            <BoardHeader>
+              <ID>@{memberId}</ID>
+              <ID>{nickname}</ID>
+              <ID>{reviewType === 'given' ? 'lover에게 주는 선물' : 'lover에게 받은 선물'}</ID>
+              <FollowButton>팔로우</FollowButton>
+            </BoardHeader>
+            <BoardBody>
+              <Title>누가 누구에게 주는 선물</Title>
+              <Body>{body}</Body>
+              <TagsContainer>
+                #
+                {hashTags.map((tag, index) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <Tag key={index}>{tag}</Tag>
+                ))}
+              </TagsContainer>
+              <DateWrapper>
+                <Dates>
+                  작성:
+                  {new Date(
+                    createTime[0],
+                    createTime[1] - 1,
+                    createTime[2],
+                    createTime[3],
+                    createTime[4],
+                    createTime[5],
+                    createTime[6],
+                  ).toLocaleString()}
+                </Dates>
 
-              <Dates>
-                수정:
-                {new Date(
-                  lastModifiedTime[0],
-                  lastModifiedTime[1] - 1,
-                  lastModifiedTime[2],
-                  lastModifiedTime[3],
-                  lastModifiedTime[4],
-                  lastModifiedTime[5],
-                  lastModifiedTime[6],
-                ).toLocaleString()}
-              </Dates>
-            </DateWrapper>
-            <Type>Member ID: {memberId}</Type>
-            <Type>내 포스트:{isMyPost ? 'Yes' : 'No'}</Type>
-            <Type>좋아요:{like ? 'Yes' : 'No'} </Type>
-            <Type>북마크:{bookMark ? 'Yes' : 'No'}</Type>
-            <Type>마음점수:{startPoint}</Type>
+                <Dates>
+                  수정:
+                  {new Date(
+                    lastModifiedTime[0],
+                    lastModifiedTime[1] - 1,
+                    lastModifiedTime[2],
+                    lastModifiedTime[3],
+                    lastModifiedTime[4],
+                    lastModifiedTime[5],
+                    lastModifiedTime[6],
+                  ).toLocaleString()}
+                </Dates>
+              </DateWrapper>
+              <Type>Member ID: {memberId}</Type>
+              <Type>내 포스트:{isMyPost ? 'Yes' : 'No'}</Type>
+              <Type>좋아요:{like ? 'Yes' : 'No'} </Type>
+              <Type>북마크:{bookMark ? 'Yes' : 'No'}</Type>
+              <Type>마음점수:{startPoint}</Type>
 
-            <div>
-              {/* {photos.length > 0 ? (
+              <div>
+                {/* {photos.length > 0 ? (
                 photos.map((photo) => (
                   <div key={photo.id}>
                     <img src={photo.photoPath} alt={`Photo ${photo.id}`} />
@@ -105,26 +106,27 @@ export default function ReviewDetailUI({
               ) : (
                No photos available</p>
               )} */}
-            </div>
-          </BoardBody>
+              </div>
+            </BoardBody>
 
-          <BoardNav>
-            <FontAwesomeIcon
-              icon={like ? solidHeart : regularHeart}
-              onClick={() => setLike((prevLike) => !prevLike)}
-              style={{ margin: '1rem' }}
-            />
-            <FontAwesomeIcon
-              icon={bookMark ? solidBookMark : regularBookMark}
-              onClick={() => setBookMark((prevBM) => !prevBM)}
-              style={{ margin: '1rem' }}
-            />
-          </BoardNav>
+            <BoardNav>
+              <FontAwesomeIcon
+                icon={like ? solidHeart : regularHeart}
+                onClick={() => setLike((prevLike) => !prevLike)}
+                style={{ margin: '1rem' }}
+              />
+              <FontAwesomeIcon
+                icon={bookMark ? solidBookMark : regularBookMark}
+                onClick={() => setBookMark((prevBM) => !prevBM)}
+                style={{ margin: '1rem' }}
+              />
+            </BoardNav>
 
-          <div>{/* 댓글 작성 */}</div>
-        </RightBox>
-      </ContentBox>
-    </Container>
+            <div>{/* 댓글 작성 */}</div>
+          </RightBox>
+        </ContentBox>
+      </Container>
+    </div>
   );
 }
 

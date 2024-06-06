@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import PostDetailUI from './PostDetail.presenter';
+import PostCommentList from '../PostComment/PostCommentList/PostCommentList';
 
 const profileImage = 'http://via.placeholder.com/90x90.png' && '';
 
@@ -49,19 +50,22 @@ export default function PostDetail() {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <PostDetailUI
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...review}
-      currentIndex={currentIndex}
-      prevSlide={prevSlide}
-      nextSlide={nextSlide}
-      boardImages={boardImages}
-      profileImage={profileImage}
-      like={like}
-      bookMark={bookMark}
-      setLike={setLike}
-      setBookMark={setBookMark}
-      selectedPost={selectedPost}
-    />
+    <div>
+      <PostDetailUI
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...review}
+        currentIndex={currentIndex}
+        prevSlide={prevSlide}
+        nextSlide={nextSlide}
+        boardImages={boardImages}
+        profileImage={profileImage}
+        like={like}
+        bookMark={bookMark}
+        setLike={setLike}
+        setBookMark={setBookMark}
+        selectedPost={selectedPost}
+      />
+      <PostCommentList />
+    </div>
   );
 }
