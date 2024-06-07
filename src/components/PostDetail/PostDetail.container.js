@@ -1,24 +1,25 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import PostDetailUI from './PostDetail.presenter';
+import { useParams } from 'react-router-dom';
+import ReviewDetailUI from './PostDetail.presenter';
 import PostCommentList from '../PostComment/PostCommentList/PostCommentList';
 
-const profileImage = 'http://via.placeholder.com/90x90.png' && '';
-
 export default function PostDetail() {
-  const reviewId = 18;
-  console.log('아이디!', reviewId);
   const [review, setReview] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [bookMark, setBookMark] = useState();
-  const [like, setLike] = useState();
-  const [selectedPost, setSelectedPost] = useState();
+  const [bookMark, setBookMark] = useState(false);
+  const [like, setLike] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const { reviewId } = useParams();
 
-  const boardImages = Array(3).fill('http://via.placeholder.com/390x510.png') && [];
+  const boardImages = [
+    'http://via.placeholder.com/390x510.png',
+    'http://via.placeholder.com/390x510.png',
+    'http://via.placeholder.com/390x510.png',
+  ];
 
-  // 사진 루프
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? boardImages.length - 1 : prevIndex - 1));
   };
@@ -32,7 +33,7 @@ export default function PostDetail() {
       try {
         const response = await axios.get(`/review/${reviewId}`);
         const { data } = response;
-        setReview(response.data);
+        setReview(data);
         setSelectedPost(data);
         setLike(data.isLike);
         setBookMark(data.isBookMark);
@@ -51,14 +52,13 @@ export default function PostDetail() {
 
   return (
     <div>
-      <PostDetailUI
+      <ReviewDetailUI
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...review}
         currentIndex={currentIndex}
         prevSlide={prevSlide}
         nextSlide={nextSlide}
         boardImages={boardImages}
-        profileImage={profileImage}
         like={like}
         bookMark={bookMark}
         setLike={setLike}
