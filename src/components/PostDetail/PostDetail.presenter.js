@@ -21,8 +21,8 @@ export default function ReviewDetailUI({
   bookMark,
   setLike,
   setBookMark,
-  currentIndex,
-  boardImages,
+
+  photos,
 }) {
   return (
     <div>
@@ -30,20 +30,24 @@ export default function ReviewDetailUI({
         <ContentBox>
           <Box>
             <LeftBox>
-              <div>
-                <SliderBtn onClick={prevSlide}>이전</SliderBtn> {/** 추후에 컴포넌트 사용 */}
-              </div>
+              <SliderBtn onClick={prevSlide}>이전</SliderBtn> {/* 추후에 컴포넌트 사용 */}
               <ContentImageWrapper>
-                <Image src={boardImages[currentIndex]} alt={`이미지 ${currentIndex + 1}`} />;
+                <strong>Photos:</strong>
+                {photos.length > 0 ? (
+                  photos.map((photo) => (
+                    <ImageBox key={photo.id}>
+                      <Image src={photo.photoPath} alt={`${photo.id}`} />
+                    </ImageBox>
+                  ))
+                ) : (
+                  <p>No photos available</p>
+                )}
               </ContentImageWrapper>
-              <div>
-                <SliderBtn onClick={nextSlide}>다음</SliderBtn> {/** 추후에 컴포넌트 사용 */}
-              </div>
+              <SliderBtn onClick={nextSlide}>다음</SliderBtn> {/* 추후에 컴포넌트 사용 */}
             </LeftBox>
             <Types>
-              {' '}
-              <Type>Price:{price}</Type>
-              <Type>구매처:{whereBuy}</Type>
+              <Type>Price: {price}</Type>
+              <Type>구매처: {whereBuy}</Type>
             </Types>
           </Box>
           <RightBox>
@@ -54,13 +58,11 @@ export default function ReviewDetailUI({
               <FollowButton>팔로우</FollowButton>
             </BoardHeader>
             <BoardBody>
-              <Title>누가 누구에게 주는 선물</Title>
               <Body>{body}</Body>
               <TagsContainer>
                 #
-                {hashTags.map((tag, index) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <Tag key={index}>{tag}</Tag>
+                {hashTags.map((tag) => (
+                  <Tag key={tag}>{tag}</Tag>
                 ))}
               </TagsContainer>
               <DateWrapper>
@@ -91,22 +93,10 @@ export default function ReviewDetailUI({
                 </Dates>
               </DateWrapper>
               <Type>Member ID: {memberId}</Type>
-              <Type>내 포스트:{isMyPost ? 'Yes' : 'No'}</Type>
-              <Type>좋아요:{like ? 'Yes' : 'No'} </Type>
-              <Type>북마크:{bookMark ? 'Yes' : 'No'}</Type>
-              <Type>마음점수:{startPoint}</Type>
-
-              <div>
-                {/* {photos.length > 0 ? (
-                photos.map((photo) => (
-                  <div key={photo.id}>
-                    <img src={photo.photoPath} alt={`Photo ${photo.id}`} />
-                  </div>
-                ))
-              ) : (
-               No photos available</p>
-              )} */}
-              </div>
+              <Type>내 포스트: {isMyPost ? 'Yes' : 'No'}</Type>
+              <Type>좋아요: {like ? 'Yes' : 'No'}</Type>
+              <Type>북마크: {bookMark ? 'Yes' : 'No'}</Type>
+              <Type>마음점수: {startPoint}</Type>
             </BoardBody>
 
             <BoardNav>
@@ -143,25 +133,22 @@ const ContentBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  border: 1px solid red;
-  height: 50rem;
+  height: 75%;
+  width: 80%;
 `;
 const LeftBox = styled.div`
-  margin-right: 50px;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  height: 80%;
 `;
-const RightBox = styled.div``;
-
-const Title = styled.h2`
-  padding: 1rem;
-  border: 1px solid black;
+const RightBox = styled.div`
+  height: 100%;
+  width: 60%;
 `;
 
 const ContentImageWrapper = styled.div`
-  width: 390px;
-  height: 510px;
   margin: 0 15px;
 `;
 
@@ -217,6 +204,7 @@ const Types = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  height: 20%;
 `;
 const Tag = styled.span`
   border: 1px solid #b1b1b1;
@@ -261,12 +249,20 @@ const FollowButton = styled.button`
     color: white;
   }
 `;
+
 const Box = styled.div`
   display: flex;
   flex-direction: column;
-  padding-right: 2rem;
+  padding-right: 3rem;
+  height: 100%;
+  width: 40%;
 `;
 
-const Image = styled.div`
+const ImageBox = styled.div`
+  margin-top: 2rem;
+`;
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 `;
