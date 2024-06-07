@@ -5,23 +5,22 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // eslint-disable-next-line camelcase, import/no-unresolved
-import { ReactComponent as Mains } from '../../assets/Main.svg';
-import { ReactComponent as One } from '../../assets/One.svg';
-import { ReactComponent as Two } from '../../assets/Two.svg';
-import { ReactComponent as Tre } from '../../assets/Tre.svg';
 import { ReactComponent as Four } from '../../assets/4.svg';
 import { ReactComponent as Five } from '../../assets/5.svg';
 import { ReactComponent as Six } from '../../assets/6.svg';
 import { ReactComponent as Seven } from '../../assets/7.svg';
-
-import { ReactComponent as D100 } from '../../assets/D100.svg';
 import { ReactComponent as Apple } from '../../assets/Apple.svg';
+import { ReactComponent as Calender } from '../../assets/Calender.svg';
+import { ReactComponent as Chres } from '../../assets/Chres.svg';
+import { ReactComponent as D100 } from '../../assets/D100.svg';
 import { ReactComponent as Gift } from '../../assets/Gift.svg';
 import { ReactComponent as Group } from '../../assets/Group.svg';
-import { ReactComponent as Vector } from '../../assets/Vector.svg';
 import { ReactComponent as Lose } from '../../assets/Lose.svg';
-import { ReactComponent as Chres } from '../../assets/Chres.svg';
-import { ReactComponent as Calender } from '../../assets/Calender.svg';
+import { ReactComponent as Mains } from '../../assets/Main.svg';
+import { ReactComponent as One } from '../../assets/One.svg';
+import { ReactComponent as Tre } from '../../assets/Tre.svg';
+import { ReactComponent as Two } from '../../assets/Two.svg';
+import { ReactComponent as Vector } from '../../assets/Vector.svg';
 
 export default function HomePage() {
   const [recommendations, setRecommendations] = useState([]);
@@ -56,7 +55,9 @@ export default function HomePage() {
   return (
     <Wrapper>
       <ProfileSection>
-        <Mains />
+        <MainBox>
+          <MainSvg />
+        </MainBox>
       </ProfileSection>
       <SearchSection>
         <KeywordBox>
@@ -69,30 +70,30 @@ export default function HomePage() {
         </KeywordBox>
         <CategoryBox>
           <CategoryList>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=100일')}>
               <D100 /> <Text>100일</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=사과의+선물')}>
               <Apple /> <Text>사과의 선물</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=가벼운+선물')}>
               <Gift /> <Text>가벼운 선물</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=생일')}>
               <Group /> <Text>생일</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=청혼')}>
               <Vector /> <Text>청혼</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=로맨틱+데이')}>
               <Lose /> <Text>로맨틱 데이</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=n주년')}>
               <Calender /> <Text>n주년</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=크리스마스')}>
               <Chres />
-              <Text>크리스마스 선물</Text>
+              <Text>크리스마스</Text>
             </CategoryWrapper>
           </CategoryList>
         </CategoryBox>
@@ -103,10 +104,10 @@ export default function HomePage() {
       <CurationSection>
         <CurationTitle>봄 맞이 선물</CurationTitle>
         <ButtonWrapper>
-          <CurationButton>어버이날기념</CurationButton>
-          <CurationButton>스승의날</CurationButton>
-          <CurationButton>황사대비탬</CurationButton>
-          <CurationButton>봄먹거리</CurationButton>
+          <CurationButton>실내 장식품</CurationButton>
+          <CurationButton>피크닉 세트</CurationButton>
+          <CurationButton>패션 잇템</CurationButton>
+          <CurationButton>봄 먹거리</CurationButton>
         </ButtonWrapper>
         <ISWRapper>
           <IWrapper>
@@ -134,7 +135,9 @@ const CategoryWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const Text = styled.div``;
+const Text = styled.div`
+  margin: 10px 0;
+`;
 const ImageWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -229,8 +232,7 @@ const PlusParagraph = styled.p`
 
 const SearchSection = styled.section`
   width: 100%;
-  border: 3px solid #aaa;
-  margin-top: 5rem;
+  margin-top: 3.5rem;
 `;
 const KeywordBox = styled.div`
   width: 80%;
@@ -238,8 +240,7 @@ const KeywordBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  align-items: start;
-  padding: 0 10rem;
+  align-items: center;
 `;
 const KeywordParagraph = styled.p`
   padding: 20px;
@@ -274,7 +275,7 @@ const CategoryBox = styled.div`
 `;
 const CategoryList = styled.ul`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   margin-top: 20px;
 `;
@@ -328,4 +329,13 @@ const ButtonBox = styled.div`
 `;
 const UpIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
+`;
+const MainBox = styled.div`
+  width: 80%;
+  margin: 0 auto;
+`;
+const MainSvg = styled(Mains)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;

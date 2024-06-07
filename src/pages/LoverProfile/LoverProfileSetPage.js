@@ -1,5 +1,5 @@
-import QuickGift from '../Review/components/QuickGift/QuickGift';
+import SetQuickGift from '../Review/components/QuickGift/SetQuickGift';
 
-export default function LoverProfilePage() {
-  return <QuickGift />;
+export default function LoverProfileSetPage() {
+  return <SetQuickGift />;
 }
