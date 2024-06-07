@@ -3,6 +3,7 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import * as S from './App.styles';
+import ProtectedRoute from './ProtectedRoute';
 import CommunityList from './components/Community/CommunityList/CommunityList';
 import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
 import Footer from './components/Footer/Footer.container';
@@ -28,24 +29,65 @@ const GlobalStyle = createGlobalStyle`
 
 const queryClient = new QueryClient();
 
+const isAuthenticated = () => {
+  // Replace this with your actual authentication logic
+  return localStorage.getItem('accessToken') !== null;
+};
+
 function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/review" element={<ReviewPage />} />
-      <Route path="/review/:reviewId" element={<PostDetail />} />
-      <Route path="/review/write" element={<ReviewWritePage />} />
-      <Route path="/review/query-result" element={<QueryResultPage />} />
-      <Route path="/lovers-profile" element={<LoverProfilePage />} />
-      <Route path="/lovers-profile-set" element={<LoverProfileSetPage />} />
-      <Route path="/profile/like" element={<ProfilePage />} />
-      <Route path="/profile/bookmark" element={<ProfilePage />} />
-      <Route path="/profile/recent" element={<ProfilePage />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/profile/edit" element={<ProfileEditPage />} />
-      <Route path="/community" element={<CommunityList />} />
-      <Route path="/community/detail" element={<CommunityDetailPage />} />
-      <Route path="/community/write" element={<CommunityWrite />} />
+      <Route path="/review" element={<ProtectedRoute element={ReviewPage} isAuthenticated={isAuthenticated()} />} />
+      <Route
+        path="/review/:reviewId"
+        element={<ProtectedRoute element={PostDetail} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route
+        path="/review/write"
+        element={<ProtectedRoute element={ReviewWritePage} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route
+        path="/review/query-result"
+        element={<ProtectedRoute element={QueryResultPage} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route
+        path="/lovers-profile"
+        element={<ProtectedRoute element={LoverProfilePage} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route
+        path="/lovers-profile-set"
+        element={<ProtectedRoute element={LoverProfileSetPage} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route
+        path="/profile/like"
+        element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route
+        path="/profile/bookmark"
+        element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route
+        path="/profile/recent"
+        element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route path="/profile" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />} />
+      <Route
+        path="/profile/edit"
+        element={<ProtectedRoute element={ProfileEditPage} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route
+        path="/community"
+        element={<ProtectedRoute element={CommunityList} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route
+        path="/community/detail"
+        element={<ProtectedRoute element={CommunityDetailPage} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route
+        path="/community/write"
+        element={<ProtectedRoute element={CommunityWrite} isAuthenticated={isAuthenticated()} />}
+      />
     </Routes>
   );
 }

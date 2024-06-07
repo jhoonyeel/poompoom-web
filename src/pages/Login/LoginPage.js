@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { axios, login, logout } from '../../apis/authService';
+import { login } from '../../apis/authService';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -21,32 +21,10 @@ export default function LoginPage() {
     }
   };
 
-  const handleRefreshToken = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        '/reissue',
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('refreshToken')}`,
-          },
-        },
-      );
-      const { access: accessToken, refresh: refreshToken } = response.data;
-      localStorage.setItem('accessToken', accessToken);
-      if (refreshToken) {
-        localStorage.setItem('refreshToken', refreshToken);
-      }
-    } catch (error) {
-      console.error('Refresh token failed', error);
-    }
-  };
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+  // const handleLogout = () => {
+  //   logout();
+  //   navigate('/login');
+  // };
 
   return (
     <Wrapper>
@@ -62,11 +40,10 @@ export default function LoginPage() {
             <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <Button type="submit">Login</Button>
-          <Button onClick={handleRefreshToken}>Refresh</Button>
-          <Button onClick={handleLogout}>Logout</Button>
         </Form>
       </FormContainer>
       <CustomLink to="/signup">회원가입으로 이동</CustomLink>
+      <CustomLink to="/">메인 화면으로 이동</CustomLink>
     </Wrapper>
   );
 }

@@ -55,7 +55,9 @@ export default function HomePage() {
   return (
     <Wrapper>
       <ProfileSection>
-        <Mains />
+        <MainBox>
+          <MainSvg />
+        </MainBox>
       </ProfileSection>
       <SearchSection>
         <KeywordBox>
@@ -327,4 +329,13 @@ const ButtonBox = styled.div`
 `;
 const UpIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
+`;
+const MainBox = styled.div`
+  width: 80%;
+  margin: 0 auto;
+`;
+const MainSvg = styled(Mains)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
