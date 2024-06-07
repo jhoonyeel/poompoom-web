@@ -14,7 +14,7 @@ export default function HeaderUI({ showSearchBar, handleOnClick, isHovered, hand
         </S.LogoBox>
         {showSearchBar && <SearchBar />}
         <S.IconBox>
-          <S.ProfileBox onClick={handleOnClick('/profile')}>
+          <S.ProfileBox onClick={handleOnClick('/lovers-profile')}>
             <S.ProfileIcon icon={faUser} />
             <S.ProfileParagraph>연인 프로필 생성 +</S.ProfileParagraph>
           </S.ProfileBox>

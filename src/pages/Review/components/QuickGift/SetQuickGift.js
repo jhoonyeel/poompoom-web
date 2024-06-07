@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export default function SetQuickGift() {
@@ -39,7 +39,6 @@ export default function SetQuickGift() {
   return (
     <Container>
       <Title>연인 프로필</Title>
-      {/* <div>{JSON.stringify(data)}</div> */}
       <DataContainer>
         {data &&
           data.map((item) => (

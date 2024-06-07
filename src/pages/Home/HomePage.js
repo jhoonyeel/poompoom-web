@@ -55,7 +55,9 @@ export default function HomePage() {
   return (
     <Wrapper>
       <ProfileSection>
-        <Mains />
+        <MainBox>
+          <MainSvg />
+        </MainBox>
       </ProfileSection>
       <SearchSection>
         <KeywordBox>
@@ -68,30 +70,30 @@ export default function HomePage() {
         </KeywordBox>
         <CategoryBox>
           <CategoryList>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=100일')}>
               <D100 /> <Text>100일</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=사과의+선물')}>
               <Apple /> <Text>사과의 선물</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=가벼운+선물')}>
               <Gift /> <Text>가벼운 선물</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=생일')}>
               <Group /> <Text>생일</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=청혼')}>
               <Vector /> <Text>청혼</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=로맨틱+데이')}>
               <Lose /> <Text>로맨틱 데이</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=n주년')}>
               <Calender /> <Text>n주년</Text>
             </CategoryWrapper>
-            <CategoryWrapper>
+            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=크리스마스')}>
               <Chres />
-              <Text>크리스마스 선물</Text>
+              <Text>크리스마스</Text>
             </CategoryWrapper>
           </CategoryList>
         </CategoryBox>
@@ -133,7 +135,9 @@ const CategoryWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const Text = styled.div``;
+const Text = styled.div`
+  margin: 10px 0;
+`;
 const ImageWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -228,7 +232,7 @@ const PlusParagraph = styled.p`
 
 const SearchSection = styled.section`
   width: 100%;
-  margin-top: 5rem;
+  margin-top: 3.5rem;
 `;
 const KeywordBox = styled.div`
   width: 80%;
@@ -325,4 +329,13 @@ const ButtonBox = styled.div`
 `;
 const UpIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
+`;
+const MainBox = styled.div`
+  width: 80%;
+  margin: 0 auto;
+`;
+const MainSvg = styled(Mains)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;

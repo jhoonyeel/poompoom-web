@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import axios from '../../../../apis/axios';
+import AgeSlider from './AgeSlider';
 import Interest from './component/Interest';
 import Job from './component/Job';
 import Purpose from './component/Purpose';
-import Image from './component/Image';
-import AgeSlider from './AgeSlider';
 
 export default function QuickGift() {
   const initialButtons = [
@@ -14,12 +13,10 @@ export default function QuickGift() {
     { id: 2, value: '' },
     { id: 3, value: '' },
     { id: 4, value: '' },
-    { id: 5, value: '' },
   ];
 
   const [buttons, setButtons] = useState(initialButtons);
   const [selectedAgeLabel, setSelectedAgeLabel] = useState('10대 후반');
-  const AccessToken = localStorage.getItem('AccessToken');
 
   const setSelectedButton = (id, value) => {
     setButtons(buttons.map((button) => (button.id === id ? { ...button, value } : button)));
@@ -31,16 +28,7 @@ export default function QuickGift() {
 
     console.log(hashtagList);
     try {
-      const result = await axios.post(
-        'profile/createVirtual',
-        { hashtagList },
-        {
-          headers: {
-            access: `${AccessToken}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      );
+      const result = await axios.post('profile/createVirtual', { hashtagList });
       console.log('Response:', result.data);
       navigate('/lovers-profile-set');
     } catch (error) {
@@ -50,7 +38,7 @@ export default function QuickGift() {
 
   return (
     <Container>
-      <IntroText>님의 연인 님의 프로필</IntroText>
+      <IntroText> test 님의 연인 님의 프로필</IntroText>
 
       <BasketContainer>
         <BasketWrapper>
@@ -88,11 +76,7 @@ export default function QuickGift() {
         <Job setSelectedButton={(value) => setSelectedButton(3, value)} />
       </Wrapper>
       <Wrapper>
-        4. 이미지
-        <Image setSelectedButton={(value) => setSelectedButton(4, value)} />
-      </Wrapper>
-      <Wrapper>
-        5. 선물 목적
+        4. 선물 목적
         <Purpose setSelectedButton={(value) => setSelectedButton(5, value)} />
       </Wrapper>
 
@@ -125,7 +109,7 @@ const SubText = styled.div`
   height: 57px;
   font-size: 15px;
   background-color: #d9d9d9;
-  margin-bottom: 3rem;
+  margin: 3rem 0;
 `;
 
 const BasketContainer = styled.div`
