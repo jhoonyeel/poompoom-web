@@ -6,7 +6,7 @@ export default function SearchGalleryUI({ searchPosts }) {
   return (
     <Wrapper>
       {searchPosts.map((post) => (
-        <ReviewPostCard key={post.id} post={post} />
+        <ReviewPostCard key={post.reviewId} post={post} />
       ))}
     </Wrapper>
   );

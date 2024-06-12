@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export default function ReviewPostHashtagsUI({ hashTags }) {
-  return <Wrapper>{hashTags && hashTags.map((hashTag) => <HashtagItem>{`#${hashTag}`}</HashtagItem>)}</Wrapper>;
+  return (
+    <Wrapper>{hashTags && hashTags.map((tag) => <HashtagItem key={tag.id}>{`#${tag.name}`}</HashtagItem>)}</Wrapper>
+  );
 }
 
 const Wrapper = styled.ul`
