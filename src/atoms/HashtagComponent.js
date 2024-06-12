@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export default function HashtagComponent({ hashTags }) {
   // eslint-disable-next-line react/jsx-no-useless-fragment
-  return <>{hashTags && hashTags.map((tag) => <HashtagItem key={tag}>{`#${tag}`}</HashtagItem>)}</>;
+  return <>{hashTags && hashTags.map((tag) => <HashtagItem key={tag.id}>{`#${tag.name}`}</HashtagItem>)}</>;
 }
 
 const HashtagItem = styled.li`
