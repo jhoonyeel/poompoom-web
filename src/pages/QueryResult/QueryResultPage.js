@@ -16,34 +16,67 @@ export default function QueryResultPage() {
   const [queryPosts, setQueryPosts] = useState([]);
   const [cursorId, setCursorId] = useState(0);
   const [hasNext, setHasNext] = useState(true);
+  const [currentKeyword, setCurrentKeyword] = useState(searchContent);
+  const [initialSearchDone, setInitialSearchDone] = useState(false); // 초기 검색 완료 상태
   const loader = useRef(null);
 
-  const fetchPostData = async (cursor, size = 24) => {
+  const fetchMaxReviewId = async () => {
+    try {
+      const res = await axios.get(`/review`);
+      const allReviews = res.data;
+      if (allReviews.length > 0) {
+        const maxReviewId = Math.max(...allReviews.map((review) => review.reviewId));
+        setCursorId(maxReviewId);
+      }
+    } catch (error) {
+      console.error('Error fetching all reviews:', error);
+    }
+  };
+
+  const fetchPostData = async (cursor, size = 24, keyword = currentKeyword) => {
     try {
       const res = await axios.get(`/review/search`, {
         params: {
-          keyword: searchContent,
+          keyword,
           cursorId: cursor, // cursorId보다 id가 작은 게시글을 가져옴.
           size, // 가져올 게시글의 개수.
         },
       });
       const { values, hasNext: newHasNext } = res.data;
-      setQueryPosts((prevPosts) => (cursor === 0 ? values : [...prevPosts, ...values]));
-      // 마지막 reviewId를 cursorId로 설정
-      if (values.length > 0) {
-        const lastPostId = values[values.length - 1].reviewId;
-        setCursorId(lastPostId);
+      if (values.length === 0 && keyword === searchContent && !initialSearchDone) {
+        // If no results and it's the original search, fetch recommended keyword
+        const recommendRes = await axios.get(`/hashtag/rank`);
+        const recommendedKeyword = recommendRes.data[0].name; // 첫번째 추천 검색어 사용
+        setCurrentKeyword(recommendedKeyword);
+        setInitialSearchDone(true); // 초기 검색 완료로 설정
+        fetchPostData(cursorId, size, recommendedKeyword);
+      } else {
+        setQueryPosts((prevPosts) => (cursor === 0 ? values : [...prevPosts, ...values]));
+        setHasNext(newHasNext);
       }
-      setHasNext(newHasNext);
     } catch (error) {
       console.error('Error fetching post data:', error);
     }
   };
+
   useEffect(() => {
-    setQueryPosts([]);
-    setCursorId(0);
-    setHasNext(true);
-    fetchPostData(0); // 검색어가 변경되면 cursorId를 0으로 설정하고 새로운 데이터를 가져옴
+    const initializeData = async () => {
+      if (!searchContent) {
+        const recommendRes = await axios.get(`/hashtag/rank`);
+        const recommendedKeyword = recommendRes.data[0].name; // 첫번째 추천 검색어 사용
+        setCurrentKeyword(recommendedKeyword);
+        setInitialSearchDone(true); // 초기 검색 완료로 설정
+        await fetchPostData(cursorId, 24, recommendedKeyword);
+      } else {
+        await fetchMaxReviewId();
+        setQueryPosts([]);
+        setHasNext(true);
+        setCurrentKeyword(searchContent);
+        setInitialSearchDone(false); // 초기 검색 완료 상태 리셋
+        fetchPostData(cursorId);
+      }
+    };
+    initializeData();
   }, [searchContent]);
 
   useEffect(() => {
@@ -86,6 +119,13 @@ export default function QueryResultPage() {
               <QuerySvg />
             </TitleBox>
           </TitleContent>
+          {initialSearchDone && (
+            <NoResults>
+              {`No results found for "${searchContent}".`}
+              <br />
+              {`Showing results for recommended keyword "${currentKeyword}".`}
+            </NoResults>
+          )}
           <GalleryContent>
             {queryPosts && queryPosts.map((post) => <ReviewPostCard key={post.id} post={post} />)}
           </GalleryContent>
@@ -148,4 +188,10 @@ const ButtonBox = styled.div`
 `;
 const UpIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
+`;
+const NoResults = styled.div`
+  margin-top: 2rem;
+  font-size: 48px;
+  font-weight: bold;
+  color: red;
 `;
