@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import AuthorComponent from '../../../../../components/AuthorComponent';
+import AuthorComponent from '../../../../../atoms/AuthorComponent';
 
 export default function ReviewPostAuthorUI({
   profilePhoto,

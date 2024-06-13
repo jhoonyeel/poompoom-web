@@ -12,7 +12,7 @@ export default function AuthorComponent({ isHovered, profilePhoto }) {
           <AuthorImg src={profilePhoto} alt="프로필 사진" />
         </AuthorImgBox>
       </AuthorCircleBox>
-      <FireCrackerBox isHovered={isHovered}>
+      <FireCrackerBox $isHovered={isHovered}>
         <FireCrackerIcon />
       </FireCrackerBox>
     </Wrapper>
@@ -61,7 +61,7 @@ const FireCrackerBox = styled.div`
   z-index: 3;
   display: flex;
   justify-content: flex-end;
-  transform: ${({ isHovered }) => (isHovered ? 'translate(-15%, -110%) rotate(90deg)' : 'translateY(-48px)')};
+  transform: ${({ $isHovered }) => ($isHovered ? 'translate(-15%, -110%) rotate(90deg)' : 'translateY(-48px)')};
   transition: transform 0.25s ease-in-out;
 `;
 const FireCrackerIcon = styled(FireCracker)`

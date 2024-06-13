@@ -1,268 +1,254 @@
-import styled from 'styled-components';
+import { faBookmark as emptyBookmark, faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
+import { faBookmark, faCircle, faGreaterThan, faHeart, faLessThan } from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as regularHeart, faBookmark as regularBookMark } from '@fortawesome/free-regular-svg-icons'; // ♡
-import { faHeart as solidHeart, faBookmark as solidBookMark } from '@fortawesome/free-solid-svg-icons'; // ♥︎
+import styled from 'styled-components';
+import FollowBtnComponent from '../../atoms/FollowBtnComponent';
+import PostCommentList from '../PostComment/PostCommentList/PostCommentList.container';
+import PostCommentWrite from '../PostComment/PostCommentWrite/PostCommentWrite.container';
 
 export default function ReviewDetailUI({
-  body,
+  photos,
+  whereBuy,
   price,
+  profileImage,
+  nickname,
+  reviewType,
+  isMyPost,
+  body,
+  hashTags,
   createTime,
   lastModifiedTime,
-  memberId,
-  isMyPost,
-  hashTags,
-  reviewType,
-  startPoint,
-  whereBuy,
-  prevSlide,
-  nextSlide,
-  nickname,
+  formatDate,
   like,
   bookMark,
-  setLike,
-  setBookMark,
-
-  photos,
+  handleLike,
+  handleBookmark,
 }) {
   return (
-    <div>
-      <Container>
-        <ContentBox>
-          <Box>
-            <LeftBox>
-              <SliderBtn onClick={prevSlide}>이전</SliderBtn> {/* 추후에 컴포넌트 사용 */}
-              <ContentImageWrapper>
-                <strong>Photos:</strong>
-                {photos.length > 0 ? (
-                  photos.map((photo) => (
-                    <ImageBox key={photo.id}>
-                      <Image src={photo.photoPath} alt={`${photo.id}`} />
-                    </ImageBox>
-                  ))
-                ) : (
-                  <p>No photos available</p>
-                )}
-              </ContentImageWrapper>
-              <SliderBtn onClick={nextSlide}>다음</SliderBtn> {/* 추후에 컴포넌트 사용 */}
-            </LeftBox>
-            <Types>
-              <Type>Price: {price}</Type>
-              <Type>구매처: {whereBuy}</Type>
-            </Types>
-          </Box>
+    <>
+      <DetailSection>
+        <DetailContent>
+          <LeftBox>
+            <PhotoBox>
+              <LeftBtn>
+                <LeftBtnIcon icon={faLessThan} />
+              </LeftBtn>
+              <ImageBox>
+                {photos.length !== 0 &&
+                  photos.map((photo) => <Image key={photo.id} src={photo.photoPath} alt={`사진${photo.id}`} />)}
+              </ImageBox>
+              <RightBtn>
+                <RightBtnIcon icon={faGreaterThan} />
+              </RightBtn>
+            </PhotoBox>
+            <InfoBox>
+              <Info>구매처: {whereBuy || `경산 다이소 영남대점`}</Info>
+              <Info>Price: {price}</Info>
+            </InfoBox>
+          </LeftBox>
+
           <RightBox>
-            <BoardHeader>
-              <ID>@{memberId}</ID>
-              <ID>{nickname}</ID>
-              <ID>{reviewType === 'given' ? 'lover에게 주는 선물' : 'lover에게 받은 선물'}</ID>
-              <FollowButton>팔로우</FollowButton>
-            </BoardHeader>
-            <BoardBody>
-              <Body>{body}</Body>
-              <TagsContainer>
-                #
-                {hashTags.map((tag) => (
-                  <Tag key={tag}>{tag}</Tag>
-                ))}
-              </TagsContainer>
+            <RightBoxContent>
+              <BoardHeader>
+                <AuthorCircleBox>
+                  <WhiteCircleIcon icon={faCircle} />
+                  <AuthorImgBox>
+                    <AuthorImg src={profileImage} alt="프로필 사진" />
+                  </AuthorImgBox>
+                </AuthorCircleBox>
+                <ID>{`@${nickname}`}</ID>
+                <ID>Lover에게 {reviewType === 'GIVEN' ? '주는 선물' : '받은 선물'}</ID>
+                {isMyPost ? <p>수정하기</p> : <FollowBtnComponent />}
+              </BoardHeader>
+              <BoardBody>{body}</BoardBody>
+              <HashtagList>
+                {hashTags && hashTags.map((tag) => <HashtagItem key={tag.id}>{`#${tag.name}`}</HashtagItem>)}
+              </HashtagList>
               <DateWrapper>
-                <Dates>
-                  작성:
-                  {new Date(
-                    createTime[0],
-                    createTime[1] - 1,
-                    createTime[2],
-                    createTime[3],
-                    createTime[4],
-                    createTime[5],
-                    createTime[6],
-                  ).toLocaleString()}
-                </Dates>
-
-                <Dates>
-                  수정:
-                  {new Date(
-                    lastModifiedTime[0],
-                    lastModifiedTime[1] - 1,
-                    lastModifiedTime[2],
-                    lastModifiedTime[3],
-                    lastModifiedTime[4],
-                    lastModifiedTime[5],
-                    lastModifiedTime[6],
-                  ).toLocaleString()}
-                </Dates>
+                <Dates>{`${formatDate(lastModifiedTime)}(수정됨)`}</Dates>
+                <Dates>{`${formatDate(createTime)}(작성됨)`}</Dates>
               </DateWrapper>
-              <Type>Member ID: {memberId}</Type>
-              <Type>내 포스트: {isMyPost ? 'Yes' : 'No'}</Type>
-              <Type>좋아요: {like ? 'Yes' : 'No'}</Type>
-              <Type>북마크: {bookMark ? 'Yes' : 'No'}</Type>
-              <Type>마음점수: {startPoint}</Type>
-            </BoardBody>
+              <BoardNavBar>
+                <BoardIcon icon={like ? faHeart : emptyHeart} onClick={handleLike} />
+                <BoardIcon icon={bookMark ? faBookmark : emptyBookmark} onClick={handleBookmark} />
+              </BoardNavBar>
 
-            <BoardNav>
-              <FontAwesomeIcon
-                icon={like ? solidHeart : regularHeart}
-                onClick={() => setLike((prevLike) => !prevLike)}
-                style={{ margin: '1rem' }}
-              />
-              <FontAwesomeIcon
-                icon={bookMark ? solidBookMark : regularBookMark}
-                onClick={() => setBookMark((prevBM) => !prevBM)}
-                style={{ margin: '1rem' }}
-              />
-            </BoardNav>
-
-            <div>{/* 댓글 작성 */}</div>
+              <CommentWriteBox>
+                <PostCommentWrite />
+              </CommentWriteBox>
+            </RightBoxContent>
           </RightBox>
-        </ContentBox>
-      </Container>
-    </div>
+        </DetailContent>
+      </DetailSection>
+      <CommentSection>
+        <CommentContent>
+          <PostCommentList />
+        </CommentContent>
+      </CommentSection>
+    </>
   );
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
-  margin-top: 2%;
+const DetailSection = styled.section`
+  width: 100%;
+  margin-top: 3rem;
+  border: 3px solid red;
 `;
-
-const ContentBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 75%;
+const DetailContent = styled.div`
   width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
 `;
 const LeftBox = styled.div`
+  width: 45%;
+  height: 100%;
+  margin-right: 5rem;
+`;
+const PhotoBox = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   height: 80%;
 `;
-const RightBox = styled.div`
-  height: 100%;
-  width: 60%;
+const LeftBtn = styled.div`
+  width: 3rem;
+  height: 3rem;
 `;
-
-const ContentImageWrapper = styled.div`
-  margin: 0 15px;
-`;
-
-const BoardHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  margin: 2rem 0;
-  padding: 0 2rem;
-`;
-
-const BoardBody = styled.div`
-  width: 100%;
-  height: 40vh;
-  padding: 1rem;
-  border: 1px solid gainsboro;
-  overflow-y: auto;
-  word-wrap: break-word;
-`;
-
-const Body = styled.div`
-  width: 654px;
-  height: 337px;
-  border: none;
-  padding: 2rem;
-  line-height: 170%;
+const LeftBtnIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
-  overflow: auto;
+  color: black;
+  padding: 1rem;
 `;
-
-const BoardNav = styled.nav`
-  display: flex;
+const RightBtn = styled.div`
+  width: 3rem;
+  height: 3rem;
 `;
-
-const SliderBtn = styled.button`
-  background-color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  &:hover {
-    background-color: gainsboro;
-  }
+const RightBtnIcon = styled(FontAwesomeIcon)`
+  font-size: 24px;
+  color: black;
+  padding: 1rem;
 `;
-
-const Type = styled.div`
-  margin: 1rem;
-`;
-
-const ID = styled.div`
-  font-size: 1.3rem;
-`;
-const Types = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  height: 20%;
-`;
-const Tag = styled.span`
-  border: 1px solid #b1b1b1;
-  padding: 5px;
-  margin: 5px;
-  border-radius: 5px;
-  transition: 0.3s;
-
-  &:hover {
-    background-color: #747474;
-    color: #fff;
-  }
-`;
-
-const TagsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
-`;
-
-const DateWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  transform: translateX(-140px);
-  margin-top: 1rem;
-`;
-const Dates = styled.div`
-  color: #b0b0b1;
-  margin: 0.5rem 0;
-`;
-
-const FollowButton = styled.button`
-  font-size: 20px;
-  border-radius: 20px;
-  color: #02574e;
-  padding: 10px;
-
-  &:hover {
-    background-color: #02574e;
-    color: white;
-  }
-`;
-
-const Box = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-right: 3rem;
-  height: 100%;
-  width: 40%;
-`;
-
 const ImageBox = styled.div`
-  margin-top: 2rem;
+  width: 500px;
+  height: 630px;
 `;
 const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+`;
+const InfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 20%;
+  margin: 0 auto;
+  margin-top: 2rem;
+`;
+const Info = styled.p`
+  margin-top: 0.5rem;
+  text-align: start;
+  font-size: 22px;
+  font-weight: bold;
+`;
+
+const RightBox = styled.div`
+  width: 55%;
+  height: 100%;
+`;
+const RightBoxContent = styled.div`
+  width: 85%;
+  margin: 0 auto;
+`;
+const BoardHeader = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+const AuthorCircleBox = styled.div`
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const WhiteCircleIcon = styled(FontAwesomeIcon)`
+  color: black;
+  font-size: 60px;
+  position: absolute;
+  z-index: 1;
+`;
+const AuthorImgBox = styled.div`
+  width: 87%;
+  height: 87%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  z-index: 2;
+`;
+const AuthorImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
+`;
+const ID = styled.span`
+  font-size: 24px;
+`;
+const BoardBody = styled.p`
+  margin-top: 1rem;
+  width: 100%;
+  height: 460px;
+  overflow-y: auto;
+  word-wrap: break-word;
+  line-height: 170%;
+  font-size: 24px;
+  text-align: start;
+`;
+const HashtagList = styled.ul`
+  margin-top: 2rem;
+  height: 15%;
+  display: flex;
+`;
+const HashtagItem = styled.li`
+  color: #c9464b;
+  margin-right: 0.7rem;
+  font-size: 24px;
+`;
+const DateWrapper = styled.div`
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+`;
+const Dates = styled.span`
+  color: #b0b0b1;
+  margin-top: 0.4rem;
+  text-align: start;
+  font-size: 18px;
+`;
+const BoardNavBar = styled.nav`
+  display: flex;
+  margin-top: 0.5rem;
+`;
+const BoardIcon = styled(FontAwesomeIcon)`
+  padding: 1rem;
+  font-size: 22px;
+`;
+
+const CommentWriteBox = styled.div`
+  height: 20%;
+`;
+const CommentSection = styled.section`
+  width: 100%;
+  margin-top: 5rem;
+  border: 3px solid red;
+`;
+const CommentContent = styled.div`
+  width: 80%;
+  margin: 0 auto;
 `;

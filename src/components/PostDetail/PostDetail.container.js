@@ -1,71 +1,58 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from '../../apis/axios';
 import ReviewDetailUI from './PostDetail.presenter';
-import PostCommentList from '../PostComment/PostCommentList/PostCommentList';
 
 export default function PostDetail() {
-  const [review, setReview] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [bookMark, setBookMark] = useState(false);
   const [like, setLike] = useState(false);
+  const [bookMark, setBookMark] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const { reviewId } = useParams();
 
-  const boardImages = [
-    'http://via.placeholder.com/390x510.png',
-    'http://via.placeholder.com/390x510.png',
-    'http://via.placeholder.com/390x510.png',
-  ];
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? boardImages.length - 1 : prevIndex - 1));
+  const fetchReview = async () => {
+    try {
+      const response = await axios.get(`/review/${reviewId}`);
+      const { data } = response;
+      setSelectedPost(data);
+      setLike(data.isLikedPost);
+      setBookMark(data.isBookmarked);
+    } catch (err) {
+      console.log('fetch failed');
+    }
   };
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === boardImages.length - 1 ? 0 : prevIndex + 1));
-  };
-
   useEffect(() => {
-    const fetchReview = async () => {
-      try {
-        const response = await axios.get(`/review/${reviewId}`);
-        const { data } = response;
-        setReview(data);
-        setSelectedPost(data);
-        setLike(data.isLike);
-        setBookMark(data.isBookMark);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchReview();
   }, [reviewId]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  const handleLike = () => setLike((l) => !l);
+  const handleBookmark = () => setBookMark((b) => !b);
+
+  const formatDate = (dateArray) => {
+    const date = new Date(
+      dateArray[0],
+      dateArray[1] - 1,
+      dateArray[2],
+      dateArray[3],
+      dateArray[4],
+      dateArray[5],
+      dateArray[6],
+    );
+    return date.toLocaleDateString('ko-KR').replace(/\./g, '').replace(/ /g, '.');
+  };
+
+  if (!selectedPost) {
+    return <div>Loading...</div>; // 로딩 중임을 표시합니다.
+  }
 
   return (
-    <div>
-      <ReviewDetailUI
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...review}
-        currentIndex={currentIndex}
-        prevSlide={prevSlide}
-        nextSlide={nextSlide}
-        boardImages={boardImages}
-        like={like}
-        bookMark={bookMark}
-        setLike={setLike}
-        setBookMark={setBookMark}
-        selectedPost={selectedPost}
-      />
-      <PostCommentList />
-    </div>
+    <ReviewDetailUI
+      like={like}
+      bookMark={bookMark}
+      handleLike={handleLike}
+      handleBookmark={handleBookmark}
+      formatDate={formatDate}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...selectedPost}
+    />
   );
 }

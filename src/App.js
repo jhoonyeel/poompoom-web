@@ -122,9 +122,6 @@ export default function App() {
   );
 }
 
-// <CommunityDetailPage /> 커뮤니티 글 확인 페이지
-// <CommunityWrite /> 커뮤니티 글 작성 페이지
-// <CommunityList /> 커뮤니티 리스트 (메인)페이지
 // <ReviewPage /> 선물 리뷰글 페이지
 // <ReviewWritePage> 리뷰글 작성, 수정 페이지
 // <ProfilePage /> 프로필 페이지

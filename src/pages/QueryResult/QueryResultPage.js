@@ -28,7 +28,7 @@ export default function QueryResultPage() {
         },
       });
       const { values, hasNext: newHasNext } = res.data;
-      setQueryPosts((prevPosts) => [...prevPosts, ...values]);
+      setQueryPosts((prevPosts) => (cursor === 0 ? values : [...prevPosts, ...values]));
       // 마지막 reviewId를 cursorId로 설정
       if (values.length > 0) {
         const lastPostId = values[values.length - 1].reviewId;
@@ -40,8 +40,11 @@ export default function QueryResultPage() {
     }
   };
   useEffect(() => {
-    fetchPostData();
-  }, []);
+    setQueryPosts([]);
+    setCursorId(0);
+    setHasNext(true);
+    fetchPostData(0); // 검색어가 변경되면 cursorId를 0으로 설정하고 새로운 데이터를 가져옴
+  }, [searchContent]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

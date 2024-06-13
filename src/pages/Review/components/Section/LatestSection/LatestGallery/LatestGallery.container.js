@@ -8,6 +8,19 @@ export default function LatestGallery() {
   const [hasNext, setHasNext] = useState(true);
   const loader = useRef(null);
 
+  const fetchAllReviews = async () => {
+    try {
+      const res = await axios.get('/review');
+      const allReviews = res.data;
+      if (allReviews.length > 0) {
+        const lastReviewId = allReviews[allReviews.length - 1].reviewId;
+        setCursorId(lastReviewId);
+      }
+    } catch (error) {
+      console.error('Error fetching all reviews:', error);
+    }
+  };
+
   const fetchPostData = async (cursor, size = 6) => {
     try {
       const res = await axios.get(`/profile/view`, {
@@ -19,18 +32,18 @@ export default function LatestGallery() {
       });
       const { values, hasNext: newHasNext } = res.data;
       setLatestPosts((prevPosts) => [...prevPosts, ...values]);
-      // 마지막 reviewId를 cursorId로 설정
-      if (values.length > 0) {
-        const lastPostId = values[values.length - 1].reviewId;
-        setCursorId(lastPostId);
-      }
       setHasNext(newHasNext);
     } catch (error) {
       console.error('Error fetching post data:', error);
     }
   };
   useEffect(() => {
-    fetchPostData();
+    const initialize = async () => {
+      // 마지막 reviewId를 cursorId로 설정
+      await fetchAllReviews();
+      fetchPostData(cursorId);
+    };
+    initialize();
   }, []);
 
   useEffect(() => {
