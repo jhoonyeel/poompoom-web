@@ -12,7 +12,7 @@ export const login = async (username, password) => {
       },
     });
 
-    console.log('서버로부터의 응답: ', response); // Debug log to check response structure
+    console.log('Login 서버로부터의 응답: ', response); // Debug log to check response structure
 
     const { access: accessToken, refresh: refreshToken } = response.data;
 

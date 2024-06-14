@@ -4,9 +4,8 @@ import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.containe
 export default function LatestGalleryUI({ latestPosts, handlePostClick }) {
   return (
     <PostList>
-      {latestPosts.map((post) => (
-        <ReviewPostCard key={post.id} post={post} onPostClick={handlePostClick} />
-      ))}
+      {latestPosts &&
+        latestPosts.map((post) => <ReviewPostCard key={post.reviewId} post={post} onPostClick={handlePostClick} />)}
     </PostList>
   );
 }

@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { debounce } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import LatestGallery from './components/Section/LatestSection/LatestGallery/LatestGallery.container';
+import LatestHeader from './components/Section/LatestSection/LatestHeader/LatestHeader.container';
 import SearchGallery from './components/Section/SearchSection/SearchGallery/SearchGallery.container';
 import SearchHeader from './components/Section/SearchSection/SearchHeader/SearchHeader.container';
 
@@ -40,12 +42,12 @@ export default function ReviewPage() {
       <Layout>
         {/* <PostFilterWrapper ref={postFilterRef} isSticky={isSticky}>
           <PostFilter />
-        </PostFilterWrapper>
+        </PostFilterWrapper> */}
         <section>
           <LatestHeader />
           <LatestGallery />
         </section>
-        <section>
+        {/* <section>
           <SubHeader />
           <SubContent>
             <SubGallery />

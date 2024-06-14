@@ -34,7 +34,6 @@ export default function SearchBar() {
       const res = await axios.get(`/hashtag/rank`);
       const { data } = res;
       setRecommendations(data);
-      console.log(data);
     } catch (error) {
       console.error('Error fetching post data:', error);
     }

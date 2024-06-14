@@ -21,7 +21,7 @@ export default function LatestGallery() {
     }
   };
 
-  const fetchPostData = async (cursor, size = 6) => {
+  const fetchPostData = async (cursor, size = 4) => {
     try {
       const res = await axios.get(`/profile/view`, {
         params: {
@@ -31,7 +31,13 @@ export default function LatestGallery() {
         },
       });
       const { values, hasNext: newHasNext } = res.data;
-      setLatestPosts((prevPosts) => [...prevPosts, ...values]);
+      // setLatestPosts((prevPosts) => [...prevPosts, ...values]);
+      setLatestPosts((prevPosts) => {
+        const newPosts = values.filter(
+          (post) => !prevPosts.some((existingPost) => existingPost.reviewId === post.reviewId),
+        );
+        return [...prevPosts, ...newPosts];
+      });
       setHasNext(newHasNext);
     } catch (error) {
       console.error('Error fetching post data:', error);
