@@ -8,9 +8,10 @@ axios.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+      // config.headers.Authorization = `Bearer ${accessToken}`;
+      config.headers.access = accessToken; // 헤더에 access 속성 추가
     }
-    console.log('Request Headers: ', config.headers); // 요청 헤더를 로그에 출력
+    console.log('Axios Request Headers: ', config.headers); // 요청 헤더를 로그에 출력
     return config;
   },
   (error) => Promise.reject(error),
@@ -19,7 +20,7 @@ axios.interceptors.request.use(
 // 응답 인터셉터
 axios.interceptors.response.use(
   (response) => {
-    console.log('Response: ', response);
+    console.log('Axios Response: ', response);
     return response;
   },
   async (error) => {
@@ -33,18 +34,36 @@ axios.interceptors.response.use(
           {},
           {
             headers: {
-              Authorization: `Bearer ${refreshToken}`,
+              // Authorization: `Bearer ${refreshToken}`,
+              refresh: refreshToken,
             },
           },
         );
+        // if (response.status === 200) {
+        //   const { access: accessToken, refresh: newRefreshToken } = response.data;
+        //   localStorage.setItem('accessToken', accessToken);
+        //   if (newRefreshToken) {
+        //     localStorage.setItem('refreshToken', newRefreshToken);
+        //   }
+        //   axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+        //   originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+        //   return axios(originalRequest);
+        // }
         if (response.status === 200) {
           const { access: accessToken, refresh: newRefreshToken } = response.data;
-          localStorage.setItem('accessToken', accessToken);
-          if (newRefreshToken) {
+          const currentAccessToken = localStorage.getItem('accessToken');
+          const currentRefreshToken = localStorage.getItem('refreshToken');
+
+          // Update tokens only if they are different
+          if (accessToken !== currentAccessToken) {
+            localStorage.setItem('accessToken', accessToken);
+            axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+            originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          }
+          if (newRefreshToken && newRefreshToken !== currentRefreshToken) {
             localStorage.setItem('refreshToken', newRefreshToken);
           }
-          axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+
           return axios(originalRequest);
         }
       } catch (refreshError) {
