@@ -57,7 +57,7 @@ const AuthorImg = styled.img`
 const FireCrackerBox = styled.div`
   width: 80px;
   height: 40px;
-  position: absolute;
+  position: relative;
   z-index: 3;
   display: flex;
   justify-content: flex-end;

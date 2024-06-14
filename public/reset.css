@@ -115,3 +115,7 @@ img {
   border-style: none;
   vertical-align: middle;
 }
+body,
+html {
+  overflow-x: hidden;
+}

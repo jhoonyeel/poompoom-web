@@ -3,25 +3,22 @@ import { ReactComponent as All } from '../../../../../../assets/ALL_MOOD_VIEW.sv
 
 export default function SearchHeaderUI() {
   return (
-    <Container>
+    <Wrapper>
       <ContentBox>
         <AllSvg />
       </ContentBox>
-    </Container>
+    </Wrapper>
   );
 }
 
-const Container = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   height: 40px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10%;
+  margin-top: 2rem;
 `;
-
 const ContentBox = styled.div`
   width: 25%;
+  height: 100%;
 `;
 const AllSvg = styled(All)`
   width: 100%;

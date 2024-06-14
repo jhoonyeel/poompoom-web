@@ -15,13 +15,14 @@ export default function LatestGallery() {
       if (allReviews.length > 0) {
         const lastReviewId = allReviews[allReviews.length - 1].reviewId;
         setCursorId(lastReviewId);
+        console.log(`last: ${lastReviewId}, cursor: ${cursorId}`);
       }
     } catch (error) {
       console.error('Error fetching all reviews:', error);
     }
   };
 
-  const fetchPostData = async (cursor, size = 4) => {
+  const fetchPostData = async (cursor, size = 6) => {
     try {
       const res = await axios.get(`/profile/view`, {
         params: {
@@ -51,13 +52,18 @@ export default function LatestGallery() {
     };
     initialize();
   }, []);
+  useEffect(() => {
+    if (cursorId !== 0) fetchPostData(cursorId);
+  }, [cursorId]);
 
   useEffect(() => {
+    if (cursorId === 0) return; // cursorId가 설정되지 않은 경우 observer를 설정하지 않음
+
     const observer = new IntersectionObserver(
       (entries) => {
         const target = entries[0];
         if (target.isIntersecting && hasNext) {
-          fetchPostData(cursorId, 2); // 추가로 가져오는 데이터
+          fetchPostData(cursorId, 3); // 추가로 가져오는 데이터
         }
       },
       { threshold: 1 },
@@ -67,6 +73,7 @@ export default function LatestGallery() {
       observer.observe(loader.current);
     }
 
+    // eslint-disable-next-line consistent-return
     return () => {
       if (loader.current) {
         observer.unobserve(loader.current);
@@ -74,10 +81,5 @@ export default function LatestGallery() {
     };
   }, [cursorId, hasNext]);
 
-  return (
-    <>
-      <LatestGalleryUI latestPosts={latestPosts} />
-      <div ref={loader} style={{ height: '20px' }} />
-    </>
-  );
+  return <LatestGalleryUI latestPosts={latestPosts} loader={loader} />;
 }
