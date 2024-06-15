@@ -22,6 +22,8 @@ import QueryResultPage from './pages/QueryResult/QueryResultPage';
 import ReviewPage from './pages/Review/ReviewPage';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
 import { basicTheme } from './shared/Theme';
+import LatestProfileGallery from './pages/Profile/components/section/LatestProfileGallery/LatestProfileGallery.container';
+import MineProfileGallery from './pages/Profile/components/section/MineProfileGallery/MineProfileGallery.container';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -64,12 +66,12 @@ function AppRoutes() {
         element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />}
       />
       <Route
-        path="/profile/bookmark"
-        element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />}
+        path="/profile"
+        element={<ProtectedRoute element={MineProfileGallery} isAuthenticated={isAuthenticated()} />}
       />
       <Route
         path="/profile/recent"
-        element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={LatestProfileGallery} isAuthenticated={isAuthenticated()} />}
       />
       <Route path="/profile" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />} />
       <Route

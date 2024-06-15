@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
+  width: 1000px;
   margin: 0 auto;
 `;
 export const ProfileNev = styled.div`
@@ -21,4 +21,18 @@ export const MenuBox = styled.div`
 
 export const Content = styled.div`
   width: 500px;
+`;
+
+export const GalleryBody = styled.div`
+  width: 100%;
+`;
+
+export const PostList = styled.div`
+  display: flex;
+  width: 1000px;
+  overflow: auto;
+  gap: 30px;
+  padding: 0 10%;
+  border: 5px solid black;
+  height: 500px;
 `;
