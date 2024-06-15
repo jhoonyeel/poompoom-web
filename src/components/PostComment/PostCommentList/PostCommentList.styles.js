@@ -71,6 +71,7 @@ const randomAnimationEven = keyframes`
   }
   100% { transform: translate(0, 0); }
 `;
+
 export const CommentBox = styled.div`
   position: relative;
   display: flex;
@@ -84,6 +85,7 @@ export const CommentBox = styled.div`
   box-shadow: 7px 12px 27px 0px rgba(0, 0, 0, 0.11);
   padding: 15px 80px;
   margin: 1rem;
+
   &:nth-child(1) {
     grid-column: span ${getRandomGridColumn()};
   }
@@ -112,6 +114,7 @@ export const CommentBox = styled.div`
   &:nth-child(3n + 1) {
     animation: ${randomAnimation} 2s infinite alternate;
   }
+
 `;
 
 export const CommentBody = styled.p`

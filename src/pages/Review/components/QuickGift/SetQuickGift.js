@@ -1,13 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 export default function SetQuickGift() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState(null);
-  const AccessToken = localStorage.getItem('AccessToken');
+  const AccessToken = localStorage.getItem('accessToken');
 
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,20 +37,27 @@ export default function SetQuickGift() {
   if (errors) {
     return <div>Error: {errors.message}</div>;
   }
-
+  const uniqueData = data.filter((item, index, self) => index === self.findIndex((t) => t.name === item.name));
   return (
     <Container>
       <Title>연인 프로필</Title>
       <DataContainer>
-        {data &&
-          data.map((item) => (
+        {uniqueData &&
+          uniqueData.map((item) => (
             <DataItem key={item.id}>
               <DataNum>{item.id}</DataNum>
               <DataValue>{item.name}</DataValue>
             </DataItem>
           ))}
       </DataContainer>
-      <Button>수정하기</Button>
+      <Button
+        onClick={() => {
+          navigate('/lovers-profile');
+        }}
+      >
+        {' '}
+        수정하기
+      </Button>
     </Container>
   );
 }

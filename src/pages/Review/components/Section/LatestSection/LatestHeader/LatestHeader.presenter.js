@@ -1,28 +1,24 @@
 import styled from 'styled-components';
-import { ReactComponent as Recent } from '../../../../../../assets/RECENT_VIEW.svg';
+import { ReactComponent as Recent } from '../../../../../../assets/Title/RECENT_VIEW.svg';
 
 export default function LatestHeaderUI() {
   return (
-    <Container>
+    <Wrapper>
       <ContentBox>
         <RecentSvg />
       </ContentBox>
-    </Container>
+    </Wrapper>
   );
 }
 
-const Container = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   height: 40px;
-  margin: 0 auto;
-  border: 3px solid #aaa;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10%;
+  margin-top: 2rem;
 `;
-
 const ContentBox = styled.div`
   width: 25%;
+  height: 100%;
 `;
 const RecentSvg = styled(Recent)`
   width: 100%;

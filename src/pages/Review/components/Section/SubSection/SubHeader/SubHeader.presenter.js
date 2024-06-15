@@ -1,28 +1,24 @@
 import styled from 'styled-components';
-import { ReactComponent as Subscribed } from '../../../../../../assets/SUBSCRIBED_VIEW.svg';
+import { ReactComponent as Subscribed } from '../../../../../../assets/Title/SUBSCRIBED_VIEW.svg';
 
 export default function SubHeaderUI() {
   return (
-    <Container>
+    <Wrapper>
       <ContentBox>
         <SubscribedSvg />
       </ContentBox>
-    </Container>
+    </Wrapper>
   );
 }
 
-const Container = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   height: 40px;
-  margin: 0 auto;
-  border: 3px solid #aaa;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10%;
+  margin-top: 2rem;
 `;
-
 const ContentBox = styled.div`
   width: 25%;
+  height: 100%;
 `;
 const SubscribedSvg = styled(Subscribed)`
   width: 100%;

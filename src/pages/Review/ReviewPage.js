@@ -1,33 +1,17 @@
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { debounce } from 'lodash';
-import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import PostFilter from './components/PostFilter/PostFilter.container';
+import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
 import LatestGallery from './components/Section/LatestSection/LatestGallery/LatestGallery.container';
 import LatestHeader from './components/Section/LatestSection/LatestHeader/LatestHeader.container';
 import SearchGallery from './components/Section/SearchSection/SearchGallery/SearchGallery.container';
 import SearchHeader from './components/Section/SearchSection/SearchHeader/SearchHeader.container';
+import SubAccount from './components/Section/SubSection/SubAccount/SubAccount.container';
+import SubGallery from './components/Section/SubSection/SubGallery/SubGallery.container';
+import SubHeader from './components/Section/SubSection/SubHeader/SubHeader.container';
 
 export default function ReviewPage() {
-  const [isSticky, setIsSticky] = useState(false);
-  const postFilterRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = debounce(() => {
-      const postFilter = postFilterRef.current;
-      if (postFilter) {
-        const { offsetTop } = postFilter;
-        setIsSticky(window.scrollY >= offsetTop - (12 * window.innerHeight) / 100);
-      }
-    }, 150); // 150~200ms의 디바운스 적용
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      handleScroll.cancel(); // 컴포넌트가 언마운트 될 때 디바운스 취소
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isSticky]);
-
   // 화면 맨 위로 이동하는 함수
   const scrollToTop = () => {
     window.scrollTo({
@@ -37,62 +21,74 @@ export default function ReviewPage() {
   };
 
   return (
-    <>
-      {/* <RankingProfileCard /> */}
-      <Layout>
-        {/* <PostFilterWrapper ref={postFilterRef} isSticky={isSticky}>
-          <PostFilter />
-        </PostFilterWrapper> */}
-        <section>
+    <Wrapper>
+      <RankingProfileCard />
+      <PostFilterContent>
+        <PostFilter />
+      </PostFilterContent>
+      <GalleryContent>
+        <LatestContent>
           <LatestHeader />
           <LatestGallery />
-        </section>
-        {/* <section>
+        </LatestContent>
+        <SubContent>
           <SubHeader />
-          <SubContent>
+          <SubBodyContent>
             <SubGallery />
             <SubAccount />
-          </SubContent>
-        </section> */}
-        <section>
+          </SubBodyContent>
+        </SubContent>
+        <SearchContent>
           <SearchHeader />
           <SearchGallery />
-        </section>
+        </SearchContent>
         <ButtonBox onClick={scrollToTop}>
           <UpIcon icon={faChevronUp} />
         </ButtonBox>
-      </Layout>
-    </>
+      </GalleryContent>
+    </Wrapper>
   );
 }
 
-const Layout = styled.div`
+const Wrapper = styled.div`
+  width: 100%;
+`;
+const GalleryContent = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
-// const SubContent = styled.div`
-//   display: flex;
-//   border: 3px solid #aaa;
-//   height: 500px;
-// `;
+const PostFilterContent = styled.div`
+  width: 100%;
+  position: sticky;
+  top: 15vh;
+  z-index: 6; /* 헤더와 함께 보이도록 z-index 조정 */
+  background-color: white; /* 배경색 지정하여 다른 콘텐츠와 구분 */
+  transition: top 0.3s ease-in-out; /* 부드러운 이동을 위한 transition 속성 추가 */
+`;
 
-// const PostFilterWrapper = styled.div`
-//   position: ${({ isSticky }) => (isSticky ? 'sticky' : 'relative')};
-//   top: ${({ isSticky }) => (isSticky ? '15vh' : 'auto')};
-//   z-index: 6; /* 헤더와 함께 보이도록 z-index 조정 */
-//   background-color: white; /* 배경색 지정하여 다른 콘텐츠와 구분 */
-//   transition: top 0.3s ease; /* 부드러운 이동을 위한 transition 속성 추가 */
-// `;
-
+const LatestContent = styled.section`
+  width: 100%;
+`;
+const SubContent = styled.section`
+  width: 100%;
+`;
+const SubBodyContent = styled.div`
+  display: flex;
+  width: 100%;
+  height: 620px;
+`;
+const SearchContent = styled.section`
+  width: 100%;
+`;
 const ButtonBox = styled.div`
   position: fixed;
   bottom: 50px; /* 화면 하단과의 간격 조정 */
   right: 50px; /* 화면 우측과의 간격 조정 */
   z-index: 999; /* 다른 요소 위에 표시되도록 z-index 조정 */
   width: 2%;
+  aspect-ratio: 1 / 1;
   border: 3px solid gray;
   border-radius: 50%;
-  aspect-ratio: 1 / 1;
   display: flex;
   justify-content: center;
   align-items: center;

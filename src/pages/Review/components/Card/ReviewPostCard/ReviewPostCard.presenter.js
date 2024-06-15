@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ReactComponent as Flame } from '../../../../../assets/Flame.svg';
 import ReviewPostAuthor from '../ReviewPostAuthor/ReviewPostAuthor.container';
 import ReviewPostBackground from '../ReviewPostBackground/ReviewPostBackground.container';
 import ReviewPostHashtags from '../ReviewPostHashtags/ReviewPostHashtags.container';
@@ -24,6 +25,11 @@ export default function ReviewPostCardUI({ post, handlePostClick, isHovered, han
               <ReviewPostHashtags hashTags={post.hashTags} />
             </HashtagsBox>
           )}
+          {isHovered && (
+            <FlameBox>
+              <FlameSvg />
+            </FlameBox>
+          )}
         </HoveredBox>
       </HoveredLayout>
     </Wrapper>
@@ -45,6 +51,17 @@ const HoveredBox = styled.div`
   &:hover {
     transform: scale(1.1);
   }
+`;
+const FlameBox = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translate(-40px, -420px);
+`;
+const FlameSvg = styled(Flame)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 const PreviewBox = styled.div`
   display: flex;

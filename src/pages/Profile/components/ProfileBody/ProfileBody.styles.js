@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
 `;
 export const ProfileNev = styled.div`
@@ -17,4 +17,8 @@ export const LogoBox = styled.div`
 
 export const MenuBox = styled.div`
   width: 75%;
+`;
+
+export const Content = styled.div`
+  width: 500px;
 `;

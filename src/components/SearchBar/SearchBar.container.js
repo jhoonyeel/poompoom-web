@@ -38,7 +38,6 @@ export default function SearchBar() {
       console.error('Error fetching post data:', error);
     }
   };
-
   useEffect(() => {
     fetchPostData();
   }, []);

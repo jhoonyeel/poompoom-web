@@ -57,8 +57,10 @@ axios.interceptors.response.use(
           // Update tokens only if they are different
           if (accessToken !== currentAccessToken) {
             localStorage.setItem('accessToken', accessToken);
-            axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-            originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+            // axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+            // originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+            axios.defaults.headers.common.access = accessToken;
+            originalRequest.headers.access = accessToken;
           }
           if (newRefreshToken && newRefreshToken !== currentRefreshToken) {
             localStorage.setItem('refreshToken', newRefreshToken);
