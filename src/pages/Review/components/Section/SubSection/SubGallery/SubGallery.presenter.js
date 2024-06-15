@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import Cursor from '../../../../../../assets/HorizontalCursor.svg';
 import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.container';
 
 export default function SubGalleryUI({ subPosts, loader }) {
@@ -29,6 +30,9 @@ export default function SubGalleryUI({ subPosts, loader }) {
 
   return (
     <Wrapper ref={postListRef}>
+      {subPosts.length === 0 && (
+        <NoFollowParagraph>팔로우를 통해 다양한 사람들의 선물을 확인해보세요~~</NoFollowParagraph>
+      )}
       {subPosts && subPosts.map((post) => <ReviewPostCard key={post.reviewId} post={post} />)}
       <ScrollTrigger ref={loader} />
     </Wrapper>
@@ -36,16 +40,19 @@ export default function SubGalleryUI({ subPosts, loader }) {
 }
 
 const Wrapper = styled.div`
-  width: 75%;
+  width: 72%;
   height: 100%;
   display: flex;
   align-items: center;
   flex-wrap: nowrap; /* 가로로 나열 */
   overflow-x: auto; /* 가로 스크롤 활성화 */
-  cursor: url('../../../../../../assets/HorizontalCursor.svg'), auto; /* SVG 커서 설정 */
+  cursor: url(${Cursor}), auto; /* SVG 커서 설정 */
   gap: 50px;
   padding-left: 5%;
-  border-right: 3px dotted brown;
+`;
+const NoFollowParagraph = styled.p`
+  font-size: 38px;
+  font-weight: bold;
 `;
 const ScrollTrigger = styled.div`
   width: 50px; /* 너비를 최소로 설정하여 공간 차지 최소화 */

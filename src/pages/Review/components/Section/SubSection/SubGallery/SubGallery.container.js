@@ -4,33 +4,29 @@ import SubGalleryUI from './SubGallery.presenter';
 
 export default function SubGallery() {
   const [subPosts, setSubPosts] = useState([]);
-  const [cursorId, setCursorId] = useState(null);
+  const [cursorId, setCursorId] = useState(1);
   const [hasNext, setHasNext] = useState(true);
   const loader = useRef(null);
 
-  const fetchPostData = async (currentCursor = null) => {
+  const fetchPostData = async (currentCursor = 1) => {
     try {
-      const page = currentCursor ? currentCursor + 1 : 1; // 최소 페이지 값 1로 설정
-
+      console.log(`cursorId: ${cursorId}, currentCursor: ${currentCursor}`);
       const res = await axios.get(`/review/subscribe`, {
         params: {
-          page,
+          cursorId: currentCursor,
         },
       });
-      const { values, hasNext: newHasNext } = res.data;
+      const { values, hasNext: newHasNext, nextPageId } = res.data;
       setSubPosts((prevPosts) => [...prevPosts, ...values]);
-      // 마지막 reviewId를 cursorId로 설정
-      if (values.length > 0) {
-        const lastPostId = values[values.length - 1].reviewId;
-        setCursorId(lastPostId);
-      }
+      // Update cursorId to nextPageId if it exists, else keep it as is
+      setCursorId(nextPageId || currentCursor);
       setHasNext(newHasNext);
     } catch (error) {
       console.error('Error fetching post data:', error);
     }
   };
   useEffect(() => {
-    fetchPostData();
+    fetchPostData(cursorId);
   }, []);
 
   useEffect(() => {
