@@ -6,7 +6,7 @@ export default function SetQuickGift() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState(null);
-  const AccessToken = localStorage.getItem('AccessToken');
+  const AccessToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,7 +48,7 @@ export default function SetQuickGift() {
             </DataItem>
           ))}
       </DataContainer>
-      <Button>수정하기</Button>
+      <Button> 수정하기</Button>
     </Container>
   );
 }
