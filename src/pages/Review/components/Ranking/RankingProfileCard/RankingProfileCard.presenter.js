@@ -85,8 +85,8 @@
 import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
-const baseWidth = 350; // Base width for 160% size card
-const baseHeight = 480; // Base height for 160% size card
+const baseWidth = 400; // Base width for 160% size card : 350px
+const baseHeight = 580; // Base height for 160% size card : 480px
 
 const sizes = [160, 142, 139, 136, 133, 130, 127, 124, 121, 118, 115, 112, 109, 106, 103, 100];
 
@@ -98,15 +98,29 @@ const getSize = (index, totalCards, rotation) => {
   return sizes[sizeIndex] || 100;
 };
 
-const RankingProfileCardUI = forwardRef(({ cards, rotation }, ref) => {
+const getZIndex = (index, totalCards, rotation) => {
+  const anglePerCard = 360 / totalCards;
+  const normalizedRotation = ((rotation % 360) + 360) % 360;
+  const adjustedIndex = (index + Math.floor(normalizedRotation / anglePerCard)) % totalCards;
+  return totalCards - adjustedIndex;
+};
+
+const RankingProfileCardUI = forwardRef(({ ranks, rotation }, ref) => {
   return (
     <Wrapper>
       <CardContainer ref={ref} rotation={rotation}>
-        {cards.map((card, index) => (
-          <Card key={card} index={index} totalCards={cards.length} rotation={rotation}>
-            <CardHeader>{card}</CardHeader>
-          </Card>
-        ))}
+        {ranks.map((card, index) => {
+          const Component = card.component;
+          const zIndex = getZIndex(index, ranks.length, rotation);
+          return (
+            <Card key={card} index={index} totalCards={ranks.length} rotation={rotation} zIndex={zIndex}>
+              <CardHeader>{card.ordinal}</CardHeader>
+              <SvgWrapper>
+                <ComponentStyled as={Component} />
+              </SvgWrapper>
+            </Card>
+          );
+        })}
       </CardContainer>
     </Wrapper>
   );
@@ -141,7 +155,8 @@ const CardContainer = styled.div`
 const Card = styled.div`
   position: absolute;
   background-color: #ccc;
-  border-radius: 10px;
+  border-radius: 20px;
+  filter: drop-shadow(0px 10px 50px rgba(0, 0, 0, 0.15));
   transform-origin: center center;
   transition:
     transform 0.3s ease,
@@ -153,11 +168,12 @@ const Card = styled.div`
     const size = getSize(props.index, props.totalCards, props.rotation);
     const width = (baseWidth * size) / 160; // Calculate width based on size percentage
     const height = (baseHeight * size) / 160; // Calculate height based on size percentage
+
     return css`
       width: ${width}px;
       height: ${height}px;
       transform: rotate(${props.index * (360 / props.totalCards)}deg) translateY(-700px); /* Adjusted */
-      z-index: ${props.totalCards - props.index}; // 각 카드에 순차적으로 감소하는 z-index 값
+      z-index: ${props.zIndex}; // 각 카드에 순차적으로 감소하는 z-index 값
     `;
   }}
 `;
@@ -166,4 +182,17 @@ const CardHeader = styled.h1`
   font-size: 24px;
   font-weight: bold;
   transform: translateY(-50px);
+`;
+
+const SvgWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const ComponentStyled = styled.svg`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;

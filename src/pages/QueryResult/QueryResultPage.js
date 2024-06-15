@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
-import { ReactComponent as Query } from '../../assets/QUERY_VIEW.svg';
+import { ReactComponent as Query } from '../../assets/Title/QUERY_VIEW.svg';
 import ReviewPostCard from '../Review/components/Card/ReviewPostCard/ReviewPostCard.container';
 import PostFilter from '../Review/components/PostFilter/PostFilter.container';
 
