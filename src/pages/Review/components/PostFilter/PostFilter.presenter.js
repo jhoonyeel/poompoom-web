@@ -30,8 +30,9 @@ export default function PostFilterUI({ handleOnClick }) {
 }
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: 80%;
   height: 100px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;

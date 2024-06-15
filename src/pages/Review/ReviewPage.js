@@ -1,9 +1,8 @@
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { debounce } from 'lodash';
-import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PostFilter from './components/PostFilter/PostFilter.container';
+import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
 import LatestGallery from './components/Section/LatestSection/LatestGallery/LatestGallery.container';
 import LatestHeader from './components/Section/LatestSection/LatestHeader/LatestHeader.container';
 import SearchGallery from './components/Section/SearchSection/SearchGallery/SearchGallery.container';
@@ -13,25 +12,6 @@ import SubGallery from './components/Section/SubSection/SubGallery/SubGallery.co
 import SubHeader from './components/Section/SubSection/SubHeader/SubHeader.container';
 
 export default function ReviewPage() {
-  const [isSticky, setIsSticky] = useState(false);
-  const postFilterRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = debounce(() => {
-      const postFilter = postFilterRef.current;
-      if (postFilter) {
-        const { offsetTop } = postFilter;
-        setIsSticky(window.scrollY >= offsetTop - (15 * window.innerHeight) / 100);
-      }
-    }, 150); // 150~200ms의 디바운스 적용
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      handleScroll.cancel(); // 컴포넌트가 언마운트 될 때 디바운스 취소
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isSticky]);
-
   // 화면 맨 위로 이동하는 함수
   const scrollToTop = () => {
     window.scrollTo({
@@ -42,11 +22,11 @@ export default function ReviewPage() {
 
   return (
     <Wrapper>
-      {/* <RankingProfileCard /> */}
+      <RankingProfileCard />
+      <PostFilterContent>
+        <PostFilter />
+      </PostFilterContent>
       <GalleryContent>
-        <PostFilterContent ref={postFilterRef} $isSticky={isSticky}>
-          <PostFilter />
-        </PostFilterContent>
         <LatestContent>
           <LatestHeader />
           <LatestGallery />
@@ -79,8 +59,8 @@ const GalleryContent = styled.div`
 `;
 const PostFilterContent = styled.div`
   width: 100%;
-  position: ${({ $isSticky }) => ($isSticky ? 'sticky' : 'relative')};
-  top: ${({ $isSticky }) => ($isSticky ? '15vh' : 'auto')};
+  position: sticky;
+  top: 15vh;
   z-index: 6; /* 헤더와 함께 보이도록 z-index 조정 */
   background-color: white; /* 배경색 지정하여 다른 콘텐츠와 구분 */
   transition: top 0.3s ease-in-out; /* 부드러운 이동을 위한 transition 속성 추가 */
@@ -106,9 +86,9 @@ const ButtonBox = styled.div`
   right: 50px; /* 화면 우측과의 간격 조정 */
   z-index: 999; /* 다른 요소 위에 표시되도록 z-index 조정 */
   width: 2%;
+  aspect-ratio: 1 / 1;
   border: 3px solid gray;
   border-radius: 50%;
-  aspect-ratio: 1 / 1;
   display: flex;
   justify-content: center;
   align-items: center;

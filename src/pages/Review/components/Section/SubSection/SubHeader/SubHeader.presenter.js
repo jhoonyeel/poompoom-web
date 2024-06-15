@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as Subscribed } from '../../../../../../assets/SUBSCRIBED_VIEW.svg';
+import { ReactComponent as Subscribed } from '../../../../../../assets/Title/SUBSCRIBED_VIEW.svg';
 
 export default function SubHeaderUI() {
   return (

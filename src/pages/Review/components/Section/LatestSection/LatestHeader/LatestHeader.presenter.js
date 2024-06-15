@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as Recent } from '../../../../../../assets/RECENT_VIEW.svg';
+import { ReactComponent as Recent } from '../../../../../../assets/Title/RECENT_VIEW.svg';
 
 export default function LatestHeaderUI() {
   return (

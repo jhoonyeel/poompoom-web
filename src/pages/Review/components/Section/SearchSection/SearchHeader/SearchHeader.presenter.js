@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as All } from '../../../../../../assets/ALL_MOOD_VIEW.svg';
+import { ReactComponent as All } from '../../../../../../assets/Title/ALL_MOOD_VIEW.svg';
 
 export default function SearchHeaderUI() {
   return (

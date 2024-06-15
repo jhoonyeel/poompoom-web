@@ -5,22 +5,22 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // eslint-disable-next-line camelcase, import/no-unresolved
-import { ReactComponent as Four } from '../../assets/4.svg';
-import { ReactComponent as Five } from '../../assets/5.svg';
-import { ReactComponent as Six } from '../../assets/6.svg';
-import { ReactComponent as Seven } from '../../assets/7.svg';
-import { ReactComponent as Apple } from '../../assets/Apple.svg';
-import { ReactComponent as Calender } from '../../assets/Calender.svg';
-import { ReactComponent as Chres } from '../../assets/Chres.svg';
-import { ReactComponent as D100 } from '../../assets/D100.svg';
-import { ReactComponent as Gift } from '../../assets/Gift.svg';
-import { ReactComponent as Group } from '../../assets/Group.svg';
-import { ReactComponent as Lose } from '../../assets/Lose.svg';
+import { ReactComponent as Anniversary } from '../../assets/Category/Anniversary.svg';
+import { ReactComponent as Apology } from '../../assets/Category/Apology.svg';
+import { ReactComponent as Birthday } from '../../assets/Category/Birthday.svg';
+import { ReactComponent as Christmas } from '../../assets/Category/Christmas.svg';
+import { ReactComponent as D100 } from '../../assets/Category/D100.svg';
+import { ReactComponent as Light } from '../../assets/Category/Light.svg';
+import { ReactComponent as Lose } from '../../assets/Category/Lose.svg';
+import { ReactComponent as Propose } from '../../assets/Category/Propose.svg';
+import { ReactComponent as Four } from '../../assets/Curator/4.svg';
+import { ReactComponent as Five } from '../../assets/Curator/5.svg';
+import { ReactComponent as Six } from '../../assets/Curator/6.svg';
+import { ReactComponent as Seven } from '../../assets/Curator/7.svg';
+import { ReactComponent as One } from '../../assets/Curator/One.svg';
+import { ReactComponent as Tre } from '../../assets/Curator/Tre.svg';
+import { ReactComponent as Two } from '../../assets/Curator/Two.svg';
 import { ReactComponent as Mains } from '../../assets/Main.svg';
-import { ReactComponent as One } from '../../assets/One.svg';
-import { ReactComponent as Tre } from '../../assets/Tre.svg';
-import { ReactComponent as Two } from '../../assets/Two.svg';
-import { ReactComponent as Vector } from '../../assets/Vector.svg';
 
 export default function HomePage() {
   const [recommendations, setRecommendations] = useState([]);
@@ -74,25 +74,25 @@ export default function HomePage() {
               <D100 /> <Text>100일</Text>
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=사과의+선물')}>
-              <Apple /> <Text>사과의 선물</Text>
+              <Apology /> <Text>사과의 선물</Text>
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=가벼운+선물')}>
-              <Gift /> <Text>가벼운 선물</Text>
+              <Light /> <Text>가벼운 선물</Text>
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=생일')}>
-              <Group /> <Text>생일</Text>
+              <Birthday /> <Text>생일</Text>
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=청혼')}>
-              <Vector /> <Text>청혼</Text>
+              <Propose /> <Text>청혼</Text>
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=로맨틱+데이')}>
               <Lose /> <Text>로맨틱 데이</Text>
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=n주년')}>
-              <Calender /> <Text>n주년</Text>
+              <Anniversary /> <Text>n주년</Text>
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=크리스마스')}>
-              <Chres />
+              <Christmas />
               <Text>크리스마스</Text>
             </CategoryWrapper>
           </CategoryList>
