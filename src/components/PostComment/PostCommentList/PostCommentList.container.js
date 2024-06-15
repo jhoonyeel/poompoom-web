@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import PostCommentListUI from './PostCommentList.presenter';
 
 export default function PostCommentList() {
   const [comments, setComments] = useState([]);
@@ -8,21 +9,35 @@ export default function PostCommentList() {
   const [hasNext, setHasNext] = useState(true);
   const loader = useRef(null);
   const { reviewId } = useParams();
-
-  const fetchComments = async (cursor, size = 6) => {
+  const AccessToken = localStorage.getItem('accessToken');
+  const fetchComments = async (cursor, size = 3) => {
     try {
-      const response = await axios.get(`/review/${reviewId}/comments`, {
-        params: {
-          reviewId,
-          cursorId: cursor,
-          sort: 'desc',
-          size,
+      const response = await axios.get(
+        `/review/${reviewId}/comments`,
+        {
+          params: {
+            cursorId: cursor,
+            sort: 'desc',
+            size,
+          },
         },
-      });
+        { headers: { access: `${AccessToken}` } },
+      );
 
       const newComments = response.data.values;
-      setComments((prevComments) => [...prevComments, ...newComments]);
+      setComments((prevComments) => {
+        // 중복된 commentId를 제거한 새로운 배열 생성
+        const uniqueComments = [...prevComments, ...newComments].reduce((acc, comment) => {
+          if (!acc.some((c) => c.commentId === comment.commentId)) {
+            acc.push(comment);
+          }
+          return acc;
+        }, []);
 
+        return uniqueComments;
+      });
+
+      console.log('ddd', newComments);
       if (newComments.length > 0) {
         const lastCommentId = newComments[newComments.length - 1].commentId;
         setCursorId(lastCommentId);
@@ -33,6 +48,12 @@ export default function PostCommentList() {
       console.error('Error fetching comments:', error);
     }
   };
+
+  const convertDateArrayToDate = (dateArray) => {
+    const [year, month, day, hour, minute, second, milliseconds] = dateArray;
+    return new Date(year, month - 1, day, hour, minute, second, milliseconds);
+  }; // 배열 형식 날짜 형변환
+
   useEffect(() => {
     fetchComments();
   }, [reviewId]);
@@ -59,15 +80,5 @@ export default function PostCommentList() {
     };
   }, [cursorId, hasNext]);
 
-  return (
-    <div>
-      {comments.map((comment, index) => (
-        <div ref={comments.length === index + 1 ? loader : null} key={comment.commentId}>
-          <p>{comment.body}</p>
-          <small>{new Date(comment.createDate).toLocaleString()}</small>
-        </div>
-      ))}
-      <div ref={loader} style={{ height: '15vh', margin: '10px' }} />
-    </div>
-  );
+  return <PostCommentListUI comments={comments} convertDateArrayToDate={convertDateArrayToDate} loader={loader} />;
 }
