@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -13,6 +12,11 @@ export default function ReviewWritePage() {
   const [source, setSource] = useState('');
 
   const navigate = useNavigate();
+
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setImages(files);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +37,7 @@ export default function ReviewWritePage() {
     formData.append('reviewType', reviewType);
     if (images) {
       images.forEach((image) => {
-        formData.append(`photos`, image);
+        formData.append(`photos[]`, image);
       });
     }
 
@@ -42,18 +46,37 @@ export default function ReviewWritePage() {
     for (const pair of formData.entries()) {
       console.log(`${pair[0]}: ${pair[1]}`);
     }
+    // try {
+    //   const response = await axios.post('/review/create', formData, {
+    //     headers: {
+    //       // 'Content-Type': 'multipart/form-data',
+    //     },
+    //   });
+    //   console.log('Success:', response.data);
+    //   navigate('/review');
+    // } catch (error) {
+    //   console.error('Error:', error);
+    // }
     try {
-      const response = await axios.post('/review/create', formData);
-      console.log('Success:', response.data);
+      const accessToken = localStorage.getItem('accessToken');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/review/create`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          access: `${accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log('Success:', data);
       navigate('/review');
     } catch (error) {
       console.error('Error:', error);
     }
-  };
-
-  const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    setImages(files);
   };
 
   return (
@@ -138,8 +161,8 @@ const ImageUploadSection = styled.div`
 `;
 
 const ImagePlaceholder = styled.div`
-  width: 280px;
-  height: 280px;
+  width: 500px;
+  height: 500px;
   border: 2px dashed #c0c0c0;
   border-radius: 10px;
   display: flex;
