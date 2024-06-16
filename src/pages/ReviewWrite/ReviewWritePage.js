@@ -46,6 +46,7 @@ export default function ReviewWritePage() {
     for (const pair of formData.entries()) {
       console.log(`${pair[0]}: ${pair[1]}`);
     }
+
     // try {
     //   const response = await axios.post('/review/create', formData, {
     //     headers: {
