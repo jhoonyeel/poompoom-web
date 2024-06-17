@@ -81,7 +81,7 @@ export const Gogosing = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  z-index: 100;
+
   width: 437px;
   height: 197px;
   border-radius: 50%;
@@ -90,8 +90,7 @@ export const Gogosing = styled.div`
   border: 20px solid white;
   color: white;
   font-size: 34px;
-  position: absolute;
-  transform: translate(0, -760px);
+  transform: translate(0, -100px);
   box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.31);
   &:hover {
     background-color: #3a716c;
@@ -187,6 +186,8 @@ export const ButtonWrapper2 = styled.div`
 export const Button = styled.button`
   margin: 10px 0;
   width: fit-content;
+  padding: 0.1rem;
+  border-radius: 10px;
 `;
 
 export const SubmitButton = styled.button`
