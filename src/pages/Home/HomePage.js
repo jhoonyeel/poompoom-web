@@ -20,7 +20,8 @@ import { ReactComponent as Seven } from '../../assets/Curator/7.svg';
 import { ReactComponent as One } from '../../assets/Curator/One.svg';
 import { ReactComponent as Tre } from '../../assets/Curator/Tre.svg';
 import { ReactComponent as Two } from '../../assets/Curator/Two.svg';
-import { ReactComponent as Mains } from '../../assets/Main.svg';
+import { ReactComponent as Calender1 } from '../../assets/Component 1 (4).svg';
+import { ReactComponent as Components } from '../../assets/Component 1 (1).svg';
 
 export default function HomePage() {
   const [recommendations, setRecommendations] = useState([]);
@@ -54,9 +55,7 @@ export default function HomePage() {
   return (
     <Wrapper>
       <ProfileSection>
-        <MainBox>
-          <MainSvg />
-        </MainBox>
+        <Components />
       </ProfileSection>
       <SearchSection>
         <KeywordBox>
@@ -68,6 +67,9 @@ export default function HomePage() {
           </KeywordList>
         </KeywordBox>
         <CategoryBox>
+          <CalenderBox>
+            <Calender1 />
+          </CalenderBox>
           <CategoryList>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=100일')}>
               <D100 /> <Text>100일</Text>
@@ -128,6 +130,8 @@ export default function HomePage() {
     </Wrapper>
   );
 }
+
+const CalenderBox = styled.div``;
 const CategoryWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -184,7 +188,7 @@ const Wrapper = styled.main`
 const ProfileSection = styled.section`
   width: 100%;
   margin-top: 5rem;
-  background-color: #ffeaea;
+
   border-radius: 20px;
   overflow: hidden;
 `;
@@ -328,13 +332,4 @@ const ButtonBox = styled.div`
 `;
 const UpIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
-`;
-const MainBox = styled.div`
-  width: 80%;
-  margin: 0 auto;
-`;
-const MainSvg = styled(Mains)`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 `;
