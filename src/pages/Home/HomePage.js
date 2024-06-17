@@ -13,15 +13,11 @@ import { ReactComponent as D100 } from '../../assets/Category/D100.svg';
 import { ReactComponent as Light } from '../../assets/Category/Light.svg';
 import { ReactComponent as Lose } from '../../assets/Category/Lose.svg';
 import { ReactComponent as Propose } from '../../assets/Category/Propose.svg';
-import { ReactComponent as Four } from '../../assets/Curator/4.svg';
-import { ReactComponent as Five } from '../../assets/Curator/5.svg';
-import { ReactComponent as Six } from '../../assets/Curator/6.svg';
-import { ReactComponent as Seven } from '../../assets/Curator/7.svg';
-import { ReactComponent as One } from '../../assets/Curator/One.svg';
-import { ReactComponent as Tre } from '../../assets/Curator/Tre.svg';
-import { ReactComponent as Two } from '../../assets/Curator/Two.svg';
 import { ReactComponent as Calender1 } from '../../assets/Component 1 (4).svg';
 import { ReactComponent as Components } from '../../assets/Component 1 (1).svg';
+import { ReactComponent as Footer } from '../../assets/Component 3.svg';
+import { ReactComponent as SliderExe } from '../../assets/Component 2 (1).svg';
+import { ReactComponent as SearchBar } from '../../assets/Component 1 (7).svg';
 
 export default function HomePage() {
   const [recommendations, setRecommendations] = useState([]);
@@ -59,70 +55,58 @@ export default function HomePage() {
       </ProfileSection>
       <SearchSection>
         <KeywordBox>
-          <KeywordParagraph>지금 다른 분들이 많이 검색해요</KeywordParagraph>
+          <KeywordParagraph>
+            <SearchBar />
+          </KeywordParagraph>
           <KeywordList>
             {recommendations.map((recommendation) => (
               <KeywordItem key={recommendation.id}>{recommendation.name}</KeywordItem>
             ))}
           </KeywordList>
         </KeywordBox>
-        <CategoryBox>
+        <MiddleBox>
+          <CategoryBox>
+            <CategoryList>
+              <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=100일')}>
+                <D100 /> <Text>100일</Text>
+              </CategoryWrapper>
+              <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=사과의+선물')}>
+                <Apology /> <Text>사과의 선물</Text>
+              </CategoryWrapper>
+              <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=가벼운+선물')}>
+                <Light /> <Text>가벼운 선물</Text>
+              </CategoryWrapper>
+              <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=생일')}>
+                <Birthday /> <Text>생일</Text>
+              </CategoryWrapper>
+              <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=청혼')}>
+                <Propose /> <Text>청혼</Text>
+              </CategoryWrapper>
+              <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=로맨틱+데이')}>
+                <Lose /> <Text>로맨틱 데이</Text>
+              </CategoryWrapper>
+              <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=n주년')}>
+                <Anniversary /> <Text>n주년</Text>
+              </CategoryWrapper>
+              <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=크리스마스')}>
+                <Christmas />
+                <Text>크리스마스</Text>
+              </CategoryWrapper>
+            </CategoryList>
+          </CategoryBox>
           <CalenderBox>
             <Calender1 />
           </CalenderBox>
-          <CategoryList>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=100일')}>
-              <D100 /> <Text>100일</Text>
-            </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=사과의+선물')}>
-              <Apology /> <Text>사과의 선물</Text>
-            </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=가벼운+선물')}>
-              <Light /> <Text>가벼운 선물</Text>
-            </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=생일')}>
-              <Birthday /> <Text>생일</Text>
-            </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=청혼')}>
-              <Propose /> <Text>청혼</Text>
-            </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=로맨틱+데이')}>
-              <Lose /> <Text>로맨틱 데이</Text>
-            </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=n주년')}>
-              <Anniversary /> <Text>n주년</Text>
-            </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=크리스마스')}>
-              <Christmas />
-              <Text>크리스마스</Text>
-            </CategoryWrapper>
-          </CategoryList>
-        </CategoryBox>
+        </MiddleBox>
       </SearchSection>
       <MoveButton type="button" onClick={handleOnClick('/review')}>
         리뷰글 페이지로
       </MoveButton>
+      <SliderWrapper>
+        <SliderExe />
+      </SliderWrapper>
       <CurationSection>
-        <CurationTitle>봄 맞이 선물</CurationTitle>
-        <ButtonWrapper>
-          <CurationButton>실내 장식품</CurationButton>
-          <CurationButton>피크닉 세트</CurationButton>
-          <CurationButton>패션 잇템</CurationButton>
-          <CurationButton>봄 먹거리</CurationButton>
-        </ButtonWrapper>
-        <ISWRapper>
-          <IWrapper>
-            <Seven />
-          </IWrapper>
-          <ImageWrapper>
-            <One />
-            <Two />
-            <Tre />
-            <Four />
-            <Five />
-            <Six />
-          </ImageWrapper>
-        </ISWRapper>
+        <Footer />
       </CurationSection>
       <ButtonBox onClick={scrollToTop}>
         <UpIcon icon={faChevronUp} />
@@ -131,7 +115,10 @@ export default function HomePage() {
   );
 }
 
+const SliderWrapper = styled.div``;
+
 const CalenderBox = styled.div``;
+
 const CategoryWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -140,45 +127,6 @@ const CategoryWrapper = styled.div`
 `;
 const Text = styled.div`
   margin: 10px 0;
-`;
-const ImageWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 20px;
-`;
-
-const IWrapper = styled.div`
-  margin: 0 1rem;
-`;
-
-const ISWRapper = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-const CurationTitle = styled.div`
-  font-size: 50px;
-  font-weight: 800;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 1rem;
-`;
-const CurationButton = styled.button`
-  width: 173px;
-  height: 48px;
-  border-radius: 30px;
-  transition: all 0.2s ease-in-out;
-  font-size: 18px;
-  margin: 1rem;
-  &:hover {
-    background-color: #545454;
-    color: white;
-  }
 `;
 
 const Wrapper = styled.main`
@@ -242,13 +190,14 @@ const KeywordBox = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 `;
 const KeywordParagraph = styled.p`
   padding: 20px;
   color: #585858;
   font-size: 24px;
+  transform: translate(-200px, 0);
 `;
 const KeywordList = styled.ul`
   display: flex;
@@ -270,6 +219,14 @@ const KeywordItem = styled.li`
   &:hover {
     background-color: rgba(108, 108, 108, 0.54);
   }
+`;
+
+const MiddleBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 10rem;
 `;
 const CategoryBox = styled.div`
   width: 80%;

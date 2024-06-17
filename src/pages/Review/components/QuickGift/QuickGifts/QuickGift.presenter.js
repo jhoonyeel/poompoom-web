@@ -10,7 +10,7 @@ import { ReactComponent as Box2 } from '../../../../../assets/Group 381.svg';
 import { ReactComponent as Comment } from '../../../../../assets/Union.svg';
 import { ReactComponent as Box3 } from '../../../../../assets/Group22.svg';
 import { ReactComponent as Footer } from '../../../../../assets/Group 373.svg';
-import { ReactComponent as ProfileExe } from '../../../../../assets/Mask group.svg';
+import { ReactComponent as ProfileExe } from '../../../../../assets/Component 1 (6).svg';
 
 export default function QuickGiftUI({
   setSelectedButton,
