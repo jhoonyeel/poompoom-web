@@ -113,7 +113,7 @@ const RankingProfileCardUI = forwardRef(({ ranks, rotation }, ref) => {
           const Component = card.component;
           const zIndex = getZIndex(index, ranks.length, rotation);
           return (
-            <Card key={card} index={index} totalCards={ranks.length} rotation={rotation} zIndex={zIndex}>
+            <Card key={card.ordinal} index={index} totalCards={ranks.length} rotation={rotation} zIndex={zIndex}>
               <CardHeader>{card.ordinal}</CardHeader>
               <SvgWrapper>
                 <ComponentStyled as={Component} />

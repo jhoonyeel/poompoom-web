@@ -1,9 +1,44 @@
 import { faBarsStaggered, faFilter, faSliders } from '@fortawesome/free-solid-svg-icons';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import Lottie from 'react-lottie';
 import styled from 'styled-components';
+import writeAnimation from '../../../../animation/PostWrite.json';
 import * as S from './PostFilter.styles';
 
+const HoverAnimation = React.memo(({ isHovered, setIsHovered, handleOnClick }) => {
+  const lottieRef = useRef();
+
+  const defaultOptions = {
+    loop: false,
+    autoplay: false,
+    animationData: writeAnimation,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+
+  useEffect(() => {
+    if (isHovered) {
+      lottieRef.current.play();
+    } else {
+      lottieRef.current.stop();
+    }
+  }, [isHovered]);
+
+  return (
+    <AnimationWrapper
+      onClick={handleOnClick(`/review/write`)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Lottie options={defaultOptions} height="100%" width="100%" isStopped={!isHovered} ref={lottieRef} />
+    </AnimationWrapper>
+  );
+});
+
 export default function PostFilterUI({ handleOnClick }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <Wrapper>
       <AlignBox>
@@ -22,9 +57,7 @@ export default function PostFilterUI({ handleOnClick }) {
           <Span>가격대</Span>
         </PriceFilter>
       </AlignBox>
-      <Button type="button" onClick={handleOnClick('/review/write')}>
-        리뷰글 작성
-      </Button>
+      <HoverAnimation isHovered={isHovered} setIsHovered={setIsHovered} handleOnClick={handleOnClick} />
     </Wrapper>
   );
 }
@@ -60,9 +93,10 @@ const PriceFilter = styled.div`
 const Span = styled.span`
   font-size: 18px;
 `;
-const Button = styled.button`
-  font-size: 18px;
-  font-weight: bold;
-  padding: 0.5rem;
-  border-radius: 20px;
+const AnimationWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px; /* 적절한 크기로 조정 */
+  height: 100px; /* 적절한 크기로 조정 */
 `;

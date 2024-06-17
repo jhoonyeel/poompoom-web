@@ -1,11 +1,18 @@
+import Lottie from 'react-lottie';
 import styled from 'styled-components';
-import { ReactComponent as Flame } from '../../../../../assets/Flame.svg';
 import ReviewPostAuthor from '../ReviewPostAuthor/ReviewPostAuthor.container';
 import ReviewPostBackground from '../ReviewPostBackground/ReviewPostBackground.container';
 import ReviewPostHashtags from '../ReviewPostHashtags/ReviewPostHashtags.container';
 import ReviewPostPreview from '../ReviewPostPreview/ReviewPostPreview.container';
 
-export default function ReviewPostCardUI({ post, handlePostClick, isHovered, handleMouseEnter, handleMouseLeave }) {
+export default function ReviewPostCardUI({
+  post,
+  handlePostClick,
+  isHovered,
+  handleMouseEnter,
+  handleMouseLeave,
+  randomParticle,
+}) {
   return (
     <Wrapper>
       <ReviewPostAuthor profilePhoto={post.profilePhoto} nickname={post.nickname} isHovered={isHovered} />
@@ -25,10 +32,10 @@ export default function ReviewPostCardUI({ post, handlePostClick, isHovered, han
               <ReviewPostHashtags hashTags={post.hashTags} />
             </HashtagsBox>
           )}
-          {isHovered && (
-            <FlameBox>
-              <FlameSvg />
-            </FlameBox>
+          {isHovered && randomParticle && (
+            <ParticlesBox>
+              <Lottie options={randomParticle} height={430} width={380} />
+            </ParticlesBox>
           )}
         </HoveredBox>
       </HoveredLayout>
@@ -52,17 +59,6 @@ const HoveredBox = styled.div`
     transform: scale(1.1);
   }
 `;
-const FlameBox = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform: translate(-40px, -420px);
-`;
-const FlameSvg = styled(Flame)`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
 const PreviewBox = styled.div`
   display: flex;
   justify-content: center;
@@ -74,4 +70,13 @@ const HashtagsBox = styled.div`
   transform: translateY(-80px);
   overflow: hidden;
   height: 80px;
+`;
+const ParticlesBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 380px; /* 적절한 크기로 조정 */
+  height: 430px; /* 적절한 크기로 조정 */
+  position: relative;
+  transform: translate(-25px, -445px);
 `;

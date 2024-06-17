@@ -18,12 +18,12 @@ import LoverProfilePage from './pages/LoverProfile/LoverProfilePage';
 import LoverProfileSetPage from './pages/LoverProfile/LoverProfileSetPage';
 import ProfileEditPage from './pages/Profile/ProfileEditPage';
 import ProfilePage from './pages/Profile/ProfilePage';
+import LatestProfileGallery from './pages/Profile/components/section/LatestProfileGallery/LatestProfileGallery.container';
+import MineProfileGallery from './pages/Profile/components/section/MineProfileGallery/MineProfileGallery.container';
 import QueryResultPage from './pages/QueryResult/QueryResultPage';
 import ReviewPage from './pages/Review/ReviewPage';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
 import { basicTheme } from './shared/Theme';
-import LatestProfileGallery from './pages/Profile/components/section/LatestProfileGallery/LatestProfileGallery.container';
-import MineProfileGallery from './pages/Profile/components/section/MineProfileGallery/MineProfileGallery.container';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}

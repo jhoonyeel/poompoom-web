@@ -39,7 +39,6 @@ export default function HomePage() {
       console.error('Error fetching post data:', error);
     }
   };
-
   useEffect(() => {
     fetchPostData();
   }, []);
