@@ -9,9 +9,8 @@ export const HeaderWrapper = styled.header`
   top: 0;
   left: 0;
   z-index: 100;
-
-  background-color: #ffeaea;
-  border-bottom: 3px solid #ffaaaa;
+  margin-bottom: 1rem;
+  background-color: white;
 `;
 export const HeaderContent = styled.div`
   width: 80%;
@@ -35,6 +34,8 @@ export const IconBox = styled.div`
   width: 20%;
   height: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 export const LogoBox = styled.div`
   width: 15%;
@@ -65,36 +66,35 @@ export const ProfileParagraph = styled.p`
   font-weight: bold;
 `;
 
-export const MenuBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 30%;
-  cursor: pointer;
-`;
-
-export const MenuIcon = styled(FontAwesomeIcon)`
-  font-size: 48px;
-`;
-
-export const MenuSpreadBox = styled.div`
-  background-color: white;
-  width: 100%;
+export const MenuBar = styled.ul`
+  width: 65%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 50px 0;
+  text-align: start;
 `;
-export const MenuSpan = styled.span`
-  font-family: 'Shrikhand', serif;
-  font-weight: bold;
-  font-size: 20px;
+export const MenuItem = styled.li`
+  font-family: 'Shrikhand';
   font-style: italic;
-  margin: 8px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 35px;
+  position: relative; /* ::after 위치를 설정하기 위해 relative 위치 지정 */
   color: #072623;
   &:hover {
     color: #c52c27;
+  }
+  margin: 3px 0;
+  &:hover::after {
+    content: '';
+    position: absolute;
+    right: 0px; /* li의 오른쪽에서 15px 떨어진 위치에 점을 추가 */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: #c52c27; /* 점의 색상을 설정 */
+    border-radius: 50%;
   }
 `;

@@ -114,7 +114,6 @@ export const CommentBox = styled.div`
   &:nth-child(3n + 1) {
     animation: ${randomAnimation} 2s infinite alternate;
   }
-
 `;
 
 export const CommentBody = styled.p`

@@ -1,11 +1,12 @@
-import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faCircle } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
+import profile from '../../assets/Mask group.svg';
 import SearchBar from '../SearchBar/SearchBar.container';
 import * as S from './Header.styles';
 
-export default function HeaderUI({ showSearchBar, handleOnClick, isHovered, handleMouseEnter, handleMouseLeave }) {
+export default function HeaderUI({ showSearchBar, handleOnClick }) {
   return (
     <S.HeaderWrapper>
       <S.HeaderContent>
@@ -14,33 +15,49 @@ export default function HeaderUI({ showSearchBar, handleOnClick, isHovered, hand
         </S.LogoBox>
         {showSearchBar && <SearchBar />}
         <S.IconBox>
-          <S.ProfileBox onClick={handleOnClick('/lovers-profile')}>
-            <S.ProfileIcon icon={faUser} />
-            <S.ProfileParagraph>연인 프로필 생성 +</S.ProfileParagraph>
-          </S.ProfileBox>
-          <Box onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            {isHovered ? (
-              <S.MenuSpreadBox>
-                <S.MenuSpan onClick={handleOnClick('/')}>HOME</S.MenuSpan>
-                <S.MenuSpan onClick={handleOnClick('/review')}>MOOD VIEW</S.MenuSpan>
-                <S.MenuSpan onClick={handleOnClick('/lovers-profile')}>MY LOVER</S.MenuSpan>
-                <S.MenuSpan onClick={handleOnClick('/profile')}>OPTIOIN</S.MenuSpan>
-              </S.MenuSpreadBox>
-            ) : (
-              <S.MenuBox>
-                <S.MenuIcon icon={faBars} />
-              </S.MenuBox>
-            )}
-          </Box>
+          <AuthorCircleBox onClick={handleOnClick('/lovers-profile')}>
+            <WhiteCircleIcon icon={faCircle} />
+            <AuthorImgBox>
+              <AuthorImg src={profile} alt="프로필 사진" />
+            </AuthorImgBox>
+          </AuthorCircleBox>
+          <S.MenuBar>
+            <S.MenuItem onClick={handleOnClick('/')}>HOME</S.MenuItem>
+            <S.MenuItem onClick={handleOnClick('/review')}>MOOD VIEW</S.MenuItem>
+            <S.MenuItem onClick={handleOnClick('/lovers-profile')}>MY LOVER</S.MenuItem>
+            <S.MenuItem onClick={handleOnClick('/profile')}>OPTIOIN</S.MenuItem>
+          </S.MenuBar>
         </S.IconBox>
       </S.HeaderContent>
     </S.HeaderWrapper>
   );
 }
 
-const Box = styled.div`
-  width: 100%;
+const AuthorCircleBox = styled.div`
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: relative;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
+`;
+const WhiteCircleIcon = styled(FontAwesomeIcon)`
+  color: black;
+  font-size: 60px;
+  position: absolute;
+  z-index: 1;
+`;
+const AuthorImgBox = styled.div`
+  width: 87%;
+  height: 87%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  z-index: 2;
+`;
+const AuthorImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
 `;
