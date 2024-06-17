@@ -57,7 +57,7 @@ export default function ReviewDetailUI({
                   </S.AuthorImgBox>
                 </S.AuthorCircleBox>
                 <S.ID>{`@${nickname}`}</S.ID>
-                <S.ID>Lover에게 {reviewType === 'GIVEN' ? '주는 선물' : '받은 선물'}</S.ID>
+                <S.Title2>Lover에게 {reviewType === 'GIVEN' ? '주는 선물' : '받은 선물'}</S.Title2>
                 {isMyPost ? <p>수정하기</p> : <FollowBtnComponent />}
               </S.BoardHeader>
               <S.BoardBody>{body}</S.BoardBody>
