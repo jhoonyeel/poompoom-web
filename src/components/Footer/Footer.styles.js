@@ -4,11 +4,10 @@ import { ReactComponent as Footer } from '../../assets/Footer.svg';
 export const FooterContainer = styled.footer`
   background-color: #ffeaea;
   width: 100%;
-  height: 42vh;
   margin-top: 3rem;
 `;
 export const FooterContent = styled.div`
-  width: 80%;
+  /* width: 80%; */
   height: 100%;
   margin: 0 auto;
 `;

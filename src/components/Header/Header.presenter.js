@@ -41,6 +41,7 @@ const AuthorCircleBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 const WhiteCircleIcon = styled(FontAwesomeIcon)`
   color: black;

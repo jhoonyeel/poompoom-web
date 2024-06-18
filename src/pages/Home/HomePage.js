@@ -13,11 +13,11 @@ import { ReactComponent as D100 } from '../../assets/Category/D100.svg';
 import { ReactComponent as Light } from '../../assets/Category/Light.svg';
 import { ReactComponent as Lose } from '../../assets/Category/Lose.svg';
 import { ReactComponent as Propose } from '../../assets/Category/Propose.svg';
-import { ReactComponent as Calender1 } from '../../assets/Component 1 (4).svg';
 import { ReactComponent as Components } from '../../assets/Component 1 (1).svg';
-import { ReactComponent as Footer } from '../../assets/Component 3.svg';
-import { ReactComponent as SliderExe } from '../../assets/Component 2 (1).svg';
+import { ReactComponent as Calender1 } from '../../assets/Component 1 (4).svg';
 import { ReactComponent as SearchBar } from '../../assets/Component 1 (7).svg';
+import { ReactComponent as SliderExe } from '../../assets/Component 2 (1).svg';
+import { ReactComponent as Footer } from '../../assets/Component 3.svg';
 
 export default function HomePage() {
   const [recommendations, setRecommendations] = useState([]);
@@ -115,7 +115,9 @@ export default function HomePage() {
   );
 }
 
-const SliderWrapper = styled.div``;
+const SliderWrapper = styled.div`
+  width: 100%;
+`;
 
 const CalenderBox = styled.div``;
 
@@ -265,8 +267,6 @@ const MoveButton = styled.button`
 
 const CurationSection = styled.section`
   width: 100%;
-  height: 767px;
-  background-color: #ffeaea;
   margin-top: 5rem;
   display: flex;
   flex-direction: column;

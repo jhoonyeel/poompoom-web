@@ -19,6 +19,7 @@ export const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #a3a3a3;
 
   /* 조건부 스타일링 */
   ${({ showSearchBar }) =>
@@ -73,6 +74,7 @@ export const MenuBar = styled.ul`
   flex-direction: column;
   justify-content: center;
   text-align: start;
+  margin-top: 10px;
 `;
 export const MenuItem = styled.li`
   font-family: 'Shrikhand';
@@ -84,8 +86,9 @@ export const MenuItem = styled.li`
   color: #072623;
   &:hover {
     color: #c52c27;
+    cursor: pointer;
   }
-  margin: 3px 0;
+  margin: 1px 0;
   &:hover::after {
     content: '';
     position: absolute;

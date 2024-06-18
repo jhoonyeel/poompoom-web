@@ -5,12 +5,12 @@ import Interest from '../component/Interest';
 import Job from '../component/Job';
 import Purpose from '../component/Purpose';
 
-import { ReactComponent as Box1 } from '../../../../../assets/Group 382.svg';
-import { ReactComponent as Box2 } from '../../../../../assets/Group 381.svg';
-import { ReactComponent as Comment } from '../../../../../assets/Union.svg';
-import { ReactComponent as Box3 } from '../../../../../assets/Group22.svg';
-import { ReactComponent as Footer } from '../../../../../assets/Group 373.svg';
 import { ReactComponent as ProfileExe } from '../../../../../assets/Component 1 (6).svg';
+import { ReactComponent as Footer } from '../../../../../assets/Group 373.svg';
+import { ReactComponent as Box2 } from '../../../../../assets/Group 381.svg';
+import { ReactComponent as Box1 } from '../../../../../assets/Group 382.svg';
+import { ReactComponent as Box3 } from '../../../../../assets/Group22.svg';
+import { ReactComponent as Comment } from '../../../../../assets/Union.svg';
 
 export default function QuickGiftUI({
   setSelectedButton,
@@ -24,7 +24,7 @@ export default function QuickGiftUI({
       <S.HeadContainer>
         <S.IntroText>
           test 님의 연인
-          <S.LoverName placeholder="이름or애칭" /> 님의 프로필
+          <S.LoverName placeholder="이름 or 애칭 입력" /> 님의 프로필
         </S.IntroText>
 
         <S.BasketContainer>
@@ -48,7 +48,7 @@ export default function QuickGiftUI({
         </S.BasketContainer>
         <S.CommentWrapper>
           <Comment />
-          <S.SubText>사진을 등록 시 , 메인배너에 뜨게 되 사랑하는 이를 맘껏 볼 수 있어용</S.SubText>
+          <S.SubText>사진을 등록하면 메인배너에서 사랑하는 이를 맘껏 볼 수 있어용</S.SubText>
         </S.CommentWrapper>
       </S.HeadContainer>
       <S.Gogosing onClick={onClickSubmit}>GOGOSING!</S.Gogosing>

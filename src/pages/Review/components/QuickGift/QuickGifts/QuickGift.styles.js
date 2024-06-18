@@ -23,7 +23,7 @@ export const CommentWrapper = styled.div`
 `;
 
 export const SubText = styled.div`
-  font-size: 15px;
+  font-size: 18px;
   color: #676767;
   position: absolute;
   top: 50%;
@@ -33,7 +33,6 @@ export const SubText = styled.div`
 
 export const Container = styled.div`
   width: 100%;
-  font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,8 +41,8 @@ export const Container = styled.div`
   margin: auto;
 `;
 
-export const IntroText = styled.div`
-  font-size: 30px;
+export const IntroText = styled.h1`
+  font-size: 46px;
   margin-top: 10rem;
   font-weight: bold;
   margin-bottom: 2rem;
@@ -57,6 +56,7 @@ export const LoverName = styled.input`
   width: 234px;
   height: 94px;
   margin: 0 1rem;
+  padding-left: 1.5rem;
   &::placeholder {
     color: #ffffff;
     opacity: 0.7;
@@ -83,7 +83,7 @@ export const Gogosing = styled.div`
   align-items: flex-end;
 
   width: 437px;
-  height: 197px;
+  height: 230px;
   border-radius: 50%;
   padding: 2.5rem;
   background-color: #06564e;
@@ -101,7 +101,7 @@ export const HeadContainer = styled.div`
   height: 92%;
   box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.31);
   padding-bottom: 10rem;
-  z-index: 200;
+  z-index: 5;
   background-color: white;
 `;
 
@@ -121,10 +121,8 @@ export const BasketWrapper = styled.div`
 
 export const BasketContainer2 = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  padding: 0 20rem;
+  margin: 0 auto;
 `;
 
 export const FooterTextWrapper = styled.div`
@@ -139,6 +137,8 @@ export const ProfileExeWrapper = styled.div`
 `;
 
 export const Footer = styled.div`
+  width: 100%;
+  margin: 0 auto;
   margin-top: 10rem;
   display: flex;
   flex-direction: column;
@@ -168,6 +168,8 @@ export const BasketWrapper2 = styled.div`
 `;
 export const Body = styled.div`
   padding-top: 10rem;
+  width: 100%;
+  margin: 0 auto;
 `;
 export const ButtonWrapper = styled.div`
   position: absolute;
@@ -209,7 +211,6 @@ export const SvgContainer2 = styled.div`
 
 export const Wrapper = styled.div`
   margin: 2rem;
-  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;

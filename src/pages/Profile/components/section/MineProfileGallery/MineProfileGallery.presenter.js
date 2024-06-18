@@ -7,11 +7,7 @@ export default function MineProfileGalleryUI({ latestPosts, handlePostClick }) {
   return (
     <S.Container>
       <ProfileHeader />
-      <S.ProfileNev>
-        <S.MenuBox>
-          <ProfileMenuBox />
-        </S.MenuBox>
-      </S.ProfileNev>
+      <ProfileMenuBox />
       <S.GalleryBody>
         <S.PostList>
           {latestPosts &&

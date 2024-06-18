@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
-import { ReactComponent as Query } from '../../assets/Title/QUERY_VIEW.svg';
 import ReviewPostCard from '../Review/components/Card/ReviewPostCard/ReviewPostCard.container';
 import PostFilter from '../Review/components/PostFilter/PostFilter.container';
 
@@ -112,18 +111,15 @@ export default function QueryResultPage() {
   return (
     <Wrapper>
       <QuerySection>
+        <PostFilter />
+
         <QueryContent>
-          <PostFilter />
-          <TitleContent>
-            <TitleBox>
-              <QuerySvg />
-            </TitleBox>
-          </TitleContent>
+          <QueryHeader>QUERY VIEW</QueryHeader>
           {initialSearchDone && (
             <NoResults>
-              {`No results found for "${searchContent}".`}
+              {`"${searchContent}"에 대한 검색 결과를 찾지 못했습니다.`}
               <br />
-              {`Showing results for recommended keyword "${currentKeyword}".`}
+              {`추천 검색어 "${currentKeyword}"에 대한 검색 결과입니다!!`}
             </NoResults>
           )}
           <GalleryContent>
@@ -151,18 +147,16 @@ const QueryContent = styled.div`
   margin: 0 auto;
 `;
 
-const TitleContent = styled.div`
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-`;
-const TitleBox = styled.div`
-  width: 25%;
-`;
-const QuerySvg = styled(Query)`
+const QueryHeader = styled.h3`
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
+  margin-top: 2rem;
+  font-family: 'Shrikhand';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 52px;
+  color: #0e5649;
+  text-align: start;
 `;
 
 const GalleryContent = styled.div`
@@ -194,4 +188,5 @@ const NoResults = styled.div`
   font-size: 48px;
   font-weight: bold;
   color: red;
+  line-height: 1.2;
 `;
