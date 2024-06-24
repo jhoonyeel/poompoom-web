@@ -22,7 +22,6 @@ export default function HeaderUI({ showSearchBar, handleOnClick }) {
             </AuthorImgBox>
           </AuthorCircleBox>
           <S.MenuBar>
-            <S.MenuItem onClick={handleOnClick('/')}>HOME</S.MenuItem>
             <S.MenuItem onClick={handleOnClick('/review')}>MOOD VIEW</S.MenuItem>
             <S.MenuItem onClick={handleOnClick('/lovers-profile')}>MY LOVER</S.MenuItem>
             <S.MenuItem onClick={handleOnClick('/profile')}>OPTIOIN</S.MenuItem>
@@ -34,8 +33,8 @@ export default function HeaderUI({ showSearchBar, handleOnClick }) {
 }
 
 const AuthorCircleBox = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   position: relative;
   display: flex;

@@ -5,15 +5,15 @@ import * as S from './LatestProfileGallery.styles';
 
 export default function LatestProfileGalleryUI({ latestPosts, handlePostClick }) {
   return (
-    <S.Container>
+    <S.Wrapper>
       <ProfileHeader />
       <ProfileMenuBox />
       <S.GalleryBody>
         <S.PostList>
           {latestPosts &&
             latestPosts.map((post) => <ReviewPostCard key={post.reviewId} post={post} onPostClick={handlePostClick} />)}
-        </S.PostList>{' '}
+        </S.PostList>
       </S.GalleryBody>
-    </S.Container>
+    </S.Wrapper>
   );
 }

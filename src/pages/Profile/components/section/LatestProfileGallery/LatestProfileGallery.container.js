@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import React, { useEffect, useRef, useState } from 'react';
 import LatestProfileGalleryUI from './LatestProfileGallery.presenter';
 
 export default function LatestProfileGallery() {
@@ -21,7 +21,7 @@ export default function LatestProfileGallery() {
     }
   };
 
-  const fetchPostData = async (cursor, size = 4) => {
+  const fetchPostData = async (cursor, size = 9) => {
     try {
       const res = await axios.get(`/profile/view`, {
         params: {
@@ -57,7 +57,7 @@ export default function LatestProfileGallery() {
       (entries) => {
         const target = entries[0];
         if (target.isIntersecting && hasNext) {
-          fetchPostData(cursorId, 2); // 추가로 가져오는 데이터
+          fetchPostData(cursorId, 6); // 추가로 가져오는 데이터
         }
       },
       { threshold: 1 },

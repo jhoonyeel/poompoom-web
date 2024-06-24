@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled, { css } from 'styled-components';
-import { ReactComponent as Logo } from '../../assets/PoomPoom.svg';
+import { ReactComponent as Logo } from '../../assets/poompoom.svg';
 
 export const HeaderWrapper = styled.header`
   width: 100%;
@@ -32,7 +32,7 @@ export const HeaderContent = styled.div`
         `}
 `;
 export const IconBox = styled.div`
-  width: 20%;
+  width: 25%;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -68,7 +68,7 @@ export const ProfileParagraph = styled.p`
 `;
 
 export const MenuBar = styled.ul`
-  width: 65%;
+  width: 55%;
   height: 100%;
   display: flex;
   flex-direction: column;
