@@ -1,7 +1,5 @@
 import ProfileBodyUI from './ProfileBody.presenter';
 
-function ProfileBody() {
+export default function ProfileBody() {
   return <ProfileBodyUI />;
 }
-
-export default ProfileBody;

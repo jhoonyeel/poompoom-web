@@ -2,7 +2,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProfileMenuBoxUI from './ProfileMenuBox.presenter';
 
-function ProfileMenuBox() {
+export default function ProfileMenuBox() {
   const location = useLocation();
   const navigate = useNavigate();
   const handleOnClick = (path) => () => {
@@ -11,5 +11,3 @@ function ProfileMenuBox() {
 
   return <ProfileMenuBoxUI handleOnClick={handleOnClick} currentPath={location.pathname} />;
 }
-
-export default ProfileMenuBox;

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import ProfileEditUI from './ProfileEdit.presenter';
 
-function ProfileEdit() {
+export default function ProfileEdit() {
   const navigate = useNavigate();
   const handleOnClick = (path) => () => {
     navigate(path);
@@ -9,5 +9,3 @@ function ProfileEdit() {
 
   return <ProfileEditUI handleOnClick={handleOnClick} />;
 }
-
-export default ProfileEdit;

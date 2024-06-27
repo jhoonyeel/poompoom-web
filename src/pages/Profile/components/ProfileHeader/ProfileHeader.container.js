@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ProfileHeaderUI from './ProfileHeader.presenter';
 
-function ProfileHeader() {
+export default function ProfileHeader() {
   const [profile, setProfile] = useState('');
   const { id } = useParams();
 
@@ -28,5 +28,3 @@ function ProfileHeader() {
 
   return <ProfileHeaderUI handleOnClick={handleOnClick} profile={profile} />;
 }
-
-export default ProfileHeader;

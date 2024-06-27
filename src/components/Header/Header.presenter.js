@@ -2,7 +2,7 @@ import { faCircle } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
-import profile from '../../assets/Mask group.svg';
+import LoverProfileEx from '../../assets/HeaderLoverProfile.svg';
 import SearchBar from '../SearchBar/SearchBar.container';
 import * as S from './Header.styles';
 
@@ -18,7 +18,7 @@ export default function HeaderUI({ showSearchBar, handleOnClick }) {
           <AuthorCircleBox onClick={handleOnClick('/lovers-profile')}>
             <WhiteCircleIcon icon={faCircle} />
             <AuthorImgBox>
-              <AuthorImg src={profile} alt="프로필 사진" />
+              <AuthorImg src={LoverProfileEx} alt="프로필 사진" />
             </AuthorImgBox>
           </AuthorCircleBox>
           <S.MenuBar>

@@ -1,11 +1,9 @@
 import ProfileBody from './components/ProfileBody/ProfileBody.container';
 
-function ProfilePage() {
+export default function ProfilePage() {
   return (
     <div>
       <ProfileBody />
     </div>
   );
 }
-
-export default ProfilePage;

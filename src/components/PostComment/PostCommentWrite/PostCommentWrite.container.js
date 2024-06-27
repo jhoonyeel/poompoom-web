@@ -2,11 +2,12 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { ReactComponent as Send } from '../../../assets/Vector (4).svg';
+import { ReactComponent as Comment } from '../../../assets/PostComment.svg';
 
 export default function PostCommentWrite() {
   const [comment, setComment] = useState();
   const { reviewId } = useParams();
+
   const onClickSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -64,7 +65,7 @@ const SubmitBtn = styled.button`
   justify-content: center;
 `;
 
-const SendIcon = styled(Send)`
+const SendIcon = styled(Comment)`
   width: 100%;
   height: 100%;
 `;

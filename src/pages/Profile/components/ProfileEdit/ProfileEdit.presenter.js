@@ -1,6 +1,6 @@
 import * as S from './ProfileEdit.styles';
 
-function ProfileEditUI({ handleOnClick }) {
+export default function ProfileEditUI({ handleOnClick }) {
   return (
     <S.Container>
       <S.Title>설정 탭</S.Title>
@@ -25,5 +25,3 @@ function ProfileEditUI({ handleOnClick }) {
     </S.Container>
   );
 }
-
-export default ProfileEditUI;
