@@ -1,7 +1,7 @@
 import { faBookmark as emptyBookmark, faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark, faCircle, faGreaterThan, faHeart, faLessThan } from '@fortawesome/free-solid-svg-icons';
 
-import FollowBtnComponent from '../../atoms/FollowBtnComponent';
+import FollowBtnComponent from '../../../atoms/FollowBtnComponent';
 import PostCommentList from '../PostComment/PostCommentList/PostCommentList.container';
 import PostCommentWrite from '../PostComment/PostCommentWrite/PostCommentWrite.container';
 import * as S from './PostDetail.styles';

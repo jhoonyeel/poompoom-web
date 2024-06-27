@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { ReactComponent as Send } from '../../../assets/Vector (4).svg';
+import { ReactComponent as Comment } from '../../../../assets/PostComment.svg';
 
 export default function PostCommentWrite() {
   const onClickSubmit = () => {
@@ -52,7 +52,7 @@ const SubmitBtn = styled.button`
   justify-content: center;
 `;
 
-const SendIcon = styled(Send)`
+const SendIcon = styled(Comment)`
   width: 100%;
   height: 100%;
 `;
