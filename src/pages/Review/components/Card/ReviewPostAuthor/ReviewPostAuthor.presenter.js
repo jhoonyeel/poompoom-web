@@ -40,10 +40,14 @@ const Content = styled.div`
 `;
 const Nickname = styled(Link)`
   text-decoration: none;
-  font-size: 28px;
-  color: black;
+  font-family: 'Oleo Script Swash Caps', system-ui;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 44px;
+  color: #000000;
   &:visited {
-    color: black;
+    color: #000000;
   }
 `;
 const FollowBtn = styled.button`

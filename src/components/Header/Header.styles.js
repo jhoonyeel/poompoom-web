@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled, { css } from 'styled-components';
-import { ReactComponent as Logo } from '../../assets/PoomPoom.svg';
+import { ReactComponent as Logo } from '../../assets/poompoom.svg';
 
 export const HeaderWrapper = styled.header`
   width: 100%;
@@ -19,6 +19,7 @@ export const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #a3a3a3;
 
   /* 조건부 스타일링 */
   ${({ showSearchBar }) =>
@@ -31,7 +32,7 @@ export const HeaderContent = styled.div`
         `}
 `;
 export const IconBox = styled.div`
-  width: 20%;
+  width: 25%;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -67,12 +68,13 @@ export const ProfileParagraph = styled.p`
 `;
 
 export const MenuBar = styled.ul`
-  width: 65%;
+  width: 55%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: start;
+  margin-top: 10px;
 `;
 export const MenuItem = styled.li`
   font-family: 'Shrikhand';
@@ -84,8 +86,9 @@ export const MenuItem = styled.li`
   color: #072623;
   &:hover {
     color: #c52c27;
+    cursor: pointer;
   }
-  margin: 3px 0;
+  margin: 1px 0;
   &:hover::after {
     content: '';
     position: absolute;

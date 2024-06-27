@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Outlet, Route, Routes } from 'react-router-dom';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
+import { ThemeProvider } from 'styled-components';
 import * as S from './App.styles';
+import GlobalStyle from './GlobalStyle';
 import ProtectedRoute from './ProtectedRoute';
 import CommunityList from './components/Community/CommunityList/CommunityList';
 import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
@@ -25,9 +25,9 @@ import ReviewPage from './pages/Review/ReviewPage';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
 import { basicTheme } from './shared/Theme';
 
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-`;
+// const GlobalStyle = createGlobalStyle`
+//   ${reset}
+// `;
 
 const queryClient = new QueryClient();
 

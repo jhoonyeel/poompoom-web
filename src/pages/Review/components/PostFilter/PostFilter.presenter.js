@@ -57,7 +57,10 @@ export default function PostFilterUI({ handleOnClick }) {
           <Span>가격대</Span>
         </PriceFilter>
       </AlignBox>
-      <HoverAnimation isHovered={isHovered} setIsHovered={setIsHovered} handleOnClick={handleOnClick} />
+      <WriteBox>
+        <HoverAnimation isHovered={isHovered} setIsHovered={setIsHovered} handleOnClick={handleOnClick} />
+        <WriteParagraph>새 무드뷰 만들기</WriteParagraph>
+      </WriteBox>
     </Wrapper>
   );
 }
@@ -99,4 +102,14 @@ const AnimationWrapper = styled.div`
   align-items: center;
   width: 100px; /* 적절한 크기로 조정 */
   height: 100px; /* 적절한 크기로 조정 */
+`;
+const WriteBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const WriteParagraph = styled.p`
+  color: #072623;
+  margin-top: 5px;
+  font-weight: bold;
 `;

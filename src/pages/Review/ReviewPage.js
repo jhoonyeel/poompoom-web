@@ -2,6 +2,7 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import PostFilter from './components/PostFilter/PostFilter.container';
+import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
 import LatestGallery from './components/Section/LatestSection/LatestGallery/LatestGallery.container';
 import LatestHeader from './components/Section/LatestSection/LatestHeader/LatestHeader.container';
 import SearchGallery from './components/Section/SearchSection/SearchGallery/SearchGallery.container';
@@ -21,7 +22,7 @@ export default function ReviewPage() {
 
   return (
     <Wrapper>
-      {/* <RankingProfileCard /> */}
+      <RankingProfileCard />
       <PostFilterContent>
         <PostFilter />
       </PostFilterContent>

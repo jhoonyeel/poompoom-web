@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
-import { ReactComponent as Query } from '../../assets/Title/QUERY_VIEW.svg';
+import { ReactComponent as Eyes } from '../../assets/eyes.svg';
 import ReviewPostCard from '../Review/components/Card/ReviewPostCard/ReviewPostCard.container';
 import PostFilter from '../Review/components/PostFilter/PostFilter.container';
 
@@ -46,7 +46,9 @@ export default function QueryResultPage() {
       if (values.length === 0 && keyword === searchContent && !initialSearchDone) {
         // If no results and it's the original search, fetch recommended keyword
         const recommendRes = await axios.get(`/hashtag/rank`);
-        const recommendedKeyword = recommendRes.data[0].name; // 첫번째 추천 검색어 사용
+        const recommendedKeywords = recommendRes.data.slice(0, 15); // 상위 15개의 추천 검색어 사용
+        const randomIndex = Math.floor(Math.random() * recommendedKeywords.length);
+        const recommendedKeyword = recommendedKeywords[randomIndex].name;
         setCurrentKeyword(recommendedKeyword);
         setInitialSearchDone(true); // 초기 검색 완료로 설정
         fetchPostData(cursorId, size, recommendedKeyword);
@@ -63,7 +65,9 @@ export default function QueryResultPage() {
     const initializeData = async () => {
       if (!searchContent) {
         const recommendRes = await axios.get(`/hashtag/rank`);
-        const recommendedKeyword = recommendRes.data[0].name; // 첫번째 추천 검색어 사용
+        const recommendedKeywords = recommendRes.data.slice(0, 15); // 상위 15개의 추천 검색어 사용
+        const randomIndex = Math.floor(Math.random() * recommendedKeywords.length);
+        const recommendedKeyword = recommendedKeywords[randomIndex].name;
         setCurrentKeyword(recommendedKeyword);
         setInitialSearchDone(true); // 초기 검색 완료로 설정
         await fetchPostData(cursorId, 24, recommendedKeyword);
@@ -112,19 +116,23 @@ export default function QueryResultPage() {
   return (
     <Wrapper>
       <QuerySection>
+        <PostFilter />
+
         <QueryContent>
-          <PostFilter />
-          <TitleContent>
-            <TitleBox>
-              <QuerySvg />
-            </TitleBox>
-          </TitleContent>
+          <QueryHeader>QUERY VIEW</QueryHeader>
           {initialSearchDone && (
-            <NoResults>
-              {`No results found for "${searchContent}".`}
-              <br />
-              {`Showing results for recommended keyword "${currentKeyword}".`}
-            </NoResults>
+            <NotFound>
+              <EyesIconBox>
+                <EyesSvg />
+              </EyesIconBox>
+              <NoResults>
+                <ColorSpan style={{ color: '#9D1B23' }}>{`"${searchContent}"`}</ColorSpan>
+                에 대한 검색 결과를 찾지 못했습니다.
+                <br />
+                {`추천 검색어 `}
+                <ColorSpan style={{ color: '#0D3F39' }}>{`"${currentKeyword}"`}</ColorSpan>에 대한 검색 결과입니다.
+              </NoResults>
+            </NotFound>
           )}
           <GalleryContent>
             {queryPosts && queryPosts.map((post) => <ReviewPostCard key={post.id} post={post} />)}
@@ -144,25 +152,57 @@ const Wrapper = styled.main`
 `;
 const QuerySection = styled.section`
   width: 100%;
-  border: 3px solid #aaa;
 `;
 const QueryContent = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
 
-const TitleContent = styled.div`
-  height: 40px;
+const QueryHeader = styled.h3`
+  width: 100%;
+  margin-top: 2rem;
+  font-family: 'Shrikhand';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 52px;
+  color: #0e5649;
+  text-align: start;
+`;
+const NotFound = styled.div`
+  border: 3px solid #dcdcdc;
+  border-radius: 30px;
+  margin: 0 auto;
+  margin-top: 2rem;
+  width: 60%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 `;
-const TitleBox = styled.div`
-  width: 25%;
+const EyesIconBox = styled.div`
+  width: 20%;
+  padding: 4rem;
 `;
-const QuerySvg = styled(Query)`
+const EyesSvg = styled(Eyes)`
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
+  object-fit: cover;
+`;
+const NoResults = styled.p`
+  font-family: 'ABeeZee';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: #8c8c8c;
+`;
+const ColorSpan = styled.span`
+  font-family: 'ABeeZee';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: #8c8c8c;
 `;
 
 const GalleryContent = styled.div`
@@ -188,10 +228,4 @@ const ButtonBox = styled.div`
 `;
 const UpIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
-`;
-const NoResults = styled.div`
-  margin-top: 2rem;
-  font-size: 48px;
-  font-weight: bold;
-  color: red;
 `;

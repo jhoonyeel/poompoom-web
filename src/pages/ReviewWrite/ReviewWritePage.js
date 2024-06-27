@@ -190,6 +190,7 @@ const ContentSection = styled.div`
 `;
 
 const User = styled.div`
+  font-family: 'Oleo Script Swash Caps', system-ui;
   font-size: 1.5em;
   color: #333333;
   margin-bottom: 10px;
@@ -267,7 +268,7 @@ const FlexBox = styled.div`
 const InfoHeader = styled.h3`
   font-size: 1em;
   color: #333333;
-  margin-right: 10px;
+  margin-bottom: 10px;
   width: 150px;
 `;
 

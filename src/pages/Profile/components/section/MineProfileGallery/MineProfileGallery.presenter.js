@@ -5,19 +5,15 @@ import * as S from './MineProfileGallery.styles';
 
 export default function MineProfileGalleryUI({ latestPosts, handlePostClick }) {
   return (
-    <S.Container>
+    <S.Wrapper>
       <ProfileHeader />
-      <S.ProfileNev>
-        <S.MenuBox>
-          <ProfileMenuBox />
-        </S.MenuBox>
-      </S.ProfileNev>
+      <ProfileMenuBox />
       <S.GalleryBody>
         <S.PostList>
           {latestPosts &&
             latestPosts.map((post) => <ReviewPostCard key={post.reviewId} post={post} onPostClick={handlePostClick} />)}
-        </S.PostList>{' '}
+        </S.PostList>
       </S.GalleryBody>
-    </S.Container>
+    </S.Wrapper>
   );
 }
