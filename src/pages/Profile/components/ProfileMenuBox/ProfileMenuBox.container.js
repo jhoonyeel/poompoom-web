@@ -1,4 +1,3 @@
-/* 프로필 네비게이션 바 */
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProfileMenuBoxUI from './ProfileMenuBox.presenter';
 

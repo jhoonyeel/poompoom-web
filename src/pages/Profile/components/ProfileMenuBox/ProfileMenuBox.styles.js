@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Wrapper = styled.nav`
   width: 100%;
   border-top: 3px solid #d9d9d9;
   border-bottom: 3px solid #d9d9d9;
 `;
-export const Menutab = styled.div`
+export const Menutab = styled.ul`
   width: 80%;
   margin: 0 auto;
   padding: 0 3rem;
@@ -13,7 +13,7 @@ export const Menutab = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-export const Button = styled.button`
+export const Button = styled.li`
   border: none;
   border-top: ${(props) => (props.isActive ? '10px solid #0D3F39' : 'none')};
   color: ${(props) => (props.isActive ? '#0D3F39' : '#959595')};

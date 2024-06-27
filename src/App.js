@@ -18,9 +18,7 @@ import LoversProfilePage from './pages/LoversProfile/LoversProfilePage';
 import LoversProfileSetPage from './pages/LoversProfile/LoversProfileSetPage';
 import ProfileEditPage from './pages/Profile/ProfileEditPage';
 import ProfilePage from './pages/Profile/ProfilePage';
-import LatestProfileGallery from './pages/Profile/components/section/LatestProfileGallery/LatestProfileGallery.container';
-import MineProfileGallery from './pages/Profile/components/section/MineProfileGallery/MineProfileGallery.container';
-import QueryResultPage from './pages/QueryResult/QueryResultPage';
+import QueryPage from './pages/Query/QueryPage';
 import ReviewPage from './pages/Review/ReviewPage';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
 import { basicTheme } from './shared/Theme';
@@ -47,7 +45,7 @@ function AppRoutes() {
       />
       <Route
         path="/review/query-result"
-        element={<ProtectedRoute element={QueryResultPage} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={QueryPage} isAuthenticated={isAuthenticated()} />}
       />
       <Route
         path="/lovers-profile"
@@ -57,19 +55,7 @@ function AppRoutes() {
         path="/lovers-profile-set"
         element={<ProtectedRoute element={LoversProfileSetPage} isAuthenticated={isAuthenticated()} />}
       />
-      <Route
-        path="/profile/like"
-        element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />}
-      />
-      <Route
-        path="/profile"
-        element={<ProtectedRoute element={MineProfileGallery} isAuthenticated={isAuthenticated()} />}
-      />
-      <Route
-        path="/profile/recent"
-        element={<ProtectedRoute element={LatestProfileGallery} isAuthenticated={isAuthenticated()} />}
-      />
-      <Route path="/profile" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />} />
+      <Route path="/profile/*" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />} />
       <Route
         path="/profile/edit"
         element={<ProtectedRoute element={ProfileEditPage} isAuthenticated={isAuthenticated()} />}

@@ -8,7 +8,7 @@ import { ReactComponent as Eyes } from '../../assets/eyes.svg';
 import ReviewPostCard from '../Review/components/Card/ReviewPostCard/ReviewPostCard.container';
 import PostFilter from '../Review/components/PostFilter/PostFilter.container';
 
-export default function QueryResultPage() {
+export default function QueryPage() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const searchContent = params.get('searchContent') || ''; // URL에서 searchContent 값을 추출

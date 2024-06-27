@@ -17,7 +17,10 @@ export default function ProfileEditUI({ handleOnClick }) {
           <S.Router onClick={handleOnClick('/profile/like')}>좋아요</S.Router>
         </S.List>
         <S.List>
-          <S.Router onClick={handleOnClick('/profile/recent')}>최근 본 게시물</S.Router>
+          <S.Router onClick={handleOnClick('/profile/latest')}>최근 본 게시물</S.Router>
+        </S.List>
+        <S.List>
+          <S.Router onClick={handleOnClick('/profile/wrote')}>내가 쓴 게시물</S.Router>
         </S.List>
         <S.List>로그인 정보 수정</S.List>
         <S.List>로그아웃</S.List>
