@@ -5,8 +5,8 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
 import { ReactComponent as Eyes } from '../../assets/eyes.svg';
+import PostFilter from '../../components/PostFilter/PostFilter.container';
 import ReviewPostCard from '../Review/components/Card/ReviewPostCard/ReviewPostCard.container';
-import PostFilter from '../Review/components/PostFilter/PostFilter.container';
 
 export default function QueryPage() {
   const location = useLocation();

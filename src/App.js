@@ -8,7 +8,6 @@ import CommunityList from './components/Community/CommunityList/CommunityList';
 import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
 import Footer from './components/Footer/Footer.container';
 import Header from './components/Header/Header.container';
-import PostDetail from './components/PostDetail/PostDetail.container';
 import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
 import HomePage from './pages/Home/HomePage';
 import SignupPage from './pages/Join/Signup/SignupPage';
@@ -20,6 +19,7 @@ import ProfileEditPage from './pages/Profile/ProfileEditPage';
 import ProfilePage from './pages/Profile/ProfilePage';
 import QueryPage from './pages/Query/QueryPage';
 import ReviewPage from './pages/Review/ReviewPage';
+import PostDetail from './pages/ReviewDetail/PostDetail/PostDetail.container';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
 import { basicTheme } from './shared/Theme';
 

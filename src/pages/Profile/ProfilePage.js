@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ProfileHeader from './components/ProfileHeader/ProfileHeader.container';
 import ProfileMenuBox from './components/ProfileMenuBox/ProfileMenuBox.container';
-import LatestProfileGallery from './components/section/LatestProfileGallery/LatestProfileGallery.container';
-import MineProfileGallery from './components/section/MineProfileGallery/MineProfileGallery.container';
+import LatestProfileGallery from './components/Section/LatestProfileGallery/LatestProfileGallery.container';
+import MineProfileGallery from './components/Section/MineProfileGallery/MineProfileGallery.container';
 
 export default function ProfilePage() {
   const location = useLocation();

@@ -1,7 +1,7 @@
 import { faBarsStaggered, faFilter, faSliders } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Lottie from 'react-lottie';
-import writeAnimation from '../../../../animation/PostWrite.json';
+import writeAnimation from '../../animation/PostWrite.json';
 import * as S from './PostFilter.styles';
 
 const HoverAnimation = React.memo(({ isHovered, setIsHovered, handleOnClick }) => {

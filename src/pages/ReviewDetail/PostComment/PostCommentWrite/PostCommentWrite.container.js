@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { ReactComponent as Comment } from '../../../assets/PostComment.svg';
+import { ReactComponent as Comment } from '../../../../assets/PostComment.svg';
 
 export default function PostCommentWrite() {
   const [comment, setComment] = useState();
