@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // eslint-disable-next-line camelcase, import/no-unresolved
+import { ReactComponent as CardNews } from '../../assets/CardNews.svg';
 import { ReactComponent as Anniversary } from '../../assets/Category/Anniversary.svg';
 import { ReactComponent as Apology } from '../../assets/Category/Apology.svg';
 import { ReactComponent as Birthday } from '../../assets/Category/Birthday.svg';
@@ -13,10 +14,8 @@ import { ReactComponent as D100 } from '../../assets/Category/D100.svg';
 import { ReactComponent as Light } from '../../assets/Category/Light.svg';
 import { ReactComponent as Lose } from '../../assets/Category/Lose.svg';
 import { ReactComponent as Propose } from '../../assets/Category/Propose.svg';
-import { ReactComponent as Calender1 } from '../../assets/Component 1 (4).svg';
-import { ReactComponent as SearchBar } from '../../assets/Component 1 (7).svg';
-import { ReactComponent as SliderExe } from '../../assets/Component 2 (1).svg';
-import { ReactComponent as Components } from '../../assets/MainBackground.svg';
+import { ReactComponent as Ranking } from '../../assets/HomeRanking.svg';
+import { ReactComponent as MainBackground } from '../../assets/MainBackground.svg';
 import { ReactComponent as Season } from '../../assets/Season.svg';
 import { ReactComponent as SeasonBk } from '../../assets/SeasonBackground.svg';
 
@@ -59,7 +58,7 @@ export default function HomePage() {
 
       <SearchSection>
         <SearchBox>
-          <SearchBar />
+          <h3>Search 지금 많이 찾아보는 태그</h3>
         </SearchBox>
         <KeywordBox>
           <KeywordList>
@@ -96,14 +95,14 @@ export default function HomePage() {
             </CategoryWrapper>
           </CategoryList>
           <CalenderBox>
-            <Calender1 />
+            <CardNews />
           </CalenderBox>
         </MiddleBox>
       </SearchSection>
 
       <RankingSection>
         <RankingBox>
-          <SliderExe />
+          <Ranking />
         </RankingBox>
       </RankingSection>
 
@@ -133,7 +132,7 @@ const MainImgBox = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
-const MainSvg = styled(Components)`
+const MainSvg = styled(MainBackground)`
   width: 100%;
   height: 100%;
   object-fit: cover;

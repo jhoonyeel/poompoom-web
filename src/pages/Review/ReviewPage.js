@@ -1,8 +1,8 @@
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
-import PostFilter from './components/PostFilter/PostFilter.container';
-import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
+import PostFilter from '../../components/PostFilter/PostFilter.container';
+// import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
 import LatestGallery from './components/Section/LatestSection/LatestGallery/LatestGallery.container';
 import LatestHeader from './components/Section/LatestSection/LatestHeader/LatestHeader.container';
 import SearchGallery from './components/Section/SearchSection/SearchGallery/SearchGallery.container';
@@ -12,17 +12,16 @@ import SubGallery from './components/Section/SubSection/SubGallery/SubGallery.co
 import SubHeader from './components/Section/SubSection/SubHeader/SubHeader.container';
 
 export default function ReviewPage() {
-  // 화면 맨 위로 이동하는 함수
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth', // 부드러운 스크롤
+      behavior: 'smooth',
     });
   };
 
   return (
     <Wrapper>
-      <RankingProfileCard />
+      {/* <RankingProfileCard /> */}
       <PostFilterContent>
         <PostFilter />
       </PostFilterContent>

@@ -1,14 +1,14 @@
 /* eslint-disable react/no-array-index-key */
 
 import styled from 'styled-components';
-import pf from '../../../../assets/ProfileImg.svg';
+import ProfilePhoto from '../../../../assets/ProfilePhoto.svg';
 import * as S from './ProfileHeader.styles';
 
 export default function ProfileHeaderUI({ handleOnClick, profile }) {
   return (
     <S.Container>
       <ImageBox>
-        <S.Image src={profile.ProfileImagePath || pf} alt="Profile" />
+        <S.Image src={profile.ProfileImagePath || ProfilePhoto} alt="Profile" />
       </ImageBox>
       <S.InnerContainer>
         <S.InformContainer>
