@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import ProfileHeader from './components/ProfileHeader/ProfileHeader.container';
+import ProfileMenuBox from './components/ProfileMenuBox/ProfileMenuBox.container';
 import LatestProfileGallery from './components/Section/LatestProfileGallery/LatestProfileGallery.container';
 import MineProfileGallery from './components/Section/MineProfileGallery/MineProfileGallery.container';
 
@@ -37,8 +40,15 @@ export default function ProfilePage() {
   }
 
   return (
-    <div>
-      <ProfileBody />
-    </div>
+    <Wrapper>
+      <ProfileHeader />
+      <ProfileMenuBox />
+      {profileContent}
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  width: 100%;
+  margin: 0 auto;
+`;

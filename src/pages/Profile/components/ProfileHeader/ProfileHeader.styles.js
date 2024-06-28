@@ -1,53 +1,45 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  width: 80%;
+  margin: 0 auto;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 80%;
-  margin: auto;
-  padding: 1rem 0;
 `;
 
 export const InnerContainer = styled.div`
-  padding: 0;
-  margin: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 60%;
+  flex: 1;
+  margin: 0 5rem;
 `;
 
 export const InformContainer = styled.div`
-  margin: 1rem;
   display: flex;
-  flex-direction: row;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
+  flex: 1;
   font-size: 20px;
+  margin-bottom: 3rem;
 `;
 
 export const HashTegContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-around;
+  gap: 50px;
+  flex: 1;
   font-size: 15px;
-  margin: 0.5rem;
 `;
 
 export const Image = styled.img`
-  margin-right: 1rem;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 `;
 
 export const Name = styled.div`
   font-weight: bold;
-`;
-export const ID = styled.div`
+  font-size: 42px;
   color: #959595;
 `;
 
@@ -63,10 +55,12 @@ export const Hashtag = styled.div`
 `;
 
 export const EditBtn = styled.button`
-  width: 6rem;
-  height: 2rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 15px;
+  background-color: #d9d9d9;
+  color: #000000;
+  font-size: 32px;
+  padding: 0.5rem 1.5rem;
 
   &:hover {
     background-color: black;

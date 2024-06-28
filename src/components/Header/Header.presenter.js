@@ -2,7 +2,7 @@ import { faCircle } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
-import profile from '../../assets/Mask group.svg';
+import LoverProfileEx from '../../assets/HeaderLoverProfile.svg';
 import SearchBar from '../SearchBar/SearchBar.container';
 import * as S from './Header.styles';
 
@@ -18,11 +18,10 @@ export default function HeaderUI({ showSearchBar, handleOnClick }) {
           <AuthorCircleBox onClick={handleOnClick('/lovers-profile')}>
             <WhiteCircleIcon icon={faCircle} />
             <AuthorImgBox>
-              <AuthorImg src={profile} alt="프로필 사진" />
+              <AuthorImg src={LoverProfileEx} alt="프로필 사진" />
             </AuthorImgBox>
           </AuthorCircleBox>
           <S.MenuBar>
-            <S.MenuItem onClick={handleOnClick('/')}>HOME</S.MenuItem>
             <S.MenuItem onClick={handleOnClick('/review')}>MOOD VIEW</S.MenuItem>
             <S.MenuItem onClick={handleOnClick('/lovers-profile')}>MY LOVER</S.MenuItem>
             <S.MenuItem onClick={handleOnClick('/profile')}>OPTIOIN</S.MenuItem>
@@ -34,13 +33,14 @@ export default function HeaderUI({ showSearchBar, handleOnClick }) {
 }
 
 const AuthorCircleBox = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 const WhiteCircleIcon = styled(FontAwesomeIcon)`
   color: black;

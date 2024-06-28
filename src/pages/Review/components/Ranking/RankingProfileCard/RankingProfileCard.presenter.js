@@ -130,11 +130,11 @@ export default RankingProfileCardUI;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 900px; /* 적당히 수정. 100vh -> ?*/
+  height: 1000px; /* 적당히 수정. 100vh -> ?*/
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
   cursor: grab;
   overflow: hidden;
 `;
@@ -154,7 +154,7 @@ const CardContainer = styled.div`
 
 const Card = styled.div`
   position: absolute;
-  background-color: #ccc;
+  /* background-color: #ccc; */
   border-radius: 20px;
   filter: drop-shadow(0px 10px 50px rgba(0, 0, 0, 0.15));
   transform-origin: center center;
@@ -179,9 +179,10 @@ const Card = styled.div`
 `;
 
 const CardHeader = styled.h1`
-  font-size: 24px;
+  font-family: 'Shrikhand', serif;
+  font-size: 65px;
   font-weight: bold;
-  transform: translateY(-50px);
+  transform: translateY(-80px);
 `;
 
 const SvgWrapper = styled.div`

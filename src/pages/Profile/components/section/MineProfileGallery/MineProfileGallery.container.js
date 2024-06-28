@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import React, { useEffect, useRef, useState } from 'react';
 import MineProfileGalleryUI from './MineProfileGallery.presenter';
 
 export default function MineProfileGallery() {
@@ -8,7 +8,7 @@ export default function MineProfileGallery() {
   const [hasNext, setHasNext] = useState(true);
   const loader = useRef(null);
 
-  const fetchPostData = async (cursor, size = 4) => {
+  const fetchPostData = async (cursor, size = 9) => {
     try {
       const response = await axios.get(`/profile/review`, {
         params: {
@@ -48,7 +48,7 @@ export default function MineProfileGallery() {
       (entries) => {
         const target = entries[0];
         if (target.isIntersecting && hasNext) {
-          fetchPostData(cursorId, 2); // 추가로 가져오는 데이터
+          fetchPostData(cursorId, 6); // 추가로 가져오는 데이터
         }
       },
       { threshold: 1 },

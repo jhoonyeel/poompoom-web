@@ -1,9 +1,9 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
+import AgeSlider from '../../LoversProfile/component/AgeSlider';
 import Gender from './component/Gender';
-import Job from './component/Job';
 import Interest from './component/Interest';
-import AgeSlider from '../../Review/components/QuickGift/AgeSlider';
+import Job from './component/Job';
 
 export default function SignupPage() {
   const initialButtons = [

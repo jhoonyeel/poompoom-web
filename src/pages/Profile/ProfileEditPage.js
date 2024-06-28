@@ -1,7 +1,5 @@
 import ProfileEdit from './components/ProfileEdit/ProfileEdit.container';
 
-function ProfileEditPage() {
+export default function ProfileEditPage() {
   return <ProfileEdit />;
 }
-
-export default ProfileEditPage;

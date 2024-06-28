@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Outlet, Route, Routes } from 'react-router-dom';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
+import { ThemeProvider } from 'styled-components';
 import * as S from './App.styles';
+import GlobalStyle from './GlobalStyle';
 import ProtectedRoute from './ProtectedRoute';
 import CommunityList from './components/Community/CommunityList/CommunityList';
 import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
@@ -13,21 +13,15 @@ import HomePage from './pages/Home/HomePage';
 import SignupPage from './pages/Join/Signup/SignupPage';
 import SignupTagPage from './pages/Join/SignupTag/SignupTagPage';
 import LoginPage from './pages/Login/LoginPage';
-import LoverProfilePage from './pages/LoverProfile/LoverProfilePage';
-import LoverProfileSetPage from './pages/LoverProfile/LoverProfileSetPage';
+import LoversProfilePage from './pages/LoversProfile/LoversProfilePage';
+import LoversProfileSetPage from './pages/LoversProfile/LoversProfileSetPage';
 import ProfileEditPage from './pages/Profile/ProfileEditPage';
 import ProfilePage from './pages/Profile/ProfilePage';
-import LatestProfileGallery from './pages/Profile/components/section/LatestProfileGallery/LatestProfileGallery.container';
-import MineProfileGallery from './pages/Profile/components/section/MineProfileGallery/MineProfileGallery.container';
-import QueryResultPage from './pages/QueryResult/QueryResultPage';
+import QueryPage from './pages/Query/QueryPage';
 import ReviewPage from './pages/Review/ReviewPage';
 import PostDetail from './pages/ReviewDetail/PostDetail/PostDetail.container';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
 import { basicTheme } from './shared/Theme';
-
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-`;
 
 const queryClient = new QueryClient();
 
@@ -51,29 +45,17 @@ function AppRoutes() {
       />
       <Route
         path="/review/query-result"
-        element={<ProtectedRoute element={QueryResultPage} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={QueryPage} isAuthenticated={isAuthenticated()} />}
       />
       <Route
         path="/lovers-profile"
-        element={<ProtectedRoute element={LoverProfilePage} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={LoversProfilePage} isAuthenticated={isAuthenticated()} />}
       />
       <Route
         path="/lovers-profile-set"
-        element={<ProtectedRoute element={LoverProfileSetPage} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={LoversProfileSetPage} isAuthenticated={isAuthenticated()} />}
       />
-      <Route
-        path="/profile/like"
-        element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />}
-      />
-      <Route
-        path="/profile"
-        element={<ProtectedRoute element={MineProfileGallery} isAuthenticated={isAuthenticated()} />}
-      />
-      <Route
-        path="/profile/recent"
-        element={<ProtectedRoute element={LatestProfileGallery} isAuthenticated={isAuthenticated()} />}
-      />
-      <Route path="/profile" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />} />
+      <Route path="/profile/*" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />} />
       <Route
         path="/profile/edit"
         element={<ProtectedRoute element={ProfileEditPage} isAuthenticated={isAuthenticated()} />}
@@ -123,7 +105,3 @@ export default function App() {
     </QueryClientProvider>
   );
 }
-
-// <ReviewPage /> 선물 리뷰글 페이지
-// <ReviewWritePage> 리뷰글 작성, 수정 페이지
-// <ProfilePage /> 프로필 페이지

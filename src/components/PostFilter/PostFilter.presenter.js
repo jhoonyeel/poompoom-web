@@ -1,6 +1,7 @@
 import { faBarsStaggered, faFilter, faSliders } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Lottie from 'react-lottie';
+import styled from 'styled-components';
 import writeAnimation from '../../animation/PostWrite.json';
 import * as S from './PostFilter.styles';
 

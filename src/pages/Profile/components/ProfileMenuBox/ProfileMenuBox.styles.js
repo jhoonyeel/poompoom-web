@@ -1,15 +1,25 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  width: inherit;
+export const Wrapper = styled.nav`
+  width: 100%;
+  border-top: 3px solid #d9d9d9;
+  border-bottom: 3px solid #d9d9d9;
+`;
+export const Menutab = styled.ul`
+  width: 80%;
+  margin: 0 auto;
+  padding: 0 3rem;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 `;
-export const Button = styled.button`
-  width: 6rem;
-  height: 2rem;
-  background-color: ${(props) => (props.isActive ? 'black' : 'white')};
-  color: ${(props) => (props.isActive ? 'white' : 'black')};
+export const Button = styled.li`
+  border: none;
+  border-top: ${(props) => (props.isActive ? '10px solid #0D3F39' : 'none')};
+  color: ${(props) => (props.isActive ? '#0D3F39' : '#959595')};
+  background-color: #ffffff;
+  padding: 1.5rem;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
 `;

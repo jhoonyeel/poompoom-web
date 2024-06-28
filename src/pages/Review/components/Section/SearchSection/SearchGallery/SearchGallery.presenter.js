@@ -4,11 +4,7 @@ import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.containe
 
 export default function SearchGalleryUI({ searchPosts }) {
   return (
-    <Wrapper>
-      {searchPosts.map((post) => (
-        <ReviewPostCard key={post.reviewId} post={post} />
-      ))}
-    </Wrapper>
+    <Wrapper>{searchPosts && searchPosts.map((post) => <ReviewPostCard key={post.reviewId} post={post} />)}</Wrapper>
   );
 }
 

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // eslint-disable-next-line camelcase, import/no-unresolved
+import { ReactComponent as CardNews } from '../../assets/CardNews.svg';
 import { ReactComponent as Anniversary } from '../../assets/Category/Anniversary.svg';
 import { ReactComponent as Apology } from '../../assets/Category/Apology.svg';
 import { ReactComponent as Birthday } from '../../assets/Category/Birthday.svg';
@@ -13,15 +14,10 @@ import { ReactComponent as D100 } from '../../assets/Category/D100.svg';
 import { ReactComponent as Light } from '../../assets/Category/Light.svg';
 import { ReactComponent as Lose } from '../../assets/Category/Lose.svg';
 import { ReactComponent as Propose } from '../../assets/Category/Propose.svg';
-import { ReactComponent as Four } from '../../assets/Curator/4.svg';
-import { ReactComponent as Five } from '../../assets/Curator/5.svg';
-import { ReactComponent as Six } from '../../assets/Curator/6.svg';
-import { ReactComponent as Seven } from '../../assets/Curator/7.svg';
-import { ReactComponent as One } from '../../assets/Curator/One.svg';
-import { ReactComponent as Tre } from '../../assets/Curator/Tre.svg';
-import { ReactComponent as Two } from '../../assets/Curator/Two.svg';
-import { ReactComponent as Calender1 } from '../../assets/Component 1 (4).svg';
-import { ReactComponent as Components } from '../../assets/Component 1 (1).svg';
+import { ReactComponent as Ranking } from '../../assets/HomeRanking.svg';
+import { ReactComponent as MainBackground } from '../../assets/MainBackground.svg';
+import { ReactComponent as Season } from '../../assets/Season.svg';
+import { ReactComponent as SeasonBk } from '../../assets/SeasonBackground.svg';
 
 export default function HomePage() {
   const [recommendations, setRecommendations] = useState([]);
@@ -55,75 +51,76 @@ export default function HomePage() {
   return (
     <Wrapper>
       <ProfileSection>
-        <Components />
+        <MainImgBox>
+          <MainSvg />
+        </MainImgBox>
       </ProfileSection>
+
       <SearchSection>
+        <SearchBox>
+          <h3>Search 지금 많이 찾아보는 태그</h3>
+        </SearchBox>
         <KeywordBox>
-          <KeywordParagraph>지금 다른 분들이 많이 검색해요</KeywordParagraph>
           <KeywordList>
             {recommendations.map((recommendation) => (
               <KeywordItem key={recommendation.id}>{recommendation.name}</KeywordItem>
             ))}
           </KeywordList>
         </KeywordBox>
-        <CategoryBox>
-          <CalenderBox>
-            <Calender1 />
-          </CalenderBox>
+        <MiddleBox>
           <CategoryList>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=100일')}>
-              <D100 /> <Text>100일</Text>
+              <D100 />
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=사과의+선물')}>
-              <Apology /> <Text>사과의 선물</Text>
+              <Apology />
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=가벼운+선물')}>
-              <Light /> <Text>가벼운 선물</Text>
+              <Light />
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=생일')}>
-              <Birthday /> <Text>생일</Text>
+              <Birthday />
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=청혼')}>
-              <Propose /> <Text>청혼</Text>
+              <Propose />
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=로맨틱+데이')}>
-              <Lose /> <Text>로맨틱 데이</Text>
+              <Lose />
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=n주년')}>
-              <Anniversary /> <Text>n주년</Text>
+              <Anniversary />
             </CategoryWrapper>
             <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=크리스마스')}>
               <Christmas />
-              <Text>크리스마스</Text>
             </CategoryWrapper>
           </CategoryList>
-        </CategoryBox>
+          <CalenderBox>
+            <CardNews />
+          </CalenderBox>
+        </MiddleBox>
       </SearchSection>
+
+      <RankingSection>
+        <RankingBox>
+          <Ranking />
+        </RankingBox>
+      </RankingSection>
+
       <MoveButton type="button" onClick={handleOnClick('/review')}>
-        리뷰글 페이지로
+        Go to mood view!
       </MoveButton>
-      <CurationSection>
-        <CurationTitle>봄 맞이 선물</CurationTitle>
-        <ButtonWrapper>
-          <CurationButton>실내 장식품</CurationButton>
-          <CurationButton>피크닉 세트</CurationButton>
-          <CurationButton>패션 잇템</CurationButton>
-          <CurationButton>봄 먹거리</CurationButton>
-        </ButtonWrapper>
-        <ISWRapper>
-          <IWrapper>
-            <Seven />
-          </IWrapper>
-          <ImageWrapper>
-            <One />
-            <Two />
-            <Tre />
-            <Four />
-            <Five />
-            <Six />
-          </ImageWrapper>
-        </ISWRapper>
-      </CurationSection>
+
+      <SeasonSection>
+        <SeasonAbsoluteBox>
+          <SeasonBackgroundBox>
+            <SeasonBk />
+          </SeasonBackgroundBox>
+          <SeasonBox>
+            <Season />
+          </SeasonBox>
+        </SeasonAbsoluteBox>
+      </SeasonSection>
+
       <ButtonBox onClick={scrollToTop}>
         <UpIcon icon={faChevronUp} />
       </ButtonBox>
@@ -131,54 +128,18 @@ export default function HomePage() {
   );
 }
 
-const CalenderBox = styled.div``;
-const CategoryWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+const MainImgBox = styled.div`
+  width: 80%;
+  margin: 0 auto;
 `;
-const Text = styled.div`
-  margin: 10px 0;
-`;
-const ImageWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 20px;
+const MainSvg = styled(MainBackground)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
-const IWrapper = styled.div`
-  margin: 0 1rem;
-`;
-
-const ISWRapper = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-const CurationTitle = styled.div`
-  font-size: 50px;
-  font-weight: 800;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 1rem;
-`;
-const CurationButton = styled.button`
-  width: 173px;
-  height: 48px;
-  border-radius: 30px;
-  transition: all 0.2s ease-in-out;
-  font-size: 18px;
-  margin: 1rem;
-  &:hover {
-    background-color: #545454;
-    color: white;
-  }
+const RankingSection = styled.section`
+  width: 100%;
 `;
 
 const Wrapper = styled.main`
@@ -187,8 +148,7 @@ const Wrapper = styled.main`
 
 const ProfileSection = styled.section`
   width: 100%;
-  margin-top: 5rem;
-
+  margin-top: 2rem;
   border-radius: 20px;
   overflow: hidden;
 `;
@@ -241,46 +201,59 @@ const KeywordBox = styled.div`
   width: 80%;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
 `;
-const KeywordParagraph = styled.p`
-  padding: 20px;
-  color: #585858;
-  font-size: 24px;
+const SearchBox = styled.div`
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
 `;
 const KeywordList = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: start;
 `;
 const KeywordItem = styled.li`
-  border: 3px solid #f2f2f2;
-  border-radius: 20px;
+  border-radius: 50px;
   margin: 0.5rem 1rem;
-  padding: 0.3rem;
+  padding: 1rem 1.5rem;
+  color: #ffffff;
+  font-size: 18px;
   cursor: pointer;
-  background-color: rgba(108, 108, 108, 0.3);
   transition: background-color 0.3s ease;
+  background-color: #a1a1a1;
   &:hover {
-    background-color: rgba(108, 108, 108, 0.54);
+    background-color: #535353;
   }
 `;
-const CategoryBox = styled.div`
+
+const MiddleBox = styled.div`
   width: 80%;
   margin: 0 auto;
-  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
 `;
 const CategoryList = styled.ul`
+  width: 70%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-top: 20px;
+  row-gap: 20px;
+`;
+const CalenderBox = styled.div`
+  /* width: 30%; */
+  flex: 1;
+  object-fit: cover;
+`;
+
+const CategoryWrapper = styled.div`
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 /* const CategoryItem = styled.li`
   border: 3px solid #f2f2f2;
@@ -297,19 +270,28 @@ const CategoryImage = styled.img`
 `; */
 const MoveButton = styled.button`
   margin-top: 2rem;
-  padding: 0.5rem;
-  border-radius: 8px;
-  font-size: 20px;
-  background-color: #ffeaea;
-  &:hover {
-    background-color: #ffc2c2;
-  }
+  padding: 0.5rem 1.5rem;
+  background: #ffffff;
+  border: 3px solid #545454;
+  border-radius: 30px;
+  font-family: 'Righteous';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 37px;
+  letter-spacing: -0.017em;
+  color: #626262;
+  cursor: pointer;
 `;
 
-const CurationSection = styled.section`
+const RankingBox = styled.div`
+  width: 80%;
+  margin: 0 auto;
+  overflow: hidden;
+`;
+
+const SeasonSection = styled.section`
   width: 100%;
-  height: 767px;
-  background-color: #ffeaea;
   margin-top: 5rem;
   display: flex;
   flex-direction: column;
@@ -332,4 +314,20 @@ const ButtonBox = styled.div`
 `;
 const UpIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
+`;
+const SeasonAbsoluteBox = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
+const SeasonBackgroundBox = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* 배경이 아래에 있도록 설정 */
+`;
+const SeasonBox = styled.div`
+  margin: 0 auto;
 `;

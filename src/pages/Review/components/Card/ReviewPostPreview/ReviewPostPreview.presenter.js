@@ -17,9 +17,11 @@ const Wrapper = styled.div`
   border-radius: 20px;
 `;
 const Paragraph = styled.p`
+  font-family: 'TAEBAEKmilkyway';
   font-size: 24px;
-  color: white;
+  color: #ffffff;
   padding: 10px 20px;
   text-align: left;
-  line-height: 1.2;
+  line-height: 1.3;
+  word-spacing: 2px;
 `;
