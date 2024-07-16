@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled, { css } from 'styled-components';
-import { ReactComponent as Logo } from '../../assets/poompoom.svg';
+import { ReactComponent as Logo } from '../../assets/PoomPoom.svg';
 
 export const HeaderWrapper = styled.header`
   width: 100%;
