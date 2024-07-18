@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from '../../apis/axios';
 import DummyPhoto from '../../assets/DummyPhoto.svg';
 
 export default function ReviewWritePage() {
@@ -28,52 +29,36 @@ export default function ReviewWritePage() {
       return;
     }
 
+    // JSON 객체 생성
+    const jsonBody = JSON.stringify({
+      body: content,
+      price,
+      whereBuy: source,
+      category,
+      reviewType,
+    });
+
     // FormData 객체를 생성하여 데이터를 담기
     const formData = new FormData();
-    formData.append('body', content);
-    formData.append('price', price);
-    formData.append('whereBuy', source);
-    formData.append('category', category);
-    formData.append('reviewType', reviewType);
+    formData.append('body', new Blob([jsonBody], { type: 'application/json' }));
     if (images) {
       images.forEach((image) => {
-        formData.append(`photos[]`, image);
+        formData.append(`photos`, image);
       });
     }
 
-    console.log(formData);
     // eslint-disable-next-line no-restricted-syntax
     for (const pair of formData.entries()) {
       console.log(`${pair[0]}: ${pair[1]}`);
     }
 
-    // try {
-    //   const response = await axios.post('/review/create', formData, {
-    //     headers: {
-    //       // 'Content-Type': 'multipart/form-data',
-    //     },
-    //   });
-    //   console.log('Success:', response.data);
-    //   navigate('/review');
-    // } catch (error) {
-    //   console.error('Error:', error);
-    // }
     try {
-      const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/review/create`, {
-        method: 'POST',
-        body: formData,
+      const response = await axios.post('/review/create', formData, {
         headers: {
-          access: `${accessToken}`,
+          'Content-Type': 'multipart/form-data',
         },
       });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      console.log('Success:', data);
+      console.log('Success:', response.data);
       navigate('/review');
     } catch (error) {
       console.error('Error:', error);
