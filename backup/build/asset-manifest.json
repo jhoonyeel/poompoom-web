@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.js": "/poompoom-web/static/js/main.e792da7a.js",
+    "static/media/MainBackground.svg": "/poompoom-web/static/media/MainBackground.420cf38234c36c7094e532aba69490a5.svg",
+    "static/media/HomeRanking.svg": "/poompoom-web/static/media/HomeRanking.66d15117af9376e8211b174120ce45e9.svg",
+    "static/media/Season.svg": "/poompoom-web/static/media/Season.28f9cb385f6d1e23b75c3e54e866a045.svg",
+    "static/media/_LoverProfilePhoto.svg": "/poompoom-web/static/media/_LoverProfilePhoto.c1b314a14e95acb39b70f948c38b3a78.svg",
+    "static/media/HeaderLoverProfile.svg": "/poompoom-web/static/media/HeaderLoverProfile.64f3f95725c677625f28b02adade6c8b.svg",
+    "static/media/SeasonBackground.svg": "/poompoom-web/static/media/SeasonBackground.ade42faa71eeb23e742154e1336c1e4c.svg",
+    "static/media/Footer.svg": "/poompoom-web/static/media/Footer.65df080be8e48ab6ee8ae4a24e8d8801.svg",
+    "static/media/CardNews.svg": "/poompoom-web/static/media/CardNews.6ee399469c3959b44b6d7e3ae8445a2f.svg",
+    "static/media/Lose.svg": "/poompoom-web/static/media/Lose.ce73ff31bc613d28ba8f0c31722b82de.svg",
+    "static/media/Light.svg": "/poompoom-web/static/media/Light.9b99512d7af7ced82a20e87a79113898.svg",
+    "static/media/Christmas.svg": "/poompoom-web/static/media/Christmas.a1e558e44db202d8e3cae022fa5e838b.svg",
+    "static/media/Birthday.svg": "/poompoom-web/static/media/Birthday.380e6c2e3e03f34895bbcb932e7fcb90.svg",
+    "static/media/Propose.svg": "/poompoom-web/static/media/Propose.6e80ea77eb5dd688596447e91e5c071b.svg",
+    "static/media/LoverProfileLastLogo.svg": "/poompoom-web/static/media/LoverProfileLastLogo.fe28835f0dd0224606a614a9012fe251.svg",
+    "static/media/PoomPoom.svg": "/poompoom-web/static/media/PoomPoom.a7090d5c585cba1208e3f71ddcd6e0dd.svg",
+    "static/media/Apology.svg": "/poompoom-web/static/media/Apology.1e521ae69b4a438227c812ea6fdb090b.svg",
+    "static/media/Anniversary.svg": "/poompoom-web/static/media/Anniversary.e86608013953a2e8b6f0dfe8891ad23c.svg",
+    "static/media/D100.svg": "/poompoom-web/static/media/D100.5ecb9cea7e52d5786c545094429f532e.svg",
+    "static/media/eyes.svg": "/poompoom-web/static/media/eyes.1cf4986378d14ebc825e64f40b9c568e.svg",
+    "static/media/DummyPhoto.svg": "/poompoom-web/static/media/DummyPhoto.ad53eedda9fb21294264277a52cb28e7.svg",
+    "static/media/LoverProfileFirstCalendar.svg": "/poompoom-web/static/media/LoverProfileFirstCalendar.ea01b478742f02625e99ea2870240a4e.svg",
+    "static/media/FireCraker.svg": "/poompoom-web/static/media/FireCraker.1ff9fb325be8e279d346a18a24e608ac.svg",
+    "static/media/HorizontalCursor.svg": "/poompoom-web/static/media/HorizontalCursor.750238f1a90188456cd2ec7ed94fe0ac.svg",
+    "static/media/LoverProfileFirstBucket.svg": "/poompoom-web/static/media/LoverProfileFirstBucket.6af0112e982f63500b87515d84e9aa3d.svg",
+    "static/media/LoverProfileSpeechBubble.svg": "/poompoom-web/static/media/LoverProfileSpeechBubble.67484b35a39ee5360b70257b17a8224f.svg",
+    "static/media/ProfilePhoto.svg": "/poompoom-web/static/media/ProfilePhoto.6e554f82d3954fa1799ec0a68c3ea4e2.svg",
+    "static/media/PostComment.svg": "/poompoom-web/static/media/PostComment.facd36af2d13436f23156875bb7d8594.svg",
+    "static/media/LoverProfileLastBucket.svg": "/poompoom-web/static/media/LoverProfileLastBucket.acc2137159210d9ff45246b323d89aed.svg",
+    "index.html": "/poompoom-web/index.html",
+    "main.e792da7a.js.map": "/poompoom-web/static/js/main.e792da7a.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.e792da7a.js"
+  ]
+}
