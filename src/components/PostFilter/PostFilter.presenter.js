@@ -56,6 +56,10 @@ export default function PostFilterUI({ handleOnClick }) {
           <S.SliderIcon icon={faSliders} />
           <Span>가격대</Span>
         </PriceFilter>
+        <ItemFilter>
+          <span>아이콘</span>
+          <Span>품목</Span>
+        </ItemFilter>
       </AlignBox>
       <HoverAnimation isHovered={isHovered} setIsHovered={setIsHovered} handleOnClick={handleOnClick} />
     </Wrapper>
@@ -71,7 +75,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 const AlignBox = styled.div`
-  width: 40%;
+  width: 50%;
   display: flex;
   gap: 10%;
 `;
@@ -86,6 +90,11 @@ const ViewFilter = styled.div`
   gap: 10px;
 `;
 const PriceFilter = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+const ItemFilter = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
