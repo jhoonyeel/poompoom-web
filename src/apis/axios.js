@@ -2,6 +2,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL; // 전역 설정
 axios.defaults.withCredentials = true; // 쿠키 포함을 위한 설정
+axios.defaults.headers.common['Content-Type'] = 'application/json'; // 기본 Content-Type 설정
 
 // 요청 인터셉터
 axios.interceptors.request.use(
@@ -36,6 +37,7 @@ axios.interceptors.response.use(
             headers: {
               // Authorization: `Bearer ${refreshToken}`,
               refresh: refreshToken,
+              'Content-Type': 'application/json', // Content-Type 설정
             },
           },
         );
