@@ -8,7 +8,7 @@ import * as S from './Header.styles';
 
 export default function HeaderUI({ showSearchBar, handleOnClick }) {
   return (
-    <S.HeaderWrapper>
+    <S.HeaderWrapper className="sticky">
       <S.HeaderContent>
         <S.LogoBox onClick={handleOnClick('/')}>
           <S.LogoSvg />

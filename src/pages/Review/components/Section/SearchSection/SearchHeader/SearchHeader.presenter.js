@@ -6,7 +6,6 @@ export default function SearchHeaderUI() {
 
 const Wrapper = styled.h3`
   width: 100%;
-  margin-top: 2rem;
   font-family: 'Shrikhand';
   font-style: italic;
   font-weight: 400;

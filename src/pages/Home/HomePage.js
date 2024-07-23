@@ -121,7 +121,13 @@ export default function HomePage() {
         </SeasonAbsoluteBox>
       </SeasonSection>
 
-      <ButtonBox onClick={scrollToTop}>
+      <ButtonBox
+        onClick={() => {
+          console.log('asdf');
+          scrollToTop();
+          console.log('asdf');
+        }}
+      >
         <UpIcon icon={faChevronUp} />
       </ButtonBox>
     </Wrapper>
@@ -152,46 +158,6 @@ const ProfileSection = styled.section`
   border-radius: 20px;
   overflow: hidden;
 `;
-/* const ProfileContent = styled.div`
-  width: 80%;
-  margin: 0 auto;
-  padding: 8% 5%;
-  border-radius: 50px;
-  background-color: gray;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-/* const ProfileQuote = styled.blockquote`
-  font-size: 48px;
-  font-weight: bold;
-  font-style: italic;
-`; 
-
-const CreateProfileBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-const PlusIconBox = styled.div`
-  background-color: white;
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const PlusIcon = styled(FontAwesomeIcon)`
-  background-color: white;
-  color: gray;
-  font-size: 100px;
-`;
-const PlusParagraph = styled.p`
-  font-size: 28px;
-  margin-top: 1rem;
-  font-weight: bold;
-`; */
 
 const SearchSection = styled.section`
   width: 100%;
@@ -255,19 +221,7 @@ const CategoryWrapper = styled.div`
   height: 100%;
   object-fit: cover;
 `;
-/* const CategoryItem = styled.li`
-  border: 3px solid #f2f2f2;
-  border-radius: 20px;
-  margin: 0.5rem 1rem;
-  padding: 0.3rem;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-`;
-const CategoryImage = styled.img`
-  width: 20%;
-  height: 20%;
-`; */
+
 const MoveButton = styled.button`
   margin-top: 2rem;
   padding: 0.5rem 1.5rem;
@@ -304,10 +258,10 @@ const ButtonBox = styled.div`
   bottom: 50px; /* 화면 하단과의 간격 조정 */
   right: 50px; /* 화면 우측과의 간격 조정 */
   z-index: 999; /* 다른 요소 위에 표시되도록 z-index 조정 */
-  width: 2%;
+  width: 50px;
+  height: 50px;
   border: 3px solid gray;
   border-radius: 50%;
-  aspect-ratio: 1 / 1;
   display: flex;
   justify-content: center;
   align-items: center;

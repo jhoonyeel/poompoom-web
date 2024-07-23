@@ -1,8 +1,10 @@
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PostFilter from '../../components/PostFilter/PostFilter.container';
 // import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
+import { scrollToTop } from '../../shared/scrollToTop';
 import LatestGallery from './components/Section/LatestSection/LatestGallery/LatestGallery.container';
 import LatestHeader from './components/Section/LatestSection/LatestHeader/LatestHeader.container';
 import SearchGallery from './components/Section/SearchSection/SearchGallery/SearchGallery.container';
@@ -12,17 +14,25 @@ import SubGallery from './components/Section/SubSection/SubGallery/SubGallery.co
 import SubHeader from './components/Section/SubSection/SubHeader/SubHeader.container';
 
 export default function ReviewPage() {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
+  const [stickyOffset, setStickyOffset] = useState(0);
+
+  useEffect(() => {
+    // 모든 sticky 요소를 선택
+    const stickyElements = document.querySelectorAll('.sticky');
+    let totalOffset = 0;
+
+    // 모든 sticky 요소의 높이를 합산
+    stickyElements.forEach((element) => {
+      totalOffset += element.offsetHeight;
     });
-  };
+
+    setStickyOffset(totalOffset);
+  }, []);
 
   return (
     <Wrapper>
       {/* <RankingProfileCard /> */}
-      <PostFilterContent>
+      <PostFilterContent className="sticky">
         <PostFilter />
       </PostFilterContent>
       <GalleryContent>
@@ -41,7 +51,12 @@ export default function ReviewPage() {
           <SearchHeader />
           <SearchGallery />
         </SearchContent>
-        <ButtonBox onClick={scrollToTop}>
+        <ButtonBox
+          onClick={() => {
+            console.log('asdf');
+            scrollToTop(stickyOffset);
+          }}
+        >
           <UpIcon icon={faChevronUp} />
         </ButtonBox>
       </GalleryContent>
@@ -67,9 +82,11 @@ const PostFilterContent = styled.div`
 
 const LatestContent = styled.section`
   width: 100%;
+  margin-top: 2rem;
 `;
 const SubContent = styled.section`
   width: 100%;
+  margin-top: 2rem;
 `;
 const SubBodyContent = styled.div`
   display: flex;
@@ -78,6 +95,7 @@ const SubBodyContent = styled.div`
 `;
 const SearchContent = styled.section`
   width: 100%;
+  margin-top: 2rem;
 `;
 const ButtonBox = styled.div`
   position: fixed;
@@ -86,11 +104,13 @@ const ButtonBox = styled.div`
   z-index: 999; /* 다른 요소 위에 표시되도록 z-index 조정 */
   width: 2%;
   aspect-ratio: 1 / 1;
+  background-color: white;
   border: 3px solid gray;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 const UpIcon = styled(FontAwesomeIcon)`
   font-size: 24px;

@@ -3,24 +3,41 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
 import DummyPhoto from '../../assets/DummyPhoto.svg';
+import { CATEGORIES } from '../../shared/categories';
 
 export default function ReviewWritePage() {
-  const [reviewType, setReviewType] = useState('RECEIVED');
-  const [category, setCategory] = useState('');
-  const [content, setContent] = useState('');
+  const [reviewData, setReviewData] = useState({
+    content: '',
+    price: '',
+    source: '',
+    category: '',
+    reviewType: 'RECEIVED',
+  });
   const [images, setImages] = useState([]);
-  const [price, setPrice] = useState('');
-  const [source, setSource] = useState('');
+  const [previewImages, setPreviewImages] = useState([]);
 
   const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setReviewData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     setImages(files);
+
+    const previewUrls = files.map((file) => URL.createObjectURL(file));
+    setPreviewImages(previewUrls);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { content, price, source, category, reviewType } = reviewData;
 
     // Validate form fields
     if (!content || !price || !source || !category || !reviewType) {
@@ -32,7 +49,7 @@ export default function ReviewWritePage() {
     // JSON 객체 생성
     const jsonBody = JSON.stringify({
       body: content,
-      price,
+      price: parseFloat(price),
       whereBuy: source,
       category,
       reviewType,
@@ -41,15 +58,10 @@ export default function ReviewWritePage() {
     // FormData 객체를 생성하여 데이터를 담기
     const formData = new FormData();
     formData.append('body', new Blob([jsonBody], { type: 'application/json' }));
-    if (images) {
+    if (images.length) {
       images.forEach((image) => {
-        formData.append(`photos`, image);
+        formData.append('photos', image);
       });
-    }
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const pair of formData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
     }
 
     try {
@@ -69,56 +81,58 @@ export default function ReviewWritePage() {
     <Form onSubmit={handleSubmit}>
       <ImageUploadSection>
         <ImagePlaceholder onClick={() => document.getElementById('imageInput').click()}>
-          <img src={DummyPhoto} alt="placeholder" />
+          {previewImages.length > 0 ? (
+            previewImages.map((src, index) => <img src={src} alt={`preview ${index}`} />)
+          ) : (
+            <img src={DummyPhoto} alt="placeholder" />
+          )}
         </ImagePlaceholder>
         <ImageInput id="imageInput" type="file" multiple onChange={handleImageChange} />
       </ImageUploadSection>
       <ContentSection>
         <User>@poompoom_in_love</User>
         <RadioButtonGroup>
-          <RadioButton type="button" $active={reviewType === 'RECEIVED'} onClick={() => setReviewType('RECEIVED')}>
+          <RadioButton
+            type="button"
+            $active={reviewData.reviewType === 'RECEIVED'}
+            onClick={() => setReviewData((prevData) => ({ ...prevData, reviewType: 'RECEIVED' }))}
+          >
             받은 선물
           </RadioButton>
-          <RadioButton type="button" $active={reviewType === 'GIVEN'} onClick={() => setReviewType('GIVEN')}>
+          <RadioButton
+            type="button"
+            $active={reviewData.reviewType === 'GIVEN'}
+            onClick={() => setReviewData((prevData) => ({ ...prevData, reviewType: 'GIVEN' }))}
+          >
             준 선물
           </RadioButton>
         </RadioButtonGroup>
-        <Textarea placeholder="문구를 입력해주세요..." value={content} onChange={(e) => setContent(e.target.value)} />
+        <Textarea
+          name="content"
+          placeholder="문구를 입력해주세요..."
+          value={reviewData.content}
+          onChange={handleInputChange}
+        />
         <AdditionalInfo>
           <InfoHeader>카테고리 선택</InfoHeader>
           <GridBox>
-            <CategoryButton type="button" onClick={() => setCategory('가벼운 선물')}>
-              가벼운 선물
-            </CategoryButton>
-            <CategoryButton type="button" onClick={() => setCategory('100일')}>
-              100일
-            </CategoryButton>
-            <CategoryButton type="button" onClick={() => setCategory('로맨틱 데이')}>
-              로맨틱 데이
-            </CategoryButton>
-            <CategoryButton type="button" onClick={() => setCategory('생일')}>
-              생일
-            </CategoryButton>
-            <CategoryButton type="button" onClick={() => setCategory('사과의 선물')}>
-              사과의 선물
-            </CategoryButton>
-            <CategoryButton type="button" onClick={() => setCategory('n주년')}>
-              n주년
-            </CategoryButton>
-            <CategoryButton type="button" onClick={() => setCategory('크리스마스')}>
-              크리스마스
-            </CategoryButton>
-            <CategoryButton type="button" onClick={() => setCategory('청혼')}>
-              청혼
-            </CategoryButton>
+            {CATEGORIES.map((cat) => (
+              <CategoryButton
+                key={cat}
+                type="button"
+                onClick={() => setReviewData((prevData) => ({ ...prevData, category: cat }))}
+              >
+                {cat}
+              </CategoryButton>
+            ))}
           </GridBox>
           <FlexBox>
             <InfoHeader>제품 정보(링크)</InfoHeader>
-            <InfoInput id="source" type="text" value={source} onChange={(e) => setSource(e.target.value)} />
+            <InfoInput name="source" type="text" value={reviewData.source} onChange={handleInputChange} />
           </FlexBox>
           <FlexBox>
             <InfoHeader>가격</InfoHeader>
-            <InfoInput id="price" type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
+            <InfoInput name="price" type="text" value={reviewData.price} onChange={handleInputChange} />
           </FlexBox>
         </AdditionalInfo>
       </ContentSection>
