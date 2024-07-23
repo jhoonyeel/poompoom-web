@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
 
   @font-face {
     font-family: 'S-CoreDream-3Light';
-     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
   }
 
   @font-face {

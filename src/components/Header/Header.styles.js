@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { ReactComponent as Logo } from '../../assets/PoomPoom.svg';
 
 export const HeaderWrapper = styled.header`
@@ -9,7 +9,6 @@ export const HeaderWrapper = styled.header`
   top: 0;
   left: 0;
   z-index: 100;
-  margin-bottom: 1rem;
   background-color: white;
 `;
 export const HeaderContent = styled.div`
@@ -20,16 +19,6 @@ export const HeaderContent = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid #a3a3a3;
-
-  /* 조건부 스타일링 */
-  ${({ showSearchBar }) =>
-    showSearchBar
-      ? css`
-          /* showSearchBar가 true일 때의 스타일 */
-        `
-      : css`
-          /* showSearchBar가 false일 때의 스타일 */
-        `}
 `;
 export const IconBox = styled.div`
   width: 25%;
