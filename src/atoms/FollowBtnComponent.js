@@ -1,12 +1,6 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 
-export default function FollowBtnComponent() {
-  const [isFollow, setIsFollow] = useState(false);
-  const handleFollow = () => {
-    setIsFollow((follow) => !follow);
-  };
-
+export default function FollowBtnComponent({ isFollow, handleFollow }) {
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
@@ -34,6 +28,7 @@ const FollowBtn = styled.button`
   border-radius: 20px;
   padding: 5px;
   font-size: 16px;
+  cursor: pointer;
 `;
 const FollowedBtn = styled.button`
   color: #b0b0b0;
@@ -46,4 +41,5 @@ const FollowedBtn = styled.button`
   border-radius: 20px;
   padding: 5px;
   font-size: 16px;
+  cursor: pointer;
 `;

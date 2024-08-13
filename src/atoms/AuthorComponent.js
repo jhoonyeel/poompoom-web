@@ -1,16 +1,16 @@
-import { faCircle } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as FireCracker } from '../assets/FireCraker.svg';
 
 export default function AuthorComponent({ isHovered, profilePhoto }) {
+  const navigate = useNavigate();
+  const handlePostClick = (path) => () => {
+    navigate(path);
+  };
   return (
-    <Wrapper>
+    <Wrapper onClick={handlePostClick(`/profile`)}>
       <AuthorCircleBox>
-        <WhiteCircleIcon icon={faCircle} />
-        <AuthorImgBox>
-          <AuthorImg src={profilePhoto} alt="프로필 사진" />
-        </AuthorImgBox>
+        <AuthorImg src={profilePhoto} alt="프로필 사진" />
       </AuthorCircleBox>
       <FireCrackerBox $isHovered={isHovered}>
         <FireCrackerIcon />
@@ -20,33 +20,21 @@ export default function AuthorComponent({ isHovered, profilePhoto }) {
 }
 
 const Wrapper = styled.div`
-  width: 80px;
-  height: 80px;
-  margin-left: 5px;
-  margin-top: 5px;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
 `;
 const AuthorCircleBox = styled.div`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
   position: relative;
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+  border: 10px solid #ddd;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-const WhiteCircleIcon = styled(FontAwesomeIcon)`
-  color: black;
-  font-size: 60px;
-  position: absolute;
-  z-index: 1;
-`;
-const AuthorImgBox = styled.div`
-  width: 87%;
-  height: 87%;
-  border-radius: 50%;
   overflow: hidden;
-  position: absolute;
-  z-index: 2;
 `;
 const AuthorImg = styled.img`
   width: 100%;
@@ -55,13 +43,14 @@ const AuthorImg = styled.img`
 `;
 
 const FireCrackerBox = styled.div`
-  width: 80px;
-  height: 40px;
   position: relative;
-  z-index: 3;
+  width: 130px;
+  height: 80px;
+  z-index: 2;
   display: flex;
   justify-content: flex-end;
-  transform: ${({ $isHovered }) => ($isHovered ? 'translate(-15%, -110%) rotate(90deg)' : 'translateY(-48px)')};
+  transform: ${({ $isHovered }) =>
+    $isHovered ? 'translate(-18px, -80px) rotate(90deg)' : 'translateY(-85px)'}; // translate(-14%, -100%)와 동일함.
   transition: transform 0.25s ease-in-out;
 `;
 const FireCrackerIcon = styled(FireCracker)`

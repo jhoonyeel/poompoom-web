@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import AuthorComponent from '../../../../../atoms/AuthorComponent';
+import FollowBtnComponent from '../../../../../atoms/FollowBtnComponent';
 
 export default function ReviewPostAuthorUI({
   profilePhoto,
   nickname,
+  reviewType,
   isHovered,
   handleOnClick,
   isFollow,
@@ -12,33 +14,31 @@ export default function ReviewPostAuthorUI({
 }) {
   return (
     <Wrapper>
-      <Content>
-        <AuthorComponent isHovered={isHovered} onClick={handleOnClick('/profile')} profilePhoto={profilePhoto} />
+      <AuthorComponent isHovered={isHovered} onClick={handleOnClick('/profile')} profilePhoto={profilePhoto} />
+      <Info>
         <Nickname to="/profile">{`@${nickname}` || '@닉네임'}</Nickname>
-        {isFollow ? (
-          <FollowedBtn type="button" onClick={handleFollow}>
-            팔로잉
-          </FollowedBtn>
-        ) : (
-          <FollowBtn type="button" onClick={handleFollow}>
-            팔로우
-          </FollowBtn>
-        )}
-      </Content>
+        <AdditionalInfo>
+          <ReviewType>{reviewType === 'GIVEN' ? '준 선물' : '받은 선물'}</ReviewType>
+          {nickname === 'test' && <FollowBtnComponent isFollow={isFollow} handleFollow={handleFollow} />}
+        </AdditionalInfo>
+      </Info>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
+  display: flex;
   width: 380px;
   margin: 0 auto;
 `;
-const Content = styled.div`
+const Info = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  margin-left: 2rem;
+  flex: 1;
 `;
 const Nickname = styled(Link)`
+  text-align: left;
   text-decoration: none;
   font-family: 'Oleo Script Swash Caps', system-ui;
   font-style: normal;
@@ -50,27 +50,13 @@ const Nickname = styled(Link)`
     color: #000000;
   }
 `;
-const FollowBtn = styled.button`
-  color: #024e46;
-  background-color: white;
-  border: 3px solid #024e46;
-  &:hover {
-    color: white;
-    background-color: #024e46;
-  }
-  border-radius: 20px;
-  padding: 5px;
-  font-size: 16px;
+const AdditionalInfo = styled.div`
+  display: flex;
 `;
-const FollowedBtn = styled.button`
-  color: #b0b0b0;
-  background-color: white;
-  border: 3px solid #b0b0b0;
-  &:hover {
-    color: white;
-    background-color: #b0b0b0;
-  }
-  border-radius: 20px;
-  padding: 5px;
-  font-size: 16px;
+const ReviewType = styled.strong`
+  flex: 1;
+  text-align: left;
+  color: #0d3f39;
+  display: flex;
+  align-items: center;
 `;
