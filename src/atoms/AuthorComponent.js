@@ -4,11 +4,11 @@ import { ReactComponent as FireCracker } from '../assets/FireCraker.svg';
 
 export default function AuthorComponent({ isHovered, profilePhoto }) {
   const navigate = useNavigate();
-  const handlePostClick = (path) => () => {
+  const handleOnClick = (path) => () => {
     navigate(path);
   };
   return (
-    <Wrapper onClick={handlePostClick(`/profile`)}>
+    <Wrapper onClick={handleOnClick(`/profile`)}>
       <AuthorCircleBox>
         <AuthorImg src={profilePhoto} alt="프로필 사진" />
       </AuthorCircleBox>
