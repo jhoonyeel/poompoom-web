@@ -79,64 +79,72 @@ export default function ReviewWritePage() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <ImageUploadSection>
-        <ImagePlaceholder onClick={() => document.getElementById('imageInput').click()}>
-          {previewImages.length > 0 ? (
-            previewImages.map((src, index) => <img src={src} alt={`preview ${index}`} />)
-          ) : (
-            <img src={DummyPhoto} alt="placeholder" />
-          )}
-        </ImagePlaceholder>
-        <ImageInput id="imageInput" type="file" multiple onChange={handleImageChange} />
-      </ImageUploadSection>
-      <ContentSection>
-        <User>@poompoom_in_love</User>
-        <RadioButtonGroup>
-          <RadioButton
-            type="button"
-            $active={reviewData.reviewType === 'RECEIVED'}
-            onClick={() => setReviewData((prevData) => ({ ...prevData, reviewType: 'RECEIVED' }))}
-          >
-            받은 선물
-          </RadioButton>
-          <RadioButton
-            type="button"
-            $active={reviewData.reviewType === 'GIVEN'}
-            onClick={() => setReviewData((prevData) => ({ ...prevData, reviewType: 'GIVEN' }))}
-          >
-            준 선물
-          </RadioButton>
-        </RadioButtonGroup>
-        <Textarea
-          name="content"
-          placeholder="문구를 입력해주세요..."
-          value={reviewData.content}
-          onChange={handleInputChange}
-        />
-        <AdditionalInfo>
-          <InfoHeader>카테고리 선택</InfoHeader>
-          <GridBox>
-            {CATEGORIES.map((cat) => (
-              <CategoryButton
-                key={cat}
-                type="button"
-                onClick={() => setReviewData((prevData) => ({ ...prevData, category: cat }))}
-              >
-                {cat}
-              </CategoryButton>
-            ))}
-          </GridBox>
-          <FlexBox>
-            <InfoHeader>제품 정보(링크)</InfoHeader>
-            <InfoInput name="source" type="text" value={reviewData.source} onChange={handleInputChange} />
-          </FlexBox>
-          <FlexBox>
-            <InfoHeader>가격</InfoHeader>
-            <InfoInput name="price" type="text" value={reviewData.price} onChange={handleInputChange} />
-          </FlexBox>
-        </AdditionalInfo>
-      </ContentSection>
-      <SubmitButton type="submit">업로드하기</SubmitButton>
+      <Top>
+        <Title>새 무드뷰 만들기</Title>
+        <SubmitButton type="submit">업로드하기</SubmitButton>
+      </Top>
+      <Bottom>
+        <ImageUploadSection>
+          <ImagePlaceholder onClick={() => document.getElementById('imageInput').click()}>
+            {previewImages.length > 0 ? (
+              previewImages.map((src, index) => <img src={src} alt={`preview ${index}`} />)
+            ) : (
+              <img src={DummyPhoto} alt="placeholder" />
+            )}
+          </ImagePlaceholder>
+          <ImageInput id="imageInput" type="file" multiple onChange={handleImageChange} />
+        </ImageUploadSection>
+        <ContentSection>
+          <Info>
+            <AuthorCircleBox>
+              <img alt="프로필 사진" />
+            </AuthorCircleBox>
+            <User>@poompoom_in_love</User>
+            <RadioButton
+              type="button"
+              $active={reviewData.reviewType === 'RECEIVED'}
+              onClick={() => setReviewData((prevData) => ({ ...prevData, reviewType: 'RECEIVED' }))}
+            >
+              받은 선물
+            </RadioButton>
+            <RadioButton
+              type="button"
+              $active={reviewData.reviewType === 'GIVEN'}
+              onClick={() => setReviewData((prevData) => ({ ...prevData, reviewType: 'GIVEN' }))}
+            >
+              준 선물
+            </RadioButton>
+          </Info>
+          <Textarea
+            name="content"
+            placeholder="문구를 입력해주세요..."
+            value={reviewData.content}
+            onChange={handleInputChange}
+          />
+          <AdditionalInfo>
+            <InfoHeader>카테고리 선택</InfoHeader>
+            <GridBox>
+              {CATEGORIES.map((cat) => (
+                <CategoryButton
+                  key={cat}
+                  type="button"
+                  onClick={() => setReviewData((prevData) => ({ ...prevData, category: cat }))}
+                >
+                  {cat}
+                </CategoryButton>
+              ))}
+            </GridBox>
+            <FlexBox>
+              <InfoHeader>제품 정보(링크)</InfoHeader>
+              <InfoInput name="source" type="text" value={reviewData.source} onChange={handleInputChange} />
+            </FlexBox>
+            <FlexBox>
+              <InfoHeader>가격</InfoHeader>
+              <InfoInput name="price" type="text" value={reviewData.price} onChange={handleInputChange} />
+            </FlexBox>
+          </AdditionalInfo>
+        </ContentSection>
+      </Bottom>
     </Form>
   );
 }
@@ -144,31 +152,54 @@ export default function ReviewWritePage() {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin: 20px auto;
+  border: 5px solid #072623;
+  border-radius: 25px;
+  background: #072623;
+  box-shadow:
+    0px 4px 60px rgba(0, 0, 0, 0.25),
+    inset 0px 0px 80px #022622;
+`;
+const Top = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+const Title = styled.h3`
+  color: white;
+  font-weight: bold;
+  padding: 12px 20px;
+`;
+const SubmitButton = styled.button`
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  color: white;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  display: flex;
+`;
+
+const Bottom = styled.div`
+  width: 100%;
+  display: flex;
 `;
 
 const ImageUploadSection = styled.div`
+  width: 50%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
 `;
-
 const ImagePlaceholder = styled.div`
-  width: 500px;
-  height: 500px;
-  border: 2px dashed #c0c0c0;
-  border-radius: 10px;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 0px 0px 25px 25px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
   cursor: pointer;
   img {
     width: 100%;
@@ -176,47 +207,51 @@ const ImagePlaceholder = styled.div`
     object-fit: cover;
   }
 `;
-
 const ImageInput = styled.input`
   display: none;
 `;
 
 const ContentSection = styled.div`
+  width: 50%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  padding: 2% 4%;
+`;
+const Info = styled.div`
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
 `;
-
+const AuthorCircleBox = styled.div`
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #ffffff;
+`;
 const User = styled.div`
   font-family: 'Oleo Script Swash Caps', system-ui;
   font-size: 1.5em;
-  color: #333333;
-  margin-bottom: 10px;
-`;
-
-const RadioButtonGroup = styled.div`
+  color: #ffffff;
   display: flex;
-  margin-bottom: 20px;
+  align-items: center;
+  flex: 1;
 `;
-
 const RadioButton = styled.button`
-  background-color: ${({ $active }) => ($active ? '#007bff' : '#e0e0e0')};
-  color: ${({ $active }) => ($active ? '#ffffff' : '#333333')};
-  border: none;
-  border-radius: 5px;
+  color: #ffffff;
+  background-color: inherit;
+  border: 2px solid #ffffff;
+  border-radius: 27px;
   padding: 10px 20px;
-  margin-right: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   &:hover {
-    background-color: ${({ $active }) => ($active ? '#0056b3' : '#c0c0c0')};
+    background: rgba(255, 255, 255, 0.25);
   }
 `;
 
 const Textarea = styled.textarea`
   width: 100%;
-  height: 120px;
+  height: 150px;
   padding: 12px;
   margin-bottom: 20px;
   border: 1px solid #e0e0e0;
@@ -229,14 +264,12 @@ const Textarea = styled.textarea`
     border-color: #007bff;
   }
 `;
-
 const AdditionalInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-bottom: 20px;
 `;
-
 const GridBox = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -244,7 +277,6 @@ const GridBox = styled.div`
   gap: 10px;
   margin-bottom: 20px;
 `;
-
 const CategoryButton = styled.button`
   padding: 10px;
   background-color: #f0f0f0;
@@ -256,21 +288,18 @@ const CategoryButton = styled.button`
     background-color: #d0d0d0;
   }
 `;
-
 const FlexBox = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 10px;
 `;
-
 const InfoHeader = styled.h3`
   font-size: 1em;
-  color: #333333;
+  color: #ffffff;
   margin-bottom: 10px;
   width: 150px;
 `;
-
 const InfoInput = styled.input`
   font-size: 16px;
   padding: 8px;
@@ -281,21 +310,5 @@ const InfoInput = styled.input`
   transition: border-color 0.3s ease;
   &:focus {
     border-color: #007bff;
-  }
-`;
-
-const SubmitButton = styled.button`
-  padding: 12px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  align-self: flex-end;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #0056b3;
   }
 `;

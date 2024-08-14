@@ -1,15 +1,13 @@
-import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   width: 1440px;
   height: 1024px;
-
   margin: 0;
 `;
 
@@ -45,10 +43,6 @@ export const ImageWrapper = styled.div`
   width: 388px;
   height: 510px;
 `;
-
-/* export const Image = styled.img`
-  object-fit: cover;
-`; */
 
 export const BoardContainer = styled.div`
   display: flex;
@@ -91,12 +85,6 @@ export const CommentWrapper = styled.div`
   top: 460px;
   right: 0px;
 `;
-
-/*
- {placeholderImages.map((imageUrl, index) => (
-  <Image src={imageUrl} alt={`이미지 ${index + 1}`} />
-))}
-*/
 
 export const DetailSection = styled.section`
   width: 100%;

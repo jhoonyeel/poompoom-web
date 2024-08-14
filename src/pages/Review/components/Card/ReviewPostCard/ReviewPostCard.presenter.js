@@ -15,7 +15,12 @@ export default function ReviewPostCardUI({
 }) {
   return (
     <Wrapper>
-      <ReviewPostAuthor profilePhoto={post.profilePhoto} nickname={post.nickname} isHovered={isHovered} />
+      <ReviewPostAuthor
+        profilePhoto={post.profilePhoto}
+        nickname={post.nickname}
+        reviewType={post.reviewType}
+        isHovered={isHovered}
+      />
       <HoveredLayout>
         <HoveredBox
           onClick={handlePostClick(`/review/${post.reviewId}`)}

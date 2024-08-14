@@ -2,6 +2,7 @@ import { faBookmark as emptyBookmark, faHeart as emptyHeart } from '@fortawesome
 import { faBookmark, faCircle, faGreaterThan, faHeart, faLessThan } from '@fortawesome/free-solid-svg-icons';
 
 import FollowBtnComponent from '../../../atoms/FollowBtnComponent';
+import OverflowMenuComponent from '../../../atoms/OverflowMenuComponent';
 import PostCommentList from '../PostComment/PostCommentList/PostCommentList.container';
 import PostCommentWrite from '../PostComment/PostCommentWrite/PostCommentWrite.container';
 import * as S from './PostDetail.styles';
@@ -58,7 +59,7 @@ export default function ReviewDetailUI({
                 </S.AuthorCircleBox>
                 <S.ID>{`@${nickname}`}</S.ID>
                 <S.Title2>Lover에게 {reviewType === 'GIVEN' ? '주는 선물' : '받은 선물'}</S.Title2>
-                {isMyPost ? <p>수정하기</p> : <FollowBtnComponent />}
+                {isMyPost ? <OverflowMenuComponent /> : <FollowBtnComponent />}
               </S.BoardHeader>
               <S.BoardBody>{body}</S.BoardBody>
               <S.HashtagList>

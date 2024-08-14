@@ -32,15 +32,12 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
-    "serve": "serve -s build",
-    "clean": "rimraf build",
-    "prebuild": "npm run clean"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
