@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+export const HeaderText = styled.div``;
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -13,6 +14,17 @@ export const Wrapper = styled.div`
 export const Header = styled.h1`
   font-size: 32px;
   font-weight: bold;
+`;
+
+export const LogoContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LogoWrapper = styled.div`
+  margin: 0 1rem;
 `;
 
 export const FormContainer = styled.div`
@@ -47,7 +59,7 @@ export const Input = styled.input`
   border-radius: 5px;
 `;
 
-export const Button = styled.button`
+export const LoginButton = styled.button`
   padding: 10px;
   margin: 10px;
   font-size: 16px;
@@ -62,6 +74,9 @@ export const Button = styled.button`
   }
 `;
 
+export const StayLoginBtn = styled.button``;
+
+export const LinkWrapper = styled.div``;
 export const CustomLink = styled(Link)`
   margin-top: 20px;
   text-decoration: none;
