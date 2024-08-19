@@ -22,6 +22,7 @@ import ReviewPage from './pages/Review/ReviewPage';
 import PostDetail from './pages/ReviewDetail/PostDetail/PostDetail.container';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
 import { basicTheme } from './shared/Theme';
+import Welcome from './pages/welcome/Welcome';
 
 const queryClient = new QueryClient();
 
@@ -96,6 +97,7 @@ export default function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/signup/tag" element={<SignupTagPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/welcome" element={<Welcome />} />
             <Route path="/*" element={<MainLayout />}>
               <Route path="*" element={<AppRoutes />} />
             </Route>
