@@ -114,47 +114,28 @@ export const PhotoBox = styled.div`
 export const LeftBtn = styled.div`
   position: absolute;
   top: 50%;
-  left: 0;
+  left: 10px;
   transform: translateY(-50%);
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 1; /* 사진 위에 버튼이 나타나도록 설정 */
-`;
-export const LeftBtnIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
   color: white;
-  padding: 1rem;
+  cursor: pointer;
+  user-select: none;
 `;
 export const RightBtn = styled.div`
   position: absolute;
   top: 50%;
-  right: 0;
+  right: 10px;
   transform: translateY(-50%);
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 1; /* 사진 위에 버튼이 나타나도록 설정 */
-`;
-export const RightBtnIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
   color: white;
-  padding: 1rem;
+  cursor: pointer;
+  user-select: none;
 `;
 
-export const Title2 = styled.span`
-  font-size: 24px;
-  color: #0d3f39;
-`;
 export const ImageBox = styled.div`
   width: 500px;
   height: 630px;
+  user-select: none;
 `;
 export const Image = styled.img`
   width: 100%;
@@ -191,27 +172,16 @@ export const BoardHeader = styled.div`
   align-items: center;
 `;
 export const AuthorCircleBox = styled.div`
-  width: 6rem;
-  height: 6rem;
-  border-radius: 50%;
   position: relative;
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+  border: 10px solid #ddd;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-export const WhiteCircleIcon = styled(FontAwesomeIcon)`
-  color: black;
-  font-size: 60px;
-  position: absolute;
-  z-index: 1;
-`;
-export const AuthorImgBox = styled.div`
-  width: 87%;
-  height: 87%;
-  border-radius: 50%;
   overflow: hidden;
-  position: absolute;
-  z-index: 2;
 `;
 export const AuthorImg = styled.img`
   width: 100%;
@@ -219,7 +189,16 @@ export const AuthorImg = styled.img`
   object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
 `;
 export const ID = styled.span`
+  font-family: 'Oleo Script Swash Caps';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 50px;
+  color: #000000;
+`;
+export const Title2 = styled.span`
   font-size: 24px;
+  color: #0d3f39;
 `;
 export const BoardBody = styled.p`
   margin-top: 1rem;
@@ -285,4 +264,20 @@ export const CommentSection = styled.section`
 export const CommentContent = styled.div`
   width: 80%;
   margin: 0 auto;
+`;
+
+export const ImageDots = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+export const Dot = styled.div`
+  width: 8px;
+  height: 8px;
+  background-color: ${({ active }) => (active ? '#000' : '#bbb')}; /* 현재 이미지 인덱스에 따라 색상 변경 */
+  border-radius: 50%;
+  margin: 0 5px;
+  transition: background-color 0.3s;
 `;

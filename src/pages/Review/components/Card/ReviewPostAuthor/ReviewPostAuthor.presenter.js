@@ -19,7 +19,7 @@ export default function ReviewPostAuthorUI({
         <Nickname to="/profile">{`@${nickname}` || '@닉네임'}</Nickname>
         <AdditionalInfo>
           <ReviewType>{reviewType === 'GIVEN' ? '준 선물' : '받은 선물'}</ReviewType>
-          {nickname === 'test' && <FollowBtnComponent isFollow={isFollow} handleFollow={handleFollow} />}
+          {nickname !== 'test' && <FollowBtnComponent isFollow={isFollow} handleFollow={handleFollow} />}
         </AdditionalInfo>
       </Info>
     </Wrapper>

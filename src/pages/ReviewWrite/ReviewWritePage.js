@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
 import DummyPhoto from '../../assets/DummyPhoto.svg';
+import { useFetchProfilePicture } from '../../hooks/useFetchProfilePicture';
+import { profilePictureState } from '../../recoil/atoms';
 import { CATEGORIES } from '../../shared/categories';
 
 export default function ReviewWritePage() {
@@ -15,8 +18,7 @@ export default function ReviewWritePage() {
   });
   const [images, setImages] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
-
-  const navigate = useNavigate();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -32,8 +34,10 @@ export default function ReviewWritePage() {
 
     const previewUrls = files.map((file) => URL.createObjectURL(file));
     setPreviewImages(previewUrls);
+    setCurrentImageIndex(0); // Reset the current index when new images are added
   };
 
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -65,7 +69,7 @@ export default function ReviewWritePage() {
     }
 
     try {
-      const response = await axios.post('/review/create', formData, {
+      const response = await axios.post(`/review/create`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -77,6 +81,22 @@ export default function ReviewWritePage() {
     }
   };
 
+  const nextImage = (e) => {
+    e.stopPropagation(); // 이벤트 전파 방지
+    setCurrentImageIndex((prevIndex) => (prevIndex === previewImages.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  const prevImage = (e) => {
+    e.stopPropagation(); // 이벤트 전파 방지
+    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? previewImages.length - 1 : prevIndex - 1));
+  };
+
+  // 프로필 사진을 가져오는 커스텀 훅 호출
+  useFetchProfilePicture();
+
+  // Recoil 상태에서 프로필 사진 경로를 읽어옴
+  const profilePicture = useRecoilValue(profilePictureState);
+
   return (
     <Form onSubmit={handleSubmit}>
       <Top>
@@ -87,7 +107,16 @@ export default function ReviewWritePage() {
         <ImageUploadSection>
           <ImagePlaceholder onClick={() => document.getElementById('imageInput').click()}>
             {previewImages.length > 0 ? (
-              previewImages.map((src, index) => <img src={src} alt={`preview ${index}`} />)
+              <>
+                <img src={previewImages[currentImageIndex]} alt={`preview ${currentImageIndex}`} />
+                <ArrowLeft onClick={prevImage}>&#8249;</ArrowLeft>
+                <ArrowRight onClick={nextImage}>&#8250;</ArrowRight>
+                <Dots>
+                  {previewImages.map((_, index) => (
+                    <Dot active={index === currentImageIndex} />
+                  ))}
+                </Dots>
+              </>
             ) : (
               <img src={DummyPhoto} alt="placeholder" />
             )}
@@ -97,7 +126,7 @@ export default function ReviewWritePage() {
         <ContentSection>
           <Info>
             <AuthorCircleBox>
-              <img alt="프로필 사진" />
+              <AuthorImg src={profilePicture} alt="프로필 사진" />
             </AuthorCircleBox>
             <User>@poompoom_in_love</User>
             <RadioButton
@@ -122,7 +151,10 @@ export default function ReviewWritePage() {
             onChange={handleInputChange}
           />
           <AdditionalInfo>
-            <InfoHeader>카테고리 선택</InfoHeader>
+            <CategoryTitle>
+              <img alt="카테고리 선택 아이콘" />
+              <InfoHeader>카테고리 선택</InfoHeader>
+            </CategoryTitle>
             <GridBox>
               {CATEGORIES.map((cat) => (
                 <CategoryButton
@@ -193,6 +225,7 @@ const ImageUploadSection = styled.div`
   align-items: center;
 `;
 const ImagePlaceholder = styled.div`
+  position: relative;
   width: 100%;
   aspect-ratio: 1/1;
   border-radius: 0px 0px 25px 25px;
@@ -210,6 +243,41 @@ const ImagePlaceholder = styled.div`
 const ImageInput = styled.input`
   display: none;
 `;
+const ArrowLeft = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+`;
+const ArrowRight = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+`;
+const Dots = styled.div`
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+`;
+const Dot = styled.div`
+  width: 8px;
+  height: 8px;
+  background-color: ${({ active }) => (active ? 'white' : 'rgba(255, 255, 255, 0.5)')};
+  border-radius: 50%;
+  margin: 0 4px;
+  transition: background-color 0.3s;
+`;
 
 const ContentSection = styled.div`
   width: 50%;
@@ -223,14 +291,29 @@ const Info = styled.div`
   margin-bottom: 20px;
 `;
 const AuthorCircleBox = styled.div`
-  width: 80px;
-  height: 80px;
+  position: relative;
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+  border: 10px solid #ddd;
   border-radius: 50%;
-  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 `;
+const AuthorImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
+`;
+
 const User = styled.div`
   font-family: 'Oleo Script Swash Caps', system-ui;
-  font-size: 1.5em;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 115%;
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -238,7 +321,7 @@ const User = styled.div`
 `;
 const RadioButton = styled.button`
   color: #ffffff;
-  background-color: inherit;
+  background-color: ${({ $active }) => ($active ? 'rgba(255, 255, 255, 0.25)' : 'inherit')};
   border: 2px solid #ffffff;
   border-radius: 27px;
   padding: 10px 20px;
@@ -270,6 +353,11 @@ const AdditionalInfo = styled.div`
   width: 100%;
   margin-bottom: 20px;
 `;
+const CategoryTitle = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+`;
 const GridBox = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -297,7 +385,6 @@ const FlexBox = styled.div`
 const InfoHeader = styled.h3`
   font-size: 1em;
   color: #ffffff;
-  margin-bottom: 10px;
   width: 150px;
 `;
 const InfoInput = styled.input`

@@ -1,5 +1,5 @@
 {
-  "name": "poompoom",
+  "name": "poompoom-web",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://TwoSSome.github.io/poompoom-web",
@@ -27,6 +27,7 @@
     "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
     "react-slider": "^2.0.6",
+    "recoil": "^0.7.7",
     "styled-components": "^6.1.8",
     "styled-reset": "^4.5.2",
     "yup": "^1.4.0"
