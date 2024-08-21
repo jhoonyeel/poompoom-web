@@ -64,8 +64,14 @@ const AuthorBox = styled.div`
 
 const AuthorCircleBox = styled.div`
   position: relative;
-  width: 80px;
-  height: 80px;
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+  border: 10px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 `;
 const AuthorImg = styled.img`

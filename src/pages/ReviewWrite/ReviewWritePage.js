@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
@@ -8,7 +8,8 @@ import { useFetchProfilePicture } from '../../hooks/useFetchProfilePicture';
 import { profilePictureState } from '../../recoil/atoms';
 import { CATEGORIES } from '../../shared/categories';
 
-export default function ReviewWritePage() {
+export default function ReviewWritePage({ mode = 'create' }) {
+  const { reviewId } = useParams(); // 리뷰 ID를 URL에서 가져옵니다 (수정 모드일 때 필요).
   const [reviewData, setReviewData] = useState({
     content: '',
     price: '',
@@ -19,6 +20,39 @@ export default function ReviewWritePage() {
   const [images, setImages] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate();
+
+  // 프로필 사진을 가져오는 커스텀 훅 호출
+  useFetchProfilePicture();
+  // Recoil 상태에서 프로필 사진 경로를 읽어옴
+  const profilePicture = useRecoilValue(profilePictureState);
+
+  useEffect(() => {
+    if (mode === 'edit' && reviewId) {
+      // 수정 모드에서 기존 리뷰 데이터를 불러옵니다.
+      const fetchReviewData = async () => {
+        try {
+          const response = await axios.get(`/review/${reviewId}`);
+          const { data } = response;
+          setReviewData({
+            content: data.body.body,
+            price: data.body.price.toString(),
+            source: data.body.whereBuy || '',
+            category: data.body.hashTags.name[0] || '',
+            reviewType: data.body.reviewType || 'RECEIVED',
+          });
+          // 기존 사진 미리보기 설정
+          if (data.photos && data.photos.length > 0) {
+            setPreviewImages(data.photos);
+          }
+        } catch (error) {
+          console.error('Failed to fetch review data:', error);
+        }
+      };
+
+      fetchReviewData();
+    }
+  }, [mode, reviewId]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +71,6 @@ export default function ReviewWritePage() {
     setCurrentImageIndex(0); // Reset the current index when new images are added
   };
 
-  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -69,11 +102,20 @@ export default function ReviewWritePage() {
     }
 
     try {
-      const response = await axios.post(`/review/create`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      let response;
+      if (mode === 'create') {
+        response = await axios.post(`/review/create`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+      } else if (mode === 'edit' && reviewId) {
+        response = await axios.put(`/review/update/${reviewId}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+      }
       console.log('Success:', response.data);
       navigate('/review');
     } catch (error) {
@@ -91,17 +133,11 @@ export default function ReviewWritePage() {
     setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? previewImages.length - 1 : prevIndex - 1));
   };
 
-  // 프로필 사진을 가져오는 커스텀 훅 호출
-  useFetchProfilePicture();
-
-  // Recoil 상태에서 프로필 사진 경로를 읽어옴
-  const profilePicture = useRecoilValue(profilePictureState);
-
   return (
     <Form onSubmit={handleSubmit}>
       <Top>
-        <Title>새 무드뷰 만들기</Title>
-        <SubmitButton type="submit">업로드하기</SubmitButton>
+        <Title>{mode === 'create' ? '새 무드뷰 만들기' : '무드뷰 수정하기'}</Title>
+        <SubmitButton type="submit">{mode === 'create' ? '업로드하기' : '수정하기'}</SubmitButton>
       </Top>
       <Bottom>
         <ImageUploadSection>

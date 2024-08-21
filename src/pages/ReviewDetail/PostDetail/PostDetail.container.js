@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from '../../../apis/axios';
 import ReviewDetailUI from './PostDetail.presenter';
 
@@ -8,6 +8,7 @@ export default function PostDetail() {
   const [bookMark, setBookMark] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const { reviewId } = useParams();
+  const navigate = useNavigate();
 
   const fetchReview = async () => {
     try {
@@ -44,8 +45,28 @@ export default function PostDetail() {
     return <div>Loading...</div>; // 로딩 중임을 표시합니다.
   }
 
+  const onUpdate = () => {
+    navigate(`/review/update/${reviewId}`); // 수정 페이지로 이동
+  };
+
+  const onDelete = async () => {
+    try {
+      // eslint-disable-next-line no-alert
+      alert('삭제하시겠습니까?');
+      await axios.delete(`/review/delete/${reviewId}`);
+      console.log(`Review ${reviewId} deleted successfully`);
+      navigate('/review'); // 삭제 후 리뷰 목록 페이지로 이동
+    } catch (error) {
+      console.error('Failed to delete review', error);
+      // 추가적인 에러 처리 로직을 여기에 추가할 수 있습니다.
+    }
+  };
+
   return (
     <ReviewDetailUI
+      reviewId={reviewId}
+      onUpdate={onUpdate}
+      onDelete={onDelete}
       like={like}
       bookMark={bookMark}
       handleLike={handleLike}

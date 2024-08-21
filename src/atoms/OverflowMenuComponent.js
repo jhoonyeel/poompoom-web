@@ -1,9 +1,7 @@
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-export default function OverflowMenuComponent() {
+export default function OverflowMenuComponent({ onUpdate, onDelete }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -27,14 +25,14 @@ export default function OverflowMenuComponent() {
 
   return (
     <Wrapper onClick={toggleMenu}>
-      <FontAwesomeIcon icon={faEllipsisVertical} />
+      <VerticalDot>&#8942;</VerticalDot> {/* 수직으로 점 3개를 나타내는 문자 */}
       {isMenuOpen && (
         <MenuBox ref={menuRef}>
-          <Item>
+          <Item onClick={onUpdate}>
             <Span>수정하기</Span>
             <img alt="이미지" />
           </Item>
-          <Item>
+          <Item onClick={onDelete}>
             <Span>삭제</Span>
             <img alt="이미지" />
           </Item>
@@ -53,7 +51,10 @@ const Wrapper = styled.div`
   align-items: center;
   cursor: pointer;
 `;
-
+const VerticalDot = styled.span`
+  font-size: 24px;
+  font-weight: bold;
+`;
 const MenuBox = styled.div`
   position: absolute;
   top: 60px;

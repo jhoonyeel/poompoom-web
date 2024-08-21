@@ -1,6 +1,5 @@
 import { faBookmark as emptyBookmark, faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
-
 import { useState } from 'react';
 import FollowBtnComponent from '../../../atoms/FollowBtnComponent';
 import OverflowMenuComponent from '../../../atoms/OverflowMenuComponent';
@@ -9,6 +8,8 @@ import PostCommentWrite from '../PostComment/PostCommentWrite/PostCommentWrite.c
 import * as S from './PostDetail.styles';
 
 export default function ReviewDetailUI({
+  onUpdate,
+  onDelete,
   photos,
   whereBuy,
   price,
@@ -76,7 +77,7 @@ export default function ReviewDetailUI({
                 </S.AuthorCircleBox>
                 <S.ID>{`@${nickname}`}</S.ID>
                 <S.Title2>Lover에게 {reviewType === 'GIVEN' ? '주는 선물' : '받은 선물'}</S.Title2>
-                {isMyPost ? <OverflowMenuComponent /> : <FollowBtnComponent />}
+                {isMyPost ? <OverflowMenuComponent onUpdate={onUpdate} onDelete={onDelete} /> : <FollowBtnComponent />}
               </S.BoardHeader>
               <S.BoardBody>{body}</S.BoardBody>
               <S.HashtagList>
