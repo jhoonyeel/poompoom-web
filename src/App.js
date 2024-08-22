@@ -21,8 +21,8 @@ import QueryPage from './pages/Query/QueryPage';
 import ReviewPage from './pages/Review/ReviewPage';
 import PostDetail from './pages/ReviewDetail/PostDetail/PostDetail.container';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
-import { basicTheme } from './shared/Theme';
 import Welcome from './pages/welcome/Welcome';
+import { basicTheme } from './shared/Theme';
 
 const queryClient = new QueryClient();
 
@@ -42,7 +42,11 @@ function AppRoutes() {
       />
       <Route
         path="/review/write"
-        element={<ProtectedRoute element={ReviewWritePage} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={<ReviewWritePage mode="create" />} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route
+        path="/review/update/:reviewId"
+        element={<ProtectedRoute element={<ReviewWritePage mode="edit" />} isAuthenticated={isAuthenticated()} />}
       />
       <Route
         path="/review/query-result"
