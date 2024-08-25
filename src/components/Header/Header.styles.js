@@ -14,6 +14,7 @@ export const HeaderWrapper = styled.header`
 export const HeaderContent = styled.div`
   width: 80%;
   margin: 0 auto;
+  min-width: 1167px;
   height: 100%;
   display: flex;
   justify-content: space-between;
