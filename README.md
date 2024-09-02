@@ -10,6 +10,7 @@ JavaScript, React, styled-components, ESLint/Prettier(Airbnb Style), Yarn
 ### ✅ Application UI
 
 - 홈화면
+
 ![image](https://github.com/user-attachments/assets/029d1bc2-ca48-4e37-9c5c-094fdec62103)
 ![image](https://github.com/user-attachments/assets/4b7a1e54-46bf-490d-aa71-f7464cdb7cff)
 ![image](https://github.com/user-attachments/assets/aa06d538-9b0b-4707-8413-601cabb85aae)
