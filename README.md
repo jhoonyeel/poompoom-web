@@ -1,6 +1,37 @@
 # poompoom
 
-<br/>
+연인간에 주고 받은 선물을 공유하여 선물 선택의 고민을 덜고, 다양한 후기와 경험을 나눌 수 있는 `선물 공유 플랫폼`입니다.
+받은 선물이나 준 선물을 플랫폼에 공유하여 실시간 후기와 평가를 확인할 수 있습니다.
+
+### ✅ 사용 기술 및 개발 환경
+
+JavaScript, React, styled-components, ESLint/Prettier(Airbnb Style), Yarn
+
+### ✅ Application UI
+
+- 홈화면
+![image](https://github.com/user-attachments/assets/029d1bc2-ca48-4e37-9c5c-094fdec62103)
+![image](https://github.com/user-attachments/assets/4b7a1e54-46bf-490d-aa71-f7464cdb7cff)
+![image](https://github.com/user-attachments/assets/aa06d538-9b0b-4707-8413-601cabb85aae)
+
+### ✅ Architecture
+![image](https://github.com/user-attachments/assets/813ed4eb-4b4f-4340-9db1-91edf7e38fea)
+
+### ✅ 주요 기능
+
+1. 회원가입
+2. 로그인
+3. 검색(프로필, 리뷰글)
+4. 정렬(가격대, 품목)
+5. 리뷰글 작성/조회/수정/삭제
+6. 팔로우
+7. 프로필 조회/수정
+
+### ✅ Technical Issue
+
+- 웹 브라우저 상에서 HTTPS/HTTP 통신 불가 (Mixed Content 차단)
+- Grid로 구성된 리뷰글이 디스플레이 크기에 따라 뭉개지는 현상 발생
+- 50KB 이상 이미지 번들링 속도가 느려지는 현상 발생
 
 ### 📌 Branch Naming Convention (Github-Flow)
 
