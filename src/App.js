@@ -11,7 +11,7 @@ import Header from './components/Header/Header.container';
 import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
 import HomePage from './pages/Home/HomePage';
 import SignupPage from './pages/Join/Signup/SignupPage';
-import SignupTagPage from './pages/Join/SignupTag/SignupTagPage';
+import SignupTagPage from './pages/Join/SignupTag/SignupTag.container';
 import LoginPage from './pages/Login/LoginPage';
 import LoversProfilePage from './pages/LoversProfile/LoversProfilePage';
 import LoversProfileSetPage from './pages/LoversProfile/LoversProfileSetPage';
