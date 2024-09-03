@@ -30,6 +30,7 @@ JavaScript, React, styled-components, ESLint/Prettier(Airbnb Style), Yarn
 
 ### ✅ Technical Issue
 
+자세한 내용은 👉 https://github.com/TwoSSome/poompoom-web/wiki
 - 웹 브라우저 상에서 HTTPS/HTTP 통신 불가 (Mixed Content 차단)
 - Grid로 구성된 리뷰글이 디스플레이 크기에 따라 뭉개지는 현상 발생
 - 50KB 이상 이미지 번들링 속도가 느려지는 현상 발생
