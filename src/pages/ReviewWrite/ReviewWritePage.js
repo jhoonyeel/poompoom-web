@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
@@ -10,6 +10,8 @@ import { CATEGORIES } from '../../shared/categories';
 
 export default function ReviewWritePage({ mode = 'create' }) {
   const { reviewId } = useParams(); // 리뷰 ID를 URL에서 가져옵니다 (수정 모드일 때 필요).
+  const location = useLocation(); // 전달된 데이터를 받아오기 위해 useLocation 사용
+
   const [reviewData, setReviewData] = useState({
     content: '',
     price: '',
@@ -29,30 +31,47 @@ export default function ReviewWritePage({ mode = 'create' }) {
 
   useEffect(() => {
     if (mode === 'edit' && reviewId) {
-      // 수정 모드에서 기존 리뷰 데이터를 불러옵니다.
-      const fetchReviewData = async () => {
-        try {
-          const response = await axios.get(`/review/${reviewId}`);
-          const { data } = response;
-          setReviewData({
-            content: data.body.body,
-            price: data.body.price.toString(),
-            source: data.body.whereBuy || '',
-            category: data.body.hashTags.name[0] || '',
-            reviewType: data.body.reviewType || 'RECEIVED',
-          });
-          // 기존 사진 미리보기 설정
-          if (data.photos && data.photos.length > 0) {
-            setPreviewImages(data.photos);
-          }
-        } catch (error) {
-          console.error('Failed to fetch review data:', error);
+      // location.state에 데이터가 있는지 확인하고 초기화
+      if (location.state) {
+        const data = location.state;
+        setReviewData({
+          content: data.body,
+          price: data.price.toString(),
+          source: data.whereBuy || '',
+          category: data.hashTags[0].name || '',
+          reviewType: data.reviewType || 'RECEIVED',
+        });
+        // 기존 사진 미리보기 설정
+        if (data.photos && data.photos.length > 0) {
+          const imageUrls = data.photos.map((photo) => photo.photoPath); // photoPath만 추출
+          setPreviewImages(imageUrls);
         }
-      };
-
-      fetchReviewData();
+      } else {
+        // 수정 모드에서 기존 리뷰 데이터를 불러옵니다.
+        const fetchReviewData = async () => {
+          try {
+            const response = await axios.get(`/review/${reviewId}`);
+            const { data } = response;
+            setReviewData({
+              content: data.body.body,
+              price: data.body.price.toString(),
+              source: data.body.whereBuy || '',
+              category: data.body.hashTags.name[0] || '',
+              reviewType: data.body.reviewType || 'RECEIVED',
+            });
+            // 기존 사진 미리보기 설정
+            if (data.photos && data.photos.length > 0) {
+              const imageUrls = data.photos.map((photo) => photo.photoPath); // photoPath만 추출
+              setPreviewImages(imageUrls);
+            }
+          } catch (error) {
+            console.error('Failed to fetch review data:', error);
+          }
+        };
+        fetchReviewData();
+      }
     }
-  }, [mode, reviewId]);
+  }, [mode, reviewId, location.state]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -110,7 +129,7 @@ export default function ReviewWritePage({ mode = 'create' }) {
           },
         });
       } else if (mode === 'edit' && reviewId) {
-        response = await axios.put(`/review/update/${reviewId}`, formData, {
+        response = await axios.post(`/review/update/${reviewId}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -120,6 +139,7 @@ export default function ReviewWritePage({ mode = 'create' }) {
       navigate('/review');
     } catch (error) {
       console.error('Error:', error);
+      console.error('formData:', formData);
     }
   };
 
@@ -196,6 +216,7 @@ export default function ReviewWritePage({ mode = 'create' }) {
                 <CategoryButton
                   key={cat}
                   type="button"
+                  $active={reviewData.category === cat}
                   onClick={() => setReviewData((prevData) => ({ ...prevData, category: cat }))}
                 >
                   {cat}
@@ -403,13 +424,16 @@ const GridBox = styled.div`
 `;
 const CategoryButton = styled.button`
   padding: 10px;
-  background-color: #f0f0f0;
-  border: 1px solid #e0e0e0;
+  background-color: ${({ $active }) => ($active ? '#007bff' : '#f0f0f0')};
+  color: ${({ $active }) => ($active ? '#ffffff' : '#000000')};
+  border: 1px solid ${({ $active }) => ($active ? '#007bff' : '#e0e0e0')};
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
   &:hover {
-    background-color: #d0d0d0;
+    background-color: ${({ $active }) => ($active ? '#0056b3' : '#d0d0d0')};
   }
 `;
 const FlexBox = styled.div`

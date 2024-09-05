@@ -42,11 +42,11 @@ function AppRoutes() {
       />
       <Route
         path="/review/write"
-        element={<ProtectedRoute element={<ReviewWritePage mode="create" />} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={ReviewWritePage} isAuthenticated={isAuthenticated()} mode="create" />}
       />
       <Route
         path="/review/update/:reviewId"
-        element={<ProtectedRoute element={<ReviewWritePage mode="edit" />} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={ReviewWritePage} isAuthenticated={isAuthenticated()} mode="edit" />}
       />
       <Route
         path="/review/query-result"
