@@ -37,7 +37,6 @@ axios.interceptors.response.use(
             headers: {
               // Authorization: `Bearer ${refreshToken}`,
               refresh: refreshToken,
-              'Content-Type': 'application/json', // Content-Type 설정
             },
           },
         );
@@ -52,22 +51,27 @@ axios.interceptors.response.use(
         //   return axios(originalRequest);
         // }
         if (response.status === 200) {
-          const { access: accessToken, refresh: newRefreshToken } = response.data;
+          const { access: newAccessToken, refresh: newRefreshToken } = response.data;
+
+          // 기존의 accessToken과 refreshToken을 로컬스토리지에서 가져옴
           const currentAccessToken = localStorage.getItem('accessToken');
           const currentRefreshToken = localStorage.getItem('refreshToken');
 
-          // Update tokens only if they are different
-          if (accessToken !== currentAccessToken) {
-            localStorage.setItem('accessToken', accessToken);
-            // axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-            // originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-            axios.defaults.headers.common.access = accessToken;
-            originalRequest.headers.access = accessToken;
+          // 새롭게 받은 accessToken이 기존 accessToken과 다르면 업데이트
+          if (newAccessToken && newAccessToken !== currentAccessToken) {
+            localStorage.setItem('accessToken', newAccessToken);
+            // axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
+            // originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+            axios.defaults.headers.common.access = newAccessToken;
+            originalRequest.headers.access = newAccessToken;
           }
+
+          // 새롭게 받은 refreshToken이 존재하고 기존 refreshToken과 다르면 업데이트
           if (newRefreshToken && newRefreshToken !== currentRefreshToken) {
             localStorage.setItem('refreshToken', newRefreshToken);
           }
 
+          // 토큰을 새롭게 받은 후에 원래의 요청(originalRequest)을 재시도
           return axios(originalRequest);
         }
       } catch (refreshError) {

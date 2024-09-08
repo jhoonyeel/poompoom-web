@@ -106,6 +106,7 @@ export default function ReviewWritePage({ mode = 'create' }) {
     const jsonBody = JSON.stringify({
       body: content,
       price: parseFloat(price),
+      willDeletePhoto: [], // 삭제할 사진 ID 리스트 (수정 시 필요, 선택적)
       whereBuy: source,
       category,
       reviewType,
@@ -114,6 +115,7 @@ export default function ReviewWritePage({ mode = 'create' }) {
     // FormData 객체를 생성하여 데이터를 담기
     const formData = new FormData();
     formData.append('body', new Blob([jsonBody], { type: 'application/json' }));
+    // 새로 추가할 이미지가 있으면 formData에 추가
     if (images.length) {
       images.forEach((image) => {
         formData.append('photos', image);
