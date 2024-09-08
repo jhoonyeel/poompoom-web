@@ -10,6 +10,7 @@ export const FooterContent = styled.div`
   /* width: 80%; */
   height: 100%;
   margin: 0 auto;
+  min-width: max-content;
 `;
 export const FooterSvg = styled(Footer)`
   width: 100%;
