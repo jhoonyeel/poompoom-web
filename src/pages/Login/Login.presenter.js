@@ -1,25 +1,13 @@
-import { useState } from 'react';
 import * as S from './Login.styles';
 import { ReactComponent as NaverLogo } from '../../assets/Login/LogoIcon/Naver.svg';
 import { ReactComponent as GoogleLogo } from '../../assets/Login/LogoIcon/Google.svg';
 import { ReactComponent as AppleLogo } from '../../assets/Login/LogoIcon/Apple.svg';
 import { ReactComponent as LoginTitle } from '../../assets/Login/LogInTitle.svg';
+import { useInputFocus } from '../../hooks/useInputFocus';
+import AuthFooterUI from '../../atoms/AuthFooter';
 
-export default function LoginUI({ handleSubmitLogin, username, setUsername, password, setPassword }) {
-  const [isFocused, setIsFocused] = useState({
-    username: false,
-    password: false,
-  });
-
-  const handleFocus = (field) => {
-    setIsFocused({ ...isFocused, [field]: true });
-  };
-
-  const handleBlur = (field) => {
-    if (!document.getElementById(field).value) {
-      setIsFocused({ ...isFocused, [field]: false });
-    }
-  };
+export default function LoginUI({ handleSubmitLogin, username, setUsername, password, setPassword, onGoogleLogin }) {
+  const { isFocused, handleFocus, handleBlur } = useInputFocus();
   return (
     <>
       <S.LogoSvg />
@@ -34,7 +22,7 @@ export default function LoginUI({ handleSubmitLogin, username, setUsername, pass
             <NaverLogo />
           </S.LogoWrapper>
           <S.LogoWrapper>
-            <GoogleLogo />
+            <GoogleLogo onClick={onGoogleLogin} />
           </S.LogoWrapper>
           <S.LogoWrapper>
             <AppleLogo />
@@ -52,10 +40,11 @@ export default function LoginUI({ handleSubmitLogin, username, setUsername, pass
               id="username"
               type="text"
               onFocus={() => handleFocus('username')}
-              onBlur={() => handleBlur('username')}
+              onBlur={(event) => handleBlur(event, 'username')}
             />
           </S.InputContainer>
 
+          {/* 라벨-htmlFor & 인풋-id 동일해야 라벨 클릭 시에도 인풋이 포커스 */}
           <S.InputContainer>
             <S.Label isFocused={isFocused.password} htmlFor="password">
               비밀번호
@@ -66,7 +55,7 @@ export default function LoginUI({ handleSubmitLogin, username, setUsername, pass
               id="password"
               type="password"
               onFocus={() => handleFocus('password')}
-              onBlur={() => handleBlur('password')}
+              onBlur={(event) => handleBlur(event, password)}
             />
           </S.InputContainer>
 
@@ -87,15 +76,7 @@ export default function LoginUI({ handleSubmitLogin, username, setUsername, pass
           <S.CustomLink to="/signup">회원가입</S.CustomLink>
         </S.LinkWrapper>
       </S.LoginContainer>
-      <S.FooterContainer>
-        <S.FooterBenner />
-        <S.MenuContainer>
-          <S.MenuText>HOME</S.MenuText>
-          <S.MenuText>MOOD VIEW</S.MenuText>
-          <S.MenuText>MY LOVER</S.MenuText>
-          <S.MenuText>OPTION</S.MenuText>
-        </S.MenuContainer>
-      </S.FooterContainer>
+      <AuthFooterUI />
     </>
   );
 }

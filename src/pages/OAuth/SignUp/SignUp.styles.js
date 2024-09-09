@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
 import { ReactComponent as Logo } from '../../../assets/Login/SmallLogo.svg';
 
 export const LogoSvg = styled(Logo)`
@@ -11,11 +9,17 @@ export const LogoSvg = styled(Logo)`
 
 export const Header = styled.h1`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   margin-top: 13rem;
-  width: 100%;
+`;
+
+export const SocialText = styled.div`
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  color: #6b0202;
+  font-weight: 800;
 `;
 
 export const HeaderText = styled.div`
@@ -142,46 +146,4 @@ export const LoginButton = styled.button`
   border-radius: 2px;
   cursor: pointer;
   font-size: 1.3rem;
-`;
-
-export const LinkWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-`;
-
-export const LinkInnerWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-export const CustomLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  padding: 0 0.5rem;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-  &:visited {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-  }
-`;
-
-export const Line = styled.div`
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-`;
-
-export const LoverText = styled.div`
-  font-size: 1.5rem;
-  width: 45rem;
-  padding: 1rem 0 4rem 0;
-  margin: 0;
 `;

@@ -8,11 +8,16 @@ import CommunityList from './components/Community/CommunityList/CommunityList';
 import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
 import Footer from './components/Footer/Footer.container';
 import Header from './components/Header/Header.container';
-import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
-import HomePage from './pages/Home/HomePage';
+
+import LoginPage from './pages/Login/LoginPage';
 import SignupPage from './pages/Join/Signup/SignupPage';
 import SignupTagPage from './pages/Join/SignupTag/SignupTag.container';
-import LoginPage from './pages/Login/LoginPage';
+import SocialSignUp from './pages/OAuth/SignUp/SignUp.container';
+import SignUpSocial from './pages/OAuth/SignUpSocial';
+import Welcome from './pages/welcome/Welcome';
+
+import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
+import HomePage from './pages/Home/HomePage';
 import LoversProfilePage from './pages/LoversProfile/LoversProfilePage';
 import LoversProfileSetPage from './pages/LoversProfile/LoversProfileSetPage';
 import ProfileEditPage from './pages/Profile/ProfileEditPage';
@@ -21,7 +26,7 @@ import QueryPage from './pages/Query/QueryPage';
 import ReviewPage from './pages/Review/ReviewPage';
 import PostDetail from './pages/ReviewDetail/PostDetail/PostDetail.container';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
-import Welcome from './pages/welcome/Welcome';
+
 import { basicTheme } from './shared/Theme';
 
 const queryClient = new QueryClient();
@@ -100,6 +105,8 @@ export default function App() {
           <Routes>
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/signup/tag" element={<SignupTagPage />} />
+            <Route path="/signup/social" element={<SignUpSocial />} />
+            <Route path="/signUp/social/form" element={<SocialSignUp />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/*" element={<MainLayout />}>

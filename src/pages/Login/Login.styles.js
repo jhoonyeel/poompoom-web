@@ -89,7 +89,8 @@ export const Label = styled.label`
   font-size: ${(props) => (props.isFocused ? '12px' : '28px')};
   color: ${(props) => (props.isFocused ? '#000' : '#888')};
   transition: all 0.2s ease-in-out;
-  padding-bottom: 10px;
+  padding: 0;
+  margin: 0;
 `;
 
 export const InputContainer = styled.div`

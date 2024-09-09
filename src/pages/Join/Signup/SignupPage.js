@@ -5,8 +5,11 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { schema } from './Signup.validation';
-import SignupUI from './SignUp.present';
+import SignupUI from './SignUp.presenter';
 
+/** 
+ @description 일반 로그인 페이지
+ */
 export default function SignupPage() {
   const {
     register,
@@ -15,16 +18,18 @@ export default function SignupPage() {
     watch,
   } = useForm({
     resolver: yupResolver(schema),
-    mode: 'onChange', // onchange 당 체크
+    mode: 'onChange',
   });
 
   const navigate = useNavigate();
   const [emailSentMessage, setEmailSentMessage] = useState('');
   const [verificationMessage, setVerificationMessage] = useState('');
+  const [idCheckMessage, setIdCheckMessage] = useState('');
+  const [isIdValid, setIsIdValid] = useState(false);
 
   const email = watch('email');
   const verificationCode = watch('verificationCode');
-
+  const id = watch('id');
   const sendEmailVerification = async () => {
     try {
       const result = await axios.post(`/${email}/send`);
@@ -35,6 +40,7 @@ export default function SignupPage() {
       console.log('이메일 인증 요청에 실패했습니다.');
     }
   };
+
   const submitVerification = async () => {
     try {
       const result = await axios.post(`/${email}/check`, { authNum: verificationCode });
@@ -45,7 +51,35 @@ export default function SignupPage() {
       setVerificationMessage('인증번호 확인에 실패했습니다.');
     }
   };
+
+  // 아이디 중복 체크 함수 추가
+  const checkDuplicateId = async () => {
+    try {
+      const result = await axios.post('/member/dupidcheck', { username: id });
+      console.log('아이디 중복 체크 성공', result.data);
+      setIdCheckMessage('사용 가능한 아이디입니다.');
+      setIsIdValid(true);
+    } catch (error) {
+      if (error.response?.status === 400) {
+        setIdCheckMessage('이미 가입된 아이디입니다.');
+      } else {
+        setIdCheckMessage('아이디 중복 체크에 실패했습니다.');
+      }
+      setIsIdValid(false);
+      console.error('아이디 중복 체크 실패', error.response?.data);
+    }
+  };
+
+  const onClickToWelcome = () => {
+    navigate('/welcome');
+  };
+
   const onSubmit = async (data) => {
+    if (!isIdValid) {
+      setIdCheckMessage('아이디 중복 체크를 먼저 해주세요.');
+      return;
+    }
+
     const formData = new FormData();
     try {
       const req = new Blob(
@@ -68,21 +102,16 @@ export default function SignupPage() {
         },
       });
       console.log('회원가입 성공', result.data);
-      navigate('/login');
+      onClickToWelcome();
     } catch (error) {
       console.error('회원가입 실패', error.response?.data);
-      console.log('FormData 내용!!!');
-      navigate('/login');
+      console.log('FormData 내용!:');
       if (formData) {
         Array.from(formData.entries()).forEach(([key, value]) => {
           console.log(key, value);
         });
       }
     }
-  };
-
-  const onClickToWelcome = () => {
-    navigate('/welcome');
   };
 
   return (
@@ -97,8 +126,10 @@ export default function SignupPage() {
       submitVerification={submitVerification}
       email={email}
       verificationCode={verificationCode}
+      id={id}
+      idCheckMessage={idCheckMessage}
+      checkDuplicateId={checkDuplicateId}
       onSubmit={onSubmit}
-      onClickToWelcome={onClickToWelcome}
     />
   );
 }
