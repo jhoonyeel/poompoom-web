@@ -3,9 +3,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-
-import { schema } from './Signup.validation';
 import SignupUI from './SignUp.presenter';
+import { schema } from '../../../components/SignUpValidation/SignUpValidation';
 
 /** 
  @description 일반 로그인 페이지
@@ -25,6 +24,7 @@ export default function SignupPage() {
   const [emailSentMessage, setEmailSentMessage] = useState('');
   const [verificationMessage, setVerificationMessage] = useState('');
   const [idCheckMessage, setIdCheckMessage] = useState('');
+  const [tagMessage, setTagMessage] = useState('');
   const [isIdValid, setIsIdValid] = useState(false);
 
   const email = watch('email');
@@ -75,8 +75,14 @@ export default function SignupPage() {
   };
 
   const onSubmit = async (data) => {
+    const storedTags = localStorage.getItem('signUpTag');
+    if (!storedTags) {
+      setTagMessage('프로필 태그를 설정해 주세요.');
+      return;
+    }
+
     if (!isIdValid) {
-      setIdCheckMessage('아이디 중복 체크를 먼저 해주세요.');
+      setIdCheckMessage('아이디 중복 체크를 해주세요.');
       return;
     }
 
@@ -87,8 +93,9 @@ export default function SignupPage() {
           JSON.stringify({
             username: data.id,
             password: data.password,
-            nickname: data.email,
-            profileTagIds: [1],
+            nickname: data.nickname,
+            email: data.email,
+            profileTagIds: storedTags,
           }),
         ],
         { type: 'application/json' },
@@ -120,6 +127,7 @@ export default function SignupPage() {
       handleSubmit={handleSubmit}
       errors={errors}
       isValid={isValid}
+      tagMessage={tagMessage}
       emailSentMessage={emailSentMessage}
       verificationMessage={verificationMessage}
       sendEmailVerification={sendEmailVerification}

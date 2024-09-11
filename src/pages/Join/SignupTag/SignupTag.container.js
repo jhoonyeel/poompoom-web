@@ -1,4 +1,6 @@
 import { useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 import SignUpUI from './SignUpTag.presenter';
 
 export default function SignupPage() {
@@ -12,8 +14,20 @@ export default function SignupPage() {
   const [buttons, setButtons] = useState(initialButtons);
   const [selectedAgeLabel, setSelectedAgeLabel] = useState('10대 후반');
 
+  const navigate = useNavigate();
+
   const setSelectedButton = (id, value) => {
     setButtons(buttons.map((button) => (button.id === id ? { ...button, value } : button)));
+  };
+
+  const onClickToBack = () => {
+    const valuesArray = buttons.map((button) => button.value);
+    console.log(valuesArray);
+
+    localStorage.setItem('signUpTag', valuesArray);
+    console.log('선택사항:', valuesArray);
+    console.log(localStorage.getItem('signUpTag'));
+    navigate(-1);
   };
 
   return (
@@ -22,6 +36,7 @@ export default function SignupPage() {
       selectedAgeLabel={selectedAgeLabel}
       setSelectedAgeLabel={setSelectedAgeLabel}
       setSelectedButton={setSelectedButton}
+      onClickToBack={onClickToBack}
     />
   );
 }

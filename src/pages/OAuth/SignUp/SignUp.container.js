@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { schema } from './SignUp.validation';
 import SocialSignUpUI from './SignUp.presenter';
+import { schema } from './SignUp.validation';
 
 /** 
  @description 소셜 로그인 페이지
@@ -24,7 +24,9 @@ export default function SocialSignUp() {
   const navigate = useNavigate();
   const [nicknameMessage, setNicknameMessage] = useState('');
   const [idCheckMessage, setIdCheckMessage] = useState('');
+  const [tagMessage, setTagMessage] = useState('');
   const [isIdValid, setIsIdValid] = useState(false);
+
   const nickname = watch('nickname');
   const id = watch('id');
   const checkDuplicateId = async () => {
@@ -45,6 +47,12 @@ export default function SocialSignUp() {
   };
   const onSubmit = async (data) => {
     const formData = new FormData();
+
+    const storedTags = localStorage.getItem('signUpTag');
+    if (!storedTags) {
+      setTagMessage('프로필 태그를 설정해 주세요.');
+      return;
+    }
 
     const jwt = localStorage.getItem('jwtToken');
     if (!jwt) {
@@ -93,6 +101,7 @@ export default function SocialSignUp() {
       isValid={isValid}
       nickname={nickname}
       id={id}
+      tagMessage={tagMessage}
       setNicknameMessage={setNicknameMessage}
       nicknameMessage={nicknameMessage}
       idCheckMessage={idCheckMessage}

@@ -4,12 +4,14 @@ import * as S from './Signup.style';
 import { ReactComponent as SignUpTitle } from '../../../assets/Login/CreateAccount.svg';
 import { useInputFocus } from '../../../hooks/useInputFocus';
 import AuthFooterUI from '../../../atoms/AuthFooter';
+import ProfileTag from '../../../components/ProfileTag/ProfileTag';
 
 export default function SignupUI({
   register,
   handleSubmit,
   errors,
   isValid,
+  tagMessage,
   emailSentMessage,
   verificationMessage,
   sendEmailVerification,
@@ -30,6 +32,7 @@ export default function SignupUI({
         <S.Header>
           <SignUpTitle />
         </S.Header>
+        <ProfileTag /> <S.ErrorMessage>{tagMessage}</S.ErrorMessage>
         <S.HeaderText>information</S.HeaderText>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <S.InputContainer>
@@ -50,7 +53,6 @@ export default function SignupUI({
             </S.InputWrapper>
             <S.ErrorMessage>{errors.id?.message || idCheckMessage}</S.ErrorMessage>
           </S.InputContainer>
-
           <S.InputContainer>
             <S.InputWrapper>
               <S.InputLabel isFocused={isFocused.email} htmlFor="email">
@@ -69,7 +71,6 @@ export default function SignupUI({
             </S.InputWrapper>
             <S.ErrorMessage>{errors.email?.message || emailSentMessage}</S.ErrorMessage>
           </S.InputContainer>
-
           <S.InputContainer>
             <S.InputWrapper>
               <S.InputLabel isFocused={isFocused.verNum} htmlFor="verNum">
@@ -92,6 +93,19 @@ export default function SignupUI({
           </S.InputContainer>
 
           <S.InputContainer>
+            <S.InputLabel isFocused={isFocused.nickname} htmlFor="nickname">
+              닉네임
+            </S.InputLabel>
+            <S.Input
+              id="nickname"
+              type="text"
+              {...register('nickname')}
+              onFocus={() => handleFocus('nickname')}
+              onBlur={(event) => handleBlur(event, 'nickname')}
+            />
+            <S.ErrorMessage>{errors.nickname?.message}</S.ErrorMessage>
+          </S.InputContainer>
+          <S.InputContainer>
             <S.InputLabel isFocused={isFocused.pass} htmlFor="pass">
               비밀번호
             </S.InputLabel>
@@ -104,7 +118,6 @@ export default function SignupUI({
             />
             <S.ErrorMessage>{errors.password?.message}</S.ErrorMessage>
           </S.InputContainer>
-
           <S.InputContainer>
             <S.InputLabel isFocused={isFocused.checkPass} htmlFor="checkPass">
               비밀번호 확인
@@ -118,13 +131,11 @@ export default function SignupUI({
             />
             <S.ErrorMessage>{errors.confirmPassword?.message}</S.ErrorMessage>
           </S.InputContainer>
-
           <S.HeaderText>profile Image</S.HeaderText>
           <S.InputContainer>
             <S.FileInput type="file" {...register('file')} />
           </S.InputContainer>
           <S.HeaderText>lover information</S.HeaderText>
-
           <S.InputContainer>
             <S.InputLabel isFocused={isFocused.loverEmail} htmlFor="loverEmail">
               이메일(연동을 원할 시 필수항목)
@@ -136,7 +147,6 @@ export default function SignupUI({
               onBlur={(event) => handleBlur(event, 'loverEmail')}
             />
           </S.InputContainer>
-
           <S.LinkWrapper>
             <S.LinkInnerWrapper>
               <S.CustomLink to="/">아이디로 찾기</S.CustomLink>
@@ -144,12 +154,12 @@ export default function SignupUI({
               <S.CustomLink to="/">닉네임으로 찾기</S.CustomLink>
             </S.LinkInnerWrapper>
           </S.LinkWrapper>
-
           <S.LoverText>연인의 이메일/아이디를 등록하셔야 연동을 위한 코드가 발송됩니다.</S.LoverText>
           <S.LoginButton style={{ backgroundColor: isValid ? 'yellow' : '' }} type="submit">
             Join
           </S.LoginButton>
         </S.Form>
+        <S.ErrorMessage>{tagMessage}</S.ErrorMessage>
       </S.LoginContainer>
       <AuthFooterUI />
     </>

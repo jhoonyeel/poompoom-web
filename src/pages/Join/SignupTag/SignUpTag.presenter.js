@@ -4,7 +4,7 @@ import Gender from './component/Gender';
 import Interest from './component/Interest';
 import Job from './component/Job';
 
-export default function SignUpUI({ buttons, setSelectedButton, setSelectedAgeLabel, selectedAgeLabel }) {
+export default function SignUpUI({ buttons, setSelectedButton, setSelectedAgeLabel, selectedAgeLabel, onClickToBack }) {
   return (
     <S.Container>
       <S.IntroText>프로필 태그 선택</S.IntroText>
@@ -35,7 +35,7 @@ export default function SignUpUI({ buttons, setSelectedButton, setSelectedAgeLab
         <Interest setSelectedButton={(value) => setSelectedButton(4, value)} />
       </S.Container>
 
-      <S.SubmitButton>회원가입</S.SubmitButton>
+      <S.SubmitButton onClick={onClickToBack}>회원가입</S.SubmitButton>
     </S.Container>
   );
 }

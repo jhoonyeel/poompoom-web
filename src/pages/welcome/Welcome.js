@@ -7,8 +7,8 @@ import { ReactComponent as Location } from '../../assets/Login/Location.svg';
 
 export default function Welcome() {
   const navigate = useNavigate();
-  const onClickToMain = () => {
-    navigate('/');
+  const onClickToLogin = () => {
+    navigate('/login');
   };
 
   return (
@@ -36,7 +36,7 @@ export default function Welcome() {
       <S.TextWrapper>
         <S.Text>생년월일, 기념일 등을 기입해주셔야 활성화됩니다.</S.Text> <S.Text>바로 하러 가볼까요?</S.Text>
       </S.TextWrapper>
-      <S.Button onClick={onClickToMain}>고고싱</S.Button>
+      <S.Button onClick={onClickToLogin}>고고싱</S.Button>
     </S.Container>
   );
 }

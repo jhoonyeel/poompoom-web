@@ -25,6 +25,17 @@ export const HeaderText = styled.div`
   padding: 4rem 0;
 `;
 
+export const TagButton = styled.button`
+  background-color: #000;
+  color: #fff;
+  padding: 0.8rem;
+  border-radius: 2px;
+  border: 1px solid #000;
+`;
+export const TagText = styled.div`
+  margin-left: 1rem;
+  font-size: 1.3rem;
+`;
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -53,6 +64,8 @@ export const InputContainer = styled.div`
 export const InputWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Input = styled.input`
@@ -81,7 +94,7 @@ export const FileInput = styled.input`
   margin-top: 8px;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 1px;
+  border-radius: 2px;
   background-color: #f9f9f9;
   cursor: pointer;
 
@@ -90,7 +103,7 @@ export const FileInput = styled.input`
     background-color: #3a3a3a;
     color: white;
     border: none;
-    border-radius: 1px;
+    border-radius: 2px;
     cursor: pointer;
   }
 

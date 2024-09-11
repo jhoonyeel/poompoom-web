@@ -3,12 +3,14 @@ import * as S from './SignUp.styles';
 import { ReactComponent as SignUpTitle } from '../../../assets/Login/CreateAccount.svg';
 import { useInputFocus } from '../../../hooks/useInputFocus';
 import AuthFooterUI from '../../../atoms/AuthFooter';
+import ProfileTag from '../../../components/ProfileTag/ProfileTag';
 
 export default function SocialSignUpUI({
   register,
   handleSubmit,
   errors,
   isValid,
+  tagMessage,
   id,
   nicknameMessage,
   idCheckMessage,
@@ -25,6 +27,9 @@ export default function SocialSignUpUI({
           <SignUpTitle />
           <S.SocialText>with-Social</S.SocialText>
         </S.Header>
+        <ProfileTag />
+        <S.ErrorMessage>{tagMessage}</S.ErrorMessage>
+
         <S.HeaderText>information</S.HeaderText>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <S.InputContainer>
