@@ -1,6 +1,5 @@
 import { faBookmark as emptyBookmark, faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
 import FollowBtnComponent from '../../../atoms/FollowBtnComponent';
 import OverflowMenuComponent from '../../../atoms/OverflowMenuComponent';
 import PostCommentList from '../PostComment/PostCommentList/PostCommentList.container';
@@ -8,6 +7,9 @@ import PostCommentWrite from '../PostComment/PostCommentWrite/PostCommentWrite.c
 import * as S from './PostDetail.styles';
 
 export default function ReviewDetailUI({
+  currentImageIndex,
+  prevImage,
+  nextImage,
   onUpdate,
   onDelete,
   photos,
@@ -27,19 +29,6 @@ export default function ReviewDetailUI({
   handleLike,
   handleBookmark,
 }) {
-  // 현재 이미지 인덱스 관리
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // 이전 이미지로 이동
-  const prevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? photos.length - 1 : prevIndex - 1));
-  };
-
-  // 다음 이미지로 이동
-  const nextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex === photos.length - 1 ? 0 : prevIndex + 1));
-  };
-
   return (
     <>
       <S.DetailSection>

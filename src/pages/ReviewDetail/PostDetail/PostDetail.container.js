@@ -8,6 +8,7 @@ export default function PostDetail() {
   const [bookMark, setBookMark] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const { reviewId } = useParams();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0); // 현재 이미지 인덱스 관리
   const navigate = useNavigate();
 
   const fetchReview = async () => {
@@ -25,7 +26,26 @@ export default function PostDetail() {
     fetchReview();
   }, [reviewId]);
 
-  const handleLike = () => setLike((l) => !l);
+  const handleLike = async () => {
+    const previousLikeStatus = like; // 현재 상태를 저장
+
+    // Optimistic UI 업데이트: 서버 응답 전에 UI를 먼저 업데이트
+    setLike((l) => !l);
+
+    try {
+      const response = await axios.post(`/like/${reviewId}`);
+      console.log(response);
+
+      if (response.status !== 200) {
+        throw new Error('Failed to toggle like');
+      }
+    } catch (error) {
+      console.error('Error while toggling like:', error);
+      setLike(previousLikeStatus); // 서버 요청 실패 시 이전 상태로 복구
+      // eslint-disable-next-line no-alert
+      alert('좋아요를 처리하는 중 오류가 발생했습니다. 다시 시도해 주세요.');
+    }
+  };
   const handleBookmark = () => setBookMark((b) => !b);
 
   const formatDate = (dateArray) => {
@@ -45,15 +65,24 @@ export default function PostDetail() {
     return <div>Loading...</div>; // 로딩 중임을 표시합니다.
   }
 
-  const onUpdate = () => {
-    navigate(`/review/update/${reviewId}`); // 수정 페이지로 이동
+  // 이전 이미지로 이동
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? selectedPost.photos.length - 1 : prevIndex - 1));
+  };
+  // 다음 이미지로 이동
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex === selectedPost.photos.length - 1 ? 0 : prevIndex + 1));
   };
 
+  const onUpdate = () => {
+    navigate(`/review/update/${reviewId}`, { state: selectedPost }); // 수정 페이지로 이동
+  };
   const onDelete = async () => {
     try {
       // eslint-disable-next-line no-alert
       alert('삭제하시겠습니까?');
-      await axios.delete(`/review/delete/${reviewId}`);
+      const response = await axios.post(`/review/delete/${reviewId}`);
+      console.log(response);
       console.log(`Review ${reviewId} deleted successfully`);
       navigate('/review'); // 삭제 후 리뷰 목록 페이지로 이동
     } catch (error) {
@@ -65,6 +94,9 @@ export default function PostDetail() {
   return (
     <ReviewDetailUI
       reviewId={reviewId}
+      currentImageIndex={currentImageIndex}
+      prevImage={prevImage}
+      nextImage={nextImage}
       onUpdate={onUpdate}
       onDelete={onDelete}
       like={like}
