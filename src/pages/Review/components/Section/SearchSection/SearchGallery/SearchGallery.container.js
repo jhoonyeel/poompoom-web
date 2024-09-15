@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from '../../../../../../apis/axios';
+import { DEFAULT_POST_STATE } from '../../../../../../constants/ReviewInitialState';
 import SearchGalleryUI from './SearchGallery.presenter';
 
 export default function SearchGallery() {
@@ -17,7 +18,13 @@ export default function SearchGallery() {
         },
       });
       const { values, hasNext: newHasNext } = res.data;
-      setSearchPosts((prevPosts) => [...prevPosts, ...values]);
+      setSearchPosts((prevPosts) => [
+        ...prevPosts,
+        ...values.map((post) => ({
+          ...DEFAULT_POST_STATE, // 기본 상태로 초기화 후 새로운 값들로 덮어씀
+          ...post,
+        })),
+      ]);
       // 마지막 reviewId를 cursorId로 설정
       if (values.length > 0) {
         const lastPostId = values[values.length - 1].reviewId;

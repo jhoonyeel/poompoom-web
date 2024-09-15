@@ -8,7 +8,9 @@ axios.defaults.headers.common['Content-Type'] = 'application/json'; // 기본 Co
 axios.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) {
+
+    // /reissue 요청이 아닐 때만 accessToken을 헤더에 추가
+    if (accessToken && config.url !== '/reissue') {
       // config.headers.Authorization = `Bearer ${accessToken}`;
       config.headers.access = accessToken; // 헤더에 access 속성 추가
     }
@@ -31,25 +33,17 @@ axios.interceptors.response.use(
       const refreshToken = localStorage.getItem('refreshToken');
       try {
         const response = await axios.post(
-          '/reissue',
+          `/reissue`,
           {},
           {
             headers: {
               // Authorization: `Bearer ${refreshToken}`,
-              refresh: refreshToken,
+              refresh: refreshToken, // refresh 속성만 헤더로 전송
+              'Content-Type': 'application/x-www-form-urlencoded',
             },
           },
         );
-        // if (response.status === 200) {
-        //   const { access: accessToken, refresh: newRefreshToken } = response.data;
-        //   localStorage.setItem('accessToken', accessToken);
-        //   if (newRefreshToken) {
-        //     localStorage.setItem('refreshToken', newRefreshToken);
-        //   }
-        //   axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-        //   originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-        //   return axios(originalRequest);
-        // }
+
         if (response.status === 200) {
           const { access: newAccessToken, refresh: newRefreshToken } = response.data;
 
@@ -70,6 +64,8 @@ axios.interceptors.response.use(
           if (newRefreshToken && newRefreshToken !== currentRefreshToken) {
             localStorage.setItem('refreshToken', newRefreshToken);
           }
+
+          console.log('Axios Response Headers: ', originalRequest.headers);
 
           // 토큰을 새롭게 받은 후에 원래의 요청(originalRequest)을 재시도
           return axios(originalRequest);

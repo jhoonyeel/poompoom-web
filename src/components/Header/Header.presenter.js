@@ -2,6 +2,7 @@ import { faCircle } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
+import ReissueButton from '../../apis/ReissueButton';
 import LoverProfileEx from '../../assets/HeaderLoverProfile.svg';
 import SearchBar from '../SearchBar/SearchBar.container';
 import * as S from './Header.styles';
@@ -10,6 +11,7 @@ export default function HeaderUI({ showSearchBar, handleOnClick }) {
   return (
     <S.HeaderWrapper className="sticky">
       <S.HeaderContent>
+        <ReissueButton />
         <S.LogoBox onClick={handleOnClick('/')}>
           <S.LogoSvg />
         </S.LogoBox>
