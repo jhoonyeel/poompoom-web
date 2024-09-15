@@ -14,6 +14,7 @@ import SignupPage from './pages/Join/Signup/SignupPage';
 import SignupTagPage from './pages/Join/SignupTag/SignupTag.container';
 import SocialSignUp from './pages/OAuth/SignUp/SignUp.container';
 import SignUpSocial from './pages/OAuth/SignUpSocial';
+import LoginSocial from './pages/OAuth/LoginSocial';
 
 import Welcome from './pages/welcome/Welcome';
 
@@ -107,6 +108,7 @@ export default function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/signup/tag" element={<SignupTagPage />} />
             <Route path="/signup/social" element={<SignUpSocial />} />
+            <Route path="/Login/Social" element={<LoginSocial />} />
             <Route path="/signUp/social/form" element={<SocialSignUp />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/welcome" element={<Welcome />} />

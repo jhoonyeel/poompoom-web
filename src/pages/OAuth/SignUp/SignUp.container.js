@@ -46,8 +46,6 @@ export default function SocialSignUp() {
     }
   };
   const onSubmit = async (data) => {
-    const formData = new FormData();
-
     const storedTags = localStorage.getItem('signUpTag');
     if (!storedTags) {
       setTagMessage('프로필 태그를 설정해 주세요.');
@@ -63,13 +61,13 @@ export default function SocialSignUp() {
       setIdCheckMessage('아이디 중복 체크를 먼저 해주세요.');
       return;
     }
-
+    const formData = new FormData();
     try {
       const req = new Blob(
         [
           JSON.stringify({
-            username: data.id,
             nickname: data.nickname,
+            username: data.id,
             jwt,
           }),
         ],
@@ -77,8 +75,8 @@ export default function SocialSignUp() {
       );
 
       formData.append('req', req);
-      if (data.profileImage && data.profileImage.length > 0) {
-        formData.append('profileImage', data.profileImage[0]);
+      if (data.file && data.file.length > 0) {
+        formData.append('profileImage', data.file[0]);
       }
       const result = await axios.post('/OAuth/initial', formData, {
         headers: {
