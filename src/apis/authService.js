@@ -14,7 +14,13 @@ export const login = async (username, password) => {
 
     console.log('Login 서버로부터의 응답: ', response); // Debug log to check response structure
 
-    const { access: accessToken, refresh: refreshToken } = response.data;
+    const {
+      access: accessToken,
+      refresh: refreshToken,
+      memberId,
+      username: responseUsername,
+      nickname,
+    } = response.data;
 
     if (accessToken) {
       localStorage.setItem('accessToken', accessToken);
@@ -28,7 +34,11 @@ export const login = async (username, password) => {
       console.error('Refresh token is missing in the server response');
     }
 
-    return { accessToken, refreshToken };
+    // userData를 로컬 스토리지에 저장 (JSON 문자열로 변환하여 저장)
+    const userData = { memberId, username: responseUsername, nickname };
+    localStorage.setItem('userData', JSON.stringify(userData));
+
+    return { accessToken, refreshToken, userData };
   } catch (error) {
     console.error('Login error:', error);
     throw error;
@@ -38,6 +48,7 @@ export const login = async (username, password) => {
 export const logout = () => {
   localStorage.removeItem('accessToken');
   localStorage.removeItem('refreshToken');
+  localStorage.removeItem('userData');
 };
 
 export { axios };
