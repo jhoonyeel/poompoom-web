@@ -13,6 +13,11 @@ export default function Login() {
     try {
       const { accessToken } = await login(username, password);
       console.log('Access Token: ', accessToken); // Debug log
+
+      // 로컬 스토리지에 저장된 userData 확인 (이미 login 함수에서 저장됨)
+      const storedUserData = JSON.parse(localStorage.getItem('userData'));
+      console.log('Stored User Data:', storedUserData);
+
       navigate('/');
     } catch (error) {
       // eslint-disable-next-line

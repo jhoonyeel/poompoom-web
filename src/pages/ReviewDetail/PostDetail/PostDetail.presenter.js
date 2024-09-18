@@ -25,6 +25,7 @@ export default function ReviewDetailUI({
   lastModifiedTime,
   formatDate,
   like,
+  likeAmount,
   bookMark,
   handleLike,
   handleBookmark,
@@ -78,6 +79,7 @@ export default function ReviewDetailUI({
               </S.DateWrapper>
               <S.BoardNavBar>
                 <S.BoardIcon icon={like ? faHeart : emptyHeart} onClick={handleLike} />
+                <S.LikeAmount>{`${likeAmount}`}</S.LikeAmount>
                 <S.BoardIcon icon={bookMark ? faBookmark : emptyBookmark} onClick={handleBookmark} />
               </S.BoardNavBar>
 

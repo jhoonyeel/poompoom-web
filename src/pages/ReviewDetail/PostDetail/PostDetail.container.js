@@ -5,6 +5,7 @@ import ReviewDetailUI from './PostDetail.presenter';
 
 export default function PostDetail() {
   const [like, setLike] = useState(false);
+  const [likeAmount, setLikeAmount] = useState(0); // 좋아요 수 상태 추가
   const [bookMark, setBookMark] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const { reviewId } = useParams();
@@ -17,6 +18,7 @@ export default function PostDetail() {
       const { data } = response;
       setSelectedPost(data);
       setLike(data.isLikedPost);
+      setLikeAmount(data.likeAmount); // 초기 좋아요 수 설정
       setBookMark(data.isBookmarked);
     } catch (err) {
       console.log('fetch failed');
@@ -28,20 +30,24 @@ export default function PostDetail() {
 
   const handleLike = async () => {
     const previousLikeStatus = like; // 현재 상태를 저장
+    const previousLikeAmount = likeAmount; // 기존 좋아요 수 저장
 
     // Optimistic UI 업데이트: 서버 응답 전에 UI를 먼저 업데이트
-    setLike((l) => !l);
+    setLike((prevLike) => {
+      const newLikeStatus = !prevLike;
+      setLikeAmount((prevAmount) => (newLikeStatus ? prevAmount + 1 : prevAmount - 1)); // 새로운 like 상태 기반으로 좋아요 수 업데이트
+      return newLikeStatus;
+    });
 
     try {
       const response = await axios.post(`/like/${reviewId}`);
-      console.log(response);
-
       if (response.status !== 200) {
         throw new Error('Failed to toggle like');
       }
     } catch (error) {
       console.error('Error while toggling like:', error);
       setLike(previousLikeStatus); // 서버 요청 실패 시 이전 상태로 복구
+      setLikeAmount(previousLikeAmount); // 서버 요청 실패 시 이전 좋아요 수로 복구
       // eslint-disable-next-line no-alert
       alert('좋아요를 처리하는 중 오류가 발생했습니다. 다시 시도해 주세요.');
     }
@@ -100,6 +106,7 @@ export default function PostDetail() {
       onUpdate={onUpdate}
       onDelete={onDelete}
       like={like}
+      likeAmount={likeAmount}
       bookMark={bookMark}
       handleLike={handleLike}
       handleBookmark={handleBookmark}

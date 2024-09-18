@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../../../../../apis/axios';
+import { DEFAULT_SUBSCRIBER_STATE } from '../../../../../../constants/SubscriptionInitialState';
 import SubAccountUI from './SubAccount.presenter';
 
 export default function SubAccount() {
@@ -30,7 +31,13 @@ export default function SubAccount() {
         },
       });
       const { values, nextPageId, hasNext: newHasNext } = res.data;
-      setSubAccounts((prevAccounts) => [...prevAccounts, ...values]);
+      setSubAccounts((prevAccounts) => [
+        ...prevAccounts,
+        ...values.map((subscriber) => ({
+          ...DEFAULT_SUBSCRIBER_STATE, // 기본 상태로 초기화 후
+          ...subscriber, // 새로운 데이터로 덮어쓰기
+        })),
+      ]);
       setCurrentPage(page);
       setCursorId(nextPageId || currentCursorId);
       setHasNext(newHasNext);

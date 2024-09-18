@@ -247,11 +247,16 @@ export const Dates = styled.span`
 `;
 export const BoardNavBar = styled.nav`
   display: flex;
+  align-items: center;
   margin-top: 0.5rem;
 `;
 export const BoardIcon = styled(FontAwesomeIcon)`
   padding: 1rem;
   font-size: 22px;
+`;
+export const LikeAmount = styled.span`
+  font-size: 22px;
+  margin-right: 20px;
 `;
 
 export const CommentWriteBox = styled.div`
