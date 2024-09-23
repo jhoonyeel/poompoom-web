@@ -26,6 +26,10 @@ export default function Login() {
     }
   };
 
+  const onGoogleLogin = () => {
+    window.location.href = 'http://goochul.iptime.org:8070/oauth2/authorization/google';
+  };
+
   return (
     <LoginUI
       username={username}
@@ -33,6 +37,7 @@ export default function Login() {
       password={password}
       setPassword={setPassword}
       handleSubmitLogin={handleSubmitLogin}
+      onGoogleLogin={onGoogleLogin}
     />
   );
 }

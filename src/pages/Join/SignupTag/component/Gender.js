@@ -7,7 +7,7 @@ export default function Gender({ setSelectedButton }) {
 
   return (
     <Container>
-      <Title>직업은 무엇인가요?</Title>
+      <Title>성별은 무엇인가요?</Title>
 
       <ButtonContainer>
         <SubButton onClick={(event) => handleClick(event.target.textContent)}>여성</SubButton>

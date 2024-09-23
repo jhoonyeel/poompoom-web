@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import * as S from './Welcomes.styles';
 import { ReactComponent as Title } from '../../assets/Login/Welcome.svg';
 import { ReactComponent as Present } from '../../assets/Login/Present.svg';
@@ -5,6 +6,11 @@ import { ReactComponent as Calender } from '../../assets/Login/Calender.svg';
 import { ReactComponent as Location } from '../../assets/Login/Location.svg';
 
 export default function Welcome() {
+  const navigate = useNavigate();
+  const onClickToLogin = () => {
+    navigate('/login');
+  };
+
   return (
     <S.Container>
       <Title />
@@ -30,7 +36,7 @@ export default function Welcome() {
       <S.TextWrapper>
         <S.Text>생년월일, 기념일 등을 기입해주셔야 활성화됩니다.</S.Text> <S.Text>바로 하러 가볼까요?</S.Text>
       </S.TextWrapper>
-      <S.Button>고고싱</S.Button>
+      <S.Button onClick={onClickToLogin}>고고싱</S.Button>
     </S.Container>
   );
 }
