@@ -16,7 +16,7 @@ import SocialSignUp from './pages/OAuth/SignUp/SignUp.container';
 import SignUpSocial from './pages/OAuth/SignUpSocial';
 import LoginSocial from './pages/OAuth/LoginSocial';
 
-import Welcome from './pages/welcome/Welcome';
+import Welcome from './pages/Welcome/Welcome';
 
 import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
 import HomePage from './pages/Home/HomePage';
