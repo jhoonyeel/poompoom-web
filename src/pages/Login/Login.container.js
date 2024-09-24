@@ -30,6 +30,14 @@ export default function Login() {
     window.location.href = 'http://goochul.iptime.org:8070/oauth2/authorization/google';
   };
 
+  const onNaverLogin = () => {
+    window.location.href = 'http://goochul.iptime.org:8070/oauth2/authorization/naver';
+  };
+
+  const onKakaoLogin = () => {
+    window.location.href = 'http://goochul.iptime.org:8070/oauth2/authorization/kakao';
+  };
+
   return (
     <LoginUI
       username={username}
@@ -38,6 +46,8 @@ export default function Login() {
       setPassword={setPassword}
       handleSubmitLogin={handleSubmitLogin}
       onGoogleLogin={onGoogleLogin}
+      onNaverLogin={onNaverLogin}
+      onKakaoLogin={onKakaoLogin}
     />
   );
 }

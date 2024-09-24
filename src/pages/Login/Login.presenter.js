@@ -1,12 +1,22 @@
 import * as S from './Login.styles';
 import { ReactComponent as NaverLogo } from '../../assets/Login/LogoIcon/Naver.svg';
 import { ReactComponent as GoogleLogo } from '../../assets/Login/LogoIcon/Google.svg';
-import { ReactComponent as AppleLogo } from '../../assets/Login/LogoIcon/Apple.svg';
+import { ReactComponent as KakaoLogo } from '../../assets/Login/LogoIcon/Kakao.svg';
+
 import { ReactComponent as LoginTitle } from '../../assets/Login/LogInTitle.svg';
 import { useInputFocus } from '../../hooks/useInputFocus';
 import AuthFooterUI from '../../atoms/AuthFooter';
 
-export default function LoginUI({ handleSubmitLogin, username, setUsername, password, setPassword, onGoogleLogin }) {
+export default function LoginUI({
+  handleSubmitLogin,
+  username,
+  setUsername,
+  password,
+  setPassword,
+  onGoogleLogin,
+  onNaverLogin,
+  onKakaoLogin,
+}) {
   const { isFocused, handleFocus, handleBlur } = useInputFocus();
   return (
     <>
@@ -19,13 +29,13 @@ export default function LoginUI({ handleSubmitLogin, username, setUsername, pass
 
         <S.LogoContainer>
           <S.LogoWrapper>
-            <NaverLogo />
+            <NaverLogo onClick={onNaverLogin} />
           </S.LogoWrapper>
           <S.LogoWrapper>
             <GoogleLogo onClick={onGoogleLogin} />
           </S.LogoWrapper>
           <S.LogoWrapper>
-            <AppleLogo />
+            <KakaoLogo onClick={onKakaoLogin} />
           </S.LogoWrapper>
         </S.LogoContainer>
 
