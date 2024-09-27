@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import * as S from './Welcomes.styles';
-import { ReactComponent as Title } from '../../assets/Login/Welcome.svg';
-import { ReactComponent as Present } from '../../assets/Login/Present.svg';
 import { ReactComponent as Calender } from '../../assets/Login/Calender.svg';
 import { ReactComponent as Location } from '../../assets/Login/Location.svg';
+import { ReactComponent as Present } from '../../assets/Login/Present.svg';
+import { ReactComponent as Title } from '../../assets/Login/Welcome.svg';
+import * as S from './Welcomes.styles';
 
 export default function Welcome() {
   const navigate = useNavigate();

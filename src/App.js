@@ -9,12 +9,12 @@ import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite
 import Footer from './components/Footer/Footer.container';
 import Header from './components/Header/Header.container';
 
-import LoginPage from './pages/Login/LoginPage';
 import SignupPage from './pages/Join/Signup/SignupPage';
 import SignupTagPage from './pages/Join/SignupTag/SignupTag.container';
+import LoginPage from './pages/Login/LoginPage';
+import LoginSocial from './pages/OAuth/LoginSocial';
 import SocialSignUp from './pages/OAuth/SignUp/SignUp.container';
 import SignUpSocial from './pages/OAuth/SignUpSocial';
-import LoginSocial from './pages/OAuth/LoginSocial';
 
 import Welcome from './pages/Welcome/Welcome';
 
