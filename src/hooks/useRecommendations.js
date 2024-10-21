@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import axios from 'axios';
+import axios from '../apis/axios';
 
 const fetchRecommendations = async (searchTerm) => {
   const { data } = await axios.get(`hashtag/rank?q=${searchTerm}`);

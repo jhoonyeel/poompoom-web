@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from '../../../apis/axios';
 
 export default function SetQuickGift() {
   const [data, setData] = useState(null);

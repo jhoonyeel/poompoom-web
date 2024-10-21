@@ -1,9 +1,9 @@
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from '../../apis/axios';
 // eslint-disable-next-line camelcase, import/no-unresolved
 import { ReactComponent as CardNews } from '../../assets/CardNews.svg';
 import { ReactComponent as Anniversary } from '../../assets/Category/Anniversary.svg';

@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
+import axios from '../../../../../apis/axios';
 import LatestProfileGalleryUI from './LatestProfileGallery.presenter';
 
 export default function LatestProfileGallery() {

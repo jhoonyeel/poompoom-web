@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import axios from '../../../../apis/axios';
 import SetQuickGiftUI from './setQuickGift.presenter';
 
 export default function SetQuickGift() {

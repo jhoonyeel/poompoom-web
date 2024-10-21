@@ -50,5 +50,3 @@ export const logout = () => {
   localStorage.removeItem('refreshToken');
   localStorage.removeItem('userData');
 };
-
-export { axios };

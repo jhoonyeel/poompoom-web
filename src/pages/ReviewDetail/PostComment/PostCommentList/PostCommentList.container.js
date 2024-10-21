@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from '../../../../apis/axios';
 import PostCommentListUI from './PostCommentList.presenter';
 
 export default function PostCommentList() {
