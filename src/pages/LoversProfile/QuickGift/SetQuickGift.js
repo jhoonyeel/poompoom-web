@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from '../../../apis/axios';
+import { useNavigatePath } from '../../../hooks/useNavigatePath';
 
 export default function SetQuickGift() {
   const [data, setData] = useState(null);
@@ -9,7 +9,7 @@ export default function SetQuickGift() {
   const [errors, setErrors] = useState(null);
   const AccessToken = localStorage.getItem('accessToken');
 
-  const navigate = useNavigate();
+  const navigatePath = useNavigatePath();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,13 +50,7 @@ export default function SetQuickGift() {
             </DataItem>
           ))}
       </DataContainer>
-      <Button
-        onClick={() => {
-          navigate('/lovers-profile');
-        }}
-      >
-        수정하기
-      </Button>
+      <Button onClick={navigatePath('/lovers-profile')}>수정하기</Button>
     </Container>
   );
 }

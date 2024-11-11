@@ -1,70 +1,45 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from '../../../../../../apis/axios';
 import { DEFAULT_POST_STATE } from '../../../../../../constants/ReviewInitialState';
+import { useInfiniteScroll } from '../../../../../../hooks/useInfiniteScroll';
 import SearchGalleryUI from './SearchGallery.presenter';
 
-export default function SearchGallery() {
-  const [searchPosts, setSearchPosts] = useState([]);
-  const [cursorId, setCursorId] = useState(0);
-  const [hasNext, setHasNext] = useState(true);
-  const loader = useRef(null);
+const fetchSearchData = async (cursorId, size) => {
+  const res = await axios.get(`/review`, {
+    params: { cursorId, size },
+  });
+  const { values, hasNext } = res.data;
+  const nextPageId = values?.[values.length - 1]?.reviewId;
 
-  const fetchPostData = async (cursor, size = 18) => {
-    try {
-      const res = await axios.get(`/review`, {
-        params: {
-          cursorId: cursor, // cursorId보다 id가 작은 게시글을 가져옴.
-          size, // 가져올 게시글의 개수.
-        },
-      });
-      const { values, hasNext: newHasNext } = res.data;
-      setSearchPosts((prevPosts) => [
-        ...prevPosts,
-        ...values.map((post) => ({
-          ...DEFAULT_POST_STATE, // 기본 상태로 초기화 후 새로운 값들로 덮어씀
-          ...post,
-        })),
-      ]);
-      // 마지막 reviewId를 cursorId로 설정
-      if (values.length > 0) {
-        const lastPostId = values[values.length - 1].reviewId;
-        setCursorId(lastPostId);
-      }
-      setHasNext(newHasNext);
-    } catch (error) {
-      console.error('Error fetching post data:', error);
-    }
+  return {
+    values,
+    nextPageId, // 마지막 reviewId를 cursorId로 설정, 그냥 nextPageId는 필요없는거??
+    hasNext,
   };
-  useEffect(() => {
-    fetchPostData();
-  }, []);
+};
+
+export default function SearchGallery() {
+  const { rawData, loaderRef } = useInfiniteScroll({
+    fetchFunction: fetchSearchData,
+    initialSize: 18,
+    additionalSize: 9,
+  });
+  const [searchPosts, setSearchPosts] = useState([]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const target = entries[0];
-        if (target.isIntersecting && hasNext) {
-          fetchPostData(cursorId, 9); // 추가로 가져오는 데이터
-        }
-      },
-      { threshold: 1 },
-    );
-
-    if (loader.current) {
-      observer.observe(loader.current);
-    }
-
-    return () => {
-      if (loader.current) {
-        observer.unobserve(loader.current);
-      }
-    };
-  }, [cursorId, hasNext]);
+    setSearchPosts((prevPosts) => [
+      ...prevPosts,
+      ...rawData.map((post) => ({
+        ...DEFAULT_POST_STATE, // 기본 상태로 초기화 후 새로운 값들로 덮어씀
+        ...post,
+      })),
+    ]);
+  }, [rawData]);
 
   return (
     <>
       <SearchGalleryUI searchPosts={searchPosts} />
-      <div ref={loader} style={{ height: '15vh', margin: '10px' }} />
+      <div ref={loaderRef} style={{ height: '15vh', margin: '10px' }} />
     </>
   );
 }

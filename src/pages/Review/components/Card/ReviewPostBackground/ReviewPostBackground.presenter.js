@@ -12,8 +12,8 @@ export default function ReviewPostBackgroundUI({ bodyPhoto }) {
 }
 
 const Wrapper = styled.div`
-  width: 380px;
-  height: 430px;
+  width: 300px;
+  height: 370px;
   border-radius: 20px;
   overflow: hidden;
 `;

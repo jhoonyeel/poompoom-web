@@ -262,14 +262,6 @@ export const LikeAmount = styled.span`
 export const CommentWriteBox = styled.div`
   height: 20%;
 `;
-export const CommentSection = styled.section`
-  width: 100%;
-  margin-top: 5rem;
-`;
-export const CommentContent = styled.div`
-  width: 80%;
-  margin: 0 auto;
-`;
 
 export const ImageDots = styled.div`
   display: flex;
@@ -285,4 +277,7 @@ export const Dot = styled.div`
   border-radius: 50%;
   margin: 0 5px;
   transition: background-color 0.3s;
+  cursor: pointer;
+  pointer-events: auto; /* Dot이 클릭 가능하도록 설정 */
+  user-select: none; /* 텍스트 선택을 방지하여 커서가 깜빡이지 않도록 설정 */
 `;

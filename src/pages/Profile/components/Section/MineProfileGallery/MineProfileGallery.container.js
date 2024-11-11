@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
+import axios from '../../../../../apis/axios';
 import MineProfileGalleryUI from './MineProfileGallery.presenter';
 
 export default function MineProfileGallery() {
@@ -10,6 +10,7 @@ export default function MineProfileGallery() {
 
   const fetchPostData = async (cursor, size = 9) => {
     try {
+      console.log('/profile/review API 실행');
       const response = await axios.get(`/profile/review`, {
         params: {
           cursorId: cursor,

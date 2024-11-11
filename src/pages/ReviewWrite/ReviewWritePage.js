@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
 import DummyPhoto from '../../assets/DummyPhoto.svg';
 import { useFetchProfilePicture } from '../../hooks/useFetchProfilePicture';
+import { useNavigatePath } from '../../hooks/useNavigatePath';
 import { profilePictureState } from '../../recoil/atoms';
 import { CATEGORIES } from '../../shared/categories';
 
@@ -22,7 +23,9 @@ export default function ReviewWritePage({ mode = 'create' }) {
   const [images, setImages] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const navigate = useNavigate();
+  const [willDeletePhoto, setWillDeletePhoto] = useState([]);
+
+  const navigatePath = useNavigatePath();
 
   // 프로필 사진을 가져오는 커스텀 훅 호출
   useFetchProfilePicture();
@@ -50,6 +53,7 @@ export default function ReviewWritePage({ mode = 'create' }) {
         // 수정 모드에서 기존 리뷰 데이터를 불러옵니다.
         const fetchReviewData = async () => {
           try {
+            console.log('/review/${} API 실행');
             const response = await axios.get(`/review/${reviewId}`);
             const { data } = response;
             setReviewData({
@@ -83,11 +87,49 @@ export default function ReviewWritePage({ mode = 'create' }) {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    setImages(files);
+    if (files.length === 0) return;
 
-    const previewUrls = files.map((file) => URL.createObjectURL(file));
-    setPreviewImages(previewUrls);
-    setCurrentImageIndex(0); // Reset the current index when new images are added
+    // 새로 선택된 이미지 파일의 미리보기 URL을 생성
+    const newImageUrl = URL.createObjectURL(files[0]);
+
+    // images 배열에서 currentImageIndex에 해당하는 이미지 파일을 교체
+    setImages((prevImages) => {
+      const updatedImages = [...prevImages];
+      if (currentImageIndex >= updatedImages.length) {
+        updatedImages.push(files[0]); // 현재 인덱스가 범위를 초과하면 새로 추가
+      } else {
+        // eslint-disable-next-line prefer-destructuring
+        updatedImages[currentImageIndex] = files[0]; // 현재 인덱스의 이미지만 교체
+      }
+      return updatedImages;
+    });
+
+    // previewImages 배열에서 currentImageIndex에 해당하는 이미지 미리보기를 교체
+    setPreviewImages((prevPreviewImages) => {
+      const updatedPreviewImages = [...prevPreviewImages];
+      if (currentImageIndex >= updatedPreviewImages.length) {
+        updatedPreviewImages.push(newImageUrl); // 현재 인덱스가 범위를 초과하면 새로 추가
+      } else {
+        updatedPreviewImages[currentImageIndex] = newImageUrl; // 현재 인덱스의 미리보기 이미지만 교체
+      }
+      return updatedPreviewImages;
+    });
+
+    // 이미지를 수정할 때, 수정된 이미지의 ID를 찾아서 기존 배열에서 해당 ID를 제거
+    setWillDeletePhoto((prev) => {
+      // currentImageIndex에 해당하는 ID를 찾아서 제거
+      return prev.filter((id) => id !== images[currentImageIndex].id);
+    });
+  };
+
+  const handleDeleteImage = () => {
+    if (images.length === 0) return; // 이미지가 없을 때는 아무 작업도 하지 않음
+
+    // 현재 이미지의 ID를 willDeletePhoto 배열에 추가
+    setWillDeletePhoto((prev) => [...prev, images[currentImageIndex].id]);
+    setImages((prevImages) => prevImages.filter((_, index) => index !== currentImageIndex));
+    setPreviewImages((prevPreviewImages) => prevPreviewImages.filter((_, index) => index !== currentImageIndex));
+    setCurrentImageIndex(0); // 이미지 삭제 후 인덱스를 초기화
   };
 
   const handleSubmit = async (e) => {
@@ -102,24 +144,50 @@ export default function ReviewWritePage({ mode = 'create' }) {
       return;
     }
 
+    // 새로운 이미지를 담는 배열
+    const newImages = images.filter((image) => typeof image === 'object');
+    console.log(newImages);
+
     // JSON 객체 생성
     const jsonBody = JSON.stringify({
       body: content,
       price: parseFloat(price),
-      willDeletePhoto: [], // 삭제할 사진 ID 리스트 (수정 시 필요, 선택적)
+      willDeletePhoto, // 삭제할 사진 ID 리스트
       whereBuy: source,
       category,
       reviewType,
     });
 
-    // FormData 객체를 생성하여 데이터를 담기
+    /// formData로 새로 추가된 이미지 파일을 처리
     const formData = new FormData();
     formData.append('body', new Blob([jsonBody], { type: 'application/json' }));
-    // 새로 추가할 이미지가 있으면 formData에 추가
-    if (images.length) {
+
+    // newImages.forEach((image) => {
+    //   formData.append('photos', image);
+    // });
+    console.log('newImages: ', newImages);
+    console.log('images: ', images);
+    console.log('previewImages: ', previewImages);
+
+    // 수정 모드에서는 기존 이미지를 유지하면서 변경된 이미지를 업데이트
+    if (mode === 'edit') {
+      // 기존 이미지 유지 로직
       images.forEach((image) => {
-        formData.append('photos', image);
+        // 새로운 파일이거나 기존에 변경된 이미지만 추가
+        console.log(images);
+
+        if (typeof image === 'object') {
+          formData.append(`photos`, image); // 기존 이미지는 string URL로 나타나기 때문에 새로 추가된 파일만 FormData에 추가
+        }
       });
+    } else {
+      // 새로 추가할 이미지가 있으면 formData에 추가
+      // eslint-disable-next-line no-lonely-if
+      if (images.length) {
+        images.forEach((image) => {
+          formData.append('photos', image);
+        });
+      }
     }
 
     try {
@@ -138,7 +206,7 @@ export default function ReviewWritePage({ mode = 'create' }) {
         });
       }
       console.log('Success:', response.data);
-      navigate('/review');
+      navigatePath(`/review/${reviewId}`);
     } catch (error) {
       console.error('Error:', error);
       console.error('formData:', formData);
@@ -171,9 +239,24 @@ export default function ReviewWritePage({ mode = 'create' }) {
                 <ArrowRight onClick={nextImage}>&#8250;</ArrowRight>
                 <Dots>
                   {previewImages.map((_, index) => (
-                    <Dot active={index === currentImageIndex} />
+                    <Dot
+                      active={index === currentImageIndex}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentImageIndex(index);
+                      }}
+                    />
                   ))}
                 </Dots>
+                <DeleteButton
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteImage();
+                  }}
+                >
+                  &times;
+                </DeleteButton>
               </>
             ) : (
               <img src={DummyPhoto} alt="placeholder" />
@@ -186,7 +269,7 @@ export default function ReviewWritePage({ mode = 'create' }) {
             <AuthorCircleBox>
               <AuthorImg src={profilePicture} alt="프로필 사진" />
             </AuthorCircleBox>
-            <User>@poompoom_in_love</User>
+            <User>@test</User>
             <RadioButton
               type="button"
               $active={reviewData.reviewType === 'RECEIVED'}
@@ -336,6 +419,29 @@ const Dot = styled.div`
   border-radius: 50%;
   margin: 0 4px;
   transition: background-color 0.3s;
+  cursor: pointer;
+  pointer-events: auto; /* Dot이 클릭 가능하도록 설정 */
+  user-select: none; /* 텍스트 선택을 방지하여 커서가 깜빡이지 않도록 설정 */
+`;
+
+const DeleteButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  &:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
 `;
 
 const ContentSection = styled.div`

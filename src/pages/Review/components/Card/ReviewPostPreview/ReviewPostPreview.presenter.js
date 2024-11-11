@@ -10,7 +10,7 @@ export default function ReviewPostPreviewUI({ body }) {
 
 const Wrapper = styled.div`
   width: 300px;
-  height: 380px;
+  height: 370px;
   background-color: rgba(0, 0, 0, 0.56);
   z-index: 99999;
   position: absolute;

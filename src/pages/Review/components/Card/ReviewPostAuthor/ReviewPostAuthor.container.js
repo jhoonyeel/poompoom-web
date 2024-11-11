@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigatePath } from '../../../../../hooks/useNavigatePath';
 import ReviewPostAuthorUI from './ReviewPostAuthor.presenter';
 
 export default function ReviewPostAuthor({ profilePhoto, nickname, reviewType, isHovered }) {
@@ -8,10 +8,7 @@ export default function ReviewPostAuthor({ profilePhoto, nickname, reviewType, i
     setIsFollow((follow) => !follow);
   };
 
-  const navigate = useNavigate();
-  const handleOnClick = (path) => () => {
-    navigate(path);
-  };
+  const navigatePath = useNavigatePath();
 
   return (
     <ReviewPostAuthorUI
@@ -19,7 +16,7 @@ export default function ReviewPostAuthor({ profilePhoto, nickname, reviewType, i
       nickname={nickname}
       reviewType={reviewType}
       isHovered={isHovered}
-      handleOnClick={handleOnClick}
+      navigatePath={navigatePath}
       isFollow={isFollow}
       handleFollow={handleFollow}
     />

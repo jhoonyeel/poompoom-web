@@ -1,19 +1,18 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import axios from '../../../../apis/axios';
+import { useNavigatePath } from '../../../../hooks/useNavigatePath';
 import ProfileHeaderUI from './ProfileHeader.presenter';
 
 export default function ProfileHeader() {
   const [profile, setProfile] = useState('');
   const { id } = useParams();
 
-  const navigate = useNavigate();
-  const handleOnClick = (path) => () => {
-    navigate(path);
-  };
+  const navigatePath = useNavigatePath();
 
   const fetchData = async () => {
     try {
+      console.log('profile/1 API 실행');
       const response = await axios.get(`profile/1`);
       setProfile(response.data);
 
@@ -26,5 +25,5 @@ export default function ProfileHeader() {
     fetchData();
   }, [id]);
 
-  return <ProfileHeaderUI handleOnClick={handleOnClick} profile={profile} />;
+  return <ProfileHeaderUI navigatePath={navigatePath} profile={profile} />;
 }

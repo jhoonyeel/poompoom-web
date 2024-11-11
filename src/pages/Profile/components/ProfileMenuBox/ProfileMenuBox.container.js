@@ -1,12 +1,10 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useNavigatePath } from '../../../../hooks/useNavigatePath';
 import ProfileMenuBoxUI from './ProfileMenuBox.presenter';
 
 export default function ProfileMenuBox() {
   const location = useLocation();
-  const navigate = useNavigate();
-  const handleOnClick = (path) => () => {
-    navigate(path);
-  };
+  const navigatePath = useNavigatePath();
 
-  return <ProfileMenuBoxUI handleOnClick={handleOnClick} currentPath={location.pathname} />;
+  return <ProfileMenuBoxUI navigatePath={navigatePath} currentPath={location.pathname} />;
 }

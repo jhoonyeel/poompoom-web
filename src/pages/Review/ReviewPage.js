@@ -70,12 +70,12 @@ const Wrapper = styled.div`
 const GalleryContent = styled.div`
   width: 80%;
   margin: 0 auto;
-  min-width: 1167px; // BUG: 이후에 grid 수정 필요.
+  min-width: 1028px;
 `;
 const PostFilterContent = styled.div`
   width: 80%;
   margin: 0 auto;
-  min-width: 1167px;
+  min-width: 1028px;
   position: sticky;
   top: 15vh;
   z-index: 6; /* 헤더와 함께 보이도록 z-index 조정 */

@@ -1,8 +1,8 @@
-import axios from 'axios';
 // import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from '../../../apis/axios';
 
 const transformData = (data) => {
   return data.values.map((item) => ({

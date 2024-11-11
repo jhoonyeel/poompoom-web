@@ -12,6 +12,6 @@ const Wrapper = styled.div`
   margin-top: 3rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 4개의 열을 가지도록 설정 */
-  column-gap: 1.5rem;
-  row-gap: 2.5rem;
+  column-gap: 20px;
+  row-gap: 20px;
 `;

@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
+import axios from '../../../../../apis/axios';
 import LatestProfileGalleryUI from './LatestProfileGallery.presenter';
 
 export default function LatestProfileGallery() {
@@ -10,6 +10,7 @@ export default function LatestProfileGallery() {
 
   const fetchAllReviews = async () => {
     try {
+      console.log('/review API 실행');
       const res = await axios.get('/review');
       const allReviews = res.data;
       if (allReviews.length > 0) {
@@ -23,6 +24,7 @@ export default function LatestProfileGallery() {
 
   const fetchPostData = async (cursor, size = 9) => {
     try {
+      console.log('/profile/view API 실행');
       const res = await axios.get(`/profile/view`, {
         params: {
           cursorId: cursor, // cursorId보다 id가 작은 게시글을 가져옴.

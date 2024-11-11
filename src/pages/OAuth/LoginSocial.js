@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axios from '../../apis/axios';
 
 export default function LoginSocial() {
   const [jwtToken, setJwtToken] = useState(null);
