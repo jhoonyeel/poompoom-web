@@ -77,7 +77,7 @@ const PostFilterContainer = styled.div`
   position: sticky;
   top: 15vh;
   z-index: 6; /* 헤더와 함께 보이도록 z-index 조정 */
-  background-color: white; /* 배경색 지정하여 다른 콘텐츠와 구분 */
+  background-color: rgba(255, 255, 255, 0.75);
   transition: top 0.3s ease-in-out; /* 부드러운 이동을 위한 transition 속성 추가 */
 `;
 
@@ -93,7 +93,6 @@ const Title = styled.h3`
 `;
 const LatestContent = styled.section`
   width: 100%;
-  margin-top: 2rem;
 `;
 const SubContent = styled.section`
   width: 100%;
