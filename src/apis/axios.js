@@ -110,6 +110,9 @@ axios.interceptors.response.use(
         if (refreshError.response && (refreshError.response.status === 400 || refreshError.response.status === 401)) {
           // Refresh Token이 만료된 경우
           // Token 재발급 실패 시 리디렉션 처리 -> App.js의 ProtectedRoute
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+          localStorage.removeItem('userData');
           // eslint-disable-next-line no-alert
           alert('세션이 만료되었습니다.');
         } else {
