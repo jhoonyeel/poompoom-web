@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../../../../../../apis/axios';
-import { DEFAULT_POST_STATE } from '../../../../../../constants/ReviewInitialState';
-import { useInfiniteScroll } from '../../../../../../hooks/useInfiniteScroll';
+import axios from '../../../../../apis/axios';
+import { DEFAULT_POST_STATE } from '../../../../../constants/ReviewInitialState';
+import { useInfiniteScroll } from '../../../../../hooks/useInfiniteScroll';
 import SearchGalleryUI from './SearchGallery.presenter';
 
 const fetchSearchData = async (cursorId, size) => {

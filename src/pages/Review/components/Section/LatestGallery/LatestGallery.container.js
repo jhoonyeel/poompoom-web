@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../../../../../../apis/axios';
-import { useInfiniteScroll } from '../../../../../../hooks/useInfiniteScroll';
+import axios from '../../../../../apis/axios';
+import { useInfiniteScroll } from '../../../../../hooks/useInfiniteScroll';
 import LatestGalleryUI from './LatestGallery.presenter';
 
 const fetchLatestData = async (cursorId, size) => {

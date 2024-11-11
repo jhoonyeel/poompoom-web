@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import Cursor from '../../../../../../assets/HorizontalCursor.svg';
-import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.container';
+import Cursor from '../../../../../assets/HorizontalCursor.svg';
+import ReviewPostCard from '../../Card/ReviewPostCard/ReviewPostCard.container';
 
 export default function LatestGalleryUI({ latestPosts, loader }) {
   const postListRef = useRef(null);

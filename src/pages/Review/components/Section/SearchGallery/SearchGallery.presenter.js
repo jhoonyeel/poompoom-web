@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ReviewPostCard from '../../../Card/ReviewPostCard/ReviewPostCard.container';
+import ReviewPostCard from '../../Card/ReviewPostCard/ReviewPostCard.container';
 
 export default function SearchGalleryUI({ searchPosts }) {
   return (
