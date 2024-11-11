@@ -14,15 +14,16 @@ import LoginSocial from './pages/OAuth/LoginSocial';
 import SocialSignUp from './pages/OAuth/SignUp/SignUp.container';
 import SignUpSocial from './pages/OAuth/SignUpSocial';
 
-import Welcome from './pages/Welcome/Welcome';
-
-import HomePage from './pages/Home/HomePage';
-import ProfileEditPage from './pages/Profile/ProfileEditPage';
-import ProfilePage from './pages/Profile/ProfilePage';
-import QueryPage from './pages/Query/QueryPage';
-import ReviewPage from './pages/Review/ReviewPage';
-import PostDetail from './pages/ReviewDetail/PostDetail/PostDetail.container';
-import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
+import {
+  HomePage,
+  ProfileEditPage,
+  ProfilePage,
+  QueryPage,
+  ReviewDetailPage,
+  ReviewPage,
+  ReviewWritePage,
+  Welcome,
+} from './pages/index';
 
 import { basicTheme } from './shared/Theme';
 
@@ -40,7 +41,7 @@ function AppRoutes() {
       <Route path="/review" element={<ProtectedRoute element={ReviewPage} isAuthenticated={isAuthenticated} />} />
       <Route
         path="/review/:reviewId"
-        element={<ProtectedRoute element={PostDetail} isAuthenticated={isAuthenticated} />}
+        element={<ProtectedRoute element={ReviewDetailPage} isAuthenticated={isAuthenticated} />}
       />
       <Route
         path="/review/write"
