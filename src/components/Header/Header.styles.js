@@ -14,7 +14,7 @@ export const HeaderWrapper = styled.header`
 export const HeaderContent = styled.div`
   width: 80%;
   margin: 0 auto;
-  min-width: 1167px;
+  min-width: 1028px;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -59,6 +59,7 @@ export const ProfileParagraph = styled.p`
 
 export const MenuBar = styled.ul`
   width: 55%;
+  min-width: 160px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -70,8 +71,8 @@ export const MenuItem = styled.li`
   font-family: 'Shrikhand';
   font-style: italic;
   font-weight: 400;
-  font-size: 24px;
-  line-height: 35px;
+  font-size: 20px;
+  line-height: 1.4;
   position: relative; /* ::after 위치를 설정하기 위해 relative 위치 지정 */
   color: #072623;
   &:hover {
