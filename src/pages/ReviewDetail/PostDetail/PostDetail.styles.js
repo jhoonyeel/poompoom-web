@@ -262,14 +262,6 @@ export const LikeAmount = styled.span`
 export const CommentWriteBox = styled.div`
   height: 20%;
 `;
-export const CommentSection = styled.section`
-  width: 100%;
-  margin-top: 5rem;
-`;
-export const CommentContent = styled.div`
-  width: 80%;
-  margin: 0 auto;
-`;
 
 export const ImageDots = styled.div`
   display: flex;
