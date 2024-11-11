@@ -4,18 +4,17 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PostFilter from '../../components/PostFilter/PostFilter.container';
 // import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
+import { ScrollToTopButton } from '../../components/common/ScrollToTopButton';
 import { scrollToTop } from '../../shared/scrollToTop';
-import LatestGallery from './components/Section/LatestSection/LatestGallery/LatestGallery.container';
-import LatestHeader from './components/Section/LatestSection/LatestHeader/LatestHeader.container';
-import SearchGallery from './components/Section/SearchSection/SearchGallery/SearchGallery.container';
-import SearchHeader from './components/Section/SearchSection/SearchHeader/SearchHeader.container';
-import SubAccount from './components/Section/SubSection/SubAccount/SubAccount.container';
-import SubGallery from './components/Section/SubSection/SubGallery/SubGallery.container';
-import SubHeader from './components/Section/SubSection/SubHeader/SubHeader.container';
+import LatestGallery from './components/Section/LatestGallery/LatestGallery.container';
+import SearchGallery from './components/Section/SearchGallery/SearchGallery.container';
+import SubAccount from './components/Section/SubAccount/SubAccount.container';
+import SubGallery from './components/Section/SubGallery/SubGallery.container';
 
 export default function ReviewPage() {
   const [stickyOffset, setStickyOffset] = useState(0);
 
+  // 헤더와 postfilter에 .sticky 추가
   useEffect(() => {
     // 모든 sticky 요소를 선택
     const stickyElements = document.querySelectorAll('.sticky');
@@ -32,33 +31,31 @@ export default function ReviewPage() {
   return (
     <Wrapper>
       {/* <RankingProfileCard /> */}
-      <PostFilterContent className="sticky">
+
+      <PostFilterContainer className="sticky">
         <PostFilter />
-      </PostFilterContent>
+      </PostFilterContainer>
+
       <GalleryContent>
         <LatestContent>
-          <LatestHeader />
+          <Title>RECENT VIEW</Title>
           <LatestGallery />
         </LatestContent>
         <SubContent>
-          <SubHeader />
+          <Title>HOW ABOUT THIS</Title>
           <SubBodyContent>
             <SubGallery />
             <SubAccount />
           </SubBodyContent>
         </SubContent>
         <SearchContent>
-          <SearchHeader />
+          <Title>ALL MOOD VIEW</Title>
           <SearchGallery />
         </SearchContent>
-        <ButtonBox
-          onClick={() => {
-            console.log('asdf');
-            scrollToTop(stickyOffset);
-          }}
-        >
+        <ButtonBox onClick={() => scrollToTop(stickyOffset)}>
           <UpIcon icon={faChevronUp} />
         </ButtonBox>
+        <ScrollToTopButton />
       </GalleryContent>
     </Wrapper>
   );
@@ -72,10 +69,11 @@ const GalleryContent = styled.div`
   margin: 0 auto;
   min-width: 1028px;
 `;
-const PostFilterContent = styled.div`
+const PostFilterContainer = styled.div`
   width: 80%;
   margin: 0 auto;
   min-width: 1028px;
+
   position: sticky;
   top: 15vh;
   z-index: 6; /* 헤더와 함께 보이도록 z-index 조정 */
@@ -83,6 +81,16 @@ const PostFilterContent = styled.div`
   transition: top 0.3s ease-in-out; /* 부드러운 이동을 위한 transition 속성 추가 */
 `;
 
+const Title = styled.h3`
+  width: 100%;
+  font-family: 'Shrikhand';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.4;
+  color: #0e5649;
+  text-align: start;
+`;
 const LatestContent = styled.section`
   width: 100%;
   margin-top: 2rem;

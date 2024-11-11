@@ -84,7 +84,9 @@ function AppRoutes() {
 function MainLayout() {
   return (
     <>
-      <Header />
+      <S.HeaderContainer>
+        <Header />
+      </S.HeaderContainer>
       <Outlet />
       <Footer />
     </>

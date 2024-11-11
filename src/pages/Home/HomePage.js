@@ -1,9 +1,6 @@
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
-// eslint-disable-next-line camelcase, import/no-unresolved
 import { ReactComponent as CardNews } from '../../assets/CardNews.svg';
 import { ReactComponent as Anniversary } from '../../assets/Category/Anniversary.svg';
 import { ReactComponent as Apology } from '../../assets/Category/Apology.svg';
@@ -17,14 +14,13 @@ import { ReactComponent as Ranking } from '../../assets/HomeRanking.svg';
 import { ReactComponent as MainBackground } from '../../assets/MainBackground.svg';
 import { ReactComponent as Season } from '../../assets/Season.svg';
 import { ReactComponent as SeasonBk } from '../../assets/SeasonBackground.svg';
+import { ScrollToTopButton } from '../../components/common/ScrollToTopButton';
 import { useNavigatePath } from '../../hooks/useNavigatePath';
-import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 export default function HomePage() {
   const [recommendations, setRecommendations] = useState([]);
 
   const navigatePath = useNavigatePath();
-  const scrollToTop = useScrollToTop();
 
   const fetchPostData = async () => {
     try {
@@ -50,7 +46,8 @@ export default function HomePage() {
 
       <SearchSection>
         <SearchBox>
-          <h3>Search 지금 많이 찾아보는 태그</h3>
+          <SearchTitle>Search</SearchTitle>
+          <SearchSmallTitle>지금 많이 찾아보는 태그</SearchSmallTitle>
         </SearchBox>
         <KeywordBox>
           <KeywordList>
@@ -113,9 +110,7 @@ export default function HomePage() {
         </SeasonAbsoluteBox>
       </SeasonSection>
 
-      <ButtonBox onClick={scrollToTop}>
-        <UpIcon icon={faChevronUp} />
-      </ButtonBox>
+      <ScrollToTopButton />
     </Wrapper>
   );
 }
@@ -160,6 +155,34 @@ const SearchBox = styled.div`
   width: 70%;
   margin: 0 auto;
   display: flex;
+`;
+const SearchTitle = styled.span`
+  font-family: 'Shrikhand';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.4;
+  color: #4b4b4b;
+  margin-right: 10px;
+`;
+const SearchSmallTitle = styled.span`
+  position: relative;
+  font-family: 'Shrikhand';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.4;
+  color: #4b4b4b;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 5px;
+    height: 1.5px;
+    background-color: #4b4b4b;
+  }
 `;
 const KeywordList = styled.ul`
   display: flex;
@@ -239,22 +262,6 @@ const SeasonSection = styled.section`
   align-items: center;
 `;
 
-const ButtonBox = styled.div`
-  position: fixed;
-  bottom: 50px; /* 화면 하단과의 간격 조정 */
-  right: 50px; /* 화면 우측과의 간격 조정 */
-  z-index: 999; /* 다른 요소 위에 표시되도록 z-index 조정 */
-  width: 50px;
-  height: 50px;
-  border: 3px solid gray;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const UpIcon = styled(FontAwesomeIcon)`
-  font-size: 24px;
-`;
 const SeasonAbsoluteBox = styled.div`
   position: relative;
   width: 100%;

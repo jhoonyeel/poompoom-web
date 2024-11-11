@@ -16,6 +16,7 @@
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "react/jsx-no-useless-fragment": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "import/prefer-default-export": "off",
