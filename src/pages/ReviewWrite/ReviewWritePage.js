@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
 import DummyPhoto from '../../assets/DummyPhoto.svg';
 import { useFetchProfilePicture } from '../../hooks/useFetchProfilePicture';
+import { useNavigatePath } from '../../hooks/useNavigatePath';
 import { profilePictureState } from '../../recoil/atoms';
 import { CATEGORIES } from '../../shared/categories';
 
@@ -24,7 +25,7 @@ export default function ReviewWritePage({ mode = 'create' }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [willDeletePhoto, setWillDeletePhoto] = useState([]);
 
-  const navigate = useNavigate();
+  const navigatePath = useNavigatePath();
 
   // 프로필 사진을 가져오는 커스텀 훅 호출
   useFetchProfilePicture();
@@ -205,7 +206,7 @@ export default function ReviewWritePage({ mode = 'create' }) {
         });
       }
       console.log('Success:', response.data);
-      navigate(`/review/${reviewId}`);
+      navigatePath(`/review/${reviewId}`);
     } catch (error) {
       console.error('Error:', error);
       console.error('formData:', formData);
