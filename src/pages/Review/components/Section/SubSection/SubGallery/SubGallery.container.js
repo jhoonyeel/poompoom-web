@@ -1,16 +1,37 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from '../../../../../../apis/axios';
+import { useInfiniteScroll } from '../../../../../../hooks/useInfiniteScroll';
 import SubGalleryUI from './SubGallery.presenter';
 
+const fetchSubData = async (cursorId = 1) => {
+  const response = await axios.get(`/review/subscribe`, {
+    params: { cursorId },
+  });
+  const { values, nextPageId, hasNext } = response.data;
+  return { values, nextPageId, hasNext };
+};
+
 export default function SubGallery() {
+  const { rawData, loaderRef } = useInfiniteScroll({
+    fetchFunction: fetchSubData, // 데이터를 가져오는 함수
+    initialSize: 10, // 한 번에 가져올 데이터 수
+    additionalSize: 10, // 초기 커서 값
+    initialCursorId: 1,
+  });
   const [subPosts, setSubPosts] = useState([]);
+
+  useEffect(() => {
+    setSubPosts((prevPosts) => [...prevPosts, ...rawData]);
+  }, [rawData]);
+  console.log('useEffect', subPosts);
+
+  /*
   const [cursorId, setCursorId] = useState(1);
   const [hasNext, setHasNext] = useState(true);
   const loader = useRef(null);
 
   const fetchPostData = async (currentCursor = 1) => {
     try {
-      console.log(`cursorId: ${cursorId}, currentCursor: ${currentCursor}`);
       const res = await axios.get(`/review/subscribe`, {
         params: {
           cursorId: currentCursor,
@@ -18,7 +39,6 @@ export default function SubGallery() {
       });
       const { values, hasNext: newHasNext, nextPageId } = res.data;
       setSubPosts((prevPosts) => [...prevPosts, ...values]);
-      // Update cursorId to nextPageId if it exists, else keep it as is
       setCursorId(nextPageId || currentCursor);
       setHasNext(newHasNext);
     } catch (error) {
@@ -50,6 +70,7 @@ export default function SubGallery() {
       }
     };
   }, [cursorId, hasNext]);
+  */
 
-  return <SubGalleryUI subPosts={subPosts} loader={loader} />;
+  return <SubGalleryUI subPosts={subPosts} loader={loaderRef} />;
 }

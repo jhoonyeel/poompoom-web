@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import FollowBtnComponent from '../../../../../../atoms/FollowBtnComponent';
 import ReviewPostHashtags from '../../../Card/ReviewPostHashtags/ReviewPostHashtags.container';
 
-export default function SubAccountUI({ subAccounts, isFollow, handleFollow, handleOnClick }) {
+export default function SubAccountUI({ subAccounts, isFollow, handleFollow, navigatePath }) {
   const getNickname = (nickname) => {
     const atIndex = nickname.indexOf('@');
     return atIndex !== -1 ? nickname.slice(0, atIndex) : nickname;
@@ -16,7 +16,7 @@ export default function SubAccountUI({ subAccounts, isFollow, handleFollow, hand
         {subAccounts.map((account) => (
           <SubItem key={account.id}>
             <AuthorBox>
-              <AuthorCircleBox onClick={handleOnClick(`/profile`)}>
+              <AuthorCircleBox onClick={navigatePath(`/profile`)}>
                 <AuthorImg src={account.profilePhotoPath} alt="프로필 사진" />
               </AuthorCircleBox>
               <Nickname to="/profile">{`@${getNickname(account.nickname)}` || '@닉네임'}</Nickname>
