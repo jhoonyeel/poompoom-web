@@ -8,13 +8,13 @@ export default function ReviewPostAuthorUI({
   nickname,
   reviewType,
   isHovered,
-  handleOnClick,
+  navigatePath,
   isFollow,
   handleFollow,
 }) {
   return (
     <Wrapper>
-      <AuthorComponent isHovered={isHovered} onClick={handleOnClick('/profile')} profilePhoto={profilePhoto} />
+      <AuthorComponent isHovered={isHovered} onClick={navigatePath('/profile')} profilePhoto={profilePhoto} />
       <Info>
         <Nickname to="/profile">{`@${nickname}` || '@닉네임'}</Nickname>
         <AdditionalInfo>
@@ -28,7 +28,7 @@ export default function ReviewPostAuthorUI({
 
 const Wrapper = styled.div`
   display: flex;
-  width: 380px;
+  width: 300px;
   margin: 0 auto;
 `;
 const Info = styled.div`

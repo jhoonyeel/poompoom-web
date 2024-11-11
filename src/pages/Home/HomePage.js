@@ -1,7 +1,6 @@
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
 // eslint-disable-next-line camelcase, import/no-unresolved
@@ -18,14 +17,14 @@ import { ReactComponent as Ranking } from '../../assets/HomeRanking.svg';
 import { ReactComponent as MainBackground } from '../../assets/MainBackground.svg';
 import { ReactComponent as Season } from '../../assets/Season.svg';
 import { ReactComponent as SeasonBk } from '../../assets/SeasonBackground.svg';
+import { useNavigatePath } from '../../hooks/useNavigatePath';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 export default function HomePage() {
   const [recommendations, setRecommendations] = useState([]);
 
-  const navigate = useNavigate();
-  const handleOnClick = (path) => () => {
-    navigate(path);
-  };
+  const navigatePath = useNavigatePath();
+  const scrollToTop = useScrollToTop();
 
   const fetchPostData = async () => {
     try {
@@ -40,14 +39,6 @@ export default function HomePage() {
   useEffect(() => {
     fetchPostData();
   }, []);
-
-  // 화면 맨 위로 이동하는 함수
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth', // 부드러운 스크롤
-    });
-  };
 
   return (
     <Wrapper>
@@ -70,28 +61,28 @@ export default function HomePage() {
         </KeywordBox>
         <MiddleBox>
           <CategoryList>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=100일')}>
+            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=100일')}>
               <D100 />
             </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=사과의+선물')}>
+            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=사과의+선물')}>
               <Apology />
             </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=가벼운+선물')}>
+            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=가벼운+선물')}>
               <Light />
             </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=생일')}>
+            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=생일')}>
               <Birthday />
             </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=청혼')}>
+            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=청혼')}>
               <Propose />
             </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=로맨틱+데이')}>
+            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=로맨틱+데이')}>
               <Lose />
             </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=n주년')}>
+            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=n주년')}>
               <Anniversary />
             </CategoryWrapper>
-            <CategoryWrapper onClick={handleOnClick('/review/query-result?searchContent=크리스마스')}>
+            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=크리스마스')}>
               <Christmas />
             </CategoryWrapper>
           </CategoryList>
@@ -107,7 +98,7 @@ export default function HomePage() {
         </RankingBox>
       </RankingSection>
 
-      <MoveButton type="button" onClick={handleOnClick('/review')}>
+      <MoveButton type="button" onClick={navigatePath('/review')}>
         Go to mood view!
       </MoveButton>
 
@@ -122,13 +113,7 @@ export default function HomePage() {
         </SeasonAbsoluteBox>
       </SeasonSection>
 
-      <ButtonBox
-        onClick={() => {
-          console.log('asdf');
-          scrollToTop();
-          console.log('asdf');
-        }}
-      >
+      <ButtonBox onClick={scrollToTop}>
         <UpIcon icon={faChevronUp} />
       </ButtonBox>
     </Wrapper>

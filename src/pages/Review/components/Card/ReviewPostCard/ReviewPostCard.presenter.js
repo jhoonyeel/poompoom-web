@@ -7,7 +7,7 @@ import ReviewPostPreview from '../ReviewPostPreview/ReviewPostPreview.container'
 
 export default function ReviewPostCardUI({
   post,
-  handlePostClick,
+  navigatePath,
   isHovered,
   handleMouseEnter,
   handleMouseLeave,
@@ -23,7 +23,7 @@ export default function ReviewPostCardUI({
       />
       <HoveredLayout>
         <HoveredBox
-          onClick={handlePostClick(`/review/${post.reviewId}`)}
+          onClick={navigatePath(`/review/${post.reviewId}`)}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -39,7 +39,7 @@ export default function ReviewPostCardUI({
           )}
           {isHovered && randomParticle && (
             <ParticlesBox>
-              <Lottie options={randomParticle} height={430} width={380} />
+              <Lottie options={randomParticle} width={300} height={370} />
             </ParticlesBox>
           )}
         </HoveredBox>
@@ -57,8 +57,8 @@ const HoveredLayout = styled.div`
   align-items: center;
 `;
 const HoveredBox = styled.div`
-  width: 380px;
-  height: 430px;
+  width: 300px;
+  height: 370px;
   transition: transform 0.2s;
   &:hover {
     transform: scale(1.1);
@@ -80,8 +80,8 @@ const ParticlesBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 380px; /* 적절한 크기로 조정 */
-  height: 430px; /* 적절한 크기로 조정 */
+  width: 300px; /* 적절한 크기로 조정 */
+  height: 370px; /* 적절한 크기로 조정 */
   position: relative;
   transform: translate(-25px, -445px);
 `;

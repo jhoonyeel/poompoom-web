@@ -1,8 +1,3 @@
-// Community Pages
-export { default as CommunityDetailPage } from './Community/Detail/CommunityDetailPage';
-export { default as CommunityPage } from './Community/List/CommunityPage';
-export { default as CommunityWritePage } from './Community/New/CommunityWritePage';
-
 // Home Page
 export { default as HomePage } from './Home/HomePage';
 
@@ -16,13 +11,6 @@ export { default as SignupTagPresenter } from './Join/SignupTag/SignUpTag.presen
 export { default as LoginContainer } from './Login/Login.container';
 export { default as LoginPresenter } from './Login/Login.presenter';
 export { default as LoginPage } from './Login/LoginPage';
-
-// LoversProfile Pages
-export { default as LoversProfilePage } from './LoversProfile/LoversProfilePage';
-export { default as LoversProfileSetPage } from './LoversProfile/LoversProfileSetPage';
-export { default as QuickGift } from './LoversProfile/QuickGift/SetQuickGift';
-export { default as SetQuickGiftContainer } from './LoversProfile/QuickGift/SetQuickGift/SetQuickGift.container';
-export { default as SetQuickGiftPresenter } from './LoversProfile/QuickGift/SetQuickGift/setQuickGift.presenter';
 
 // OAuth Pages
 export { default as LoginSocial } from './OAuth/LoginSocial';

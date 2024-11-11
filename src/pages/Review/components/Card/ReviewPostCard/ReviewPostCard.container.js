@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import particle1 from '../../../../../animation/Particle1.json';
 import particle2 from '../../../../../animation/Particle2.json';
 import particle3 from '../../../../../animation/Particle3.json';
+import { useNavigatePath } from '../../../../../hooks/useNavigatePath';
 import ReviewPostCardUI from './ReviewPostCard.presenter';
 
 const particleOptions = [
@@ -41,10 +41,7 @@ export default function ReviewPostCard({ post }) {
     setRandomParticle(particleOptions[randomIndex]);
   };
 
-  const navigate = useNavigate();
-  const handlePostClick = (path) => () => {
-    navigate(path);
-  };
+  const navigatePath = useNavigatePath();
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -57,7 +54,7 @@ export default function ReviewPostCard({ post }) {
   return (
     <ReviewPostCardUI
       post={post}
-      handlePostClick={handlePostClick}
+      navigatePath={navigatePath}
       isHovered={isHovered}
       handleMouseEnter={handleMouseEnter}
       handleMouseLeave={handleMouseLeave}

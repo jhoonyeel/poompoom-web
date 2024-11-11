@@ -1,14 +1,11 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as FireCracker } from '../assets/FireCraker.svg';
+import { useNavigatePath } from '../hooks/useNavigatePath';
 
 export default function AuthorComponent({ isHovered, profilePhoto }) {
-  const navigate = useNavigate();
-  const handleOnClick = (path) => () => {
-    navigate(path);
-  };
+  const navigatePath = useNavigatePath();
   return (
-    <Wrapper onClick={handleOnClick(`/profile`)}>
+    <Wrapper onClick={navigatePath(`/profile`)}>
       <AuthorCircleBox>
         <AuthorImg src={profilePhoto} alt="프로필 사진" />
       </AuthorCircleBox>

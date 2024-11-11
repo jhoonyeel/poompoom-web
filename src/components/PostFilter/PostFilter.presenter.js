@@ -29,7 +29,7 @@ const HoverAnimation = React.memo(({ isHovered }) => {
   return <Lottie options={defaultOptions} height="100%" width="70%" isStopped={!isHovered} ref={lottieRef} />;
 });
 
-export default function PostFilterUI({ handleOnClick }) {
+export default function PostFilterUI({ navigatePath }) {
   const [isHovered, setIsHovered] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('추천순'); // 기본으로 추천순이 선택되도록 설정
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -104,7 +104,7 @@ export default function PostFilterUI({ handleOnClick }) {
         </ItemFilter>
       </AlignBox>
       <AnimationBox
-        onClick={handleOnClick(`/review/write`)}
+        onClick={navigatePath(`/review/write`)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -169,14 +169,14 @@ const AlignSequence = styled.span`
     `}
 `;
 const WritingReview = styled.span`
-  font-size: 18px;
+  font-size: 14px;
 `;
 const AnimationBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 150px; /* 적절한 크기로 조정 */
+  width: 70px; /* 적절한 크기로 조정 */
 `;
 
 const Dropdown = styled.div`
@@ -192,7 +192,7 @@ const DropdownMenu = styled.div`
   border-radius: 4px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  width: 150px;
+  width: 70px;
 `;
 const DropdownItem = styled.div`
   padding: 8px 12px;

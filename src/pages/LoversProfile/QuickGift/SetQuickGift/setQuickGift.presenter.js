@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import * as S from './setQuickGift.styles';
 
 import AgeSlider from '../../component/AgeSlider';
@@ -9,9 +8,10 @@ import Purpose from '../../component/Purpose';
 import { ReactComponent as FirstBucket } from '../../../../assets/LoverProfileFirstBucket.svg';
 import { ReactComponent as FirstCalendar } from '../../../../assets/LoverProfileFirstCalendar.svg';
 import { ReactComponent as SpeechBubble } from '../../../../assets/LoverProfileSpeechBubble.svg';
+import { useNavigatePath } from '../../../../hooks/useNavigatePath';
 
 export default function SetQuickGiftUI({ uniqueData }) {
-  const navigate = useNavigate();
+  const navigatePath = useNavigatePath();
   return (
     <S.Container>
       <S.HeadContainer>
@@ -51,13 +51,7 @@ export default function SetQuickGiftUI({ uniqueData }) {
         </S.CommentWrapper>
       </S.HeadContainer>
 
-      <S.Gogosing
-        onClick={() => {
-          navigate('/lovers-profile');
-        }}
-      >
-        edit gogosing!
-      </S.Gogosing>
+      <S.Gogosing onClick={navigatePath('/lovers-profile')}>edit gogosing!</S.Gogosing>
       <S.Body>
         <S.Wrapper>
           <S.TextWrapper>

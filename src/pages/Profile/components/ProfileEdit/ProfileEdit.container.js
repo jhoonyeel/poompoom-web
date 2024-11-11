@@ -1,11 +1,8 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigatePath } from '../../../../hooks/useNavigatePath';
 import ProfileEditUI from './ProfileEdit.presenter';
 
 export default function ProfileEdit() {
-  const navigate = useNavigate();
-  const handleOnClick = (path) => () => {
-    navigate(path);
-  };
+  const navigatePath = useNavigatePath();
 
-  return <ProfileEditUI handleOnClick={handleOnClick} />;
+  return <ProfileEditUI navigatePath={navigatePath} />;
 }
