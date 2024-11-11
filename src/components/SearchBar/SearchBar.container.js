@@ -31,6 +31,7 @@ export default function SearchBar() {
 
   const fetchPostData = async () => {
     try {
+      console.log('/hashtag/rank API 실행');
       const res = await axios.get(`/hashtag/rank`);
       const { data } = res;
       setRecommendations(data);

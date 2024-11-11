@@ -101,6 +101,7 @@ export default function PostDetail() {
     <ReviewDetailUI
       reviewId={reviewId}
       currentImageIndex={currentImageIndex}
+      setCurrentImageIndex={setCurrentImageIndex}
       prevImage={prevImage}
       nextImage={nextImage}
       onUpdate={onUpdate}

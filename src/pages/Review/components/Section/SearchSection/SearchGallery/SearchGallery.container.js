@@ -11,6 +11,7 @@ export default function SearchGallery() {
 
   const fetchPostData = async (cursor, size = 18) => {
     try {
+      console.log('/review API 실행');
       const res = await axios.get(`/review`, {
         params: {
           cursorId: cursor, // cursorId보다 id가 작은 게시글을 가져옴.

@@ -6,6 +6,7 @@ export const login = async (username, password) => {
   data.append('password', password);
 
   try {
+    console.log('/login API 실행');
     const response = await axios.post('/login', data, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

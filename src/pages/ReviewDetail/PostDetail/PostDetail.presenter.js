@@ -8,6 +8,7 @@ import * as S from './PostDetail.styles';
 
 export default function ReviewDetailUI({
   currentImageIndex,
+  setCurrentImageIndex,
   prevImage,
   nextImage,
   onUpdate,
@@ -50,7 +51,12 @@ export default function ReviewDetailUI({
             </S.PhotoBox>
             <S.ImageDots>
               {photos.map((_, index) => (
-                <S.Dot active={index === currentImageIndex} />
+                <S.Dot
+                  active={index === currentImageIndex}
+                  onClick={() => {
+                    setCurrentImageIndex(index);
+                  }}
+                />
               ))}
             </S.ImageDots>
             <S.InfoBox>

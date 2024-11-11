@@ -14,6 +14,7 @@ export default function ProfileHeader() {
 
   const fetchData = async () => {
     try {
+      console.log('profile/1 API 실행');
       const response = await axios.get(`profile/1`);
       setProfile(response.data);
 

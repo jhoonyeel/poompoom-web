@@ -23,6 +23,7 @@ export default function SubAccount() {
 
   const fetchAccountData = async (page, size = 10, currentCursorId = cursorId) => {
     try {
+      console.log('/subscribe API 실행');
       const res = await axios.get(`/subscribe`, {
         params: {
           page,

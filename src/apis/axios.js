@@ -22,13 +22,12 @@ axios.interceptors.request.use(
 
     // /reissue 요청이 아닐 때만 accessToken을 헤더에 추가
     if (accessToken && config.url !== '/reissue') {
-      // config.headers.Authorization = `Bearer ${accessToken}`;
+      /* config.headers.Authorization = `Bearer ${accessToken}`; */
       config.headers.access = accessToken; // 헤더에 access 속성 추가
-      console.log('/reissue 요청이 아닐 때 AT 헤더에 추가');
+      console.log('/reissue 요청이 아닐 때, localStorage에 있는 AT 헤더에 추가해서 요청');
     }
 
-    // 요청 헤더를 콘솔에 출력합니다. (디버깅 용도)
-    console.log('Request Interceptor의 헤더: ', config.headers);
+    console.log('Request Interceptor의 헤더: ', config.headers['Content-Type']);
 
     // 수정된 요청 설정을 반환하여, 서버로 전송합니다.
     return config;
@@ -50,11 +49,12 @@ axios.interceptors.request.use(
 /* Response 인터셉터 */
 axios.interceptors.response.use(
   (response) => {
-    console.log('서버로부터 response axios 받았다');
-    console.log('Response Interceptor: ', response);
+    console.log('Response 인터셉터 Success');
     return response;
   },
   async (error) => {
+    console.log('Response 인터셉터 Failed');
+
     const originalRequest = error.config;
     if (error.response && error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
@@ -68,7 +68,7 @@ axios.interceptors.response.use(
           {},
           {
             headers: {
-              // Authorization: `Bearer ${refreshToken}`,
+              /* Authorization: `Bearer ${refreshToken}`, */
               // refresh: JSON.stringify(refreshToken),
               refresh: refreshToken, // refresh 속성만 헤더로 전송
               'Content-Type': 'application/x-www-form-urlencoded',
@@ -87,8 +87,8 @@ axios.interceptors.response.use(
           // 새롭게 받은 accessToken이 기존 accessToken과 다르면 업데이트
           if (newAccessToken && newAccessToken !== currentAccessToken) {
             localStorage.setItem('accessToken', newAccessToken);
-            // axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
-            // originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+            /* axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`; */
+            /* originalRequest.headers.Authorization = `Bearer ${newAccessToken}`; */
             axios.defaults.headers.common.access = newAccessToken;
             originalRequest.headers.access = newAccessToken;
             console.log('새로운 AT이 발급되었습니다.');
