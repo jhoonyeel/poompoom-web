@@ -1,5 +1,5 @@
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Lottie from 'react-lottie';
 import writeAnimation from '../../animation/PostWrite.json';
 import ItemDropdown from './ItemDropdown';
@@ -29,32 +29,29 @@ const HoverAnimation = React.memo(({ isHovered }) => {
   return <Lottie options={defaultOptions} width="70px" height="100%" isStopped={!isHovered} ref={lottieRef} />;
 });
 
-export default function PostFilterUI({ navigatePath }) {
-  const [selectedSort, setSelectedSort] = useState('추천순'); // 기본으로 추천순이 선택되도록 설정
-  const [isPriceSliderOpen, setIsPriceSliderOpen] = useState(false); // 가격 슬라이더 열림 상태 관리
-  const [selectedItem, setSelectedItem] = useState('품목 선택'); // 기본 선택된 품목
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleSortClick = (filter) => {
-    setSelectedSort(filter);
-  };
-
-  const togglePriceSlider = () => {
-    setIsPriceSliderOpen(!isPriceSliderOpen);
-  };
-
+export default function PostFilterUI({
+  selectedSort,
+  onSortClick,
+  isPriceSliderOpen,
+  togglePriceSlider,
+  selectedItem,
+  setSelectedItem,
+  isHovered,
+  setIsHovered,
+  navigatePath,
+}) {
   return (
     <S.Wrapper>
       <S.AlignBox>
         <S.SortBox>
           <S.SortIcon icon={faFilter} />
-          <S.SortText isSelected={selectedSort === '인기순'} onClick={() => handleSortClick('인기순')}>
+          <S.SortText isSelected={selectedSort === '인기순'} onClick={() => onSortClick('인기순')}>
             인기순
           </S.SortText>
-          <S.SortText isSelected={selectedSort === '최신순'} onClick={() => handleSortClick('최신순')}>
+          <S.SortText isSelected={selectedSort === '최신순'} onClick={() => onSortClick('최신순')}>
             최신순
           </S.SortText>
-          <S.SortText isSelected={selectedSort === '추천순'} onClick={() => handleSortClick('추천순')}>
+          <S.SortText isSelected={selectedSort === '추천순'} onClick={() => onSortClick('추천순')}>
             추천순
           </S.SortText>
         </S.SortBox>
