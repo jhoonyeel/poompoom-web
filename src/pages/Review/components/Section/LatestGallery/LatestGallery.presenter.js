@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Cursor from '../../../../../assets/HorizontalCursor.svg';
-import ReviewPostCard from '../../Card/ReviewPostCard/ReviewPostCard.container';
+import ReviewPostCard from '../../../../../components/ReviewPostCard/ReviewPostCard.container';
 
 export default function LatestGalleryUI({ latestPosts, loader }) {
   const postListRef = useRef(null);
@@ -29,21 +29,21 @@ export default function LatestGalleryUI({ latestPosts, loader }) {
   }, []);
 
   return (
-    <PostList ref={postListRef}>
+    <Wrapper ref={postListRef}>
       {latestPosts && latestPosts.map((post) => <ReviewPostCard key={post.reviewId} post={post} />)}
       <ScrollTrigger ref={loader} />
-    </PostList>
+    </Wrapper>
   );
 }
 
-const PostList = styled.div`
-  padding-left: 5%;
-  height: 620px;
+const Wrapper = styled.div`
+  padding-left: 32px;
+  height: 420px;
   display: flex;
-  gap: 50px;
   align-items: center;
-  flex-wrap: nowrap; /* 가로로 나열 */
-  overflow-x: auto; /* 가로 스크롤 활성화 */
+  gap: 50px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   cursor: url(${Cursor}), auto; /* SVG 커서 설정 */
 `;
 const ScrollTrigger = styled.div`

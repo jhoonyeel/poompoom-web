@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ProfilePhoto from '../../../../assets/ProfilePhoto.svg';
 import * as S from './ProfileHeader.styles';
 
-export default function ProfileHeaderUI({ navigatePath, profile }) {
+export default function ProfileHeaderUI({ profile, navigatePath }) {
   return (
     <S.Container>
       <ImageBox>

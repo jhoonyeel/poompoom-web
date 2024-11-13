@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Cursor from '../../../../../assets/HorizontalCursor.svg';
-import ReviewPostCard from '../../Card/ReviewPostCard/ReviewPostCard.container';
+import ReviewPostCard from '../../../../../components/ReviewPostCard/ReviewPostCard.container';
 
 export default function SubGalleryUI({ subPosts, loader }) {
   const postListRef = useRef(null);
@@ -40,18 +40,17 @@ export default function SubGalleryUI({ subPosts, loader }) {
 }
 
 const Wrapper = styled.div`
-  width: 72%;
-  height: 100%;
+  padding-left: 32px;
   display: flex;
   align-items: center;
-  flex-wrap: nowrap; /* 가로로 나열 */
-  overflow-x: auto; /* 가로 스크롤 활성화 */
-  cursor: url(${Cursor}), auto; /* SVG 커서 설정 */
   gap: 50px;
-  padding-left: 5%;
+  flex: 7;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  cursor: url(${Cursor}), auto; /* SVG 커서 설정 */
 `;
 const NoFollowParagraph = styled.p`
-  font-size: 38px;
+  font-size: 30px;
   font-weight: bold;
 `;
 const ScrollTrigger = styled.div`

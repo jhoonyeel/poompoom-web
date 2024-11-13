@@ -6,5 +6,5 @@ export default function ProfileMenuBox() {
   const location = useLocation();
   const navigatePath = useNavigatePath();
 
-  return <ProfileMenuBoxUI navigatePath={navigatePath} currentPath={location.pathname} />;
+  return <ProfileMenuBoxUI currentPath={location.pathname} navigatePath={navigatePath} />;
 }

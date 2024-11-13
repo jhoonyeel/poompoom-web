@@ -36,38 +36,31 @@ export default function ReviewPage() {
         <PostFilter />
       </PostFilterContainer>
 
-      <GalleryContent>
-        <LatestContent>
-          <Title>RECENT VIEW</Title>
-          <LatestGallery />
-        </LatestContent>
-        <SubContent>
-          <Title>HOW ABOUT THIS</Title>
-          <SubBodyContent>
-            <SubGallery />
-            <SubAccount />
-          </SubBodyContent>
-        </SubContent>
-        <SearchContent>
-          <Title>ALL MOOD VIEW</Title>
-          <SearchGallery />
-        </SearchContent>
-        <ButtonBox onClick={() => scrollToTop(stickyOffset)}>
-          <UpIcon icon={faChevronUp} />
-        </ButtonBox>
-        <ScrollToTopButton />
-      </GalleryContent>
+      <LatestSection>
+        <Title>RECENT VIEW</Title>
+        <LatestGallery />
+      </LatestSection>
+      <SubSection>
+        <Title>HOW ABOUT THIS</Title>
+        <SubBodyContent>
+          <SubGallery />
+          <SubAccount />
+        </SubBodyContent>
+      </SubSection>
+      <SearchSection>
+        <Title>ALL MOOD VIEW</Title>
+        <SearchGallery />
+      </SearchSection>
+      <ButtonBox onClick={() => scrollToTop(stickyOffset)}>
+        <UpIcon icon={faChevronUp} />
+      </ButtonBox>
+      <ScrollToTopButton />
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
   width: 100%;
-`;
-const GalleryContent = styled.div`
-  width: 80%;
-  margin: 0 auto;
-  min-width: 1028px;
 `;
 const PostFilterContainer = styled.div`
   width: 80%;
@@ -82,30 +75,32 @@ const PostFilterContainer = styled.div`
 `;
 
 const Title = styled.h3`
-  width: 100%;
+  text-align: start;
   font-family: 'Shrikhand';
   font-style: italic;
   font-weight: 400;
   font-size: 24px;
   line-height: 1.4;
   color: #0e5649;
-  text-align: start;
 `;
-const LatestContent = styled.section`
-  width: 100%;
+const LatestSection = styled.section`
+  margin: 0 auto;
+  min-width: 1028px;
+  width: 80%;
 `;
-const SubContent = styled.section`
-  width: 100%;
-  margin-top: 2rem;
+const SubSection = styled.section`
+  margin: 32px auto 0;
+  min-width: 1028px;
+  width: 80%;
 `;
 const SubBodyContent = styled.div`
   display: flex;
-  width: 100%;
-  height: 620px;
+  height: 420px;
 `;
-const SearchContent = styled.section`
-  width: 100%;
-  margin-top: 2rem;
+const SearchSection = styled.section`
+  margin: 32px auto 0;
+  min-width: 1028px;
+  width: 80%;
 `;
 const ButtonBox = styled.div`
   position: fixed;

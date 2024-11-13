@@ -17,28 +17,30 @@ export default function FollowButton({ isFollow, handleFollow }) {
 }
 
 const FollowBtn = styled.button`
+  padding: 4px 6px;
   color: #024e46;
-  background-color: white;
+  font-size: 12px;
+  background-color: #fff;
+  border-radius: 20px;
   border: 3px solid #024e46;
+  cursor: pointer;
+
   &:hover {
-    color: white;
+    color: #fff;
     background-color: #024e46;
   }
-  border-radius: 20px;
-  padding: 5px;
-  font-size: 16px;
-  cursor: pointer;
 `;
 const FollowedBtn = styled.button`
+  padding: 4px 6px;
   color: #b0b0b0;
-  background-color: white;
+  font-size: 12px;
+  background-color: #fff;
+  border-radius: 20px;
   border: 3px solid #b0b0b0;
+  cursor: pointer;
+
   &:hover {
-    color: white;
+    color: #fff;
     background-color: #b0b0b0;
   }
-  border-radius: 20px;
-  padding: 5px;
-  font-size: 16px;
-  cursor: pointer;
 `;

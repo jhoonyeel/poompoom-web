@@ -5,8 +5,8 @@ import axios from '../../apis/axios';
 import { ReactComponent as Eyes } from '../../assets/eyes.svg';
 import { ScrollToTopButton } from '../../components/common/ScrollToTopButton';
 import PostFilter from '../../components/PostFilter/PostFilter.container';
+import ReviewPostCard from '../../components/ReviewPostCard/ReviewPostCard.container';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
-import ReviewPostCard from '../Review/components/Card/ReviewPostCard/ReviewPostCard.container';
 
 const fetchQueryData = async (cursorId, size, keyword) => {
   const res = await axios.get(`/review/search`, {
@@ -143,7 +143,7 @@ export default function QueryPage() {
         <PostFilter />
 
         <QueryContent>
-          <QueryHeader>QUERY VIEW</QueryHeader>
+          <Title>QUERY VIEW</Title>
           {initialSearchDone && (
             <NotFound>
               <EyesIconBox>
@@ -182,16 +182,15 @@ const QueryContent = styled.div`
   margin: 0 auto;
 `;
 
-const QueryHeader = styled.h3`
-  width: 100%;
+const Title = styled.h3`
   margin-top: 2rem;
+  text-align: start;
   font-family: 'Shrikhand';
   font-style: italic;
   font-weight: 400;
   font-size: 36px;
   line-height: 52px;
   color: #0e5649;
-  text-align: start;
 `;
 const NotFound = styled.div`
   border: 3px solid #dcdcdc;

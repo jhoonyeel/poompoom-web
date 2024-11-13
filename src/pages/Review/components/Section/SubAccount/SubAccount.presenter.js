@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import FollowButton from '../../../../../components/common/FollowBtutton';
-import ReviewPostHashtags from '../../Card/ReviewPostHashtags/ReviewPostHashtags.container';
 
 export default function SubAccountUI({ subAccounts, isFollow, handleFollow, navigatePath }) {
   const getNickname = (nickname) => {
@@ -12,83 +11,106 @@ export default function SubAccountUI({ subAccounts, isFollow, handleFollow, navi
   return (
     <Wrapper>
       <AccountHeader>이런 분들은 어떠세요??</AccountHeader>
-      <SubList>
+      <SubAccountList>
         {subAccounts.map((account) => (
-          <SubItem key={account.id}>
-            <AuthorBox>
-              <AuthorCircleBox onClick={navigatePath(`/profile`)}>
+          <SubAccountItem key={account.id}>
+            <AuthorInfo>
+              <AuthorImgBox onClick={navigatePath(`/profile`)}>
                 <AuthorImg src={account.profilePhotoPath} alt="프로필 사진" />
-              </AuthorCircleBox>
+              </AuthorImgBox>
               <Nickname to="/profile">{`@${getNickname(account.nickname)}` || '@닉네임'}</Nickname>
               <FollowButton isFollow={isFollow} handleFollow={handleFollow} />
-            </AuthorBox>
-            <ReviewPostHashtags hashTags={account.hashtagList} />
-          </SubItem>
+            </AuthorInfo>
+            <HashtagList>
+              {account.hashtagList &&
+                account.hashtagList.map((tag) => <HashtagItem key={tag.id}>{`#${tag.name}`}</HashtagItem>)}
+            </HashtagList>
+          </SubAccountItem>
         ))}
-      </SubList>
+      </SubAccountList>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  width: 28%;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
+  flex: 3;
+  min-width: 340px;
+  overflow-y: scroll;
 `;
 const AccountHeader = styled.h3`
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 12px;
 `;
-const SubList = styled.div`
+const SubAccountList = styled.div`
   width: 100%;
   height: 100%;
-  overflow-y: auto;
-  padding: 0 1%;
 `;
-const SubItem = styled.div`
+const SubAccountItem = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  &:nth-child(n + 2) {
+    margin-top: 20px;
+  }
 `;
-const AuthorBox = styled.div`
+const AuthorInfo = styled.div`
   width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
-
-const AuthorCircleBox = styled.div`
-  position: relative;
-  z-index: 1;
-  width: 100px;
-  height: 100px;
-  border: 10px solid #ddd;
-  border-radius: 50%;
+const AuthorImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 1;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid #ddd;
   overflow: hidden;
+  cursor: pointer;
 `;
 const AuthorImg = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
+  object-fit: cover;
+  user-select: none;
 `;
 
 const Nickname = styled(Link)`
-  text-decoration: none;
-  font-family: 'Oleo Script Swash Caps', system-ui;
+  color: #000;
+  font-family: 'Oleo Script Swash Caps';
   font-style: normal;
   font-weight: 400;
-  font-size: 32px;
-  line-height: 44px;
-  color: #000000;
-  &:visited {
-    color: #000000;
-  }
+  font-size: 24px;
+  line-height: 1.4;
+  text-decoration: none;
+`;
+
+const HashtagList = styled.ul`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  width: 100%;
+  height: 58px;
+  overflow: hidden;
+`;
+
+const HashtagItem = styled.li`
+  padding: 6px 8px;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
 `;

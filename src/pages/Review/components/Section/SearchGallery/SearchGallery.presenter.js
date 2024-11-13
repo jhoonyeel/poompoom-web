@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ReviewPostCard from '../../Card/ReviewPostCard/ReviewPostCard.container';
+import ReviewPostCard from '../../../../../components/ReviewPostCard/ReviewPostCard.container';
 
 export default function SearchGalleryUI({ searchPosts }) {
   return (
@@ -9,9 +9,9 @@ export default function SearchGalleryUI({ searchPosts }) {
 }
 
 const Wrapper = styled.div`
-  margin-top: 3rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 4개의 열을 가지도록 설정 */
-  column-gap: 20px;
-  row-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 16px;
+  padding-left: 20px;
 `;

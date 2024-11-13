@@ -1,6 +1,6 @@
 import * as S from './ProfileMenuBox.styles';
 
-export default function ProfileMenuBoxUI({ navigatePath, currentPath }) {
+export default function ProfileMenuBoxUI({ currentPath, navigatePath }) {
   return (
     <S.Wrapper>
       <S.Menutab>
