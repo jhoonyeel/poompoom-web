@@ -25,6 +25,7 @@ import {
   Welcome,
 } from './pages/index';
 
+import { InitializeNickname } from './recoil/InitializeNickname';
 import { basicTheme } from './shared/Theme';
 
 const queryClient = new QueryClient();
@@ -88,7 +89,9 @@ function MainLayout() {
         <Header />
       </S.HeaderContainer>
       <Outlet />
-      <Footer />
+      <S.FooterContainer>
+        <Footer />
+      </S.FooterContainer>
     </>
   );
 }
@@ -98,6 +101,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={basicTheme}>
         <GlobalStyle />
+        <InitializeNickname /> {/* recoil 상태 초기화 */}
         <S.AppLayout>
           <Routes>
             <Route path="/signup" element={<SignupPage />} />
