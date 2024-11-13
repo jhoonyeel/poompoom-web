@@ -1,7 +1,5 @@
 import FooterUI from './Footer.presenter';
 
-function Footer() {
+export default function Footer() {
   return <FooterUI />;
 }
-
-export default Footer;
