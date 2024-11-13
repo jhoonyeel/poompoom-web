@@ -5,10 +5,21 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  position: relative;
+  margin: 0 auto;
+  min-width: 1028px;
+  width: 80%;
   height: 100%;
-  border-bottom: 2px solid #a3a3a3;
-  background-color: white;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #a3a3a3;
+  }
 `;
 export const LogoIcon = styled(Logo)`
   width: 155px; // SVG는 자동으로 비율을 맞춰서 height를 조절함. height, object-fit은 불필요.
@@ -28,11 +39,11 @@ export const LoverImgBox = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  overflow: hidden;
   border: 5px solid #fff;
   box-shadow:
     0px 4px 6px rgba(0, 0, 0, 0.12),
     0px 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
   cursor: pointer;
 `;
 export const LoverImg = styled.img`
