@@ -7,7 +7,7 @@ export default function EditComment({ body, commentId, reviewId, isEditing, setI
   const ChangeComment = async () => {
     try {
       await axios.post(`/review/${reviewId}/update/${commentId}`, {
-        body,
+        body: editedBody,
       });
       return console.log(`${commentId} 번 댓글 업데이트 완료`);
     } catch (error) {
