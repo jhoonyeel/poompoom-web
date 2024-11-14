@@ -28,6 +28,8 @@ import QueryPage from './pages/Query/QueryPage';
 import ReviewPage from './pages/Review/ReviewPage';
 import PostDetail from './pages/ReviewDetail/PostDetail/PostDetail.container';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
+import FindID from './pages/Finds/FindID';
+import FindPW from './pages/Finds/FindPW/FindPW';
 
 import { basicTheme } from './shared/Theme';
 
@@ -105,6 +107,8 @@ export default function App() {
         <GlobalStyle />
         <S.AppLayout>
           <Routes>
+            <Route path="/find/id" element={<FindID />} />
+            <Route path="/find/pw" element={<FindPW />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/signup/tag" element={<SignupTagPage />} />
             <Route path="/signup/social" element={<SignUpSocial />} />

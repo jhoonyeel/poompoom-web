@@ -30,6 +30,7 @@ export default function LatestGallery() {
       });
       setCursorId(nextPageId);
       setHasNext(newHasNext);
+      console.log(' hasNext:', hasNext, 'cursorId:', cursorId);
     } catch (error) {
       console.error('Error fetching post data:', error);
     } finally {

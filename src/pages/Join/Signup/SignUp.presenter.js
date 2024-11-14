@@ -149,9 +149,9 @@ export default function SignupUI({
           </S.InputContainer>
           <S.LinkWrapper>
             <S.LinkInnerWrapper>
-              <S.CustomLink to="/">아이디로 찾기</S.CustomLink>
+              <S.CustomLink to="/">연인 아이디로 찾기</S.CustomLink>
               <S.Line>|</S.Line>
-              <S.CustomLink to="/">닉네임으로 찾기</S.CustomLink>
+              <S.CustomLink to="/">연인 닉네임으로 찾기</S.CustomLink>
             </S.LinkInnerWrapper>
           </S.LinkWrapper>
           <S.LoverText>연인의 이메일/아이디를 등록하셔야 연동을 위한 코드가 발송됩니다.</S.LoverText>

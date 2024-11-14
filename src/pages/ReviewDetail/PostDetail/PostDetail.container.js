@@ -15,13 +15,14 @@ export default function PostDetail() {
   const fetchReview = async () => {
     try {
       const response = await axios.get(`/review/${reviewId}`);
+      console.log(response.data);
       const { data } = response;
       setSelectedPost(data);
       setLike(data.isLikedPost);
       setLikeAmount(data.likeAmount); // 초기 좋아요 수 설정
       setBookMark(data.isBookmarked);
-    } catch (err) {
-      console.log('fetch failed');
+    } catch (error) {
+      console.log(error.response?.data || error, '데이터 없음');
     }
   };
   useEffect(() => {

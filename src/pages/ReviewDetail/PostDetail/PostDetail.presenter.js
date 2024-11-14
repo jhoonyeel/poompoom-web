@@ -2,9 +2,9 @@ import { faBookmark as emptyBookmark, faHeart as emptyHeart } from '@fortawesome
 import { faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
 import FollowBtnComponent from '../../../atoms/FollowBtnComponent';
 import OverflowMenuComponent from '../../../atoms/OverflowMenuComponent';
-import PostCommentList from '../PostComment/PostCommentList/PostCommentList.container';
-import PostCommentWrite from '../PostComment/PostCommentWrite/PostCommentWrite.container';
 import * as S from './PostDetail.styles';
+import CommentWrite from '../../../components/Comment/CommentWrite';
+import CommentContainer from '../../../components/Comment/CommentContainer';
 
 export default function ReviewDetailUI({
   currentImageIndex,
@@ -84,7 +84,7 @@ export default function ReviewDetailUI({
               </S.BoardNavBar>
 
               <S.CommentWriteBox>
-                <PostCommentWrite />
+                <CommentWrite />
               </S.CommentWriteBox>
             </S.RightBoxContent>
           </S.RightBox>
@@ -92,7 +92,7 @@ export default function ReviewDetailUI({
       </S.DetailSection>
       <S.CommentSection>
         <S.CommentContent>
-          <PostCommentList />
+          <CommentContainer />
         </S.CommentContent>
       </S.CommentSection>
     </>

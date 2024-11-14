@@ -25,8 +25,8 @@ export default function HeaderUI({ showSearchBar, handleOnClick }) {
           </AuthorCircleBox>
           <S.MenuBar>
             <S.MenuItem onClick={handleOnClick('/review')}>MOOD VIEW</S.MenuItem>
-            <S.MenuItem onClick={handleOnClick('/lovers-profile')}>MY LOVER</S.MenuItem>
-            <S.MenuItem onClick={handleOnClick('/profile')}>OPTIOIN</S.MenuItem>
+            {/* <S.MenuItem onClick={handleOnClick('/lovers-profile')}>MY LOVER</S.MenuItem> */}
+            <S.MenuItem onClick={handleOnClick('/profile')}>Profile</S.MenuItem>
           </S.MenuBar>
         </S.IconBox>
       </S.HeaderContent>
