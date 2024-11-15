@@ -1,6 +1,6 @@
 // FindPWContainer.js
 import React, { useState } from 'react';
-import { useRequestPasswordReset, useAuthenticateResetCode, useResetPassword } from '../../../hooks/finds/useFindPW';
+import { useRequestPasswordReset, useAuthenticateResetCode, useResetPassword } from '../../../hooks/FindApi/useFindPW';
 import FindPWPresenter from './FindPW.presenter';
 
 export default function FindPWContainer() {

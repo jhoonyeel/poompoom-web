@@ -62,11 +62,11 @@ function AppRoutes() {
         element={<ProtectedRoute element={QueryPage} isAuthenticated={isAuthenticated()} />}
       />
       <Route
-        path="/lovers-profile"
+        path="/profile/lover"
         element={<ProtectedRoute element={LoversProfilePage} isAuthenticated={isAuthenticated()} />}
       />
       <Route
-        path="/lovers-profile-set"
+        path="/profile/lover/set"
         element={<ProtectedRoute element={LoversProfileSetPage} isAuthenticated={isAuthenticated()} />}
       />
       <Route path="/profile/*" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />} />

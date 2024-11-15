@@ -17,7 +17,7 @@ export default function HeaderUI({ showSearchBar, handleOnClick }) {
         </S.LogoBox>
         {showSearchBar && <SearchBar />}
         <S.IconBox>
-          <AuthorCircleBox onClick={handleOnClick('/lovers-profile')}>
+          <AuthorCircleBox onClick={handleOnClick('/profile/lover')}>
             <WhiteCircleIcon icon={faCircle} />
             <AuthorImgBox>
               <AuthorImg src={LoverProfileEx} alt="프로필 사진" />
@@ -25,8 +25,8 @@ export default function HeaderUI({ showSearchBar, handleOnClick }) {
           </AuthorCircleBox>
           <S.MenuBar>
             <S.MenuItem onClick={handleOnClick('/review')}>MOOD VIEW</S.MenuItem>
-            {/* <S.MenuItem onClick={handleOnClick('/lovers-profile')}>MY LOVER</S.MenuItem> */}
-            <S.MenuItem onClick={handleOnClick('/profile')}>Profile</S.MenuItem>
+            <S.MenuItem onClick={handleOnClick('/profile/lover/set')}>MY LOVER</S.MenuItem>
+            <S.MenuItem onClick={handleOnClick('/profile')}>PROFILE</S.MenuItem>
           </S.MenuBar>
         </S.IconBox>
       </S.HeaderContent>

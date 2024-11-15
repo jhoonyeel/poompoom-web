@@ -1,5 +1,3 @@
-import Profile from './Profile/Profile.container';
-
 export default function LoversProfilePage() {
-  return <Profile />;
+  return <div> 내용 없음 </div>;
 }
