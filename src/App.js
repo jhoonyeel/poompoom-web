@@ -4,8 +4,6 @@ import { ThemeProvider } from 'styled-components';
 import * as S from './App.styles';
 import GlobalStyle from './GlobalStyle';
 import ProtectedRoute from './ProtectedRoute';
-import CommunityList from './components/Community/CommunityList/CommunityList';
-import CommunityWrite from './components/Community/CommunityWrite/CommunityWrite';
 import Footer from './components/Footer/Footer.container';
 import Header from './components/Header/Header.container';
 
@@ -18,7 +16,6 @@ import SignUpSocial from './pages/OAuth/SignUpSocial';
 
 import Welcome from './pages/Welcome/Welcome';
 
-import CommunityDetailPage from './pages/Community/Detail/CommunityDetailPage';
 import HomePage from './pages/Home/HomePage';
 import LoversProfilePage from './pages/LoversProfile/LoversProfilePage';
 import LoversProfileSetPage from './pages/LoversProfile/LoversProfileSetPage';
@@ -73,18 +70,6 @@ function AppRoutes() {
       <Route
         path="/profile/edit"
         element={<ProtectedRoute element={ProfileEditPage} isAuthenticated={isAuthenticated()} />}
-      />
-      <Route
-        path="/community"
-        element={<ProtectedRoute element={CommunityList} isAuthenticated={isAuthenticated()} />}
-      />
-      <Route
-        path="/community/detail"
-        element={<ProtectedRoute element={CommunityDetailPage} isAuthenticated={isAuthenticated()} />}
-      />
-      <Route
-        path="/community/write"
-        element={<ProtectedRoute element={CommunityWrite} isAuthenticated={isAuthenticated()} />}
       />
     </Routes>
   );
