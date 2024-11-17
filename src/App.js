@@ -19,9 +19,10 @@ import {
   ProfileEditPage,
   ProfilePage,
   QueryPage,
+  ReviewCreatePage,
   ReviewDetailPage,
+  ReviewEditPage,
   ReviewPage,
-  ReviewWritePage,
   Welcome,
 } from './pages/index';
 
@@ -45,12 +46,12 @@ function AppRoutes() {
         element={<ProtectedRoute element={ReviewDetailPage} isAuthenticated={isAuthenticated} />}
       />
       <Route
-        path="/review/write"
-        element={<ProtectedRoute element={ReviewWritePage} isAuthenticated={isAuthenticated} mode="create" />}
+        path="/review/create"
+        element={<ProtectedRoute element={ReviewCreatePage} isAuthenticated={isAuthenticated} />}
       />
       <Route
         path="/review/update/:reviewId"
-        element={<ProtectedRoute element={ReviewWritePage} isAuthenticated={isAuthenticated} mode="edit" />}
+        element={<ProtectedRoute element={ReviewEditPage} isAuthenticated={isAuthenticated} />}
       />
       <Route
         path="/review/query-result"
