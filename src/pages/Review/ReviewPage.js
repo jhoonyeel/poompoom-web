@@ -109,7 +109,7 @@ const ButtonBox = styled.div`
   z-index: 999; /* 다른 요소 위에 표시되도록 z-index 조정 */
   width: 2%;
   aspect-ratio: 1 / 1;
-  background-color: white;
+  background-color: #fff;
   border: 3px solid gray;
   border-radius: 50%;
   display: flex;

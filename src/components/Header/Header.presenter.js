@@ -10,7 +10,7 @@ export default function HeaderUI({ showSearchBar, navigatePath }) {
       {showSearchBar && <SearchBar />}
       <S.RightBox>
         <S.LoverImgBox onClick={navigatePath('/lovers-profile')}>
-          <S.LoverImg src={LoverProfileEx} alt="프로필 사진" />
+          <S.LoverImg src={LoverProfileEx} alt="프로필 이미지" />
         </S.LoverImgBox>
         <S.MenuBar>
           <S.MenuItem onClick={navigatePath('/review')}>MOOD VIEW</S.MenuItem>

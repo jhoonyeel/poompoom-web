@@ -43,7 +43,27 @@ export default function SubAccount() {
     console.log('useEffect', subAccounts);
   }, [rawData]);
 
-  /*
+  const getNickname = (nickname) => {
+    const atIndex = nickname.indexOf('@');
+    return atIndex !== -1 ? nickname.slice(0, atIndex) : nickname;
+  };
+
+  return (
+    <>
+      <SubAccountUI
+        subAccounts={subAccounts}
+        isFollow={isFollow}
+        handleFollow={handleFollow}
+        getNickname={getNickname}
+        navigatePath={navigatePath}
+      />
+      <div ref={loaderRef} style={{ height: '20px' }} />
+    </>
+  );
+}
+
+/*
+페이지 존재여부에 따른 문제 대비
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
   const [cursorId, setCursorId] = useState(1); // 최소 cursorId 1로 설정
   const [hasNext, setHasNext] = useState(true); // 다음 페이지 여부
@@ -100,16 +120,3 @@ export default function SubAccount() {
     };
   }, [currentPage, hasNext, cursorId]);
   */
-
-  return (
-    <>
-      <SubAccountUI
-        subAccounts={subAccounts}
-        isFollow={isFollow}
-        handleFollow={handleFollow}
-        navigatePath={navigatePath}
-      />
-      <div ref={loaderRef} style={{ height: '20px' }} />
-    </>
-  );
-}

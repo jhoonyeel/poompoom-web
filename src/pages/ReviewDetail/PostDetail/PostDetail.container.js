@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from '../../../apis/axios';
 import { useNavigatePath } from '../../../hooks/useNavigatePath';
 import ReviewDetailUI from './PostDetail.presenter';
@@ -12,6 +12,7 @@ export default function PostDetail() {
   const { reviewId } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // 현재 이미지 인덱스 관리
   const navigatePath = useNavigatePath();
+  const navigate = useNavigate();
 
   const fetchReview = async () => {
     try {
@@ -82,7 +83,8 @@ export default function PostDetail() {
   };
 
   const onUpdate = () => {
-    navigatePath(`/review/update/${reviewId}`, { state: selectedPost }); // 수정 페이지로 이동
+    navigate(`/review/update/${reviewId}`); // 수정 페이지로 이동
+    // navigate(`/review/update/${reviewId}`, { state: selectedPost }); // 수정 페이지로 이동
   };
   const onDelete = async () => {
     try {

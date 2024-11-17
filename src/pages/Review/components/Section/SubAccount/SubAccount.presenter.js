@@ -2,12 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import FollowButton from '../../../../../components/common/FollowBtutton';
 
-export default function SubAccountUI({ subAccounts, isFollow, handleFollow, navigatePath }) {
-  const getNickname = (nickname) => {
-    const atIndex = nickname.indexOf('@');
-    return atIndex !== -1 ? nickname.slice(0, atIndex) : nickname;
-  };
-
+export default function SubAccountUI({ subAccounts, isFollow, handleFollow, getNickname, navigatePath }) {
   return (
     <Wrapper>
       <AccountHeader>이런 분들은 어떠세요??</AccountHeader>
@@ -16,7 +11,7 @@ export default function SubAccountUI({ subAccounts, isFollow, handleFollow, navi
           <SubAccountItem key={account.id}>
             <AuthorInfo>
               <AuthorImgBox onClick={navigatePath(`/profile`)}>
-                <AuthorImg src={account.profilePhotoPath} alt="프로필 사진" />
+                <AuthorImg src={account.profilePhotoPath} alt="프로필 이미지" />
               </AuthorImgBox>
               <Nickname to="/profile">{`@${getNickname(account.nickname)}` || '@닉네임'}</Nickname>
               <FollowButton isFollow={isFollow} handleFollow={handleFollow} />
@@ -69,8 +64,6 @@ const AuthorImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  z-index: 1;
   width: 50px;
   height: 50px;
   border-radius: 50%;

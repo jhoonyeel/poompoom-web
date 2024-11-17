@@ -5,7 +5,7 @@ export default function AuthorProfile({ isContentHovered, profilePhoto, navigate
   return (
     <Wrapper onClick={navigatePath(`/profile`)}>
       <AuthorImgBox>
-        <AuthorImg src={profilePhoto} alt="프로필 사진" />
+        <AuthorImg src={profilePhoto} alt="프로필 이미지" />
       </AuthorImgBox>
       <FireCrackerIcon $isContentHovered={isContentHovered} />
     </Wrapper>
