@@ -9,26 +9,32 @@ import Header from './components/Header/Header.container';
 
 import SignupPage from './pages/Join/Signup/SignupPage';
 import SignupTagPage from './pages/Join/SignupTag/SignupTag.container';
+
+import SignUpSocial from './pages/OAuth/SignUpSocial';
+import SocialSignUp from './pages/OAuth/SignUp/SignUp.container';
+
 import LoginPage from './pages/Login/LoginPage';
 import LoginSocial from './pages/OAuth/LoginSocial';
-import SocialSignUp from './pages/OAuth/SignUp/SignUp.container';
-import SignUpSocial from './pages/OAuth/SignUpSocial';
 
+import FindID from './pages/Finds/FindID';
+import FindPW from './pages/Finds/FindPW/FindPW';
 import Welcome from './pages/Welcome/Welcome';
 
+import LoverPage from './pages/Lover/LoverPage';
+import ConnectPage from './pages/LoverSet/Connect/Connect';
+import RecommendPage from './pages/LoverSet/Recommend/Recommend';
+
 import HomePage from './pages/Home/HomePage';
-import LoversProfilePage from './pages/LoversProfile/LoversProfilePage';
-import LoversProfileSetPage from './pages/LoversProfile/LoversProfileSetPage';
+
 import ProfileEditPage from './pages/Profile/ProfileEditPage';
 import ProfilePage from './pages/Profile/ProfilePage';
 import QueryPage from './pages/Query/QueryPage';
 import ReviewPage from './pages/Review/ReviewPage';
 import PostDetail from './pages/ReviewDetail/PostDetail/PostDetail.container';
 import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
-import FindID from './pages/Finds/FindID';
-import FindPW from './pages/Finds/FindPW/FindPW';
 
 import { basicTheme } from './shared/Theme';
+import ConnectGidePage from './components/Connect/Connect';
 
 const queryClient = new QueryClient();
 
@@ -58,13 +64,18 @@ function AppRoutes() {
         path="/review/query-result"
         element={<ProtectedRoute element={QueryPage} isAuthenticated={isAuthenticated()} />}
       />
+      <Route path="/lover" element={<ProtectedRoute element={LoverPage} isAuthenticated={isAuthenticated()} />} />
       <Route
-        path="/profile/lover"
-        element={<ProtectedRoute element={LoversProfilePage} isAuthenticated={isAuthenticated()} />}
+        path="/lover/connect/guide"
+        element={<ProtectedRoute element={ConnectGidePage} isAuthenticated={isAuthenticated()} />}
       />
       <Route
-        path="/profile/lover/set"
-        element={<ProtectedRoute element={LoversProfileSetPage} isAuthenticated={isAuthenticated()} />}
+        path="/lover/connect"
+        element={<ProtectedRoute element={ConnectPage} isAuthenticated={isAuthenticated()} />}
+      />
+      <Route
+        path="/lover/recommend"
+        element={<ProtectedRoute element={RecommendPage} isAuthenticated={isAuthenticated()} />}
       />
       <Route path="/profile/*" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />} />
       <Route

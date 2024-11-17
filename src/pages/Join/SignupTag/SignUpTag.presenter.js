@@ -1,8 +1,8 @@
+import AgeSlider from '../../../components/ProfileTag/AgeSlider';
+import Job from '../../../components/ProfileTag/Job';
+import Gender from '../../../components/ProfileTag/Gender';
+import Interest from '../../../components/ProfileTag/Interest';
 import * as S from './SignUpTag.styles';
-import AgeSlider from '../../LoversProfile/component/AgeSlider';
-import Gender from './component/Gender';
-import Interest from './component/Interest';
-import Job from './component/Job';
 
 export default function SignUpUI({ buttons, setSelectedButton, setSelectedAgeLabel, selectedAgeLabel, onClickToBack }) {
   return (
