@@ -26,9 +26,10 @@ export { default as ProfilePage } from './Profile/ProfilePage';
 export { default as QueryPage } from './Query/QueryPage';
 
 // Review Pages
+export { default as ReviewCreatePage } from './Review/ReviewCreatePage';
+export { default as ReviewEditPage } from './Review/ReviewEditPage';
 export { default as ReviewPage } from './Review/ReviewPage';
 export { default as ReviewDetailPage } from './ReviewDetail/PostDetail/PostDetail.container';
-export { default as ReviewWritePage } from './ReviewWrite/ReviewWritePage';
 
 // Welcome Pages
 export { default as Welcome } from './Welcome/Welcome';
