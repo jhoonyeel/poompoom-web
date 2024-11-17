@@ -1,14 +1,12 @@
 import styled, { css } from 'styled-components';
 
-function CardUI({ index, totalCards, content }) {
+export function CardUI({ index, totalCards, content }) {
   return (
     <StyledCard index={index} totalCards={totalCards}>
       {content}
     </StyledCard>
   );
 }
-
-export default CardUI;
 
 const StyledCard = styled.div`
   position: absolute;

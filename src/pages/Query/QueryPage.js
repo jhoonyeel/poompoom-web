@@ -1,14 +1,12 @@
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
 import { ReactComponent as Eyes } from '../../assets/eyes.svg';
+import { ScrollToTopButton } from '../../components/common/ScrollToTopButton';
 import PostFilter from '../../components/PostFilter/PostFilter.container';
+import ReviewPostCard from '../../components/ReviewPostCard/ReviewPostCard.container';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
-import { useScrollToTop } from '../../hooks/useScrollToTop';
-import ReviewPostCard from '../Review/components/Card/ReviewPostCard/ReviewPostCard.container';
 
 const fetchQueryData = async (cursorId, size, keyword) => {
   const res = await axios.get(`/review/search`, {
@@ -32,7 +30,6 @@ export default function QueryPage() {
     additionalSize: 8,
   });
   const [queryPosts, setQueryPosts] = useState([]);
-  const scrollToTop = useScrollToTop();
 
   // 검색어가 변경될 때마다 초기화 로직 실행
   useEffect(() => {
@@ -146,7 +143,7 @@ export default function QueryPage() {
         <PostFilter />
 
         <QueryContent>
-          <QueryHeader>QUERY VIEW</QueryHeader>
+          <Title>QUERY VIEW</Title>
           {initialSearchDone && (
             <NotFound>
               <EyesIconBox>
@@ -167,9 +164,7 @@ export default function QueryPage() {
             </GalleryContent>
             <div ref={loaderRef} style={{ height: '15vh', margin: '10px' }} />
           </>
-          <ButtonBox onClick={scrollToTop}>
-            <UpIcon icon={faChevronUp} />
-          </ButtonBox>
+          <ScrollToTopButton />
         </QueryContent>
       </QuerySection>
     </Wrapper>
@@ -187,16 +182,15 @@ const QueryContent = styled.div`
   margin: 0 auto;
 `;
 
-const QueryHeader = styled.h3`
-  width: 100%;
+const Title = styled.h3`
   margin-top: 2rem;
+  text-align: start;
   font-family: 'Shrikhand';
   font-style: italic;
   font-weight: 400;
   font-size: 36px;
   line-height: 52px;
   color: #0e5649;
-  text-align: start;
 `;
 const NotFound = styled.div`
   border: 3px solid #dcdcdc;
@@ -240,21 +234,4 @@ const GalleryContent = styled.div`
   grid-template-columns: repeat(4, 1fr); /* 4개의 열을 가지도록 설정 */
   column-gap: 1.5rem;
   row-gap: 2.5rem;
-`;
-
-const ButtonBox = styled.div`
-  position: fixed;
-  bottom: 50px; /* 화면 하단과의 간격 조정 */
-  right: 50px; /* 화면 우측과의 간격 조정 */
-  z-index: 999; /* 다른 요소 위에 표시되도록 z-index 조정 */
-  width: 2%;
-  border: 3px solid gray;
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const UpIcon = styled(FontAwesomeIcon)`
-  font-size: 24px;
 `;

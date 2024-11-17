@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { ReactComponent as Delete } from '../assets/Delete.svg';
+import { ReactComponent as Edit } from '../assets/Edit.svg';
+import { ReactComponent as OverflowMenu } from '../assets/OverflowMenu.svg';
 
 export default function OverflowMenuComponent({ onUpdate, onDelete }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,63 +28,69 @@ export default function OverflowMenuComponent({ onUpdate, onDelete }) {
 
   return (
     <Wrapper onClick={toggleMenu}>
-      <VerticalDot>&#8942;</VerticalDot> {/* 수직으로 점 3개를 나타내는 문자 */}
+      <OverflowMenuIcon />
       {isMenuOpen && (
-        <MenuBox ref={menuRef}>
-          <Item onClick={onUpdate}>
-            <Span>수정하기</Span>
-            <img alt="이미지" />
-          </Item>
-          <Item onClick={onDelete}>
-            <Span>삭제</Span>
-            <img alt="이미지" />
-          </Item>
-        </MenuBox>
+        <MenuList ref={menuRef}>
+          <MenuItem onClick={onUpdate}>
+            <MenuText>수정하기</MenuText>
+            <EditIcon />
+          </MenuItem>
+          <MenuItem onClick={onDelete}>
+            <MenuText>삭제</MenuText>
+            <DeleteIcon />
+          </MenuItem>
+        </MenuList>
       )}
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  position: relative;
-  width: 3rem;
-  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
 `;
-const VerticalDot = styled.span`
-  font-size: 24px;
-  font-weight: bold;
+const OverflowMenuIcon = styled(OverflowMenu)`
+  width: 4px;
+  height: 100%;
 `;
-const MenuBox = styled.div`
+const MenuList = styled.div`
   position: absolute;
-  top: 60px;
+  top: 100%;
   right: 0px;
-  width: 200px;
+  width: 180px;
   padding: 10px;
   background: rgba(255, 255, 255, 0.85);
-  border: 0.5px solid #d9d9d9;
+  border: 1px solid #d9d9d9;
   border-radius: 8px;
   box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);
 `;
-
-const Item = styled.div`
+const MenuItem = styled.div`
   display: flex;
-  background-color: white;
-  color: black;
+  align-items: center;
   padding: 10px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
 
   &:hover {
     background-color: #126056;
-    color: white;
+    color: #fff;
   }
 `;
-
-const Span = styled.span`
+const MenuText = styled.span`
   flex: 1;
   text-align: left;
+  font-size: 18px;
+`;
+const EditIcon = styled(Edit)`
+  width: 20px;
+  height: 100%;
+`;
+const DeleteIcon = styled(Delete)`
+  width: 20px;
+  height: 100%;
 `;

@@ -25,5 +25,5 @@ export default function ProfileHeader() {
     fetchData();
   }, [id]);
 
-  return <ProfileHeaderUI navigatePath={navigatePath} profile={profile} />;
+  return <ProfileHeaderUI profile={profile} navigatePath={navigatePath} />;
 }

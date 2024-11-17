@@ -19,12 +19,14 @@ import {
   ProfileEditPage,
   ProfilePage,
   QueryPage,
+  ReviewCreatePage,
   ReviewDetailPage,
+  ReviewEditPage,
   ReviewPage,
-  ReviewWritePage,
   Welcome,
 } from './pages/index';
 
+import { InitializeNickname } from './recoil/InitializeNickname';
 import { basicTheme } from './shared/Theme';
 
 const queryClient = new QueryClient();
@@ -44,12 +46,12 @@ function AppRoutes() {
         element={<ProtectedRoute element={ReviewDetailPage} isAuthenticated={isAuthenticated} />}
       />
       <Route
-        path="/review/write"
-        element={<ProtectedRoute element={ReviewWritePage} isAuthenticated={isAuthenticated} mode="create" />}
+        path="/review/create"
+        element={<ProtectedRoute element={ReviewCreatePage} isAuthenticated={isAuthenticated} />}
       />
       <Route
         path="/review/update/:reviewId"
-        element={<ProtectedRoute element={ReviewWritePage} isAuthenticated={isAuthenticated} mode="edit" />}
+        element={<ProtectedRoute element={ReviewEditPage} isAuthenticated={isAuthenticated} />}
       />
       <Route
         path="/review/query-result"
@@ -84,9 +86,13 @@ function AppRoutes() {
 function MainLayout() {
   return (
     <>
-      <Header />
+      <S.HeaderContainer>
+        <Header />
+      </S.HeaderContainer>
       <Outlet />
-      <Footer />
+      <S.FooterContainer>
+        <Footer />
+      </S.FooterContainer>
     </>
   );
 }
@@ -96,6 +102,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={basicTheme}>
         <GlobalStyle />
+        <InitializeNickname /> {/* recoil 상태 초기화 */}
         <S.AppLayout>
           <Routes>
             <Route path="/signup" element={<SignupPage />} />

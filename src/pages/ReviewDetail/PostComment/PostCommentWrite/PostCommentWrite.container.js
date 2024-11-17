@@ -31,41 +31,34 @@ export default function PostCommentWrite() {
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
   position: relative;
-  width: 617px;
-  height: 50px;
-  margin: auto;
-  border-radius: 6px;
 `;
 
 const CommentBox = styled.textarea`
-  width: 617px;
-  height: 50px;
   padding: 1rem;
+  width: 100%;
+  height: 50px;
   border: 5px solid #8c8c8c;
   border-radius: 40px;
   overflow: hidden;
+  resize: none;
 `;
 
 const SubmitBtn = styled.button`
-  position: absolute;
-  right: 10px;
-  top: 6px;
-  width: 2rem;
-  height: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
 `;
 
 const SendIcon = styled(Comment)`
-  width: 100%;
+  width: 32px;
   height: 100%;
 `;

@@ -1,4 +1,4 @@
-import ReviewPostCard from '../../../../Review/components/Card/ReviewPostCard/ReviewPostCard.container';
+import ReviewPostCard from '../../../../../components/ReviewPostCard/ReviewPostCard.container';
 import * as S from './LatestProfileGallery.styles';
 
 export default function LatestProfileGalleryUI({ latestPosts, handlePostClick }) {

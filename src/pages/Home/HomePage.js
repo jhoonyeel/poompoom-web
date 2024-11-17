@@ -1,9 +1,5 @@
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import axios from '../../apis/axios';
-// eslint-disable-next-line camelcase, import/no-unresolved
 import { ReactComponent as CardNews } from '../../assets/CardNews.svg';
 import { ReactComponent as Anniversary } from '../../assets/Category/Anniversary.svg';
 import { ReactComponent as Apology } from '../../assets/Category/Apology.svg';
@@ -17,155 +13,129 @@ import { ReactComponent as Ranking } from '../../assets/HomeRanking.svg';
 import { ReactComponent as MainBackground } from '../../assets/MainBackground.svg';
 import { ReactComponent as Season } from '../../assets/Season.svg';
 import { ReactComponent as SeasonBk } from '../../assets/SeasonBackground.svg';
+import { ScrollToTopButton } from '../../components/common/ScrollToTopButton';
 import { useNavigatePath } from '../../hooks/useNavigatePath';
-import { useScrollToTop } from '../../hooks/useScrollToTop';
+import { fetchRecommendationsSelector } from '../../recoil/recommendationsState';
 
 export default function HomePage() {
-  const [recommendations, setRecommendations] = useState([]);
+  const recommendations = useRecoilValue(fetchRecommendationsSelector);
 
   const navigatePath = useNavigatePath();
-  const scrollToTop = useScrollToTop();
-
-  const fetchPostData = async () => {
-    try {
-      console.log('/hashtag/rank API 실행');
-      const res = await axios.get(`/hashtag/rank`);
-      const { data } = res;
-      setRecommendations(data);
-    } catch (error) {
-      console.error('Error fetching post data:', error);
-    }
-  };
-  useEffect(() => {
-    fetchPostData();
-  }, []);
 
   return (
     <Wrapper>
       <ProfileSection>
-        <MainImgBox>
-          <MainSvg />
-        </MainImgBox>
+        <MainIcon /> {/* SVG to PNG */}
       </ProfileSection>
 
       <SearchSection>
         <SearchBox>
-          <h3>Search 지금 많이 찾아보는 태그</h3>
+          <SearchTitle>Search</SearchTitle>
+          <SearchSmallTitle>지금 많이 찾아보는 태그</SearchSmallTitle>
         </SearchBox>
-        <KeywordBox>
-          <KeywordList>
-            {recommendations.map((recommendation) => (
-              <KeywordItem key={recommendation.id}>{recommendation.name}</KeywordItem>
-            ))}
-          </KeywordList>
-        </KeywordBox>
-        <MiddleBox>
-          <CategoryList>
-            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=100일')}>
-              <D100 />
-            </CategoryWrapper>
-            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=사과의+선물')}>
-              <Apology />
-            </CategoryWrapper>
-            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=가벼운+선물')}>
-              <Light />
-            </CategoryWrapper>
-            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=생일')}>
-              <Birthday />
-            </CategoryWrapper>
-            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=청혼')}>
-              <Propose />
-            </CategoryWrapper>
-            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=로맨틱+데이')}>
-              <Lose />
-            </CategoryWrapper>
-            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=n주년')}>
-              <Anniversary />
-            </CategoryWrapper>
-            <CategoryWrapper onClick={navigatePath('/review/query-result?searchContent=크리스마스')}>
-              <Christmas />
-            </CategoryWrapper>
-          </CategoryList>
-          <CalenderBox>
-            <CardNews />
-          </CalenderBox>
-        </MiddleBox>
+        <KeywordList>
+          {recommendations.map((recommendation) => (
+            <KeywordItem key={recommendation.id}>{recommendation.name}</KeywordItem>
+          ))}
+        </KeywordList>
       </SearchSection>
+
+      <CategorySection>
+        <CategoryBox>
+          <CategoryList>
+            <D100 width="170px" onClick={navigatePath('/review/query-result?searchContent=100일')} />
+            <Apology width="170px" onClick={navigatePath('/review/query-result?searchContent=사과의+선물')} />
+            <Light width="170px" onClick={navigatePath('/review/query-result?searchContent=가벼운+선물')} />
+            <Birthday width="170px" onClick={navigatePath('/review/query-result?searchContent=생일')} />
+            <Propose width="170px" onClick={navigatePath('/review/query-result?searchContent=청혼')} />
+            <Lose width="170px" onClick={navigatePath('/review/query-result?searchContent=로맨틱+데이')} />
+            <Anniversary width="170px" onClick={navigatePath('/review/query-result?searchContent=n주년')} />
+            <Christmas width="170px" onClick={navigatePath('/review/query-result?searchContent=크리스마스')} />
+          </CategoryList>
+          <CardNews width="380px" />
+        </CategoryBox>
+      </CategorySection>
 
       <RankingSection>
         <RankingBox>
           <Ranking />
         </RankingBox>
+        <MoveButton type="button" onClick={navigatePath('/review')}>
+          Go to mood view!
+        </MoveButton>
       </RankingSection>
-
-      <MoveButton type="button" onClick={navigatePath('/review')}>
-        Go to mood view!
-      </MoveButton>
 
       <SeasonSection>
         <SeasonAbsoluteBox>
           <SeasonBackgroundBox>
-            <SeasonBk />
+            <SeasonBk width="100%" height="100%" /> {/* SVG to PNG */}
           </SeasonBackgroundBox>
-          <SeasonBox>
-            <Season />
-          </SeasonBox>
+          <Season width="100%" height="100%" /> {/* SVG to PNG */}
         </SeasonAbsoluteBox>
       </SeasonSection>
 
-      <ButtonBox onClick={scrollToTop}>
-        <UpIcon icon={faChevronUp} />
-      </ButtonBox>
+      <ScrollToTopButton />
     </Wrapper>
   );
 }
 
-const MainImgBox = styled.div`
-  width: 80%;
-  margin: 0 auto;
-`;
-const MainSvg = styled(MainBackground)`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-const RankingSection = styled.section`
-  width: 100%;
-`;
-
 const Wrapper = styled.main`
   width: 100%;
 `;
-
 const ProfileSection = styled.section`
-  width: 100%;
-  margin-top: 2rem;
+  margin: 0 auto;
+  padding-top: 40px;
+  min-width: 1028px;
+  width: 80%;
   border-radius: 20px;
   overflow: hidden;
 `;
+const MainIcon = styled(MainBackground)`
+  width: 100%;
+  height: 100%;
+`;
 
 const SearchSection = styled.section`
-  width: 100%;
-  margin-top: 3.5rem;
-`;
-const KeywordBox = styled.div`
+  min-width: 1028px;
   width: 80%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 48px auto 0px;
 `;
 const SearchBox = styled.div`
-  width: 70%;
-  margin: 0 auto;
   display: flex;
 `;
+const SearchTitle = styled.span`
+  font-family: 'Shrikhand';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.4;
+  color: #4b4b4b;
+  margin-right: 10px;
+`;
+const SearchSmallTitle = styled.span`
+  position: relative;
+  font-family: 'Shrikhand';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.4;
+  color: #4b4b4b;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 5px;
+    height: 1.5px;
+    background-color: #4b4b4b;
+  }
+`;
 const KeywordList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 6fr)); /* 열 크기 자동 조절 */
   gap: 20px;
-  justify-content: center;
+  margin-top: 24px;
 `;
 const KeywordItem = styled.li`
   border-radius: 50px;
@@ -173,39 +143,31 @@ const KeywordItem = styled.li`
   padding: 1rem 1.5rem;
   color: #ffffff;
   font-size: 18px;
-  cursor: pointer;
   transition: background-color 0.3s ease;
   background-color: #a1a1a1;
+  cursor: pointer;
+
   &:hover {
     background-color: #535353;
   }
 `;
 
-const MiddleBox = styled.div`
+const CategorySection = styled.section`
+  min-width: 1028px;
   width: 80%;
-  margin: 0 auto;
+  margin: 48px auto 0px;
+`;
+const CategoryBox = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 5rem;
+  gap: 20px;
 `;
 const CategoryList = styled.ul`
   width: 70%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  row-gap: 20px;
-`;
-const CalenderBox = styled.div`
-  /* width: 30%; */
-  flex: 1;
-  object-fit: cover;
-`;
-
-const CategoryWrapper = styled.div`
-  cursor: pointer;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  gap: 20px 10px;
 `;
 
 const MoveButton = styled.button`
@@ -224,36 +186,23 @@ const MoveButton = styled.button`
   cursor: pointer;
 `;
 
+const RankingSection = styled.section`
+  width: 100%;
+`;
 const RankingBox = styled.div`
+  min-width: 1028px;
   width: 80%;
   margin: 0 auto;
   overflow: hidden;
 `;
 
 const SeasonSection = styled.section`
-  width: 100%;
-  margin-top: 5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const ButtonBox = styled.div`
-  position: fixed;
-  bottom: 50px; /* 화면 하단과의 간격 조정 */
-  right: 50px; /* 화면 우측과의 간격 조정 */
-  z-index: 999; /* 다른 요소 위에 표시되도록 z-index 조정 */
-  width: 50px;
-  height: 50px;
-  border: 3px solid gray;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const UpIcon = styled(FontAwesomeIcon)`
-  font-size: 24px;
+  margin-top: 80px;
+  width: 100%;
 `;
 const SeasonAbsoluteBox = styled.div`
   position: relative;
@@ -264,10 +213,8 @@ const SeasonBackgroundBox = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  min-width: max-content;
   width: 100%;
   height: 100%;
   z-index: -1; /* 배경이 아래에 있도록 설정 */
-`;
-const SeasonBox = styled.div`
-  margin: 0 auto;
 `;
