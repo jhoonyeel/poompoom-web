@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { login as authServiceLogin, logout as authServiceLogout } from '../apis/authService';
+import { useNavigatePath } from './useNavigatePath';
 
 export function useLogin() {
   const [userData, setUserData] = useState(null); // userData 상태 관리
-  const navigate = useNavigate();
+  const navigatePath = useNavigatePath();
 
   // 페이지 새로고침 시 로컬 스토리지에서 userData 불러오기
   useEffect(() => {
@@ -21,7 +21,7 @@ export function useLogin() {
       setUserData(newUserData); // 로그인 성공 시 상태 업데이트
       localStorage.setItem('userData', JSON.stringify(newUserData)); // 로컬 스토리지에 저장
 
-      navigate('/'); // 로그인 후 페이지 이동
+      navigatePath('/'); // 로그인 후 페이지 이동
     } catch (error) {
       console.error('Login failed', error);
       // eslint-disable-next-line no-alert
@@ -33,7 +33,7 @@ export function useLogin() {
   const logout = () => {
     authServiceLogout(); // 로컬 스토리지와 Recoil에서 토큰과 사용자 정보 제거
     setUserData(null); // 상태 초기화
-    navigate('/login'); // 로그아웃 후 로그인 페이지로 이동
+    navigatePath('/login'); // 로그아웃 후 로그인 페이지로 이동
   };
 
   return { userData, login, logout }; // userData, login, logout 반환

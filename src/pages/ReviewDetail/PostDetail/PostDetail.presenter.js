@@ -1,13 +1,15 @@
 import { faBookmark as emptyBookmark, faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
-import FollowBtnComponent from '../../../atoms/FollowBtnComponent';
 import OverflowMenuComponent from '../../../atoms/OverflowMenuComponent';
+import FollowButton from '../../../components/common/FollowBtutton';
+
 import * as S from './PostDetail.styles';
 import CommentWrite from '../../../components/Comment/CommentWrite';
 import CommentContainer from '../../../components/Comment/CommentContainer';
 
 export default function ReviewDetailUI({
   currentImageIndex,
+  setCurrentImageIndex,
   prevImage,
   nextImage,
   onUpdate,
@@ -31,70 +33,76 @@ export default function ReviewDetailUI({
   handleBookmark,
 }) {
   return (
-    <>
-      <S.DetailSection>
-        <S.DetailContent>
-          <S.LeftBox>
-            <S.PhotoBox>
-              <S.LeftBtn onClick={prevImage}>&#8249;</S.LeftBtn>
-              <S.ImageBox>
-                {photos.length !== 0 && (
-                  <S.Image
-                    key={photos[currentImageIndex].id}
-                    src={photos[currentImageIndex].photoPath}
-                    alt={`사진${photos[currentImageIndex].id}`}
-                  />
-                )}
-              </S.ImageBox>
-              <S.RightBtn onClick={nextImage}>&#8250;</S.RightBtn>
-            </S.PhotoBox>
-            <S.ImageDots>
-              {photos.map((_, index) => (
-                <S.Dot active={index === currentImageIndex} />
-              ))}
-            </S.ImageDots>
-            <S.InfoBox>
-              <S.Info>구매처: {whereBuy || `경산 다이소 영남대점`}</S.Info>
-              <S.Info>Price: {price}</S.Info>
-            </S.InfoBox>
-          </S.LeftBox>
+    <S.DetailSection>
+      <S.LeftBox>
+        <S.ImageContainer>
+          <S.ImageBox>
+            {photos.length !== 0 && (
+              <S.Image
+                key={photos[currentImageIndex].id}
+                src={photos[currentImageIndex].photoPath}
+                alt={`이미지 ${photos[currentImageIndex].id}`}
+              />
+            )}
+          </S.ImageBox>
+          <S.LeftBtn onClick={prevImage}>&#8249;</S.LeftBtn>
+          <S.RightBtn onClick={nextImage}>&#8250;</S.RightBtn>
+          <S.Dots>
+            {photos.map((_, index) => (
+              <S.Dot
+                active={index === currentImageIndex}
+                onClick={() => {
+                  setCurrentImageIndex(index);
+                }}
+              />
+            ))}
+          </S.Dots>
+        </S.ImageContainer>
+        <S.AdditionalInfoContainer>
+          <S.AdditionalInfoText>구매처: {whereBuy || `경산 다이소 영남대점`}</S.AdditionalInfoText>
+          <S.AdditionalInfoText>Price: {price}</S.AdditionalInfoText>
+        </S.AdditionalInfoContainer>
+      </S.LeftBox>
 
-          <S.RightBox>
-            <S.RightBoxContent>
-              <S.BoardHeader>
-                <S.AuthorCircleBox>
-                  <S.AuthorImg src={profileImage} alt="프로필 사진" />
-                </S.AuthorCircleBox>
-                <S.ID>{`@${nickname}`}</S.ID>
-                <S.Title2>Lover에게 {reviewType === 'GIVEN' ? '주는 선물' : '받은 선물'}</S.Title2>
-                {isMyPost ? <OverflowMenuComponent onUpdate={onUpdate} onDelete={onDelete} /> : <FollowBtnComponent />}
-              </S.BoardHeader>
-              <S.BoardBody>{body}</S.BoardBody>
-              <S.HashtagList>
-                {hashTags && hashTags.map((tag) => <S.HashtagItem key={tag.id}>{`#${tag.name}`}</S.HashtagItem>)}
-              </S.HashtagList>
-              <S.DateWrapper>
-                <S.Dates>{`${formatDate(lastModifiedTime)}(수정됨)`}</S.Dates>
-                <S.Dates>{`${formatDate(createTime)}(작성됨)`}</S.Dates>
-              </S.DateWrapper>
-              <S.BoardNavBar>
-                <S.BoardIcon icon={like ? faHeart : emptyHeart} onClick={handleLike} />
-                <S.LikeAmount>{`${likeAmount}`}</S.LikeAmount>
-                <S.BoardIcon icon={bookMark ? faBookmark : emptyBookmark} onClick={handleBookmark} />
-              </S.BoardNavBar>
-
-              <S.CommentWriteBox>
-                <CommentWrite />
-              </S.CommentWriteBox>
-            </S.RightBoxContent>
-          </S.RightBox>
-        </S.DetailContent>
-      </S.DetailSection>
+      <S.RightBox>
+        <S.PostContainer>
+          <S.PostHeader>
+            <S.AuthorInfo>
+              <S.AuthorImgBox>
+                <S.AuthorImg src={profileImage} alt="프로필 사진" />
+              </S.AuthorImgBox>
+              <S.AuthorNickname to="/profile">{`@${nickname}`}</S.AuthorNickname>
+            </S.AuthorInfo>
+            <S.TypeText>Lover에게 {reviewType === 'GIVEN' ? '주는 선물' : '받은 선물'}</S.TypeText>
+            {isMyPost ? <OverflowMenuComponent onUpdate={onUpdate} onDelete={onDelete} /> : <FollowButton />}
+          </S.PostHeader>
+          <S.PostBody>{body}</S.PostBody>
+          <S.HashtagList>
+            {hashTags && hashTags.map((tag) => <S.HashtagItem key={tag.id}>{`#${tag.name}`}</S.HashtagItem>)}
+          </S.HashtagList>
+          <S.DateContainer>
+            <S.DateText>{`${formatDate(lastModifiedTime)}(수정됨)`}</S.DateText>
+            <S.DateText>{`${formatDate(createTime)}(작성됨)`}</S.DateText>
+          </S.DateContainer>
+          <S.IconBar>
+            <S.LikeContainer>
+              <S.LikeIconBox>
+                <S.LikeIcon icon={like ? faHeart : emptyHeart} onClick={handleLike} />
+              </S.LikeIconBox>
+              <S.LikeCount>{`${likeAmount}`}</S.LikeCount>
+            </S.LikeContainer>
+            <S.BookmarkIcon icon={bookMark ? faBookmark : emptyBookmark} onClick={handleBookmark} />
+          </S.IconBar>
+        </S.PostContainer>
+        <S.CommentWriteBox>
+          <CommentWrite />
+        </S.CommentWriteBox>
+      </S.RightBox>
       <S.CommentSection>
         <S.CommentContent>
           <CommentContainer />
         </S.CommentContent>
       </S.CommentSection>
-    </>
+    </S.DetailSection>
   );
 }

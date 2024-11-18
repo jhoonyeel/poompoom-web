@@ -1,8 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import axios from '../../../apis/axios';
 import SocialSignUpUI from './SignUp.presenter';
 import { schema } from './SignUp.validation';
 

@@ -4,17 +4,17 @@ import styled from 'styled-components';
 import ProfilePhoto from '../../../../assets/ProfilePhoto.svg';
 import * as S from './ProfileHeader.styles';
 
-export default function ProfileHeaderUI({ handleOnClick, profile }) {
+export default function ProfileHeaderUI({ profile, navigatePath }) {
   return (
     <S.Container>
       <ImageBox>
-        <S.Image src={profile.ProfileImagePath || ProfilePhoto} alt="Profile" />
+        <S.Image src={profile.ProfileImagePath || ProfilePhoto} alt="프로필 이미지" />
       </ImageBox>
       <S.InnerContainer>
         <S.InformContainer>
           <Name>{`${profile.nickName}`}</Name>
           <S.Name>{`@${profile.nickName}`}</S.Name>
-          <S.EditBtn onClick={handleOnClick('/profile/edit')}>내 정보 수정</S.EditBtn>
+          <S.EditBtn onClick={navigatePath('/profile/edit')}>내 정보 수정</S.EditBtn>
         </S.InformContainer>
         <S.HashTegContainer>
           {profile.profileTagList &&

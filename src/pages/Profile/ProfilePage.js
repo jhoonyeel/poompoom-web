@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { useNavigatePath } from '../../hooks/useNavigatePath';
 import ProfileHeader from './components/ProfileHeader/ProfileHeader.container';
 import ProfileMenuBox from './components/ProfileMenuBox/ProfileMenuBox.container';
 import LatestProfileGallery from './components/Section/LatestProfileGallery/LatestProfileGallery.container';
@@ -8,7 +9,7 @@ import MineProfileGallery from './components/Section/MineProfileGallery/MineProf
 
 export default function ProfilePage() {
   const location = useLocation();
-  const navigate = useNavigate();
+  const navigatePath = useNavigatePath();
   const [currentPath, setCurrentPath] = useState('/profile');
 
   useEffect(() => {
@@ -18,9 +19,9 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (location.pathname === '/profile') {
-      navigate('/profile/bookmark');
+      navigatePath('/profile/bookmark');
     }
-  }, [location.pathname, navigate]);
+  }, [location.pathname, navigatePath]);
   let profileContent;
   switch (currentPath) {
     case '/profile/bookmark':

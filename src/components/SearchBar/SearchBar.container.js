@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from '../../apis/axios';
+import { useNavigatePath } from '../../hooks/useNavigatePath';
 import SearchBarUI from './SearchBar.presenter';
 // import useDebounce from '../../hooks/useDebounce';
 
@@ -10,7 +10,7 @@ export default function SearchBar() {
   const [isFocused, setIsFocused] = useState(false);
   // const debouncedSearchTerm = useDebounce(searchTerm, 500); // 입력값을 0.5초 지연시킴
   const inputRef = useRef(null);
-  const navigate = useNavigate();
+  const navigatePath = useNavigatePath();
 
   // 사용자의 검색어에 따른 추천 키워드를 가져오는 API 호출을 수행합니다.
   // useEffect(() => {
@@ -31,6 +31,7 @@ export default function SearchBar() {
 
   const fetchPostData = async () => {
     try {
+      console.log('/hashtag/rank API 실행');
       const res = await axios.get(`/hashtag/rank`);
       const { data } = res;
       setRecommendations(data);
@@ -64,7 +65,7 @@ export default function SearchBar() {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       const params = new URLSearchParams({ searchContent: searchTerm });
-      navigate(`/review/query-result?${params.toString()}`);
+      navigatePath(`/review/query-result?${params.toString()}`);
     }
   };
 

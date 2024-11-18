@@ -22,7 +22,7 @@ export default function PriceSlider() {
   };
 
   return (
-    <PriceSliderWrapper>
+    <Wrapper>
       <StyledSlider
         value={[minValue, maxValue]}
         min={0}
@@ -36,14 +36,15 @@ export default function PriceSlider() {
       <PriceRange>
         {minValue.toLocaleString()}원 ~ {maxValue.toLocaleString()}원
       </PriceRange>
-    </PriceSliderWrapper>
+    </Wrapper>
   );
 }
 
-const PriceSliderWrapper = styled.div`
+const Wrapper = styled.div`
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
   width: 300px;
   padding: 10px;
   background-color: #f9f9f9;

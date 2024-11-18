@@ -1,140 +1,66 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 1440px;
-  height: 1024px;
-  margin: 0;
-`;
-
-export const CurrentImage = styled.div`
-  transform: translateX(-20rem);
-`;
-
-export const DetailContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-`;
-
-export const Title = styled.div`
-  padding: 1rem;
-  margin: 1rem;
-  border: 1px solid black;
-`;
-
-export const Name = styled.div`
-  margin: 0 1rem;
-`;
-export const ImageContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-`;
-export const ImageWrapper = styled.div`
-  width: 388px;
-  height: 510px;
-`;
-
-export const BoardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-`;
-export const BoardContainerHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Board = styled.div`
-  width: 617px;
-  height: 303.07px;
-  padding: 1rem;
-  border: 1px solid gainsboro;
-  overflow-y: auto;
-  word-wrap: break-word;
-`;
-
-export const BoardNav = styled.nav`
-  display: flex;
-  flex-direction: row;
-`;
-
-export const SliderBtn = styled.button`
-  background-color: rgba(255, 255, 255, 0.5);
-  border: none;
-  cursor: pointer;
-  &:hover {
-    background-color: gainsboro;
-  }
-`;
-
-export const CommentWrapper = styled.div`
-  position: absolute;
-  top: 460px;
-  right: 0px;
-`;
-
 export const DetailSection = styled.section`
-  width: 100%;
-  margin-top: 3rem;
-`;
-export const DetailContent = styled.div`
-  width: 80%;
-  height: 100%;
-  margin: 0 auto;
   display: flex;
+  gap: 40px;
+  margin: 24px auto 0;
+  min-width: 1028px;
+  height: 580px;
+  width: 80%;
 `;
 export const LeftBox = styled.div`
-  width: 45%;
-  height: 100%;
-  margin-right: 5rem;
-`;
-export const PhotoBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 80%;
+  flex-direction: column;
+  gap: 20px;
+  flex: 4;
+`;
+export const ImageContainer = styled.div`
   position: relative;
-  width: fit-content;
-  margin: auto;
+  width: 100%;
+  height: 100%;
 `;
 export const LeftBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  color: #fff;
   font-size: 24px;
-  color: white;
-  cursor: pointer;
+  font-weight: 700;
   user-select: none;
+  cursor: pointer;
 `;
 export const RightBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  color: #fff;
   font-size: 24px;
-  color: white;
-  cursor: pointer;
+  font-weight: 700;
   user-select: none;
+  cursor: pointer;
 `;
 
 export const ImageBox = styled.div`
-  width: 500px;
-  height: 630px;
+  width: 100%;
+  height: 100%;
   user-select: none;
 `;
 export const Image = styled.img`
@@ -142,73 +68,79 @@ export const Image = styled.img`
   height: 100%;
   object-fit: cover;
 `;
-export const InfoBox = styled.div`
+export const AdditionalInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 500px;
-  height: 20%;
-  margin: 0 auto;
-  margin-top: 2rem;
 `;
-export const Info = styled.p`
+export const AdditionalInfoText = styled.span`
   margin-top: 0.5rem;
   text-align: start;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
 `;
 
 export const RightBox = styled.div`
-  width: 55%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 5;
 `;
-export const RightBoxContent = styled.div`
-  width: 85%;
-  margin: 0 auto;
+export const PostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;
-export const BoardHeader = styled.div`
-  width: 100%;
+export const PostHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
-export const AuthorCircleBox = styled.div`
-  position: relative;
-  z-index: 1;
-  width: 100px;
-  height: 100px;
-  border: 10px solid #ddd;
-  border-radius: 50%;
+export const AuthorInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  min-width: 240px;
+`;
+export const AuthorImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid #ddd;
   overflow: hidden;
+  cursor: pointer;
 `;
 export const AuthorImg = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
+  object-fit: cover;
+  user-select: none;
 `;
-export const ID = styled.span`
+export const AuthorNickname = styled(Link)`
+  color: #000;
+  font-size: 28px;
   font-family: 'Oleo Script Swash Caps';
   font-style: normal;
   font-weight: 400;
-  font-size: 36px;
-  line-height: 50px;
-  color: #000000;
+  line-height: 1.4;
+  text-decoration: none;
 `;
-export const Title2 = styled.span`
-  font-size: 24px;
+export const TypeText = styled.span`
+  font-size: 16px;
   color: #0d3f39;
 `;
-export const BoardBody = styled.p`
-  margin-top: 1rem;
-  width: 100%;
-  height: 460px;
-  overflow-y: auto;
-  word-wrap: break-word;
-  line-height: 170%;
-  font-size: 24px;
+export const PostBody = styled.p`
+  flex: 1;
+  margin-top: 12px;
   text-align: start;
+  font-size: 18px;
+  line-height: 1.7;
+  word-wrap: break-word;
+  word-spacing: 2px;
+  overflow-y: auto;
+
   &::-webkit-scrollbar {
     width: 12px; /* width of the entire scrollbar */
   }
@@ -225,57 +157,65 @@ export const BoardBody = styled.p`
   }
 `;
 export const HashtagList = styled.ul`
-  margin-top: 2rem;
-  height: 15%;
   display: flex;
+  margin-top: 12px;
+  gap: 12px;
 `;
 export const HashtagItem = styled.li`
   color: #c9464b;
-  margin-right: 0.7rem;
-  font-size: 24px;
+  font-size: 22px;
 `;
-export const DateWrapper = styled.div`
-  margin-top: 0.5rem;
+export const DateContainer = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
 `;
-export const Dates = styled.span`
+export const DateText = styled.span`
   color: #b0b0b1;
-  margin-top: 0.4rem;
   text-align: start;
-  font-size: 18px;
+  font-size: 14px;
 `;
-export const BoardNavBar = styled.nav`
+export const IconBar = styled.nav`
   display: flex;
   align-items: center;
-  margin-top: 0.5rem;
+  gap: 20px;
+  margin-top: 8px;
 `;
-export const BoardIcon = styled(FontAwesomeIcon)`
-  padding: 1rem;
+export const LikeIcon = styled(FontAwesomeIcon)`
   font-size: 22px;
+  cursor: pointer;
 `;
-export const LikeAmount = styled.span`
+export const BookmarkIcon = styled(FontAwesomeIcon)`
   font-size: 22px;
-  margin-right: 20px;
+  cursor: pointer;
 `;
-
-export const CommentWriteBox = styled.div`
-  height: 20%;
-`;
-export const CommentSection = styled.section`
-  width: 100%;
-  margin-top: 5rem;
-`;
-export const CommentContent = styled.div`
-  width: 80%;
-  margin: 0 auto;
-`;
-
-export const ImageDots = styled.div`
+export const LikeContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  gap: 4px;
+`;
+export const LikeIconBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+`;
+export const LikeCount = styled.span`
+  font-size: 20px;
+`;
+
+export const Dots = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 10px;
+  z-index: 1;
+  width: 100%;
 `;
 
 export const Dot = styled.div`
@@ -285,4 +225,7 @@ export const Dot = styled.div`
   border-radius: 50%;
   margin: 0 5px;
   transition: background-color 0.3s;
+  pointer-events: auto; /* Dot이 클릭 가능하도록 설정 */
+  user-select: none; /* 텍스트 선택을 방지하여 커서가 깜빡이지 않도록 설정 */
+  cursor: pointer;
 `;

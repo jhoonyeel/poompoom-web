@@ -1,17 +1,14 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useNavigatePath } from '../../hooks/useNavigatePath';
 
 export default function ProfileTag() {
-  const navigate = useNavigate();
-  const onClickToTag = () => {
-    navigate('/signup/tag');
-  };
+  const navigatePath = useNavigatePath();
 
   return (
     <>
       <HeaderText>Profile-Tag</HeaderText>
       <InputWrapper>
-        <TagButton onClick={onClickToTag}>프로필 태그 선택</TagButton>
+        <TagButton onClick={navigatePath('/signup/tag')}>프로필 태그 선택</TagButton>
         <TagText>태그를 먼저 선택해주세요!</TagText>
       </InputWrapper>
     </>

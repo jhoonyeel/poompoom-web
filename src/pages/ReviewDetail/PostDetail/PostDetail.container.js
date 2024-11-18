@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from '../../../apis/axios';
+import { useNavigatePath } from '../../../hooks/useNavigatePath';
 import ReviewDetailUI from './PostDetail.presenter';
 
 export default function PostDetail() {
@@ -10,6 +11,7 @@ export default function PostDetail() {
   const [selectedPost, setSelectedPost] = useState(null);
   const { reviewId } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // 현재 이미지 인덱스 관리
+  const navigatePath = useNavigatePath();
   const navigate = useNavigate();
 
   const fetchReview = async () => {
@@ -82,7 +84,8 @@ export default function PostDetail() {
   };
 
   const onUpdate = () => {
-    navigate(`/review/update/${reviewId}`, { state: selectedPost }); // 수정 페이지로 이동
+    navigate(`/review/update/${reviewId}`); // 수정 페이지로 이동
+    // navigate(`/review/update/${reviewId}`, { state: selectedPost }); // 수정 페이지로 이동
   };
   const onDelete = async () => {
     try {
@@ -91,7 +94,7 @@ export default function PostDetail() {
       const response = await axios.post(`/review/delete/${reviewId}`);
       console.log(response);
       console.log(`Review ${reviewId} deleted successfully`);
-      navigate('/review'); // 삭제 후 리뷰 목록 페이지로 이동
+      navigatePath('/review'); // 삭제 후 리뷰 목록 페이지로 이동
     } catch (error) {
       console.error('Failed to delete review', error);
       // 추가적인 에러 처리 로직을 여기에 추가할 수 있습니다.
@@ -102,6 +105,7 @@ export default function PostDetail() {
     <ReviewDetailUI
       reviewId={reviewId}
       currentImageIndex={currentImageIndex}
+      setCurrentImageIndex={setCurrentImageIndex}
       prevImage={prevImage}
       nextImage={nextImage}
       onUpdate={onUpdate}

@@ -1,23 +1,76 @@
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
 import { ReactComponent as Eyes } from '../../assets/eyes.svg';
+import { ScrollToTopButton } from '../../components/common/ScrollToTopButton';
 import PostFilter from '../../components/PostFilter/PostFilter.container';
-import ReviewPostCard from '../Review/components/Card/ReviewPostCard/ReviewPostCard.container';
+import ReviewPostCard from '../../components/ReviewPostCard/ReviewPostCard.container';
+import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
+
+const fetchQueryData = async (cursorId, size, keyword) => {
+  const res = await axios.get(`/review/search`, {
+    params: { cursorId, size, keyword },
+  });
+  const { values, hasNext } = res.data;
+  const nextPageId = values?.[values.length - 1]?.reviewId;
+
+  return { values, nextPageId, hasNext };
+};
 
 export default function QueryPage() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const searchContent = params.get('searchContent') || ''; // URL에서 searchContent 값을 추출
-
-  const [queryPosts, setQueryPosts] = useState([]);
-  const [cursorId, setCursorId] = useState(0);
-  const [hasNext, setHasNext] = useState(true);
   const [currentKeyword, setCurrentKeyword] = useState(searchContent);
   const [initialSearchDone, setInitialSearchDone] = useState(false); // 초기 검색 완료 상태
+  const { rawData, loaderRef } = useInfiniteScroll({
+    fetchFunction: (cursorId, size) => fetchQueryData(cursorId, size, currentKeyword),
+    initialSize: 24,
+    additionalSize: 8,
+  });
+  const [queryPosts, setQueryPosts] = useState([]);
+
+  // 검색어가 변경될 때마다 초기화 로직 실행
+  useEffect(() => {
+    const initializeData = async () => {
+      if (!searchContent) {
+        // 추천 키워드 로직
+        const recommendRes = await axios.get(`/hashtag/rank`);
+        const recommendedKeywords = recommendRes.data.slice(0, 15);
+        const randomKeyword = recommendedKeywords[Math.floor(Math.random() * recommendedKeywords.length)].name;
+        setCurrentKeyword(randomKeyword);
+        setInitialSearchDone(true);
+      } else {
+        setQueryPosts([]); // 기존 검색 결과 초기화
+        setInitialSearchDone(false); // 초기 검색 상태 리셋
+        setCurrentKeyword(searchContent);
+      }
+    };
+    initializeData();
+  }, [searchContent]);
+
+  // rawData가 변경될 때마다 queryPosts를 업데이트
+  useEffect(() => {
+    if (rawData.length === 0 && currentKeyword === searchContent && !initialSearchDone) {
+      // 검색 결과가 없을 경우, 추천 키워드를 설정
+      const fetchRecommendedKeyword = async () => {
+        const recommendRes = await axios.get(`/hashtag/rank`);
+        const recommendedKeywords = recommendRes.data.slice(0, 15);
+        const randomKeyword = recommendedKeywords[Math.floor(Math.random() * recommendedKeywords.length)].name;
+        setCurrentKeyword(randomKeyword);
+        setInitialSearchDone(true);
+      };
+      fetchRecommendedKeyword();
+    } else {
+      // 검색 결과가 있으면 queryPosts에 추가
+      setQueryPosts((prevPosts) => [...prevPosts, ...rawData]);
+    }
+  }, [rawData, currentKeyword, initialSearchDone, searchContent]);
+
+  /*
+  const [cursorId, setCursorId] = useState(0);
+  const [hasNext, setHasNext] = useState(true);
   const loader = useRef(null);
 
   const fetchMaxReviewId = async () => {
@@ -44,14 +97,14 @@ export default function QueryPage() {
       });
       const { values, hasNext: newHasNext } = res.data;
       if (values.length === 0 && keyword === searchContent && !initialSearchDone) {
-        // If no results and it's the original search, fetch recommended keyword
+        // 추천 키워드 로직: 초기 검색에서 결과가 없는 경우
         const recommendRes = await axios.get(`/hashtag/rank`);
         const recommendedKeywords = recommendRes.data.slice(0, 15); // 상위 15개의 추천 검색어 사용
         const randomIndex = Math.floor(Math.random() * recommendedKeywords.length);
         const recommendedKeyword = recommendedKeywords[randomIndex].name;
-        setCurrentKeyword(recommendedKeyword);
+        setCurrentKeyword(recommendedKeyword); // 추천 키워드로 업데이트
         setInitialSearchDone(true); // 초기 검색 완료로 설정
-        fetchPostData(cursorId, size, recommendedKeyword);
+        fetchPostData(cursorId, size, recommendedKeyword); // 추천 키워드로 재검색
       } else {
         setQueryPosts((prevPosts) => (cursor === 0 ? values : [...prevPosts, ...values]));
         setHasNext(newHasNext);
@@ -82,36 +135,7 @@ export default function QueryPage() {
     };
     initializeData();
   }, [searchContent]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const target = entries[0];
-        if (target.isIntersecting && hasNext) {
-          fetchPostData(cursorId, 8); // 추가로 가져오는 데이터
-        }
-      },
-      { threshold: 1 },
-    );
-
-    if (loader.current) {
-      observer.observe(loader.current);
-    }
-
-    return () => {
-      if (loader.current) {
-        observer.unobserve(loader.current);
-      }
-    };
-  }, [cursorId, hasNext]);
-
-  // 화면 맨 위로 이동하는 함수
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth', // 부드러운 스크롤
-    });
-  };
+  */
 
   return (
     <Wrapper>
@@ -119,7 +143,7 @@ export default function QueryPage() {
         <PostFilter />
 
         <QueryContent>
-          <QueryHeader>QUERY VIEW</QueryHeader>
+          <Title>QUERY VIEW</Title>
           {initialSearchDone && (
             <NotFound>
               <EyesIconBox>
@@ -134,13 +158,13 @@ export default function QueryPage() {
               </NoResults>
             </NotFound>
           )}
-          <GalleryContent>
-            {queryPosts && queryPosts.map((post) => <ReviewPostCard key={post.id} post={post} />)}
-          </GalleryContent>
-          <div ref={loader} style={{ height: '15vh', margin: '10px' }} />
-          <ButtonBox onClick={scrollToTop}>
-            <UpIcon icon={faChevronUp} />
-          </ButtonBox>
+          <>
+            <GalleryContent>
+              {queryPosts && queryPosts.map((post) => <ReviewPostCard key={post.id} post={post} />)}
+            </GalleryContent>
+            <div ref={loaderRef} style={{ height: '15vh', margin: '10px' }} />
+          </>
+          <ScrollToTopButton />
         </QueryContent>
       </QuerySection>
     </Wrapper>
@@ -158,16 +182,15 @@ const QueryContent = styled.div`
   margin: 0 auto;
 `;
 
-const QueryHeader = styled.h3`
-  width: 100%;
+const Title = styled.h3`
   margin-top: 2rem;
+  text-align: start;
   font-family: 'Shrikhand';
   font-style: italic;
   font-weight: 400;
   font-size: 36px;
   line-height: 52px;
   color: #0e5649;
-  text-align: start;
 `;
 const NotFound = styled.div`
   border: 3px solid #dcdcdc;
@@ -211,21 +234,4 @@ const GalleryContent = styled.div`
   grid-template-columns: repeat(4, 1fr); /* 4개의 열을 가지도록 설정 */
   column-gap: 1.5rem;
   row-gap: 2.5rem;
-`;
-
-const ButtonBox = styled.div`
-  position: fixed;
-  bottom: 50px; /* 화면 하단과의 간격 조정 */
-  right: 50px; /* 화면 우측과의 간격 조정 */
-  z-index: 999; /* 다른 요소 위에 표시되도록 z-index 조정 */
-  width: 2%;
-  border: 3px solid gray;
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const UpIcon = styled(FontAwesomeIcon)`
-  font-size: 24px;
 `;

@@ -15,31 +15,32 @@ import SocialSignUp from './pages/OAuth/SignUp/SignUp.container';
 
 import LoginPage from './pages/Login/LoginPage';
 import LoginSocial from './pages/OAuth/LoginSocial';
-
+import ConnectGidePage from './components/Connect/Connect';
 import FindID from './pages/Finds/FindID';
 import FindPW from './pages/Finds/FindPW/FindPW';
-import Welcome from './pages/Welcome/Welcome';
 
-import LoverPage from './pages/Lover/LoverPage';
-import ConnectPage from './pages/LoverSet/Connect/Connect';
-import RecommendPage from './pages/LoverSet/Recommend/Recommend';
+import {
+  HomePage,
+  ProfileEditPage,
+  ProfilePage,
+  QueryPage,
+  ReviewCreatePage,
+  ReviewDetailPage,
+  ReviewEditPage,
+  ReviewPage,
+  Welcome,
+  LoverPage,
+  ConnectPage,
+  RecommendPage,
+} from './pages/index';
 
-import HomePage from './pages/Home/HomePage';
-
-import ProfileEditPage from './pages/Profile/ProfileEditPage';
-import ProfilePage from './pages/Profile/ProfilePage';
-import QueryPage from './pages/Query/QueryPage';
-import ReviewPage from './pages/Review/ReviewPage';
-import PostDetail from './pages/ReviewDetail/PostDetail/PostDetail.container';
-import ReviewWritePage from './pages/ReviewWrite/ReviewWritePage';
-
+import { InitializeNickname } from './recoil/InitializeNickname';
 import { basicTheme } from './shared/Theme';
-import ConnectGidePage from './components/Connect/Connect';
 
 const queryClient = new QueryClient();
 
-const isAuthenticated = () => {
-  // Replace this with your actual authentication logic
+const isAuthenticated = async () => {
+  // AT 만료여부 확인해서 새로운 AT인지 확인해야 함.
   return localStorage.getItem('accessToken') !== null;
 };
 
@@ -47,22 +48,22 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/review" element={<ProtectedRoute element={ReviewPage} isAuthenticated={isAuthenticated()} />} />
+      <Route path="/review" element={<ProtectedRoute element={ReviewPage} isAuthenticated={isAuthenticated} />} />
       <Route
         path="/review/:reviewId"
-        element={<ProtectedRoute element={PostDetail} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={ReviewDetailPage} isAuthenticated={isAuthenticated} />}
       />
       <Route
-        path="/review/write"
-        element={<ProtectedRoute element={ReviewWritePage} isAuthenticated={isAuthenticated()} mode="create" />}
+        path="/review/create"
+        element={<ProtectedRoute element={ReviewCreatePage} isAuthenticated={isAuthenticated} />}
       />
       <Route
         path="/review/update/:reviewId"
-        element={<ProtectedRoute element={ReviewWritePage} isAuthenticated={isAuthenticated()} mode="edit" />}
+        element={<ProtectedRoute element={ReviewEditPage} isAuthenticated={isAuthenticated} />}
       />
       <Route
         path="/review/query-result"
-        element={<ProtectedRoute element={QueryPage} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={QueryPage} isAuthenticated={isAuthenticated} />}
       />
       <Route path="/lover" element={<ProtectedRoute element={LoverPage} isAuthenticated={isAuthenticated()} />} />
       <Route
@@ -89,9 +90,13 @@ function AppRoutes() {
 function MainLayout() {
   return (
     <>
-      <Header />
+      <S.HeaderContainer>
+        <Header />
+      </S.HeaderContainer>
       <Outlet />
-      <Footer />
+      <S.FooterContainer>
+        <Footer />
+      </S.FooterContainer>
     </>
   );
 }
@@ -101,6 +106,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={basicTheme}>
         <GlobalStyle />
+        <InitializeNickname /> {/* recoil 상태 초기화 */}
         <S.AppLayout>
           <Routes>
             <Route path="/find/id" element={<FindID />} />
