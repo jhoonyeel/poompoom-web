@@ -37,7 +37,7 @@ export default function SignupPage() {
       setEmailSentMessage('이메일 인증 코드가 발송되었습니다.');
     } catch (error) {
       console.error('이메일 인증 요청 실패', error.response?.data);
-      console.log('이메일 인증 요청에 실패했습니다.');
+      setEmailSentMessage(error.response?.data?.message || '중복되거나 잘못된 이메일입니다.');
     }
   };
 

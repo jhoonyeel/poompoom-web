@@ -33,3 +33,7 @@ export { default as ReviewDetailPage } from './ReviewDetail/PostDetail/PostDetai
 
 // Welcome Pages
 export { default as Welcome } from './Welcome/Welcome';
+
+export { default as LoverPage } from './Lover/LoverPage';
+export { default as ConnectPage } from './LoverSet/Connect/Connect';
+export { default as RecommendPage } from './LoverSet/Recommend/Recommend';

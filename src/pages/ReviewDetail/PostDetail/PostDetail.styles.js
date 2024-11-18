@@ -229,3 +229,11 @@ export const Dot = styled.div`
   user-select: none; /* 텍스트 선택을 방지하여 커서가 깜빡이지 않도록 설정 */
   cursor: pointer;
 `;
+
+export const CommentWriteBox = styled.div``;
+
+export const CommentSection = styled.div`
+  margin-top: 20px;
+`;
+
+export const CommentContent = styled.div``;

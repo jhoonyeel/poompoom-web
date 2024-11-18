@@ -79,9 +79,9 @@ export default function LoginUI({
 
         <S.LinkWrapper>
           <S.LinkInnerWrapper>
-            <S.CustomLink to="/">아이디 찾기</S.CustomLink>
+            <S.CustomLink to="/find/id">아이디 찾기</S.CustomLink>
             <S.Line>|</S.Line>
-            <S.CustomLink to="/">비밀번호 찾기</S.CustomLink>
+            <S.CustomLink to="/find/pw">비밀번호 찾기</S.CustomLink>
           </S.LinkInnerWrapper>
           <S.CustomLink to="/signup">회원가입</S.CustomLink>
         </S.LinkWrapper>
