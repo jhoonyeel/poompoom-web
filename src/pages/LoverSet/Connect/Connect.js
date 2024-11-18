@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as S from './Connect.style';
 import { questionsWithAnswers } from './Constant';
 
@@ -8,6 +9,7 @@ export default function ConnectPage() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
+  const navigate = useNavigate();
   const lastQuestionMessage =
     currentQuestion === questionsWithAnswers.length - 1 ? '마지막 질문입니다!' : '스크롤을 내리거나 버튼을 클릭하세요!';
 
@@ -50,7 +52,7 @@ export default function ConnectPage() {
     if (answers.includes(null)) {
       setIsModalVisible(true);
     } else {
-      console.log('모든 질문에 응답하셨습니다!');
+      navigate('/review');
     }
   };
 

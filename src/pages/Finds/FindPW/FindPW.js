@@ -1,5 +1,6 @@
 // FindPWContainer.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRequestPasswordReset, useAuthenticateResetCode, useResetPassword } from '../../../hooks/FindApi/useFindPW';
 import FindPWPresenter from './FindPW.presenter';
 
@@ -14,6 +15,11 @@ export default function FindPWContainer() {
   const { requestPasswordReset } = useRequestPasswordReset();
   const { authenticateResetCode } = useAuthenticateResetCode();
   const { resetPassword } = useResetPassword();
+
+  const navigate = useNavigate();
+  const handleOnClick = (path) => () => {
+    navigate(path);
+  };
 
   const handleRequestReset = async () => {
     const result = await requestPasswordReset(email, username);
@@ -37,6 +43,7 @@ export default function FindPWContainer() {
     const result = await resetPassword(newPassword, email);
     if (result.success) {
       console.log('비밀번호가 성공적으로 재설정되었습니다.');
+      handleOnClick('/login');
     } else {
       setError(result.message);
     }
