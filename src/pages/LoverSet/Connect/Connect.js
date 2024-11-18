@@ -64,6 +64,9 @@ export default function ConnectPage() {
       <S.QuestionSection>
         {questionsWithAnswers.map(({ question, answers: options }, index) => (
           <S.QuestionContainer key={question} isVisible={currentQuestion === index}>
+            <S.Seq>
+              QnA.{currentQuestion + 1}/{questionsWithAnswers.length}
+            </S.Seq>
             <S.Question>{question}</S.Question>
             <S.AnswerContainer>
               {options.map((option) => (

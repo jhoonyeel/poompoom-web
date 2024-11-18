@@ -79,14 +79,15 @@ export default function RecommendPage() {
     <S.PageContainer onWheel={handleScroll}>
       <S.Header>
         <S.Title>선물 추천에 사용될 정보입니다.</S.Title>
-        <S.SubTitle>
-          {currentQuestion + 1}/{questionsWithAnswers.length} 질문
-        </S.SubTitle>
+        <S.SubTitle>언제든 수정 가능하나 사실기반 답변을 추천합니다!</S.SubTitle>
       </S.Header>
 
       <S.QuestionSection>
         {questionsWithAnswers.map(({ question, Component, optional }, index) => (
           <S.QuestionContainer key={question} isVisible={currentQuestion === index}>
+            <S.Seq>
+              QnA.{currentQuestion + 1}/{questionsWithAnswers.length}
+            </S.Seq>
             <S.Question>{question}</S.Question>
             <Component onAnswer={(answer) => handleAnswer(index, answer)} />
             {optional && <S.OptionalText>(선택 사항)</S.OptionalText>}

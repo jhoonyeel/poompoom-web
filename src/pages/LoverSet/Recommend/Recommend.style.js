@@ -11,7 +11,7 @@ export const PageContainer = styled.div`
 export const Header = styled.div`
   background-color: white;
   text-align: center;
-  padding: 20px 0;
+  padding: 100px 0;
 `;
 
 export const Title = styled.div`
@@ -24,6 +24,13 @@ export const Title = styled.div`
 export const SubTitle = styled.div`
   color: #9d9d9d;
   font-size: 24px;
+`;
+
+export const Seq = styled.div`
+  margin-bottom: 50px;
+  color: #b92929;
+  font-size: 18px;
+  font-weight: 800;
 `;
 
 export const QuestionSection = styled.div`
@@ -42,7 +49,7 @@ export const QuestionContainer = styled.div`
   transform: translate(-50%, -50%);
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   pointer-events: ${({ isVisible }) => (isVisible ? 'auto' : 'none')};
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 `;
 
 export const Question = styled.div`
