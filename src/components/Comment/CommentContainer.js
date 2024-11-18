@@ -32,7 +32,7 @@ export default function CommentContainer() {
 
 const CommentContainers = styled.div`
   border: none;
-  margin: 0 100px;
+  margin: 0;
 `;
 
 const ScrollText = styled.div`

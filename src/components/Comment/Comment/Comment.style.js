@@ -53,6 +53,14 @@ export const CommentContainer = styled.div`
   gap: 10px;
   height: fit-content;
 
+  ${({ isFixed }) =>
+    isFixed &&
+    `
+    border: 5px solid  rgba(249, 159, 159, 0.8);
+    border-color: rgba(249, 159, 159, 0.8); 
+    order: -1;
+  `}
+
   &:nth-child(1) {
     grid-column: span ${getRandomGridColumn()};
   }

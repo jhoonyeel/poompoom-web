@@ -21,7 +21,9 @@ export function Comment({ comment, convertDateArrayToDate, reviewId }) {
   const { delete: deleteMessage, report } = MODAL_MESSAGE;
   const { isOpen, openModal, closeModal } = useModal();
   const { ref, isVisible, setIsVisible } = useOutsideClick();
-  const { profile, body, memberId, commentId, createDate, isfixed: isFixed, likeCount, isLiked } = comment;
+  const { body, commentId, createDate, isfixed: isFixed, likeCount, isLiked, commentedMember } = comment;
+
+  const { nickName, profileImagePath, memberId } = commentedMember;
 
   const [confirmHandler, setConfirmHandler] = useState(null);
   const [selectedOption, setSelectedOption] = useState('');
@@ -39,7 +41,7 @@ export function Comment({ comment, convertDateArrayToDate, reviewId }) {
   };
 
   const handleDeleteComment = async () => {
-    await useDeleteComment(commentId, reviewId);
+    await useDeleteComment(commentId, reviewId, closeModal);
   };
 
   const handleEditClick = () => {
@@ -47,12 +49,15 @@ export function Comment({ comment, convertDateArrayToDate, reviewId }) {
   };
 
   return (
-    <S.CommentContainer>
+    <S.CommentContainer isFixed={isFixed}>
       <CommentHeader>
-        <ProfileImgWrapper>{!profile && <EmptyProfile />}</ProfileImgWrapper>
+        <ProfileImgWrapper>
+          {profileImagePath ? <UserProfile src={profileImagePath} alt="프로필 사진" /> : <EmptyProfile />}
+        </ProfileImgWrapper>
+
         <UserContainer>
           <UserWrapper>
-            <Id>사용자ID {memberId}</Id> <PinComment isFixed={isFixed} commentId={commentId} reviewId={reviewId} />
+            <Id>{nickName}</Id> <PinComment isFixed={isFixed} commentId={commentId} reviewId={reviewId} />
           </UserWrapper>
 
           <CommentDate>{convertDateArrayToDate(createDate).toLocaleString()}작성</CommentDate>
@@ -122,12 +127,33 @@ const CommentIcon = styled.div`
   cursor: pointer;
 `;
 
-const EmptyProfile = styled(EmptyProfileImg)`
+const EmptyProfile = styled(EmptyProfileImg)``;
+
+const UserProfile = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
+`;
+
+const ProfileImgWrapper = styled.div`
   width: 40px;
   height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   position: absolute;
   top: -2%;
   left: -2%;
+`;
+const Id = styled.div`
+  font-size: 20px;
+`;
+const CommentOption = styled.div``;
+const CommentDate = styled.div`
+  font-size: 10px;
 `;
 
 const OptionButton = styled(FontAwesomeIcon)`
@@ -135,13 +161,6 @@ const OptionButton = styled(FontAwesomeIcon)`
   color: '#655f48';
   top: 28px;
   right: 30px;
-`;
-
-const ProfileImgWrapper = styled.div``;
-const Id = styled.div``;
-const CommentOption = styled.div``;
-const CommentDate = styled.div`
-  font-size: 10px;
 `;
 
 const UserContainer = styled.div`

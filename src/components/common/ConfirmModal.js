@@ -38,7 +38,40 @@ const Container = styled.div`
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 `;
 
-const ModalText = styled.div``;
-const ButtonContainer = styled.div``;
-const CancelButton = styled.button``;
-const ConfirmButton = styled.button``;
+const ModalText = styled.div`
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+`;
+
+const CancelButton = styled.button`
+  background-color: #949494;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #b9b9b9;
+  }
+`;
+
+const ConfirmButton = styled.button`
+  background-color: rgba(230, 143, 143, 0.84);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(255, 154, 154, 0.84);
+  }
+`;
