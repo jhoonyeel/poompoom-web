@@ -15,7 +15,6 @@ import SocialSignUp from './pages/OAuth/SignUp/SignUp.container';
 
 import LoginPage from './pages/Login/LoginPage';
 import LoginSocial from './pages/OAuth/LoginSocial';
-import ConnectGidePage from './components/Connect/Connect';
 import FindID from './pages/Finds/FindID';
 import FindPW from './pages/Finds/FindPW/FindPW';
 
@@ -31,6 +30,7 @@ import {
   Welcome,
   LoverPage,
   ConnectPage,
+  ConnectGidePage,
   RecommendPage,
 } from './pages/index';
 
@@ -65,18 +65,18 @@ function AppRoutes() {
         path="/review/query-result"
         element={<ProtectedRoute element={QueryPage} isAuthenticated={isAuthenticated} />}
       />
-      <Route path="/lover" element={<ProtectedRoute element={LoverPage} isAuthenticated={isAuthenticated()} />} />
+      <Route path="/lover" element={<ProtectedRoute element={LoverPage} isAuthenticated={isAuthenticated} />} />
       <Route
         path="/lover/connect/guide"
-        element={<ProtectedRoute element={ConnectGidePage} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={ConnectGidePage} isAuthenticated={isAuthenticated} />}
       />
       <Route
         path="/lover/connect"
-        element={<ProtectedRoute element={ConnectPage} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={ConnectPage} isAuthenticated={isAuthenticated} />}
       />
       <Route
         path="/lover/recommend"
-        element={<ProtectedRoute element={RecommendPage} isAuthenticated={isAuthenticated()} />}
+        element={<ProtectedRoute element={RecommendPage} isAuthenticated={isAuthenticated} />}
       />
       <Route path="/profile/*" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />} />
       <Route
