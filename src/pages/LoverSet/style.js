@@ -26,64 +26,6 @@ export const SubTitle = styled.div`
   font-size: 24px;
 `;
 
-export const Seq = styled.div`
-  margin-bottom: 50px;
-  color: #b92929;
-  font-size: 18px;
-  font-weight: 800;
-`;
-
-export const QuestionSection = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-`;
-
-export const QuestionContainer = styled.div`
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
-  pointer-events: ${({ isVisible }) => (isVisible ? 'auto' : 'none')};
-  transition: opacity 0.3s ease-in-out;
-  height: fit-content;
-`;
-
-export const Question = styled.div`
-  font-weight: bold;
-  margin-bottom: 30px;
-  font-size: 36px;
-  padding-bottom: 50px;
-`;
-
-export const AnswerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-`;
-
-export const Answer = styled.div`
-  margin: auto;
-  width: fit-content;
-  font-size: 24px;
-  padding: 10px 20px;
-  border: 1px solid #cfd4d3;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: ${({ isSelected }) => (isSelected ? '#06564e' : '#fff')};
-  color: ${({ isSelected }) => (isSelected ? '#fff' : '#06564e')};
-  font-weight: ${({ isSelected }) => (isSelected ? 'bold' : 'normal')};
-  transition: all 0.2s ease-in-out;
-  &:hover {
-    background-color: #047d70;
-    color: #fff;
-  }
-`;
-
 export const CompleteButton = styled.button`
   margin: auto;
   width: fit-content;
@@ -138,10 +80,4 @@ export const CloseButton = styled.button`
   &:hover {
     color: #000;
   }
-`;
-
-export const FloatingText = styled.div`
-  font-size: 15px;
-  color: #9d9d9d;
-  margin-top: 10px;
 `;

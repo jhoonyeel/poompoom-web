@@ -32,9 +32,11 @@ export default function CommentContainer() {
 
 const CommentContainers = styled.div`
   border: none;
-  margin: 0;
+  margin-top: 100px;
 `;
 
 const ScrollText = styled.div`
   color: rgba(255, 154, 154, 0.84);
+  font-size: 15px;
+  margin-bottom: 10px;
 `;

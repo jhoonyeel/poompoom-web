@@ -1,17 +1,28 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import Lottie from 'react-lottie';
+import checkAnimation from '../../assets/Lottie-Animation/checkAnimation.json';
 
-export default function ConnectGidePage() {
+const defaultOptions = { loop: false, animationData: checkAnimation };
+
+export default function ConnectGuidePage() {
   const navigate = useNavigate();
   const handleOnClick = (path) => () => {
     navigate(path);
   };
+
+  const allAnswers = JSON.parse(localStorage.getItem('allAnswers')) || { connect: false, recommend: false, dd: false };
+  console.log('1:', allAnswers);
+
   return (
     <Container>
       <Title>연인 연동 서비스 활성화를 위한 질문에 답해주세요!</Title>
       <Body>
-        <QRContainer>
-          <Box /> <Text>필수 질문에 모두 응답시 코드가 생성</Text>
+        <QRContainer onClick={handleOnClick('/lover/connect')}>
+          <Box>
+            {allAnswers.connect ? <Lottie options={defaultOptions} /> : <BoxText>답변이 완료되지 않았어요!</BoxText>}
+          </Box>
+          <Text>가치관 질문</Text>
           <SubText>
             연애 가치관, 선물 품목 선호도부터 신발 사이즈까지!
             <br />
@@ -19,12 +30,14 @@ export default function ConnectGidePage() {
             연인에게 나에게 대해 알려주세요!
           </SubText>
         </QRContainer>
-        <QRContainer>
-          <Box />
-          <Text>생성된 코드를 연인에게 전송</Text>
+        <QRContainer onClick={handleOnClick('/lover/recommend')}>
+          <Box>
+            {allAnswers.recommend ? <Lottie options={defaultOptions} /> : <BoxText>답변이 완료되지 않았어요!</BoxText>}
+          </Box>
+          <Text>치수 질문</Text>
         </QRContainer>
         <QRContainer>
-          <Box />
+          <Box>서비스 준비중입니다!</Box>
           <Text>연동서비스 활성화 완료</Text>
         </QRContainer>
       </Body>
@@ -68,8 +81,13 @@ const Box = styled.div`
   border: 2px solid black;
   width: 241px;
   height: 210px;
-  margin-bottom: 40px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+
+const BoxText = styled.div``;
 const Text = styled.div`
   font-size: 24px;
   font-weight: 600;

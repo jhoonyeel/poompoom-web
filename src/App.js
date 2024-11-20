@@ -29,9 +29,9 @@ import {
   ReviewPage,
   Welcome,
   LoverPage,
-  ConnectPage,
+  SetValuePage,
   ConnectGidePage,
-  RecommendPage,
+  SetRecommendPage,
 } from './pages/index';
 
 import { InitializeNickname } from './recoil/InitializeNickname';
@@ -72,11 +72,11 @@ function AppRoutes() {
       />
       <Route
         path="/lover/connect"
-        element={<ProtectedRoute element={ConnectPage} isAuthenticated={isAuthenticated} />}
+        element={<ProtectedRoute element={SetValuePage} isAuthenticated={isAuthenticated} />}
       />
       <Route
         path="/lover/recommend"
-        element={<ProtectedRoute element={RecommendPage} isAuthenticated={isAuthenticated} />}
+        element={<ProtectedRoute element={SetRecommendPage} isAuthenticated={isAuthenticated} />}
       />
       <Route path="/profile/*" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />} />
       <Route

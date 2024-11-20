@@ -6,6 +6,7 @@ import FollowButton from '../../../components/common/FollowBtutton';
 import * as S from './PostDetail.styles';
 import CommentWrite from '../../../components/Comment/CommentWrite';
 import CommentContainer from '../../../components/Comment/CommentContainer';
+import { ReactComponent as LinkImg } from '../../../assets/LinkImg.svg';
 
 export default function ReviewDetailUI({
   currentImageIndex,
@@ -15,6 +16,7 @@ export default function ReviewDetailUI({
   onUpdate,
   onDelete,
   photos,
+  handleWhereBuyClick,
   whereBuy,
   price,
   profileImage,
@@ -59,9 +61,12 @@ export default function ReviewDetailUI({
               ))}
             </S.Dots>
           </S.ImageContainer>
-          <S.AdditionalInfoContainer>
-            <S.AdditionalInfoText>구매처: {whereBuy || `경산 다이소 영남대점`}</S.AdditionalInfoText>
-            <S.AdditionalInfoText>Price: {price}</S.AdditionalInfoText>
+          <S.AdditionalInfoContainer onClick={handleWhereBuyClick}>
+            <LinkImg />
+            <S.AdditionalInfoWrapper>
+              <S.AdditionalInfoText> {whereBuy || `경산 다이소 영남대점`}</S.AdditionalInfoText>
+              <S.Price> {price}</S.Price>
+            </S.AdditionalInfoWrapper>
           </S.AdditionalInfoContainer>
         </S.LeftBox>
 
@@ -72,7 +77,7 @@ export default function ReviewDetailUI({
                 <S.AuthorImgBox>
                   <S.AuthorImg src={profileImage} alt="프로필 사진" />
                 </S.AuthorImgBox>
-                <S.AuthorNickname to="/profile">{`@${nickname}`}</S.AuthorNickname>
+                <S.AuthorNickname to="/profile">{nickname}</S.AuthorNickname>
               </S.AuthorInfo>
               <S.TypeText>Lover에게 {reviewType === 'GIVEN' ? '주는 선물' : '받은 선물'}</S.TypeText>
               {isMyPost ? <OverflowMenuComponent onUpdate={onUpdate} onDelete={onDelete} /> : <FollowButton />}
