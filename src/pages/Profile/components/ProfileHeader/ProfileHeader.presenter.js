@@ -7,42 +7,44 @@ import * as S from './ProfileHeader.styles';
 export default function ProfileHeaderUI({ profile, navigatePath }) {
   return (
     <S.Container>
-      <ImageBox>
-        <S.Image src={profile.ProfileImagePath || ProfilePhoto} alt="프로필 이미지" />
-      </ImageBox>
+      <ProfileImgWrapper>
+        <UserProfile src={profile?.profileImagePath || ProfilePhoto} alt="프로필 이미지" />
+      </ProfileImgWrapper>
       <S.InnerContainer>
         <S.InformContainer>
           <Name>{`${profile.nickName}`}</Name>
-          <S.Name>{`@${profile.nickName}`}</S.Name>
+          <Name style={{ color: '#567c75' }}>{`@${profile.username}`}</Name>
           <S.EditBtn onClick={navigatePath('/profile/edit')}>내 정보 수정</S.EditBtn>
         </S.InformContainer>
         <S.HashTegContainer>
           {profile.profileTagList &&
             profile.profileTagList.map((tag, index) => <S.Hashtag key={index}>{`#${tag}`}</S.Hashtag>)}
-          <Span>#20대 초반</Span>
-          <Span>#여행</Span>
-          <Span>#예술</Span>
-          <Span>#음악</Span>
         </S.HashTegContainer>
       </S.InnerContainer>
     </S.Container>
   );
 }
 
-const ImageBox = styled.div`
-  width: 20%;
-  margin-right: 1rem;
-  padding: 3rem;
+const UserProfile = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율을 유지하며 자를 때 사용 */
 `;
+
+const ProfileImgWrapper = styled.div`
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+`;
+
 const Name = styled.div`
   font-family: 'YEONGJUPunggiGinsengTTF';
   font-weight: bold;
   font-size: 48px;
   color: #231f20;
-`;
-const Span = styled.span`
-  font-size: 32px;
-  background-color: #000000;
-  color: #ffffff;
-  padding: 0.3rem 0.8rem;
 `;

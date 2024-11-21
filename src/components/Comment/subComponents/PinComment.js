@@ -32,6 +32,7 @@ export default function PinComment({ isFixed, commentId, reviewId }) {
       upPinComment(commentId, reviewId);
     }
     setIsPined(!isPined);
+    window.location.reload();
     console.log(isFixed);
   };
 

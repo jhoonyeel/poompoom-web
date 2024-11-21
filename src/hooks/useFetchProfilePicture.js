@@ -6,10 +6,14 @@ import { profilePictureState } from '../recoil/atoms';
 export function useFetchProfilePicture() {
   const [profilePicture, setProfilePicture] = useRecoilState(profilePictureState);
 
+  const userData = JSON.parse(localStorage.getItem('userData'));
+  const memberId = userData.memberId;
+
   useEffect(() => {
     async function fetchProfilePicture() {
       try {
-        const response = await axios.get(`/profile/1`);
+        const response = await axios.get(`/profile/${memberId}`);
+
         setProfilePicture(response.data.profileImagePath); // API 응답에 맞게 경로 수정
       } catch (error) {
         console.error('Failed to fetch profile picture:', error);

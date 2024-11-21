@@ -31,17 +31,19 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
 `;
 
 const Title = styled.div`
   padding: 1rem;
   width: 593px;
   border-radius: 38.5px;
-  border: 3px solid #8c8c8c;
-  color: #8c8c8c;
+  border: 3px solid #0e5649;
+  color: #0e5649;
 `;
 
 const ButtonContainer = styled.div`
+  font-family: 'S-CoreDream-3Light';
   position: relative;
   display: flex;
   flex-direction: row;
@@ -50,17 +52,21 @@ const ButtonContainer = styled.div`
 `;
 
 const SubButton = styled.button`
+  font-family: 'S-CoreDream-3Light';
   width: fit-content;
-  background: #f0f0f0;
+  background: wheat;
   border: none;
   padding: 10px 20px;
   border-radius: 20px;
   transition: all 0.5s;
   cursor: pointer;
+  border: 1px solid #0e5649;
+  color: #0e5649;
 
   &:hover {
-    background: #e07c00;
+    background: #0e5649;
     transform: scale(120%);
+    color: wheat;
   }
 
   ${(props) =>

@@ -78,7 +78,7 @@ function AppRoutes() {
         path="/lover/recommend"
         element={<ProtectedRoute element={SetRecommendPage} isAuthenticated={isAuthenticated} />}
       />
-      <Route path="/profile/*" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated()} />} />
+      <Route path="/profile/*" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated} />} />
       <Route
         path="/profile/edit"
         element={<ProtectedRoute element={ProfileEditPage} isAuthenticated={isAuthenticated()} />}

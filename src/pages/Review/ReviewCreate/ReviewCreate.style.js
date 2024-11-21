@@ -181,6 +181,7 @@ export const AuthorImg = styled.img`
   object-fit: cover;
 `;
 export const Nickname = styled.span`
+  font-family: 'seolleimcool-SemiBold';
   flex: 1;
   text-align: start;
   color: #fff;

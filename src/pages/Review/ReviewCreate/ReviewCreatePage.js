@@ -18,10 +18,12 @@ export default function ReviewWritePage() {
     reviewType: 'RECEIVED',
     content: '',
     category: CATEGORIES[0],
-    item: ITEM[0],
-    item_url: '',
+    item: '',
   });
   const navigate = useNavigate();
+
+  const userData = JSON.parse(localStorage.getItem('userData'));
+  const nickname = userData.nickname;
 
   useFetchProfilePicture(); // 프로필 사진을 가져오는 커스텀 훅 호출
   const profilePhoto = useRecoilValue(profilePictureState); // Recoil 전역 상태에서 프로필 사진 경로를 읽어옴
@@ -56,7 +58,7 @@ export default function ReviewWritePage() {
       return;
     }
 
-    const { content, price, source, category, reviewType, item, item_url } = reviewData;
+    const { content, price, source, category, reviewType, item } = reviewData;
     if (!content || !price || !source || !category || !reviewType || !item) {
       alert('모든 필드를 입력해주세요.');
       return;
@@ -70,7 +72,6 @@ export default function ReviewWritePage() {
       category,
       reviewType,
       item,
-      item_url,
     });
 
     // 파일 업로드를 지원하는 multipart 요청을 생성하기 위해 formData 객체 생성
@@ -124,6 +125,7 @@ export default function ReviewWritePage() {
       prevImage={prevImage}
       CATEGORIES={CATEGORIES}
       ITEM={ITEM}
+      nickname={nickname}
     />
   );
 }
