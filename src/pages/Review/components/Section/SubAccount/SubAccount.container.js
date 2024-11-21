@@ -39,6 +39,7 @@ export default function SubAccount() {
         );
       return [...prevAccounts, ...newAccounts];
     });
+    console.log(subAccounts);
   }, [rawData]);
 
   const getNickname = (nickname) => {
