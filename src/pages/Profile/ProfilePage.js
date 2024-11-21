@@ -6,7 +6,7 @@ import ProfileHeader from './components/ProfileHeader/ProfileHeader.container';
 import ProfileMenuBox from './components/ProfileMenuBox/ProfileMenuBox.container';
 import LatestProfileGallery from './components/Section/LatestProfileGallery/LatestProfileGallery.container';
 import MineProfileGallery from './components/Section/MineProfileGallery/MineProfileGallery.container';
-import Category from '../../components/Category/Category';
+import Category from './components/Section/Category/Category';
 
 export default function ProfilePage() {
   const location = useLocation();

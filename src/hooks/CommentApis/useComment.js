@@ -52,6 +52,17 @@ export const useComments = () => {
     }
   };
 
+  const getPinnedComment = async () => {
+    try {
+      const response = await axios.get(`/review/${reviewId}/fixedComment`);
+      const fixedComment = response.data;
+      console.log('고정댓글:', fixedComment);
+      return fixedComment;
+    } catch (error) {
+      return console.log('고정 댓글 get 에러:', error);
+    }
+  };
+
   const convertDateArrayToDate = (dateArray) => {
     const [year, month, day, hour, minute, second, milliseconds] = dateArray;
     return new Date(year, month - 1, day, hour, minute, second, milliseconds); // 월 -1 보정
@@ -59,6 +70,7 @@ export const useComments = () => {
 
   useEffect(() => {
     fetchComments(null, 3);
+    getPinnedComment();
   }, []);
 
   console.log(' hasNext:', hasNext, 'cursorId:', cursorId);

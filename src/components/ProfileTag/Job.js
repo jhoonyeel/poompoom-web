@@ -17,6 +17,7 @@ export default function Job({ setSelectedButton }) {
         <SubButton onClick={(event) => handleClick(event.target.textContent)}>비즈니스/금융</SubButton>
         <SubButton onClick={(event) => handleClick(event.target.textContent)}>예술/스포츠</SubButton>
         <SubButton onClick={(event) => handleClick(event.target.textContent)}>공공 서비스/법률</SubButton>
+        <SubButton onClick={(event) => handleClick(event.target.textContent)}>학생</SubButton>
       </ButtonContainer>
     </Container>
   );

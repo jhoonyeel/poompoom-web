@@ -51,6 +51,16 @@ export default function Interest({ setSelectedButton }) {
             </FixedSubButtonContainer>
           )}
         </ButtonContainer>
+        <ButtonContainer>
+          <Button onMouseEnter={() => handleHover('친목/동물')}>친목/동물</Button>
+          {hoveredButton === '친목/동물' && (
+            <FixedSubButtonContainer>
+              <SubButton onClick={(event) => handleClick(event.target.textContent)}>친목</SubButton>
+              <SubButton onClick={(event) => handleClick(event.target.textContent)}>동호회</SubButton>
+              <SubButton onClick={(event) => handleClick(event.target.textContent)}>동물</SubButton>
+            </FixedSubButtonContainer>
+          )}
+        </ButtonContainer>
       </ButtonContainers>
     </Container>
   );
