@@ -13,6 +13,7 @@ const fetchQueryData = async (cursorId, size, keyword) => {
     params: { cursorId, size, keyword },
   });
   const { values, nextPageId, hasNext } = res.data;
+  console.log('검색 API 실행', keyword);
   return { values, nextPageId, hasNext };
 };
 
@@ -21,7 +22,7 @@ export default function QueryPage() {
   const params = new URLSearchParams(location.search);
   const searchContent = params.get('searchContent') || ''; // URL에서 검색어 추출
   const [currentKeyword, setCurrentKeyword] = useState(searchContent || '');
-  const [initialSearchDone, setInitialSearchDone] = useState(false); // 초기 검색 완료 상태
+  const [noResults, setNoResults] = useState(false); // 검색 결과가 없을 경우 상태
   const { rawData, loaderRef, resetData } = useInfiniteScroll({
     fetchFunction: (cursorId, size) => fetchQueryData(cursorId, size, currentKeyword || ''),
     initialSize: 18,
@@ -34,37 +35,45 @@ export default function QueryPage() {
     resetData(); // 무한 스크롤 데이터 초기화
     setQueryPosts([]); // 기존 데이터 초기화
     setCurrentKeyword(searchContent);
+    setNoResults(false); // 검색 결과 없음을 초기화
   }, [searchContent]);
 
   // rawData 업데이트에 따른 queryPosts 설정
   useEffect(() => {
-    if (rawData.length === 0 && currentKeyword === searchContent && !initialSearchDone) return; // 삭제해도 될 듯?
-    setQueryPosts((prevPosts) => {
-      setInitialSearchDone(true);
-      const uniquePosts = [...new Map([...prevPosts, ...rawData].map((post) => [post.reviewId, post])).values()]; // 중복 제거
-      return uniquePosts;
-    });
+    if (rawData.length > 0) {
+      setQueryPosts((prevPosts) => {
+        const uniquePosts = [...new Map([...prevPosts, ...rawData].map((post) => [post.reviewId, post])).values()]; // 중복 제거
+        return uniquePosts;
+      });
+      setNoResults(false); // 검색 결과가 있으면 결과 없음 상태 초기화
+    } else if (rawData.length === 0 && queryPosts.length === 0) {
+      // 검색 결과가 없을 경우
+      setNoResults(true);
+    }
   }, [rawData]);
-  /*
-  // 검색 결과가 없을 때 추천 키워드 요청 및 재검색 실행
+
   useEffect(() => {
-    if (queryPosts.length === 0 && currentKeyword && !initialSearchDone) {
+    if (noResults && currentKeyword === searchContent) {
+      // 검색 결과 없을 때 추천 키워드로 재검색
       const fetchFailSearchTag = async () => {
         try {
+          console.log('noresults', noResults, 'currentkeyword', currentKeyword);
           const res = await axios.get('/recommend/failsearchtag');
           const recommendedKeyword = res.data?.tag;
           if (recommendedKeyword) {
+            resetData(); // 이전 데이터를 초기화
             setCurrentKeyword(recommendedKeyword); // 추천 키워드로 업데이트
-            setInitialSearchDone(true); // 검색 완료 상태 업데이트
+            setNoResults(false); // 검색 결과 없음을 리셋
           }
         } catch (error) {
           console.error('/recommend/failsearchtag 에러:', error);
+          setNoResults(true);
         }
       };
       fetchFailSearchTag();
     }
-  }, [queryPosts, currentKeyword, searchContent, initialSearchDone, resetData]);
-*/
+  }, [noResults, currentKeyword, searchContent]);
+
   /*
   const [cursorId, setCursorId] = useState(0);
   const [hasNext, setHasNext] = useState(true);
@@ -142,7 +151,7 @@ export default function QueryPage() {
 
       <QuerySection>
         <Title>QUERY VIEW</Title>
-        {initialSearchDone && (
+        {noResults && (
           <NotFoundContianer>
             <NotFound searchContent={searchContent} currentKeyword={currentKeyword} />
           </NotFoundContianer>

@@ -21,20 +21,21 @@ export default function SearchBar() {
     setTimeout(() => setIsFocused(false), 500);
   };
 
-  const handleRecommendationClick = (keyword) => {
-    setSearchTerm(keyword);
-    setIsFocused(true);
-    inputRef.current.focus();
+  const handleSearch = (keyword = searchTerm) => {
+    const params = new URLSearchParams({ searchContent: keyword });
+    navigate(`/review/query-result?${params.toString()}`);
   };
 
-  const handleSearch = () => {
-    const params = new URLSearchParams({ searchContent: searchTerm });
-    navigate(`/review/query-result?${params.toString()}`);
+  const handleRecommendationClick = (keyword) => {
+    setSearchTerm(keyword);
+    setIsFocused(false);
+    handleSearch(keyword); // 클릭된 추천 검색어로 검색 실행
   };
 
   const handleClearInput = () => {
     setSearchTerm('');
-    setIsFocused(false);
+    setIsFocused(true);
+    inputRef.current.focus();
   };
 
   return (

@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import { Recommendations } from './Recommendations';
 import * as S from './SearchBar.styles';
 
 const SearchBarUI = forwardRef(
@@ -12,7 +13,7 @@ const SearchBarUI = forwardRef(
       handleBlur,
       handleClearInput,
       handleSearch,
-      // handleRecommendationClick,
+      handleRecommendationClick,
     },
     ref,
   ) => (
@@ -37,10 +38,10 @@ const SearchBarUI = forwardRef(
         )}
         <S.SearchBtn type="button" onClick={handleSearch} />
       </S.SearchInputContainer>
-      {/* {isFocused && searchTerm.length === 0 && (
+      {isFocused && searchTerm.length === 0 && (
         <Recommendations handleRecommendationClick={handleRecommendationClick} />
       )}
-      {isFocused && searchTerm.length > 0 && (
+      {/* {isFocused && searchTerm.length > 0 && (
         <AutoCompleteKeywords searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       )} */}
     </S.Wrapper>
