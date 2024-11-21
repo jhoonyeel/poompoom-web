@@ -24,6 +24,7 @@
     "no-param-reassign": "off",
     "no-underscore-dangle": ["error", { "allow": ["_retry"] }],
     "no-alert": "off",
+    "react/no-array-index-key": "off",
     "prefer-destructuring": "off",
     "no-lonely-if": "off"
   },

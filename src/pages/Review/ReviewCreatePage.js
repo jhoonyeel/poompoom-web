@@ -129,7 +129,7 @@ export default function ReviewWritePage() {
                   <ArrowRight onClick={nextImage}>
                     {activeImageIndex === images.length - 1 ? <AddIcon /> : '›'}
                   </ArrowRight>
-                  <DeleteButton
+                  <DeleteBtn
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -137,7 +137,7 @@ export default function ReviewWritePage() {
                     }}
                   >
                     &times;
-                  </DeleteButton>
+                  </DeleteBtn>
                   <Dots>
                     {images.map((_, index) => (
                       <Dot
@@ -340,7 +340,7 @@ const AddIcon = styled(Add)`
   width: 32px;
   height: 32px;
 `;
-const DeleteButton = styled.button`
+const DeleteBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;

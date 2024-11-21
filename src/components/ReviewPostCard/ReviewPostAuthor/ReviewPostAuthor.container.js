@@ -1,15 +1,9 @@
-import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useLogin } from '../../../hooks/useLogin';
 import { useNavigatePath } from '../../../hooks/useNavigatePath';
-import { nicknameState } from '../../../recoil/atoms';
 import ReviewPostAuthorUI from './ReviewPostAuthor.presenter';
 
-export default function ReviewPostAuthor({ profilePhoto, nickname, reviewType, isContentHovered }) {
-  const currentNickname = useRecoilValue(nicknameState); // 현재 로그인된 사용자의 닉네임
-  const [isFollow, setIsFollow] = useState(false);
-  const handleFollow = () => {
-    setIsFollow((follow) => !follow);
-  };
+export default function ReviewPostAuthor({ profilePhoto, nickname, reviewType, follow, isContentHovered }) {
+  const { userData: currentUser } = useLogin();
 
   const navigatePath = useNavigatePath();
 
@@ -17,11 +11,10 @@ export default function ReviewPostAuthor({ profilePhoto, nickname, reviewType, i
     <ReviewPostAuthorUI
       profilePhoto={profilePhoto}
       nickname={nickname}
+      currentUser={currentUser}
       reviewType={reviewType}
       isContentHovered={isContentHovered}
-      currentNickname={currentNickname}
-      isFollow={isFollow}
-      handleFollow={handleFollow}
+      initialFollow={follow}
       navigatePath={navigatePath}
     />
   );

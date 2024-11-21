@@ -3,9 +3,9 @@ import { faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
 import OverflowMenuComponent from '../../../atoms/OverflowMenuComponent';
 import FollowButton from '../../../components/common/FollowBtutton';
 
-import * as S from './PostDetail.styles';
-import CommentWrite from '../../../components/Comment/CommentWrite';
 import CommentContainer from '../../../components/Comment/CommentContainer';
+import CommentWrite from '../../../components/Comment/CommentWrite';
+import * as S from './PostDetail.styles';
 
 export default function ReviewDetailUI({
   currentImageIndex,
@@ -46,8 +46,8 @@ export default function ReviewDetailUI({
                 />
               )}
             </S.ImageBox>
-            <S.LeftBtn onClick={prevImage}>&#8249;</S.LeftBtn>
-            <S.RightBtn onClick={nextImage}>&#8250;</S.RightBtn>
+            <S.LeftBtn onClick={prevImage}>‹</S.LeftBtn>
+            <S.RightBtn onClick={nextImage}>›</S.RightBtn>
             <S.Dots>
               {photos.map((_, index) => (
                 <S.Dot

@@ -13,6 +13,7 @@ import SubGallery from './components/Section/SubGallery/SubGallery.container';
 
 export default function ReviewPage() {
   const [stickyOffset, setStickyOffset] = useState(0);
+  const [selectedSort, setSelectedSort] = useState('추천순'); // 기본으로 추천순이 선택되도록 설정
 
   // 헤더와 postfilter에 .sticky 추가
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function ReviewPage() {
       {/* <RankingProfileCard /> */}
 
       <PostFilterContainer className="sticky">
-        <PostFilter />
+        <PostFilter selectedSort={selectedSort} setSelectedSort={setSelectedSort} />
       </PostFilterContainer>
 
       <LatestSection>
@@ -49,7 +50,7 @@ export default function ReviewPage() {
       </SubSection>
       <SearchSection>
         <Title>ALL MOOD VIEW</Title>
-        <SearchGallery />
+        <SearchGallery selectedSort={selectedSort} />
       </SearchSection>
       <ButtonBox onClick={() => scrollToTop(stickyOffset)}>
         <UpIcon icon={faChevronUp} />
@@ -70,7 +71,7 @@ const PostFilterContainer = styled.div`
   position: sticky;
   top: 15vh;
   z-index: 6; /* 헤더와 함께 보이도록 z-index 조정 */
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: transparent;
   transition: top 0.3s ease-in-out; /* 부드러운 이동을 위한 transition 속성 추가 */
 `;
 

@@ -7,14 +7,11 @@ export default function ReviewPostAuthorUI({
   profilePhoto,
   isContentHovered,
   nickname,
+  currentUser,
   reviewType,
-  currentNickname,
-  isFollow,
-  handleFollow,
+  initialFollow, // TODO
   navigatePath,
 }) {
-  console.log('currentNickname: ', currentNickname);
-  console.log('currentNickname: ', localStorage.getItem('nickname'));
   return (
     <Wrapper>
       <AuthorProfile isContentHovered={isContentHovered} profilePhoto={profilePhoto} navigatePath={navigatePath} />
@@ -22,7 +19,9 @@ export default function ReviewPostAuthorUI({
         <Nickname to="/profile">{`@${nickname}` || '@닉네임'}</Nickname>
         <AdditionalInfo>
           <ReviewType>{reviewType === 'GIVEN' ? '준 선물' : '받은 선물'}</ReviewType>
-          {nickname !== currentNickname && <FollowButton isFollow={isFollow} handleFollow={handleFollow} />}
+          {nickname !== currentUser?.nickname && (
+            <FollowButton memberId={currentUser?.memberId} initialFollow={initialFollow} />
+          )}
         </AdditionalInfo>
       </AuthorInfo>
     </Wrapper>
