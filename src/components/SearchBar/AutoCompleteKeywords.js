@@ -5,7 +5,7 @@ import useDebounce from '../../hooks/useDebounce';
 import { useFetchAllHashtags } from '../../hooks/useFetchAllHashtags';
 
 export function AutoCompleteKeywords({ searchTerm, setSearchTerm }) {
-  const allHashtags = useFetchAllHashtags(); // 모든 해시태그 가져오기
+  const { allHashtags } = useFetchAllHashtags(); // 모든 해시태그 가져오기
   const debouncedSearchTerm = useDebounce(searchTerm, 500); // 입력값을 0.5초 지연시킴
 
   const filteredHashtags = allHashtags.filter((hashtag) =>
@@ -17,9 +17,9 @@ export function AutoCompleteKeywords({ searchTerm, setSearchTerm }) {
       <KeywordList>
         {filteredHashtags.map((hashtag, index) => (
           <KeywordItem
-            key={hashtag.id || index}
+            key={`${hashtag.id}-${index}`}
             onClick={() => {
-              setSearchTerm(hashtag);
+              setSearchTerm(hashtag.name);
             }}
           >
             <SearchKeywordIcon />

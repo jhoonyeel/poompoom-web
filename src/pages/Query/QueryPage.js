@@ -19,11 +19,11 @@ const fetchQueryData = async (cursorId, size, keyword) => {
 export default function QueryPage() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const searchContent = params.get('searchContent') || ''; // URL에서 searchContent 값을 추출
-  const [currentKeyword, setCurrentKeyword] = useState(searchContent);
+  const searchContent = params.get('searchContent') || ''; // URL에서 검색어 추출
+  const [currentKeyword, setCurrentKeyword] = useState(searchContent || '');
   const [initialSearchDone, setInitialSearchDone] = useState(false); // 초기 검색 완료 상태
   const { rawData, loaderRef, resetData } = useInfiniteScroll({
-    fetchFunction: (cursorId, size) => fetchQueryData(cursorId, size, currentKeyword),
+    fetchFunction: (cursorId, size) => fetchQueryData(cursorId, size, currentKeyword || ''),
     initialSize: 18,
     additionalSize: 8,
   });
@@ -38,47 +38,33 @@ export default function QueryPage() {
 
   // rawData 업데이트에 따른 queryPosts 설정
   useEffect(() => {
-    if (rawData.length === 0) return; // 삭제해도 될 듯?
+    if (rawData.length === 0 && currentKeyword === searchContent && !initialSearchDone) return; // 삭제해도 될 듯?
     setQueryPosts((prevPosts) => {
+      setInitialSearchDone(true);
       const uniquePosts = [...new Map([...prevPosts, ...rawData].map((post) => [post.reviewId, post])).values()]; // 중복 제거
       return uniquePosts;
     });
   }, [rawData]);
-
-  // 추천 키워드 가져오기 (검색 결과가 없을 경우)
-  useEffect(() => {
-    const fetchRecommendedKeyword = async () => {
-      if (queryPosts.length === 0) {
-        const res = await axios.get(`/recommend/failsearchtag`);
-        setCurrentKeyword(res.data?.tag || '추천 검색어 없음');
-        setInitialSearchDone(true);
-      }
-    };
-    fetchRecommendedKeyword();
-  }, [queryPosts]);
-
   /*
-  // rawData가 변경될 때마다 queryPosts를 업데이트
+  // 검색 결과가 없을 때 추천 키워드 요청 및 재검색 실행
   useEffect(() => {
-    if (rawData.length === 0 && currentKeyword === searchContent && !initialSearchDone) {
-      // 검색 결과가 없을 경우, 추천 키워드를 설정
-      const fetchRecommendedKeyword = async () => {
-        const {
-          data: { result: recommendedKeyword },
-        } = await axios.get(`/recommend/searchtag`, {
-          params: { keyword: searchContent },
-        });
-        setCurrentKeyword(recommendedKeyword);
-        setInitialSearchDone(true);
+    if (queryPosts.length === 0 && currentKeyword && !initialSearchDone) {
+      const fetchFailSearchTag = async () => {
+        try {
+          const res = await axios.get('/recommend/failsearchtag');
+          const recommendedKeyword = res.data?.tag;
+          if (recommendedKeyword) {
+            setCurrentKeyword(recommendedKeyword); // 추천 키워드로 업데이트
+            setInitialSearchDone(true); // 검색 완료 상태 업데이트
+          }
+        } catch (error) {
+          console.error('/recommend/failsearchtag 에러:', error);
+        }
       };
-      fetchRecommendedKeyword();
-    } else {
-      // 검색 결과가 있으면 queryPosts에 추가
-      setQueryPosts((prevPosts) => [...prevPosts, ...rawData]);
+      fetchFailSearchTag();
     }
-  }, [rawData, currentKeyword, initialSearchDone, searchContent]);
-  */
-
+  }, [queryPosts, currentKeyword, searchContent, initialSearchDone, resetData]);
+*/
   /*
   const [cursorId, setCursorId] = useState(0);
   const [hasNext, setHasNext] = useState(true);

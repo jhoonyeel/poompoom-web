@@ -21,7 +21,7 @@ export default function ReviewEditPage() {
     content: '',
     category: CATEGORIES[0],
     item: ITEM[0],
-    item_url: 'kakaoCom',
+    item_url: '',
   });
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [existingImages, setExistingImages] = useState([]); // 기존 이미지
@@ -100,7 +100,7 @@ export default function ReviewEditPage() {
       return;
     }
 
-    const { content, price, source, category, reviewType } = reviewData;
+    const { content, price, source, category, reviewType, item, item_url } = reviewData;
     if (!content || !price || !source || !category || !reviewType) {
       alert('모든 필드를 입력해주세요.');
       return;
@@ -113,6 +113,8 @@ export default function ReviewEditPage() {
       whereBuy: source,
       category,
       reviewType,
+      item,
+      item_url,
       willDeletePhoto: deletedImages,
     });
 

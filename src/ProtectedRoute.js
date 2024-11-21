@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import Loading from './components/Loading';
 
 // eslint-disable-next-line no-unused-vars
 export default function ProtectedRoute({ element: Component, isAuthenticated, ...rest }) {
@@ -17,7 +18,7 @@ export default function ProtectedRoute({ element: Component, isAuthenticated, ..
 
   if (loading) {
     // 로딩 중일 때 보여줄 UI
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   // eslint-disable-next-line react/jsx-props-no-spreading

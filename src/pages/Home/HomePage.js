@@ -17,7 +17,7 @@ import { useFetchRecommendations } from '../../hooks/useFetchRecommendations';
 import { useNavigatePath } from '../../hooks/useNavigatePath';
 
 export default function HomePage() {
-  const recommendations = useFetchRecommendations();
+  const { recommendations } = useFetchRecommendations();
   const navigatePath = useNavigatePath();
 
   return (
