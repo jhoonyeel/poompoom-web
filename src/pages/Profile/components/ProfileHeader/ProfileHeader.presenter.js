@@ -7,7 +7,7 @@ export default function ProfileHeaderUI({ profile, navigatePath }) {
   return (
     <S.Container>
       <ProfileImgWrapper>
-        <UserProfile src={profile.ProfileImagePath || profileDummyPhoto} alt="프로필 이미지" />
+        <UserProfile src={profile.profileImagePath || profileDummyPhoto} alt="프로필 이미지" />
       </ProfileImgWrapper>
       <S.InnerContainer>
         <S.InformContainer>
