@@ -22,7 +22,8 @@ export default function QueryPage() {
   const params = new URLSearchParams(location.search);
   const searchContent = params.get('searchContent') || ''; // URL에서 검색어 추출
   const [currentKeyword, setCurrentKeyword] = useState(searchContent || '');
-  const [noResults, setNoResults] = useState(false); // 검색 결과가 없을 경우 상태
+  const [noResults, setNoResults] = useState(false); // searchContent를 통한 첫 번째 검색의 결과 존재 유무
+  const [isRetrying, setIsRetrying] = useState(false); // 자동 재검색 상태인지 판별
   const { rawData, loaderRef, resetData } = useInfiniteScroll({
     fetchFunction: (cursorId, size) => fetchQueryData(cursorId, size, currentKeyword || ''),
     initialSize: 18,
@@ -34,114 +35,34 @@ export default function QueryPage() {
   useEffect(() => {
     resetData(); // 무한 스크롤 데이터 초기화
     setQueryPosts([]); // 기존 데이터 초기화
-    setCurrentKeyword(searchContent);
     setNoResults(false); // 검색 결과 없음을 초기화
+    setIsRetrying(false); // 재검색 상태 초기화
+    setCurrentKeyword(searchContent);
   }, [searchContent]);
+  console.log('currentKeyword', currentKeyword, 'queryPosts', queryPosts);
+  console.log('isRetrying', isRetrying, 'queryPosts', queryPosts.length, 'noresult', noResults);
 
   // rawData 업데이트에 따른 queryPosts 설정
   useEffect(() => {
-    if (rawData.length > 0) {
-      setQueryPosts((prevPosts) => {
-        const uniquePosts = [...new Map([...prevPosts, ...rawData].map((post) => [post.reviewId, post])).values()]; // 중복 제거
-        return uniquePosts;
-      });
-      setNoResults(false); // 검색 결과가 있으면 결과 없음 상태 초기화
-    } else if (rawData.length === 0 && queryPosts.length === 0) {
-      // 검색 결과가 없을 경우
-      setNoResults(true);
-    }
-  }, [rawData]);
+    const uniquePosts = [...new Map([...queryPosts, ...rawData].map((post) => [post.reviewId, post])).values()]; // 중복 제거
 
-  useEffect(() => {
-    if (noResults && currentKeyword === searchContent) {
-      // 검색 결과 없을 때 추천 키워드로 재검색
-      const fetchFailSearchTag = async () => {
-        try {
-          console.log('noresults', noResults, 'currentkeyword', currentKeyword);
-          const res = await axios.get('/recommend/failsearchtag');
-          const recommendedKeyword = res.data?.tag;
-          if (recommendedKeyword) {
-            resetData(); // 이전 데이터를 초기화
-            setCurrentKeyword(recommendedKeyword); // 추천 키워드로 업데이트
-            setNoResults(false); // 검색 결과 없음을 리셋
-          }
-        } catch (error) {
-          console.error('/recommend/failsearchtag 에러:', error);
-          setNoResults(true);
-        }
-      };
-      fetchFailSearchTag();
-    }
-  }, [noResults, currentKeyword, searchContent]);
+    // queryPosts 상태 업데이트
+    setQueryPosts(uniquePosts);
 
-  /*
-  const [cursorId, setCursorId] = useState(0);
-  const [hasNext, setHasNext] = useState(true);
-  const loader = useRef(null);
-
-  const fetchMaxReviewId = async () => {
-    try {
-      const res = await axios.get(`/review`);
-      const allReviews = res.data;
-      if (allReviews.length > 0) {
-        const maxReviewId = Math.max(...allReviews.map((review) => review.reviewId));
-        setCursorId(maxReviewId);
-      }
-    } catch (error) {
-      console.error('Error fetching all reviews:', error);
+    console.log('queryPosts: ', queryPosts);
+    // noResults 상태 설정
+    if (!isRetrying && uniquePosts.length === 0 && rawData.length === 0) {
+      setNoResults(true); // 검색 결과 없음
+    } else if (uniquePosts.length > 0) {
+      console.log('결과 있음');
+      setNoResults(false); // 검색 결과 있음
     }
+  }, [rawData, isRetrying]);
+
+  const handleRetry = (retryKeyword) => {
+    setIsRetrying(true);
+    setCurrentKeyword(retryKeyword);
   };
-
-  const fetchPostData = async (cursor, size = 24, keyword = currentKeyword) => {
-    try {
-      const res = await axios.get(`/review/search`, {
-        params: {
-          keyword,
-          cursorId: cursor, // cursorId보다 id가 작은 게시글을 가져옴.
-          size, // 가져올 게시글의 개수.
-        },
-      });
-      const { values, hasNext: newHasNext } = res.data;
-      if (values.length === 0 && keyword === searchContent && !initialSearchDone) {
-        // 추천 키워드 로직: 초기 검색에서 결과가 없는 경우
-        const recommendRes = await axios.get(`/hashtag/rank`);
-        const recommendedKeywords = recommendRes.data.slice(0, 15); // 상위 15개의 추천 검색어 사용
-        const randomIndex = Math.floor(Math.random() * recommendedKeywords.length);
-        const recommendedKeyword = recommendedKeywords[randomIndex].name;
-        setCurrentKeyword(recommendedKeyword); // 추천 키워드로 업데이트
-        setInitialSearchDone(true); // 초기 검색 완료로 설정
-        fetchPostData(cursorId, size, recommendedKeyword); // 추천 키워드로 재검색
-      } else {
-        setQueryPosts((prevPosts) => (cursor === 0 ? values : [...prevPosts, ...values]));
-        setHasNext(newHasNext);
-      }
-    } catch (error) {
-      console.error('Error fetching post data:', error);
-    }
-  };
-
-  useEffect(() => {
-    const initializeData = async () => {
-      if (!searchContent) {
-        const recommendRes = await axios.get(`/hashtag/rank`);
-        const recommendedKeywords = recommendRes.data.slice(0, 15); // 상위 15개의 추천 검색어 사용
-        const randomIndex = Math.floor(Math.random() * recommendedKeywords.length);
-        const recommendedKeyword = recommendedKeywords[randomIndex].name;
-        setCurrentKeyword(recommendedKeyword);
-        setInitialSearchDone(true); // 초기 검색 완료로 설정
-        await fetchPostData(cursorId, 24, recommendedKeyword);
-      } else {
-        await fetchMaxReviewId();
-        setQueryPosts([]);
-        setHasNext(true);
-        setCurrentKeyword(searchContent);
-        setInitialSearchDone(false); // 초기 검색 완료 상태 리셋
-        fetchPostData(cursorId);
-      }
-    };
-    initializeData();
-  }, [searchContent]);
-  */
 
   return (
     <Wrapper>
@@ -153,7 +74,7 @@ export default function QueryPage() {
         <Title>QUERY VIEW</Title>
         {noResults && (
           <NotFoundContianer>
-            <NotFound searchContent={searchContent} currentKeyword={currentKeyword} />
+            <NotFound searchContent={searchContent} currentKeyword={currentKeyword} onRetry={handleRetry} />
           </NotFoundContianer>
         )}
         <>

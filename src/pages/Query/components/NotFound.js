@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Eyes } from '../../../assets/eyes.svg';
 
-export function NotFound({ searchContent, currentKeyword }) {
+export function NotFound({ searchContent, currentKeyword, onRetry }) {
+  // const { failKeyword } = useFetchFailKeyword();
+  const tag = '초콜릿';
+  // console.log(failKeyword);
+
+  useEffect(() => {
+    if (currentKeyword === searchContent && tag) {
+      console.log('자동 재검색: failKeyword', tag);
+      onRetry(tag); // 부모 컴포넌트에서 전달된 재검색 핸들러 호출
+    }
+  }, [currentKeyword, searchContent, tag]);
+
   return (
     <Wrapper>
       <EyesIcon />
@@ -10,8 +21,8 @@ export function NotFound({ searchContent, currentKeyword }) {
         <ColorSpan style={{ color: '#9D1B23' }}>{`"${searchContent}"`}</ColorSpan>
         에 대한 검색 결과를 찾지 못했습니다.
         <br />
-        {`추천 검색어 `}
-        <ColorSpan style={{ color: '#0D3F39' }}>{`"${currentKeyword}"`}</ColorSpan>에 대한 검색 결과입니다.
+        추천 검색어
+        <ColorSpan style={{ color: '#0D3F39' }}>{` "${currentKeyword}"`}</ColorSpan>에 대한 검색 결과입니다.
       </NoResults>
     </Wrapper>
   );
