@@ -1,17 +1,16 @@
 /* eslint-disable camelcase */
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-
 import axios from '../../apis/axios';
-import * as S from './ReviewEdit.style';
 import placeholderPhoto from '../../assets/DummyPhoto.svg';
+import profileDummyPhoto from '../../assets/ProfilePhoto.svg';
 import { useFetchProfilePicture } from '../../hooks/useFetchProfilePicture';
-import { profilePictureState } from '../../recoil/atoms';
+import { useLogin } from '../../hooks/useLogin';
 import { CATEGORIES } from '../../shared/categories';
 import { ITEM } from '../../shared/item';
+import * as S from './ReviewEdit.style';
 
-export default function ReviewWritePage() {
+export default function ReviewEditPage() {
   const { reviewId } = useParams(); // 리뷰 ID를 URL에서 가져옵니다 (수정 모드일 때 필요).
   const navigate = useNavigate();
 
@@ -29,8 +28,8 @@ export default function ReviewWritePage() {
   const [newImages, setNewImages] = useState([]); // 새로 추가된 이미지
   const [deletedImages, setDeletedImages] = useState([]); // 삭제된 기존 이미지
 
-  useFetchProfilePicture(); // 프로필 사진을 가져오는 커스텀 훅 호출
-  const profilePhoto = useRecoilValue(profilePictureState); // Recoil 전역 상태에서 프로필 사진 경로를 읽어옴
+  const { userData } = useLogin();
+  const profilePhoto = useFetchProfilePicture(userData?.memberId); // 프로필 사진을 가져오는 커스텀 훅 호출
 
   // `allImages`는 기존 이미지와 새로 추가된 이미지를 결합한 배열
   const allImages = [...existingImages, ...newImages.map((file) => URL.createObjectURL(file))];
@@ -210,7 +209,7 @@ export default function ReviewWritePage() {
           <S.ReviewContentContainer>
             <S.ReviewContentHeader>
               <S.AuthorCircleBox>
-                <S.AuthorImg src={profilePhoto} alt="프로필 이미지" />
+                <S.AuthorImg src={profilePhoto || profileDummyPhoto} alt="프로필 이미지" />
               </S.AuthorCircleBox>
               <S.Nickname>@test</S.Nickname>
               <S.ReviewTypeBtn

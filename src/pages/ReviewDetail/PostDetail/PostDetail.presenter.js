@@ -1,12 +1,11 @@
 import { faBookmark as emptyBookmark, faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
-import OverflowMenuComponent from '../../../atoms/OverflowMenuComponent';
-import FollowButton from '../../../components/common/FollowBtutton';
-
-import * as S from './PostDetail.styles';
-import CommentWrite from '../../../components/Comment/CommentWrite';
-import CommentContainer from '../../../components/Comment/CommentContainer';
 import { ReactComponent as LinkImg } from '../../../assets/LinkImg.svg';
+import OverflowMenuComponent from '../../../atoms/OverflowMenuComponent';
+import CommentContainer from '../../../components/Comment/CommentContainer';
+import CommentWrite from '../../../components/Comment/CommentWrite';
+import FollowButton from '../../../components/common/FollowBtutton';
+import * as S from './PostDetail.styles';
 
 export default function ReviewDetailUI({
   currentImageIndex,
@@ -48,8 +47,8 @@ export default function ReviewDetailUI({
                 />
               )}
             </S.ImageBox>
-            <S.LeftBtn onClick={prevImage}>&#8249;</S.LeftBtn>
-            <S.RightBtn onClick={nextImage}>&#8250;</S.RightBtn>
+            <S.LeftBtn onClick={prevImage}>‹</S.LeftBtn>
+            <S.RightBtn onClick={nextImage}>›</S.RightBtn>
             <S.Dots>
               {photos.map((_, index) => (
                 <S.Dot
@@ -65,7 +64,7 @@ export default function ReviewDetailUI({
             <LinkImg />
             <S.AdditionalInfoWrapper>
               <S.AdditionalInfoText> {whereBuy || `경산 다이소 영남대점`}</S.AdditionalInfoText>
-              <S.Price> {price}</S.Price>
+              <S.Price>{price}</S.Price>
             </S.AdditionalInfoWrapper>
           </S.AdditionalInfoContainer>
         </S.LeftBox>

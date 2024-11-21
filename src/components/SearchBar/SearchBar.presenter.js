@@ -1,5 +1,5 @@
-import { faCircleXmark, faMagnifyingGlass, faMinus } from '@fortawesome/free-solid-svg-icons';
 import React, { forwardRef } from 'react';
+import { Recommendations } from './Recommendations';
 import * as S from './SearchBar.styles';
 
 const SearchBarUI = forwardRef(
@@ -7,20 +7,18 @@ const SearchBarUI = forwardRef(
     {
       isFocused,
       searchTerm,
+      // setSearchTerm,
       handleChange,
       handleFocus,
       handleBlur,
-      handleKeyDown,
-      handleRecommendationClick,
       handleClearInput,
-      recommendations,
+      handleSearch,
+      handleRecommendationClick,
     },
     ref,
   ) => (
     <S.Wrapper>
-      <S.SearchInputBox>
-        <S.SearchIcon icon={faMagnifyingGlass} />
-        <S.MinusIcon icon={faMinus} rotation={90} />
+      <S.SearchInputContainer>
         <S.SearchInput
           type="text"
           placeholder="사용자 검색 시 검색어 앞에 @를 붙여주세요."
@@ -28,30 +26,24 @@ const SearchBarUI = forwardRef(
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          onKeyDown={handleKeyDown}
+          onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
           ref={ref}
+          hasSearchTerm={searchTerm.length !== 0}
+          isFocused={isFocused}
         />
-        <S.XCircleIcon icon={faCircleXmark} onClick={handleClearInput} />
-      </S.SearchInputBox>
-      <S.RecommendBox>
-        {isFocused && searchTerm.length === 0 && (
-          <>
-            <S.RecommendParagraph>지금 다른 분들이 많이 검색해요</S.RecommendParagraph>
-            <S.RecommendList>
-              {recommendations.map((recommendation) => (
-                <S.RecommendItem
-                  key={recommendation.id}
-                  onClick={() => {
-                    handleRecommendationClick(recommendation.name);
-                  }}
-                >
-                  {recommendation.name}
-                </S.RecommendItem>
-              ))}
-            </S.RecommendList>
-          </>
+        {searchTerm.length !== 0 && (
+          <S.DeleteBtn type="button" onClick={handleClearInput}>
+            ×
+          </S.DeleteBtn>
         )}
-      </S.RecommendBox>
+        <S.SearchBtn type="button" onClick={handleSearch} />
+      </S.SearchInputContainer>
+      {isFocused && searchTerm.length === 0 && (
+        <Recommendations handleRecommendationClick={handleRecommendationClick} />
+      )}
+      {/* {isFocused && searchTerm.length > 0 && (
+        <AutoCompleteKeywords searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      )} */}
     </S.Wrapper>
   ),
 );

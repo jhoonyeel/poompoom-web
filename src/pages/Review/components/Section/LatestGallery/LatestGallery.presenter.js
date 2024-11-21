@@ -30,7 +30,8 @@ export default function LatestGalleryUI({ latestPosts, loader }) {
 
   return (
     <Wrapper ref={postListRef}>
-      {latestPosts && latestPosts.map((post) => <ReviewPostCard key={post.reviewId} post={post} />)}
+      {latestPosts &&
+        latestPosts.map((post, index) => <ReviewPostCard key={`${post.reviewId}-${index}`} post={post} />)}
       <ScrollTrigger ref={loader} />
     </Wrapper>
   );

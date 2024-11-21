@@ -1,6 +1,47 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import axios from '../../apis/axios';
 
-export default function FollowButton({ isFollow, handleFollow }) {
+const followUser = async (memberId) => {
+  try {
+    const response = await axios.post('/subscribe/add', { subscribdId: memberId });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to follow user:', error);
+    throw error;
+  }
+};
+
+// 팔로우 취소 요청
+const unfollowUser = async (memberId) => {
+  try {
+    const response = await axios.post('/subscribe/cancel', { subscribdId: memberId });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to unfollow user:', error);
+    throw error;
+  }
+};
+
+export default function FollowButton({ memberId, initialFollow = false }) {
+  const [isFollow, setIsFollow] = useState(initialFollow); // 개별 팔로우 상태 관리
+
+  const handleFollow = async () => {
+    try {
+      if (isFollow) {
+        // 팔로우 취소 요청
+        await unfollowUser(memberId);
+        setIsFollow(false);
+      } else {
+        // 팔로우 요청
+        await followUser(memberId);
+        setIsFollow(true);
+      }
+    } catch (error) {
+      console.error('Failed to update follow status:', error);
+    }
+  };
+
   return (
     <>
       {isFollow ? (

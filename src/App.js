@@ -10,16 +10,18 @@ import Header from './components/Header/Header.container';
 import SignupPage from './pages/Join/Signup/SignupPage';
 import SignupTagPage from './pages/Join/SignupTag/SignupTag.container';
 
-import SignUpSocial from './pages/OAuth/SignUpSocial';
 import SocialSignUp from './pages/OAuth/SignUp/SignUp.container';
+import SignUpSocial from './pages/OAuth/SignUpSocial';
 
-import LoginPage from './pages/Login/LoginPage';
-import LoginSocial from './pages/OAuth/LoginSocial';
 import FindID from './pages/Finds/FindID';
 import FindPW from './pages/Finds/FindPW/FindPW';
+import LoginPage from './pages/Login/LoginPage';
+import LoginSocial from './pages/OAuth/LoginSocial';
 
 import {
+  ConnectGidePage,
   HomePage,
+  LoverPage,
   ProfileEditPage,
   ProfilePage,
   QueryPage,
@@ -27,14 +29,11 @@ import {
   ReviewDetailPage,
   ReviewEditPage,
   ReviewPage,
-  Welcome,
-  LoverPage,
-  SetValuePage,
-  ConnectGidePage,
   SetRecommendPage,
+  SetValuePage,
+  Welcome,
 } from './pages/index';
 
-import { InitializeNickname } from './recoil/InitializeNickname';
 import { basicTheme } from './shared/Theme';
 
 const queryClient = new QueryClient();
@@ -106,7 +105,6 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={basicTheme}>
         <GlobalStyle />
-        <InitializeNickname /> {/* recoil 상태 초기화 */}
         <S.AppLayout>
           <Routes>
             <Route path="/find/id" element={<FindID />} />

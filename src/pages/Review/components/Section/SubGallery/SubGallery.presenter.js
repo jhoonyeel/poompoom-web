@@ -33,7 +33,7 @@ export default function SubGalleryUI({ subPosts, loader }) {
       {subPosts.length === 0 && (
         <NoFollowParagraph>팔로우를 통해 다양한 사람들의 선물을 확인해보세요~~</NoFollowParagraph>
       )}
-      {subPosts && subPosts.map((post) => <ReviewPostCard key={post.reviewId} post={post} />)}
+      {subPosts && subPosts.map((post, index) => <ReviewPostCard key={`${post.reviewId}-${index}`} post={post} />)}
       <ScrollTrigger ref={loader} />
     </Wrapper>
   );

@@ -1,14 +1,13 @@
 /* eslint-disable react/no-array-index-key */
-
 import styled from 'styled-components';
-import ProfilePhoto from '../../../../assets/ProfilePhoto.svg';
+import profileDummyPhoto from '../../../../assets/ProfilePhoto.svg';
 import * as S from './ProfileHeader.styles';
 
 export default function ProfileHeaderUI({ profile, navigatePath }) {
   return (
     <S.Container>
       <ImageBox>
-        <S.Image src={profile.ProfileImagePath || ProfilePhoto} alt="프로필 이미지" />
+        <S.Image src={profile.ProfileImagePath || profileDummyPhoto} alt="프로필 이미지" />
       </ImageBox>
       <S.InnerContainer>
         <S.InformContainer>

@@ -2,26 +2,29 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import FollowButton from '../../../../../components/common/FollowBtutton';
 
-export default function SubAccountUI({ subAccounts, isFollow, handleFollow, getNickname, navigatePath }) {
+export default function SubAccountUI({ loaderRef, subAccounts, getNickname, navigatePath }) {
   return (
     <Wrapper>
       <AccountHeader>이런 분들은 어떠세요??</AccountHeader>
       <SubAccountList>
         {subAccounts.map((account) => (
-          <SubAccountItem key={account.id}>
+          <SubAccountItem key={account.memberId}>
             <AuthorInfo>
               <AuthorImgBox onClick={navigatePath(`/profile`)}>
-                <AuthorImg src={account.profilePhotoPath} alt="프로필 이미지" />
+                <AuthorImg src={account.profileImagePath} alt="프로필 이미지" />
               </AuthorImgBox>
-              <Nickname to="/profile">{`@${getNickname(account.nickname)}` || '@닉네임'}</Nickname>
-              <FollowButton isFollow={isFollow} handleFollow={handleFollow} />
+              <Nickname to="/profile">{`@${getNickname(account.nickName)}`}</Nickname>
+              <FollowButton memberId={account.memberId} />
             </AuthorInfo>
             <HashtagList>
-              {account.hashtagList &&
-                account.hashtagList.map((tag) => <HashtagItem key={tag.id}>{`#${tag.name}`}</HashtagItem>)}
+              {account.profileTags &&
+                account.profileTags.map((profileTag) => (
+                  <HashtagItem key={profileTag.id}>{`#${profileTag.name}`}</HashtagItem>
+                ))}
             </HashtagList>
           </SubAccountItem>
         ))}
+        <div ref={loaderRef} style={{ height: '20px' }} />
       </SubAccountList>
     </Wrapper>
   );
