@@ -39,7 +39,6 @@ export default function SubAccount() {
         );
       return [...prevAccounts, ...newAccounts];
     });
-    console.log('account 개수', subAccounts);
   }, [rawData]);
 
   const getNickname = (nickname) => {

@@ -1,4 +1,3 @@
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { ReactComponent as CardNews } from '../../assets/CardNews.svg';
 import { ReactComponent as Anniversary } from '../../assets/Category/Anniversary.svg';
@@ -14,12 +13,11 @@ import { ReactComponent as MainBackground } from '../../assets/MainBackground.sv
 import { ReactComponent as Season } from '../../assets/Season.svg';
 import { ReactComponent as SeasonBk } from '../../assets/SeasonBackground.svg';
 import { ScrollToTopButton } from '../../components/common/ScrollToTopButton';
+import { useFetchRecommendations } from '../../hooks/useFetchRecommendations';
 import { useNavigatePath } from '../../hooks/useNavigatePath';
-import { fetchRecommendationsSelector } from '../../recoil/recommendationsState';
 
 export default function HomePage() {
-  const recommendations = useRecoilValue(fetchRecommendationsSelector);
-
+  const recommendations = useFetchRecommendations();
   const navigatePath = useNavigatePath();
 
   return (

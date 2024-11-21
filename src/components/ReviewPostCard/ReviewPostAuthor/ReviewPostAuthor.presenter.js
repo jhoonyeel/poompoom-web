@@ -9,7 +9,7 @@ export default function ReviewPostAuthorUI({
   nickname,
   currentUser,
   reviewType,
-  initialFollow, // TODO
+  isFollowed,
   navigatePath,
 }) {
   return (
@@ -20,7 +20,7 @@ export default function ReviewPostAuthorUI({
         <AdditionalInfo>
           <ReviewType>{reviewType === 'GIVEN' ? '준 선물' : '받은 선물'}</ReviewType>
           {nickname !== currentUser?.nickname && (
-            <FollowButton memberId={currentUser?.memberId} initialFollow={initialFollow} />
+            <FollowButton memberId={currentUser?.memberId} initialFollow={isFollowed} />
           )}
         </AdditionalInfo>
       </AuthorInfo>

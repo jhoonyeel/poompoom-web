@@ -13,7 +13,7 @@ export const login = async (username, password) => {
       },
     });
 
-    console.log('Login 서버로부터의 응답: ', response); // Debug log to check response structure
+    console.log('Login 서버로부터의 응답: ', response);
 
     const {
       access: accessToken,

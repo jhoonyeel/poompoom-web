@@ -2,19 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
-import { ReactComponent as Eyes } from '../../assets/eyes.svg';
 import { ScrollToTopButton } from '../../components/common/ScrollToTopButton';
 import PostFilter from '../../components/PostFilter/PostFilter.container';
 import ReviewPostCard from '../../components/ReviewPostCard/ReviewPostCard.container';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
+import { NotFound } from './components/NotFound';
 
 const fetchQueryData = async (cursorId, size, keyword) => {
   const res = await axios.get(`/review/search`, {
     params: { cursorId, size, keyword },
   });
-  const { values, hasNext } = res.data;
-  const nextPageId = values?.[values.length - 1]?.reviewId;
-
+  const { values, nextPageId, hasNext } = res.data;
   return { values, nextPageId, hasNext };
 };
 
@@ -24,41 +22,53 @@ export default function QueryPage() {
   const searchContent = params.get('searchContent') || ''; // URL에서 searchContent 값을 추출
   const [currentKeyword, setCurrentKeyword] = useState(searchContent);
   const [initialSearchDone, setInitialSearchDone] = useState(false); // 초기 검색 완료 상태
-  const { rawData, loaderRef } = useInfiniteScroll({
+  const { rawData, loaderRef, resetData } = useInfiniteScroll({
     fetchFunction: (cursorId, size) => fetchQueryData(cursorId, size, currentKeyword),
-    initialSize: 24,
+    initialSize: 18,
     additionalSize: 8,
   });
   const [queryPosts, setQueryPosts] = useState([]);
 
-  // 검색어가 변경될 때마다 초기화 로직 실행
+  // 검색어 변경 시 초기화
   useEffect(() => {
-    const initializeData = async () => {
-      if (!searchContent) {
-        // 추천 키워드 로직
-        const recommendRes = await axios.get(`/hashtag/rank`);
-        const recommendedKeywords = recommendRes.data.slice(0, 15);
-        const randomKeyword = recommendedKeywords[Math.floor(Math.random() * recommendedKeywords.length)].name;
-        setCurrentKeyword(randomKeyword);
-        setInitialSearchDone(true);
-      } else {
-        setQueryPosts([]); // 기존 검색 결과 초기화
-        setInitialSearchDone(false); // 초기 검색 상태 리셋
-        setCurrentKeyword(searchContent);
-      }
-    };
-    initializeData();
+    resetData(); // 무한 스크롤 데이터 초기화
+    setQueryPosts([]); // 기존 데이터 초기화
+    setCurrentKeyword(searchContent);
   }, [searchContent]);
 
+  // rawData 업데이트에 따른 queryPosts 설정
+  useEffect(() => {
+    if (rawData.length === 0) return; // 삭제해도 될 듯?
+    setQueryPosts((prevPosts) => {
+      const uniquePosts = [...new Map([...prevPosts, ...rawData].map((post) => [post.reviewId, post])).values()]; // 중복 제거
+      return uniquePosts;
+    });
+  }, [rawData]);
+
+  // 추천 키워드 가져오기 (검색 결과가 없을 경우)
+  useEffect(() => {
+    const fetchRecommendedKeyword = async () => {
+      if (queryPosts.length === 0) {
+        const res = await axios.get(`/recommend/failsearchtag`);
+        setCurrentKeyword(res.data?.tag || '추천 검색어 없음');
+        setInitialSearchDone(true);
+      }
+    };
+    fetchRecommendedKeyword();
+  }, [queryPosts]);
+
+  /*
   // rawData가 변경될 때마다 queryPosts를 업데이트
   useEffect(() => {
     if (rawData.length === 0 && currentKeyword === searchContent && !initialSearchDone) {
       // 검색 결과가 없을 경우, 추천 키워드를 설정
       const fetchRecommendedKeyword = async () => {
-        const recommendRes = await axios.get(`/hashtag/rank`);
-        const recommendedKeywords = recommendRes.data.slice(0, 15);
-        const randomKeyword = recommendedKeywords[Math.floor(Math.random() * recommendedKeywords.length)].name;
-        setCurrentKeyword(randomKeyword);
+        const {
+          data: { result: recommendedKeyword },
+        } = await axios.get(`/recommend/searchtag`, {
+          params: { keyword: searchContent },
+        });
+        setCurrentKeyword(recommendedKeyword);
         setInitialSearchDone(true);
       };
       fetchRecommendedKeyword();
@@ -67,6 +77,7 @@ export default function QueryPage() {
       setQueryPosts((prevPosts) => [...prevPosts, ...rawData]);
     }
   }, [rawData, currentKeyword, initialSearchDone, searchContent]);
+  */
 
   /*
   const [cursorId, setCursorId] = useState(0);
@@ -139,33 +150,25 @@ export default function QueryPage() {
 
   return (
     <Wrapper>
-      <QuerySection>
+      <PostFilterContainer className="sticky">
         <PostFilter />
+      </PostFilterContainer>
 
-        <QueryContent>
-          <Title>QUERY VIEW</Title>
-          {initialSearchDone && (
-            <NotFound>
-              <EyesIconBox>
-                <EyesSvg />
-              </EyesIconBox>
-              <NoResults>
-                <ColorSpan style={{ color: '#9D1B23' }}>{`"${searchContent}"`}</ColorSpan>
-                에 대한 검색 결과를 찾지 못했습니다.
-                <br />
-                {`추천 검색어 `}
-                <ColorSpan style={{ color: '#0D3F39' }}>{`"${currentKeyword}"`}</ColorSpan>에 대한 검색 결과입니다.
-              </NoResults>
-            </NotFound>
-          )}
-          <>
-            <GalleryContent>
-              {queryPosts && queryPosts.map((post) => <ReviewPostCard key={post.id} post={post} />)}
-            </GalleryContent>
-            <div ref={loaderRef} style={{ height: '15vh', margin: '10px' }} />
-          </>
-          <ScrollToTopButton />
-        </QueryContent>
+      <QuerySection>
+        <Title>QUERY VIEW</Title>
+        {initialSearchDone && (
+          <NotFoundContianer>
+            <NotFound searchContent={searchContent} currentKeyword={currentKeyword} />
+          </NotFoundContianer>
+        )}
+        <>
+          <QueryGallery>
+            {queryPosts &&
+              queryPosts.map((post, index) => <ReviewPostCard key={`${post.reviewId}-${index}`} post={post} />)}
+          </QueryGallery>
+          <div ref={loaderRef} style={{ height: '15vh', margin: '10px' }} />
+        </>
+        <ScrollToTopButton />
       </QuerySection>
     </Wrapper>
   );
@@ -174,64 +177,41 @@ export default function QueryPage() {
 const Wrapper = styled.main`
   width: 100%;
 `;
-const QuerySection = styled.section`
-  width: 100%;
-`;
-const QueryContent = styled.div`
+const PostFilterContainer = styled.div`
   width: 80%;
   margin: 0 auto;
+  min-width: 1028px;
+
+  position: sticky;
+  top: 15vh;
+  z-index: 6; /* 헤더와 함께 보이도록 z-index 조정 */
+  background-color: transparent;
+  transition: top 0.3s ease-in-out; /* 부드러운 이동을 위한 transition 속성 추가 */
 `;
 
+const QuerySection = styled.section`
+  margin: 0 auto;
+  min-width: 1028px;
+  width: 80%;
+`;
 const Title = styled.h3`
-  margin-top: 2rem;
   text-align: start;
+  font-size: 24px;
   font-family: 'Shrikhand';
   font-style: italic;
   font-weight: 400;
-  font-size: 36px;
-  line-height: 52px;
+  line-height: 1.4;
   color: #0e5649;
 `;
-const NotFound = styled.div`
-  border: 3px solid #dcdcdc;
-  border-radius: 30px;
-  margin: 0 auto;
-  margin-top: 2rem;
-  width: 60%;
+const NotFoundContianer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 26px;
 `;
-const EyesIconBox = styled.div`
-  width: 20%;
-  padding: 4rem;
-`;
-const EyesSvg = styled(Eyes)`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-const NoResults = styled.p`
-  font-family: 'ABeeZee';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 28px;
-  color: #8c8c8c;
-`;
-const ColorSpan = styled.span`
-  font-family: 'ABeeZee';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 28px;
-  color: #8c8c8c;
-`;
-
-const GalleryContent = styled.div`
-  margin-top: 3rem;
+const QueryGallery = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4개의 열을 가지도록 설정 */
-  column-gap: 1.5rem;
-  row-gap: 2.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+  padding-left: 20px;
 `;

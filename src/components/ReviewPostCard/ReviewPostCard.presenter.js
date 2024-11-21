@@ -19,7 +19,7 @@ export default function ReviewPostCardUI({
         profilePhoto={post.profilePhoto}
         nickname={post.nickname}
         reviewType={post.reviewType}
-        follow={post.isFollow}
+        isFollowed={post.isFollowed}
         isContentHovered={isContentHovered}
       />
       <ReviewPostContent
