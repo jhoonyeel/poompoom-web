@@ -41,7 +41,7 @@ export default function ConnectGuidePage() {
           <Text>연동서비스 활성화 완료</Text>
         </QRContainer>
       </Body>
-      <Button onClick={handleOnClick('/lover/connect')}>Gogosing</Button>
+      <Button onClick={handleOnClick('/review')}>Gogosing</Button>
     </Container>
   );
 }

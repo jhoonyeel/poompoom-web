@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../apis/axios';
+import Loading from '../../components/Loading';
 
 export default function SignUpSocial() {
   const [jwtToken, setJwtToken] = useState(null);
@@ -37,6 +38,7 @@ export default function SignUpSocial() {
       const newUrl = window.location.pathname;
       window.history.replaceState({}, '', newUrl);
       sendJwtToBackend(tokenFromUrl);
+      console.log(jwtToken);
     }
   }, []);
 
@@ -56,7 +58,7 @@ export default function SignUpSocial() {
           <p>{jwtToken}</p>
         </div>
       ) : (
-        <p>Loading...</p>
+        <Loading />
       )}
 
       {responseData && (

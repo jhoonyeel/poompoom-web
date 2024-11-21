@@ -77,7 +77,7 @@ export default function ReviewDetailUI({
                 <S.AuthorImgBox>
                   <S.AuthorImg src={profileImage} alt="프로필 사진" />
                 </S.AuthorImgBox>
-                <S.AuthorNickname to="/profile">{nickname}</S.AuthorNickname>
+                <S.AuthorNickname to="/profile">@ {nickname}</S.AuthorNickname>
               </S.AuthorInfo>
               <S.TypeText>Lover에게 {reviewType === 'GIVEN' ? '주는 선물' : '받은 선물'}</S.TypeText>
               {isMyPost ? <OverflowMenuComponent onUpdate={onUpdate} onDelete={onDelete} /> : <FollowButton />}

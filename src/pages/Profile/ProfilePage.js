@@ -6,6 +6,7 @@ import ProfileHeader from './components/ProfileHeader/ProfileHeader.container';
 import ProfileMenuBox from './components/ProfileMenuBox/ProfileMenuBox.container';
 import LatestProfileGallery from './components/Section/LatestProfileGallery/LatestProfileGallery.container';
 import MineProfileGallery from './components/Section/MineProfileGallery/MineProfileGallery.container';
+import Category from '../../components/Category/Category';
 
 export default function ProfilePage() {
   const location = useLocation();
@@ -25,7 +26,7 @@ export default function ProfilePage() {
   let profileContent;
   switch (currentPath) {
     case '/profile/bookmark':
-      profileContent = <MineProfileGallery />;
+      profileContent = <Category />;
       break;
     case '/profile/like':
       profileContent = <MineProfileGallery />;
