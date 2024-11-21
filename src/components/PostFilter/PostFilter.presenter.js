@@ -64,7 +64,7 @@ export default function PostFilterUI({
         </S.ItemDropdownContainer>
       </S.AlignBox>
       <S.WriteBox
-        onClick={navigatePath(`/review/write`)}
+        onClick={navigatePath(`/review/create`)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from '../../../apis/axios';
 import { useNavigatePath } from '../../../hooks/useNavigatePath';
 import ReviewDetailUI from './PostDetail.presenter';
+import Loading from '../../../components/Loading';
 
 export default function PostDetail() {
   const [like, setLike] = useState(false);
@@ -23,6 +24,7 @@ export default function PostDetail() {
       setLike(data.isLikedPost);
       setLikeAmount(data.likeAmount); // 초기 좋아요 수 설정
       setBookMark(data.isBookmarked);
+      console.log('dd', selectedPost);
     } catch (error) {
       console.log(error.response?.data || error, '데이터 없음');
     }
@@ -66,7 +68,7 @@ export default function PostDetail() {
   };
 
   if (!selectedPost) {
-    return <div>Loading...</div>; // 로딩 중임을 표시합니다.
+    return <Loading />;
   }
 
   // 이전 이미지로 이동
