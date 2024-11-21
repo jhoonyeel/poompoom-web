@@ -1,47 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import axios from '../../apis/axios';
-import { useNavigatePath } from '../../hooks/useNavigatePath';
+import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SearchBarUI from './SearchBar.presenter';
-// import useDebounce from '../../hooks/useDebounce';
 
 export default function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [recommendations, setRecommendations] = useState([]);
-  const [isFocused, setIsFocused] = useState(false);
-  // const debouncedSearchTerm = useDebounce(searchTerm, 500); // 입력값을 0.5초 지연시킴
+  const [searchTerm, setSearchTerm] = useState(''); // 검색어 상태
+  const [isFocused, setIsFocused] = useState(false); // input focus 상태
   const inputRef = useRef(null);
-  const navigatePath = useNavigatePath();
-
-  // 사용자의 검색어에 따른 추천 키워드를 가져오는 API 호출을 수행합니다.
-  // useEffect(() => {
-  //   if (debouncedSearchTerm) {
-  //     // 이 예시에서는 결과를 빈 배열로 설정합니다.
-  //     fetch(`https://api.example.com/recommendations?q=${debouncedSearchTerm}`)
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         setRecommendations(data);
-  //       })
-  //       .catch((error) => {
-  //         console.error('Error fetching recommendations:', error);
-  //       });
-  //   } else {
-  //     setRecommendations([]);
-  //   }
-  // }, [debouncedSearchTerm]);
-
-  const fetchPostData = async () => {
-    try {
-      console.log('/hashtag/rank API 실행');
-      const res = await axios.get(`/hashtag/rank`);
-      const { data } = res;
-      setRecommendations(data);
-    } catch (error) {
-      console.error('Error fetching post data:', error);
-    }
-  };
-  useEffect(() => {
-    fetchPostData();
-  }, []);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -56,34 +21,33 @@ export default function SearchBar() {
     setTimeout(() => setIsFocused(false), 500);
   };
 
-  const handleRecommendationClick = (keyword) => {
-    setSearchTerm(keyword);
-    setIsFocused(true);
-    inputRef.current.focus();
+  const handleSearch = (keyword = searchTerm) => {
+    const params = new URLSearchParams({ searchContent: keyword });
+    navigate(`/review/query-result?${params.toString()}`);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      const params = new URLSearchParams({ searchContent: searchTerm });
-      navigatePath(`/review/query-result?${params.toString()}`);
-    }
+  const handleRecommendationClick = (keyword) => {
+    setSearchTerm(keyword);
+    setIsFocused(false);
+    handleSearch(keyword); // 클릭된 추천 검색어로 검색 실행
   };
 
   const handleClearInput = () => {
     setSearchTerm('');
-    setIsFocused(false);
+    setIsFocused(true);
+    inputRef.current.focus();
   };
 
   return (
     <SearchBarUI
       isFocused={isFocused}
       searchTerm={searchTerm}
+      setSearchTerm={setSearchTerm}
       handleChange={handleChange}
       handleFocus={handleFocus}
       handleBlur={handleBlur}
-      handleKeyDown={handleKeyDown}
       handleClearInput={handleClearInput}
-      recommendations={recommendations}
+      handleSearch={handleSearch}
       handleRecommendationClick={handleRecommendationClick}
       ref={inputRef}
     />

@@ -1,5 +1,6 @@
-import * as S from './ReviewCreate.style';
 import placeholderPhoto from '../../../assets/DummyPhoto.svg';
+import profileDummyPhoto from '../../../assets/ProfilePhoto.svg';
+import * as S from './ReviewCreate.style';
 
 export default function ReviewWriteUI({
   images,
@@ -73,7 +74,7 @@ export default function ReviewWriteUI({
           <S.ReviewContentContainer>
             <S.ReviewContentHeader>
               <S.AuthorCircleBox>
-                <S.AuthorImg src={profilePhoto} alt="프로필 이미지" />
+                <S.AuthorImg src={profilePhoto || profileDummyPhoto} alt="프로필 이미지" />
               </S.AuthorCircleBox>
               <S.Nickname>@{nickname}</S.Nickname>
               <S.ReviewTypeBtn

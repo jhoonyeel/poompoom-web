@@ -16,6 +16,7 @@ export default function LatestGallery() {
     fetchFunction: fetchLatestData, // 데이터 fetch 함수
     initialSize: 6, // 초기 로드 데이터 개수
     additionalSize: 3,
+    initialCursorId: 1,
   });
   const [latestPosts, setLatestPosts] = useState([]); // 가공된 데이터 상태 관리
 

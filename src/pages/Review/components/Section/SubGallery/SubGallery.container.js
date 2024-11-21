@@ -3,9 +3,9 @@ import axios from '../../../../../apis/axios';
 import { useInfiniteScroll } from '../../../../../hooks/useInfiniteScroll';
 import SubGalleryUI from './SubGallery.presenter';
 
-const fetchSubData = async (cursorId = 1) => {
+const fetchSubData = async (cursorId, size) => {
   const response = await axios.get(`/review/subscribe`, {
-    params: { cursorId },
+    params: { cursorId, size },
   });
   const { values, nextPageId, hasNext } = response.data;
   return { values, nextPageId, hasNext };
@@ -20,57 +20,10 @@ export default function SubGallery() {
   });
   const [subPosts, setSubPosts] = useState([]);
 
+  // rawData가 변경될 때 UI 상태를 업데이트
   useEffect(() => {
-    setSubPosts((prevPosts) => [...prevPosts, ...rawData]);
+    setSubPosts(rawData); // rawData를 그대로 사용해 UI에 반영
   }, [rawData]);
-  console.log('useEffect', subPosts);
-
-  /*
-  const [cursorId, setCursorId] = useState(1);
-  const [hasNext, setHasNext] = useState(true);
-  const loader = useRef(null);
-
-  const fetchPostData = async (currentCursor = 1) => {
-    try {
-      const res = await axios.get(`/review/subscribe`, {
-        params: {
-          cursorId: currentCursor,
-        },
-      });
-      const { values, hasNext: newHasNext, nextPageId } = res.data;
-      setSubPosts((prevPosts) => [...prevPosts, ...values]);
-      setCursorId(nextPageId || currentCursor);
-      setHasNext(newHasNext);
-    } catch (error) {
-      console.error('Error fetching post data:', error);
-    }
-  };
-  useEffect(() => {
-    fetchPostData(cursorId);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const target = entries[0];
-        if (target.isIntersecting && hasNext) {
-          fetchPostData(cursorId);
-        }
-      },
-      { threshold: 1 },
-    );
-
-    if (loader.current) {
-      observer.observe(loader.current);
-    }
-
-    return () => {
-      if (loader.current) {
-        observer.unobserve(loader.current);
-      }
-    };
-  }, [cursorId, hasNext]);
-  */
 
   return <SubGalleryUI subPosts={subPosts} loader={loaderRef} />;
 }

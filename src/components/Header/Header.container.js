@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom';
 import { useNavigatePath } from '../../hooks/useNavigatePath';
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import HeaderUI from './Header.presenter';
 
 export default function Header() {

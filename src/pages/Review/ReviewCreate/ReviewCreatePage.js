@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 import axios from '../../../apis/axios';
+// eslint-disable-next-line import/named
 import { useFetchProfilePicture } from '../../../hooks/useFetchProfilePicture';
-import { profilePictureState } from '../../../recoil/atoms';
+import { useLogin } from '../../../hooks/useLogin';
 import { CATEGORIES } from '../../../shared/categories';
 import { ITEM } from '../../../shared/item';
 import ReviewWriteUI from './ReviewCreate.presenter';
@@ -22,11 +22,11 @@ export default function ReviewWritePage() {
   });
   const navigate = useNavigate();
 
-  const userData = JSON.parse(localStorage.getItem('userData'));
-  const nickname = userData.nickname;
+  const user = JSON.parse(localStorage.getItem('userData'));
+  const nickname = user.nickname;
 
-  useFetchProfilePicture(); // 프로필 사진을 가져오는 커스텀 훅 호출
-  const profilePhoto = useRecoilValue(profilePictureState); // Recoil 전역 상태에서 프로필 사진 경로를 읽어옴
+  const { userData } = useLogin();
+  const profilePhoto = useFetchProfilePicture(userData?.memberId); // 프로필 사진을 가져오는 커스텀 훅 호출
 
   const handleManageImage = (e) => {
     const files = Array.from(e.target.files);

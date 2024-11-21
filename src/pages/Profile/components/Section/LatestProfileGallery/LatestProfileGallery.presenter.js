@@ -7,7 +7,9 @@ export default function LatestProfileGalleryUI({ latestPosts, handlePostClick })
       <S.GalleryBody>
         <S.PostList>
           {latestPosts &&
-            latestPosts.map((post) => <ReviewPostCard key={post.reviewId} post={post} onPostClick={handlePostClick} />)}
+            latestPosts.map((post, index) => (
+              <ReviewPostCard key={`${post.reviewId}-${index}`} post={post} onPostClick={handlePostClick} />
+            ))}
         </S.PostList>
       </S.GalleryBody>
     </S.Wrapper>

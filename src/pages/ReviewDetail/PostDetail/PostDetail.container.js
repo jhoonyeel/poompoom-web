@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from '../../../apis/axios';
-import { useNavigatePath } from '../../../hooks/useNavigatePath';
 import ReviewDetailUI from './PostDetail.presenter';
-import Loading from '../../../components/Loading';
 
 export default function PostDetail() {
   const [like, setLike] = useState(false);
@@ -12,7 +10,6 @@ export default function PostDetail() {
   const [selectedPost, setSelectedPost] = useState(null);
   const { reviewId } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // 현재 이미지 인덱스 관리
-  const navigatePath = useNavigatePath();
   const navigate = useNavigate();
 
   const fetchReview = async () => {
@@ -22,11 +19,10 @@ export default function PostDetail() {
       const { data } = response;
       setSelectedPost(data);
       setLike(data.isLikedPost);
-      setLikeAmount(data.likeAmount); // 초기 좋아요 수 설정
+      setLikeAmount(data.likeAmount);
       setBookMark(data.isBookmarked);
-      console.log('dd', selectedPost);
-    } catch (error) {
-      console.log(error.response?.data || error, '데이터 없음');
+    } catch (err) {
+      console.log(`/review/${reviewId} 에러:`, err);
     }
   };
   useEffect(() => {
@@ -45,10 +41,9 @@ export default function PostDetail() {
         throw new Error('Failed to toggle like');
       }
     } catch (error) {
-      console.error('Error while toggling like:', error);
+      console.error(`/like/${reviewId} 에러:`, error);
       setLike(previousLikeStatus); // 서버 요청 실패 시 이전 상태로 복구
       setLikeAmount(previousLikeAmount); // 서버 요청 실패 시 이전 좋아요 수로 복구
-      // eslint-disable-next-line no-alert
       alert('좋아요를 처리하는 중 오류가 발생했습니다. 다시 시도해 주세요.');
     }
   };
@@ -67,10 +62,6 @@ export default function PostDetail() {
     return date.toLocaleDateString('ko-KR').replace(/\./g, '').replace(/ /g, '.');
   };
 
-  if (!selectedPost) {
-    return <Loading />;
-  }
-
   // 이전 이미지로 이동
   const prevImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? selectedPost.photos.length - 1 : prevIndex - 1));
@@ -81,20 +72,16 @@ export default function PostDetail() {
   };
 
   const onUpdate = () => {
-    navigate(`/review/update/${reviewId}`); // 수정 페이지로 이동
-    // navigate(`/review/update/${reviewId}`, { state: selectedPost }); // 수정 페이지로 이동
+    navigate(`/review/update/${reviewId}`);
   };
   const onDelete = async () => {
     try {
-      // eslint-disable-next-line no-alert
       alert('삭제하시겠습니까?');
       const response = await axios.post(`/review/delete/${reviewId}`);
-      console.log(response);
-      console.log(`Review ${reviewId} deleted successfully`);
-      navigatePath('/review'); // 삭제 후 리뷰 목록 페이지로 이동
+      console.log(`Review ${reviewId} deleted successfully: `, response);
+      navigate('/review');
     } catch (error) {
       console.error('Failed to delete review', error);
-      // 추가적인 에러 처리 로직을 여기에 추가할 수 있습니다.
     }
   };
   const handleWhereBuyClick = () => {
@@ -104,6 +91,10 @@ export default function PostDetail() {
       alert('링크가 설정되지 않았습니다.');
     }
   };
+
+  if (!selectedPost) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <ReviewDetailUI
