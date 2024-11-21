@@ -31,14 +31,9 @@ export default function PostDetail() {
 
   const handleLike = async () => {
     const previousLikeStatus = like; // 현재 상태를 저장
-    const previousLikeAmount = likeAmount; // 기존 좋아요 수 저장
-
-    // Optimistic UI 업데이트: 서버 응답 전에 UI를 먼저 업데이트
-    setLike((prevLike) => {
-      const newLikeStatus = !prevLike;
-      setLikeAmount((prevAmount) => (newLikeStatus ? prevAmount + 1 : prevAmount - 1)); // 새로운 like 상태 기반으로 좋아요 수 업데이트
-      return newLikeStatus;
-    });
+    const previousLikeAmount = likeAmount; // 기존
+    setLike((prevStatus) => !prevStatus);
+    setLikeAmount((prevCount) => prevCount + (like ? -1 : 1));
 
     try {
       const response = await axios.post(`/like/${reviewId}`);
@@ -89,6 +84,13 @@ export default function PostDetail() {
       console.error('Failed to delete review', error);
     }
   };
+  const handleWhereBuyClick = () => {
+    if (selectedPost.item_url) {
+      window.open(selectedPost.item_url, '_blank');
+    } else {
+      alert('링크가 설정되지 않았습니다.');
+    }
+  };
 
   if (!selectedPost) {
     return <div>Loading...</div>;
@@ -109,6 +111,7 @@ export default function PostDetail() {
       handleLike={handleLike}
       handleBookmark={handleBookmark}
       formatDate={formatDate}
+      handleWhereBuyClick={handleWhereBuyClick}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...selectedPost}
     />

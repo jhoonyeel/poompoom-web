@@ -1,14 +1,15 @@
+/* eslint-disable camelcase */
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import styled from 'styled-components';
+
 import axios from '../../apis/axios';
-import { ReactComponent as Add } from '../../assets/Add.svg';
-import { ReactComponent as CategorySelect } from '../../assets/CategorySelect.svg';
 import placeholderPhoto from '../../assets/DummyPhoto.svg';
 import { useFetchProfilePicture } from '../../hooks/useFetchProfilePicture';
 import { profilePictureState } from '../../recoil/atoms';
 import { CATEGORIES } from '../../shared/categories';
+import { ITEM } from '../../shared/item';
+import * as S from './ReviewEdit.style';
 
 export default function ReviewWritePage() {
   const { reviewId } = useParams(); // 리뷰 ID를 URL에서 가져옵니다 (수정 모드일 때 필요).
@@ -20,6 +21,8 @@ export default function ReviewWritePage() {
     reviewType: 'RECEIVED',
     content: '',
     category: CATEGORIES[0],
+    item: ITEM[0],
+    item_url: 'kakaoCom',
   });
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [existingImages, setExistingImages] = useState([]); // 기존 이미지
@@ -37,7 +40,7 @@ export default function ReviewWritePage() {
     try {
       const response = await axios.get(`/review/${reviewId}`);
       console.log('Fetched data:', response.data);
-      const { body, price, whereBuy, hashTags, reviewType, photos } = response.data;
+      const { body, price, whereBuy, hashTags, reviewType, photos, item_url, item } = response.data;
       console.log(body);
       setReviewData({
         content: body,
@@ -45,6 +48,8 @@ export default function ReviewWritePage() {
         source: whereBuy,
         category: hashTags[0].name,
         reviewType,
+        item,
+        item_url,
       });
       setExistingImages(photos);
     } catch (error) {
@@ -149,15 +154,16 @@ export default function ReviewWritePage() {
   };
 
   return (
-    <Wrapper>
-      <ReviewEditForm onSubmit={handleSubmit}>
-        <Header>
-          <Title>무드뷰 수정하기</Title>
-          <SubmitBtn type="submit">수정하기</SubmitBtn>
-        </Header>
-        <BodyContainer>
-          <ReviewImageContainer>
-            <ReviewImageBox onClick={() => document.getElementById('imageInput').click()}>
+    <S.Wrapper>
+      <S.ReviewEditForm onSubmit={handleSubmit}>
+        <S.Header>
+          <S.Title>무드뷰 수정하기</S.Title>
+          <S.SubmitBtn type="submit">수정하기</S.SubmitBtn>
+        </S.Header>
+        <S.HeaderLine />
+        <S.BodyContainer>
+          <S.ReviewImageContainer>
+            <S.ReviewImageBox onClick={() => document.getElementById('imageInput').click()}>
               {allImages.length > 0 ? (
                 <>
                   <img
@@ -168,11 +174,11 @@ export default function ReviewWritePage() {
                     }
                     alt={`preview ${activeImageIndex} 이미지`}
                   />
-                  {activeImageIndex > 0 && <ArrowLeft onClick={prevImage}>‹</ArrowLeft>}
-                  <ArrowRight onClick={nextImage}>
-                    {activeImageIndex === allImages.length - 1 ? <AddIcon /> : '›'}
-                  </ArrowRight>
-                  <DeleteBtn
+                  {activeImageIndex > 0 && <S.ArrowLeft onClick={prevImage}>‹</S.ArrowLeft>}
+                  <S.ArrowRight onClick={nextImage}>
+                    {activeImageIndex === allImages.length - 1 ? <S.AddIcon /> : '›'}
+                  </S.ArrowRight>
+                  <S.DeleteButton
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -180,10 +186,10 @@ export default function ReviewWritePage() {
                     }}
                   >
                     &times;
-                  </DeleteBtn>
-                  <Dots>
+                  </S.DeleteButton>
+                  <S.Dots>
                     {allImages.map((_, index) => (
-                      <Dot
+                      <S.Dot
                         active={index === activeImageIndex}
                         onClick={(e) => {
                           e.stopPropagation();
@@ -191,368 +197,95 @@ export default function ReviewWritePage() {
                         }}
                       />
                     ))}
-                  </Dots>
+                  </S.Dots>
                 </>
               ) : (
                 <img src={placeholderPhoto} alt="placeholder" />
               )}
-            </ReviewImageBox>
-            <ImageInput id="imageInput" type="file" multiple onChange={handleManageImage} />
-          </ReviewImageContainer>
-          <ReviewContentContainer>
-            <ReviewContentHeader>
-              <AuthorCircleBox>
-                <AuthorImg src={profilePhoto} alt="프로필 이미지" />
-              </AuthorCircleBox>
-              <Nickname>@test</Nickname>
-              <ReviewTypeBtn
+            </S.ReviewImageBox>
+            <S.ImageInput id="imageInput" type="file" multiple onChange={handleManageImage} />
+          </S.ReviewImageContainer>
+          <S.ReviewContentContainer>
+            <S.ReviewContentHeader>
+              <S.AuthorCircleBox>
+                <S.AuthorImg src={profilePhoto} alt="프로필 이미지" />
+              </S.AuthorCircleBox>
+              <S.Nickname>@test</S.Nickname>
+              <S.ReviewTypeBtn
                 type="button"
                 $active={reviewData.reviewType === 'RECEIVED'}
                 onClick={() => setReviewData((prevData) => ({ ...prevData, reviewType: 'RECEIVED' }))}
               >
                 받은 선물
-              </ReviewTypeBtn>
-              <ReviewTypeBtn
+              </S.ReviewTypeBtn>
+              <S.ReviewTypeBtn
                 type="button"
                 $active={reviewData.reviewType === 'GIVEN'}
                 onClick={() => setReviewData((prevData) => ({ ...prevData, reviewType: 'GIVEN' }))}
               >
                 준 선물
-              </ReviewTypeBtn>
-            </ReviewContentHeader>
-            <ReviewContent
+              </S.ReviewTypeBtn>
+            </S.ReviewContentHeader>
+            <S.ReviewContent
               name="content"
               placeholder="문구를 입력해주세요..."
               value={reviewData.content}
               onChange={handleInputChange}
             />
-            <ReviewInfoContainer>
-              <CategoryHeader>
-                <CategorySelectIcon />
-                <CategoryTitle>카테고리 선택</CategoryTitle>
-              </CategoryHeader>
-              <CategoryContainer>
+            <S.ReviewInfoContainer>
+              <S.Line />
+              <S.CategoryHeader>
+                <S.CategorySelectIcon />
+                <S.CategoryTitle>카테고리 선택</S.CategoryTitle>
+              </S.CategoryHeader>
+              <S.CategoryContainer>
                 {CATEGORIES.map((cat) => (
-                  <CategoryBtn
+                  <S.CategoryBtn
                     key={cat}
                     type="button"
                     $active={reviewData.category === cat}
                     onClick={() => setReviewData((prevData) => ({ ...prevData, category: cat }))}
                   >
                     {cat}
-                  </CategoryBtn>
+                  </S.CategoryBtn>
                 ))}
-              </CategoryContainer>
-              <AdditionalInfoContainer>
-                <LabelContainer>
-                  <InfoTitle>제품 정보(링크)</InfoTitle>
-                  <InfoInput name="source" type="text" value={reviewData.source} onChange={handleInputChange} />
-                </LabelContainer>
-                <LabelContainer>
-                  <InfoTitle>가격</InfoTitle>
-                  <InfoInput name="price" type="text" value={reviewData.price} onChange={handleInputChange} />
-                </LabelContainer>
-              </AdditionalInfoContainer>
-            </ReviewInfoContainer>
-          </ReviewContentContainer>
-        </BodyContainer>
-      </ReviewEditForm>
-    </Wrapper>
+              </S.CategoryContainer>
+              <S.Line />
+              <S.CategoryHeader>
+                <S.CategorySelectIcon />
+                <S.CategoryTitle>품목 선택</S.CategoryTitle>
+              </S.CategoryHeader>
+              <S.CategoryContainer>
+                {ITEM.map((itemSell) => (
+                  <S.CategoryBtn
+                    key={itemSell}
+                    type="button"
+                    $active={reviewData.item === itemSell}
+                    onClick={() => setReviewData((prevData) => ({ ...prevData, item: itemSell }))}
+                  >
+                    {itemSell}
+                  </S.CategoryBtn>
+                ))}
+              </S.CategoryContainer>
+              <S.Line />
+              <S.AdditionalInfoContainer>
+                <S.LabelContainer>
+                  <S.InfoTitle>구매처</S.InfoTitle>
+                  <S.InfoInput name="source" type="text" value={reviewData.source} onChange={handleInputChange} />
+                </S.LabelContainer>
+                <S.LabelContainer>
+                  <S.InfoTitle>제품 정보(링크)</S.InfoTitle>
+                  <S.InfoInput name="item_url" type="text" value={reviewData.item_url} onChange={handleInputChange} />
+                </S.LabelContainer>
+                <S.LabelContainer>
+                  <S.InfoTitle>가격</S.InfoTitle>
+                  <S.InfoInput name="price" type="text" value={reviewData.price} onChange={handleInputChange} />
+                </S.LabelContainer>
+              </S.AdditionalInfoContainer>
+            </S.ReviewInfoContainer>
+          </S.ReviewContentContainer>
+        </S.BodyContainer>
+      </S.ReviewEditForm>
+    </S.Wrapper>
   );
 }
-
-const Wrapper = styled.div`
-  margin: 24px auto 0;
-  min-width: 1028px;
-  width: 80%;
-`;
-const ReviewEditForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  min-height: 580px;
-  border-radius: 20px;
-  background: #072623;
-  box-shadow:
-    0px 4px 60px rgba(0, 0, 0, 0.25),
-    inset 0px 0px 80px #022622;
-`;
-const Header = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  position: relative;
-`;
-const Title = styled.span`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 18px;
-  color: #fff;
-  font-weight: bold;
-`;
-const SubmitBtn = styled.button`
-  padding: 12px 20px;
-  color: #fff;
-  font-size: 18px;
-  font-weight: bold;
-  background-color: inherit;
-  border: none;
-  cursor: pointer;
-`;
-
-const BodyContainer = styled.div`
-  display: flex;
-  flex: 1;
-`;
-
-const ReviewImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex: 5;
-`;
-const ReviewImageBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  padding: 30px;
-  overflow: hidden;
-  cursor: pointer;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-const ImageInput = styled.input`
-  display: none;
-`;
-const ArrowLeft = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 50%;
-  color: #fff;
-  font-size: 24px;
-  font-weight: 700;
-  user-select: none;
-  cursor: pointer;
-`;
-const ArrowRight = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 50%;
-  color: #fff;
-  font-size: 24px;
-  font-weight: 700;
-  user-select: none;
-  cursor: pointer;
-`;
-const Dots = styled.div`
-  display: flex;
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-`;
-const Dot = styled.div`
-  margin: 0 4px;
-  width: 12px;
-  height: 12px;
-  background-color: ${({ active }) => (active ? '#fff' : 'rgba(255, 255, 255, 0.5)')};
-  border-radius: 50%;
-  transition: background-color 0.3s;
-  user-select: none;
-  pointer-events: auto; // Dot이 클릭 가능하도록 설정
-  cursor: pointer;
-`;
-const AddIcon = styled(Add)`
-  width: 32px;
-  height: 32px;
-`;
-const DeleteBtn = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 32px;
-  height: 32px;
-  background: rgba(0, 0, 0, 0.6);
-  transition: background-color 0.3s ease-in-out;
-  border-radius: 50%;
-  border: none;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.6);
-  }
-`;
-
-const ReviewContentContainer = styled.div`
-  flex: 4;
-  display: flex;
-  flex-direction: column;
-  padding: 16px 30px 10px;
-`;
-const ReviewContentHeader = styled.div`
-  display: flex;
-  align-items: center;
-`;
-const AuthorCircleBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  margin-right: 30px;
-  width: 50px;
-  height: 50px;
-  border: 5px solid #ddd;
-  border-radius: 50%;
-  overflow: hidden;
-`;
-const AuthorImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-const Nickname = styled.span`
-  flex: 1;
-  text-align: start;
-  color: #fff;
-  font-size: 28px;
-  font-family: 'Oleo Script Swash Caps';
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.4;
-`;
-const ReviewTypeBtn = styled.button`
-  padding: 8px 12px;
-  background-color: ${({ $active }) => ($active ? 'rgba(255, 255, 255, 0.25)' : 'inherit')};
-  border: 2px solid #fff;
-  border-radius: 20px;
-  color: #fff;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.25);
-  }
-
-  &:first-of-type {
-    margin-right: 10px;
-  }
-`;
-
-const ReviewContent = styled.textarea`
-  flex: 1;
-  margin-top: 16px;
-  padding: 12px;
-  width: 100%;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: #f9f9f9;
-  resize: none;
-  transition: border-color 0.3s ease;
-
-  &:focus {
-    border-color: #007bff;
-  }
-`;
-const ReviewInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 12px;
-`;
-const CategoryHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-`;
-const CategoryTitle = styled.div`
-  font-size: 16px;
-  color: #fff;
-`;
-const CategoryContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 12px;
-`;
-const CategoryBtn = styled.button`
-  padding: 10px;
-  background-color: ${({ $active }) => ($active ? '#007bff' : '#f0f0f0')};
-  border: 1px solid ${({ $active }) => ($active ? '#007bff' : '#e0e0e0')};
-  border-radius: 5px;
-  border: none;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
-  color: ${({ $active }) => ($active ? '#fff' : '#000')};
-  font-size: 14px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${({ $active }) => ($active ? '#0056b3' : '#d0d0d0')};
-  }
-`;
-const AdditionalInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 12px;
-`;
-const LabelContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-
-  &:first-of-type {
-    margin-bottom: 8px;
-  }
-`;
-const CategorySelectIcon = styled(CategorySelect)`
-  width: 26px;
-  height: 100%;
-  stroke: #fff;
-`;
-const InfoTitle = styled.span`
-  font-size: 16px;
-  color: #fff;
-  min-width: 120px;
-`;
-const InfoInput = styled.input`
-  font-size: 16px;
-  padding: 8px;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  flex: 1;
-  background-color: #f9f9f9;
-  transition: border-color 0.3s ease;
-
-  &:focus {
-    border-color: #007bff;
-  }
-`;

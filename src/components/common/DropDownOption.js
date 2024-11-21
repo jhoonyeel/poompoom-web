@@ -19,24 +19,23 @@ export default function DropDownOption({ items }) {
 }
 
 const DropDownContainer = styled.div`
+  padding: 5px;
   position: absolute;
   top: 100%;
   right: 0;
   background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.37);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 10;
   width: max-content;
+  background-color: rgba(255, 255, 255, 0.37);
 `;
 
 const DropDownItem = styled.li`
   list-style: none;
   margin: 0;
   padding: 0;
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
 `;
 
 const Button = styled.button`
@@ -49,8 +48,12 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
   text-align: left;
+  transition: all 0.4s ease-in-out;
+  border-radius: 5px;
+  font-family: 'S-CoreDream-3Light';
 
   &:hover {
-    background-color: #e6e6e6;
+    background-color: #06564e;
+    color: white;
   }
 `;

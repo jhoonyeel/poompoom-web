@@ -26,7 +26,7 @@ export { default as ProfilePage } from './Profile/ProfilePage';
 export { default as QueryPage } from './Query/QueryPage';
 
 // Review Pages
-export { default as ReviewCreatePage } from './Review/ReviewCreatePage';
+export { default as ReviewCreatePage } from './Review/ReviewCreate/ReviewCreatePage';
 export { default as ReviewEditPage } from './Review/ReviewEditPage';
 export { default as ReviewPage } from './Review/ReviewPage';
 export { default as ReviewDetailPage } from './ReviewDetail/PostDetail/PostDetail.container';
@@ -36,6 +36,6 @@ export { default as Welcome } from './Welcome/Welcome';
 
 // Lover Pages
 export { default as LoverPage } from './Lover/LoverPage';
-export { default as RecommendPage } from './LoverSet/Recommend/Recommend';
-export { default as ConnectGidePage } from '../components/Connect/Connect';
-export { default as ConnectPage } from './LoverSet/Connect/Connect';
+export { default as SetRecommendPage } from './LoverSet/SetRecommendPage';
+export { default as ConnectGidePage } from './LoverSet/ConnectGuidePage';
+export { default as SetValuePage } from './LoverSet/SetValuePage';

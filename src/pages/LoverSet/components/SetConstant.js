@@ -1,4 +1,29 @@
-export const questionsWithAnswers = [
+import Ling from '../../../components/Lover/Ling';
+import Shoes from '../../../components/Lover/Shoes';
+import Clothes from '../../../components/Lover/Clothes';
+import UnderWare from '../../../components/Lover/UnderWare';
+
+export const recommendQnA = [
+  {
+    question: 'Q1. 반지 사이즈를 선택해주세요.',
+    Component: Ling,
+  },
+  {
+    question: 'Q2. 신발 사이즈를 선택해주세요.',
+    Component: Shoes,
+  },
+  {
+    question: 'Q3. 옷 사이즈를 선택해주세요.',
+    Component: Clothes,
+  },
+  {
+    question: 'Q4. 속옷 사이즈를 선택해주세요. (선택 사항)',
+    Component: UnderWare,
+    optional: true,
+  },
+];
+
+export const ConnectQnA = [
   {
     question: 'Q1. 자취를 시작한 나, 놀러온 애인의 손에 들려있는',
     answers: ['극강의 실용성, 크리X스 제품 패키지!', '감성충만, 빈티지숍 라탄 휴지 케이스'],
