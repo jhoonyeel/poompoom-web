@@ -7,7 +7,7 @@ export const DetailSection = styled.section`
   gap: 40px;
   margin: 24px auto 0;
   min-width: 1028px;
-  height: 580px;
+  height: 600px;
   width: 80%;
 `;
 export const LeftBox = styled.div`
@@ -19,7 +19,8 @@ export const LeftBox = styled.div`
 export const ImageContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 600px;
+  border-radius: 20px;
 `;
 export const LeftBtn = styled.div`
   display: flex;
@@ -67,16 +68,26 @@ export const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 20px;
 `;
 export const AdditionalInfoContainer = styled.div`
+  margin: 0 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 10px;
+  font-weight: bold;
+  font-family: 'seolleimcool-SemiBold';
+`;
+
+export const AdditionalInfoWrapper = styled.div`
+  text-align: start;
 `;
 export const AdditionalInfoText = styled.span`
-  margin-top: 0.5rem;
-  text-align: start;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: 10px;
+`;
+export const Price = styled.div`
+  font-size: 15px;
 `;
 
 export const RightBox = styled.div`
@@ -84,6 +95,7 @@ export const RightBox = styled.div`
   flex-direction: column;
   gap: 20px;
   flex: 5;
+  width: 600px;
 `;
 export const PostContainer = styled.div`
   display: flex;
@@ -105,8 +117,8 @@ export const AuthorImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   border: 5px solid #ddd;
   overflow: hidden;
@@ -121,25 +133,29 @@ export const AuthorImg = styled.img`
 export const AuthorNickname = styled(Link)`
   color: #000;
   font-size: 28px;
-  font-family: 'Oleo Script Swash Caps';
+  font-family: 'YEONGJUPunggiGinsengTTF';
   font-style: normal;
   font-weight: 400;
   line-height: 1.4;
   text-decoration: none;
 `;
 export const TypeText = styled.span`
-  font-size: 16px;
+  font-size: 18px;
   color: #0d3f39;
+  font-family: 'seolleimcool-SemiBold';
 `;
 export const PostBody = styled.p`
   flex: 1;
-  margin-top: 12px;
+  margin-top: 30px;
   text-align: start;
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1.7;
   word-wrap: break-word;
   word-spacing: 2px;
   overflow-y: auto;
+  width: 750px;
+  font-family: 'TAEBAEKmilkyway';
+  font-weight: 800;
 
   &::-webkit-scrollbar {
     width: 12px; /* width of the entire scrollbar */
@@ -162,19 +178,19 @@ export const HashtagList = styled.ul`
   gap: 12px;
 `;
 export const HashtagItem = styled.li`
-  color: #c9464b;
-  font-size: 22px;
+  color: rgba(255, 154, 154, 0.84);
+  font-size: 20px;
 `;
 export const DateContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 6px;
   margin-top: 8px;
 `;
 export const DateText = styled.span`
-  color: #b0b0b1;
+  color: #d5d5d5;
   text-align: start;
-  font-size: 14px;
+  font-size: 12px;
 `;
 export const IconBar = styled.nav`
   display: flex;

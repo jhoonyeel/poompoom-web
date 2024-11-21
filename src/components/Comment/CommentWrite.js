@@ -15,6 +15,7 @@ export default function CommentWrite() {
       await submitComment(reviewId, data.body);
       reset();
       console.log('댓글 작성 성공');
+      window.location.reload();
     } catch (error) {
       console.log('댓글 작성 에러', error);
     }
@@ -42,27 +43,33 @@ export default function CommentWrite() {
 }
 
 const Container = styled.div`
-  border: 5px solid #4a4a4a;
+  border: 4px solid rgba(255, 154, 154, 0.84);
   border-radius: 40px;
   position: relative;
-  width: 700px;
-  height: 60px; /* 고정 높이 설정 */
-  margin: auto;
+  width: 750px;
+  height: 70px;
   display: flex;
   align-items: center;
+  justify-content: start;
+  padding-left: 10px;
 `;
 
 const CommentBox = styled.textarea`
-  margin-left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: start;
   width: 550px;
-  max-height: 45px;
-  padding: 0 20px;
-  padding-top: 15px;
-  resize: none;
-  overflow-y: auto;
-  border-radius: 40px;
+  height: 70px;
+  line-height: 70px;
   border: none;
   outline: none;
+  resize: none;
+  overflow-y: auto;
+  background-color: transparent;
+  font-size: 20px;
+  font-family: 'S-CoreDream-3Light';
+  padding: 0;
 `;
 
 const SubmitBtn = styled.button`
