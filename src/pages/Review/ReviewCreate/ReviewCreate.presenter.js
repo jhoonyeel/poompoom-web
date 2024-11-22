@@ -17,6 +17,7 @@ export default function ReviewWriteUI({
   prevImage,
   CATEGORIES,
   ITEM,
+  nickname,
 }) {
   return (
     <S.Wrapper>
@@ -75,7 +76,7 @@ export default function ReviewWriteUI({
               <S.AuthorCircleBox>
                 <S.AuthorImg src={profilePhoto || profileDummyPhoto} alt="프로필 이미지" />
               </S.AuthorCircleBox>
-              <S.Nickname>@test</S.Nickname>
+              <S.Nickname>@{nickname}</S.Nickname>
               <S.ReviewTypeBtn
                 type="button"
                 $active={reviewData.reviewType === 'RECEIVED'}
@@ -132,6 +133,10 @@ export default function ReviewWriteUI({
                 <S.LabelContainer>
                   <S.InfoTitle>구매처</S.InfoTitle>
                   <S.InfoInput name="source" type="text" onChange={handleInputChange} />
+                </S.LabelContainer>
+                <S.LabelContainer>
+                  <S.InfoTitle>아이템</S.InfoTitle>
+                  <S.InfoInput name="item" type="text" onChange={handleInputChange} />
                 </S.LabelContainer>
                 <S.LabelContainer>
                   <S.InfoTitle>제품 정보(링크)</S.InfoTitle>

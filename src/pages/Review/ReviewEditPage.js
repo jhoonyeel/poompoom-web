@@ -22,6 +22,8 @@ export default function ReviewEditPage() {
     category: CATEGORIES[0],
     item: ITEM[0],
     item_url: '',
+    nickname: '',
+    profileImage: '',
   });
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [existingImages, setExistingImages] = useState([]); // 기존 이미지
@@ -39,7 +41,8 @@ export default function ReviewEditPage() {
     try {
       const response = await axios.get(`/review/${reviewId}`);
       console.log('Fetched data:', response.data);
-      const { body, price, whereBuy, hashTags, reviewType, photos, item_url, item } = response.data;
+      const { body, price, whereBuy, hashTags, reviewType, photos, item_url, item, nickname, profileImage } =
+        response.data;
       console.log(body);
       setReviewData({
         content: body,
@@ -49,6 +52,8 @@ export default function ReviewEditPage() {
         reviewType,
         item,
         item_url,
+        nickname,
+        profileImage,
       });
       setExistingImages(photos);
     } catch (error) {
@@ -211,7 +216,7 @@ export default function ReviewEditPage() {
               <S.AuthorCircleBox>
                 <S.AuthorImg src={profilePhoto || profileDummyPhoto} alt="프로필 이미지" />
               </S.AuthorCircleBox>
-              <S.Nickname>@test</S.Nickname>
+              <S.Nickname>{reviewData.nickname}</S.Nickname>
               <S.ReviewTypeBtn
                 type="button"
                 $active={reviewData.reviewType === 'RECEIVED'}
@@ -273,6 +278,10 @@ export default function ReviewEditPage() {
                 <S.LabelContainer>
                   <S.InfoTitle>구매처</S.InfoTitle>
                   <S.InfoInput name="source" type="text" value={reviewData.source} onChange={handleInputChange} />
+                </S.LabelContainer>
+                <S.LabelContainer>
+                  <S.InfoTitle>아이템</S.InfoTitle>
+                  <S.InfoInput name="item" type="text" onChange={handleInputChange} />
                 </S.LabelContainer>
                 <S.LabelContainer>
                   <S.InfoTitle>제품 정보(링크)</S.InfoTitle>

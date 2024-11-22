@@ -32,6 +32,7 @@ export default function ReviewDetailUI({
   bookMark,
   handleLike,
   handleBookmark,
+  item,
 }) {
   return (
     <div>
@@ -83,6 +84,7 @@ export default function ReviewDetailUI({
             </S.PostHeader>
             <S.PostBody>{body}</S.PostBody>
             <S.HashtagList>
+              #{item}
               {hashTags && hashTags.map((tag) => <S.HashtagItem key={tag.id}>{`#${tag.name}`}</S.HashtagItem>)}
             </S.HashtagList>
             <S.DateContainer>

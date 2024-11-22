@@ -31,7 +31,7 @@ const SlideBarContainer = styled.div`
   position: relative;
   width: 534px;
   height: 10px;
-  background: #e0e0e0;
+  background: wheat;
   border-radius: 5px;
   margin: 50px auto;
 `;
@@ -52,7 +52,7 @@ const RangeInput = styled.input`
     appearance: none;
     width: 30px;
     height: 30px;
-    background: #b5c8e8;
+    background: #0e5649;
     border-radius: 50%;
     cursor: pointer;
     pointer-events: auto;
@@ -64,7 +64,7 @@ const RangeInput = styled.input`
   &::-moz-range-thumb {
     width: 30px;
     height: 30px;
-    background: #b5c8e8;
+    background: #0e5649;
     border-radius: 50%;
     cursor: pointer;
     pointer-events: auto;
@@ -74,12 +74,12 @@ const RangeInput = styled.input`
   }
 
   &:focus::-webkit-slider-thumb {
-    background: #a3bce2;
+    background: #0e5649;
     transform: scale(1.1);
   }
 
   &:focus::-moz-range-thumb {
-    background: #a3bce2;
+    background: #0e5649;
     transform: scale(1.1);
   }
 `;

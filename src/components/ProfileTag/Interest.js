@@ -51,6 +51,16 @@ export default function Interest({ setSelectedButton }) {
             </FixedSubButtonContainer>
           )}
         </ButtonContainer>
+        <ButtonContainer>
+          <Button onMouseEnter={() => handleHover('친목/동물')}>친목/동물</Button>
+          {hoveredButton === '친목/동물' && (
+            <FixedSubButtonContainer>
+              <SubButton onClick={(event) => handleClick(event.target.textContent)}>친목</SubButton>
+              <SubButton onClick={(event) => handleClick(event.target.textContent)}>동호회</SubButton>
+              <SubButton onClick={(event) => handleClick(event.target.textContent)}>동물</SubButton>
+            </FixedSubButtonContainer>
+          )}
+        </ButtonContainer>
       </ButtonContainers>
     </Container>
   );
@@ -64,14 +74,16 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: 'S-CoreDream-3Light';
+  margin-top: 20px;
 `;
 
 const Title = styled.div`
   padding: 1rem;
   width: 593px;
   border-radius: 38.5px;
-  border: 3px solid #8c8c8c;
-  color: #8c8c8c;
+  border: 3px solid #0e5649;
+  color: #0e5649;
 `;
 
 const ButtonContainers = styled.div`
@@ -88,6 +100,7 @@ const ButtonContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
+  font-family: 'S-CoreDream-3Light';
 `;
 
 const FixedSubButtonContainer = styled.div`
@@ -101,32 +114,37 @@ const FixedSubButtonContainer = styled.div`
 const Button = styled.button`
   margin: 0;
   width: fit-content;
-  background: #f0f0f0;
+  background: wheat;
   border: none;
   padding: 10px 20px;
   border-radius: 20px;
   opacity: 0.5;
   transition: all 0.5s;
   cursor: pointer;
+  font-family: 'S-CoreDream-3Light';
 
   &:hover {
     opacity: 1;
-    background: #ff8c00;
+    background: #0e5649;
   }
 `;
 
 const SubButton = styled.button`
   width: 7rem;
-  background: #f0f0f0;
+  background: wheat;
   border: none;
   padding: 10px 20px;
   border-radius: 20px;
   transition: all 0.5s;
   cursor: pointer;
+  font-family: 'S-CoreDream-3Light';
+  border: 1px solid #0e5649;
+  color: #0e5649;
 
   &:hover {
-    background: #e07c00;
+    background: #0e5649;
     transform: scale(120%);
+    color: wheat;
   }
 
   ${(props) =>

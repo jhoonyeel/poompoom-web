@@ -4,7 +4,7 @@ import useIntersectionObserver from '../../hooks/useInterSectionObserver';
 import CommentList from './CommentList';
 
 export default function CommentContainer() {
-  const { fetchComments, comments, convertDateArrayToDate, hasNext, cursorId, reviewId } = useComments();
+  const { fetchComments, pinnedComment, comments, convertDateArrayToDate, hasNext, cursorId, reviewId } = useComments();
   const { loader } = useIntersectionObserver({
     onIntersect: () => fetchComments(cursorId, 3),
     threshold: 1,
@@ -17,6 +17,7 @@ export default function CommentContainer() {
         <div>
           <ScrollText>댓글을 아래로 내려보세요!</ScrollText>
           <CommentList
+            pinnedComment={pinnedComment}
             loader={loader}
             comments={comments}
             convertDateArrayToDate={convertDateArrayToDate}

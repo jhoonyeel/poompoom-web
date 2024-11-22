@@ -1,9 +1,17 @@
 import styled from 'styled-components';
 import { Comment } from './Comment/Comment';
 
-export default function CommentList({ loader, comments, convertDateArrayToDate, reviewId }) {
+export default function CommentList({ pinnedComment, loader, comments, convertDateArrayToDate, reviewId }) {
   return (
     <CommentContainer>
+      {pinnedComment && (
+        <Comment
+          key={pinnedComment.commentId}
+          comment={pinnedComment}
+          convertDateArrayToDate={convertDateArrayToDate}
+          reviewId={reviewId}
+        />
+      )}
       {comments.map((comment) => (
         <Comment
           key={comment.commentId}

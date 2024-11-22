@@ -4,6 +4,7 @@ export const useDeleteComment = async (commentId, reviewId, closeModal) => {
   try {
     const response = await axios.post(`/review/${reviewId}/delete/${commentId}`);
     console.log('댓글이 성공적으로 삭제되었습니다.', response);
+    window.location.reload();
     closeModal();
   } catch (error) {
     console.error('댓글 삭제 오류:', error);

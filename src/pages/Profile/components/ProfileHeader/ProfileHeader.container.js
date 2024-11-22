@@ -1,29 +1,28 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from '../../../../apis/axios';
 import { useNavigatePath } from '../../../../hooks/useNavigatePath';
 import ProfileHeaderUI from './ProfileHeader.presenter';
 
 export default function ProfileHeader() {
   const [profile, setProfile] = useState('');
-  const { id } = useParams();
+  const userData = JSON.parse(localStorage.getItem('userData'));
+  const memberId = userData?.memberId;
 
   const navigatePath = useNavigatePath();
 
   const fetchData = async () => {
     try {
-      console.log('profile/1 API 실행');
-      const response = await axios.get(`profile/1`);
+      const response = await axios.get(`profile/${memberId}`);
       setProfile(response.data);
 
-      console.log('데이터', response.data);
+      console.log('프로필헤더', response.data);
     } catch (error) {
       console.log('에러', error);
     }
   };
   useEffect(() => {
     fetchData();
-  }, [id]);
+  }, [memberId]);
 
   return <ProfileHeaderUI profile={profile} navigatePath={navigatePath} />;
 }

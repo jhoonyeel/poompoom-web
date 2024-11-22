@@ -176,6 +176,8 @@ export const HashtagList = styled.ul`
   display: flex;
   margin-top: 12px;
   gap: 12px;
+  color: #094c42;
+  font-size: 20px;
 `;
 export const HashtagItem = styled.li`
   color: rgba(255, 154, 154, 0.84);

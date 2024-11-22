@@ -8,6 +8,7 @@ export const useComments = () => {
   const [cursorId, setCursorId] = useState(null);
   const [hasNext, setHasNext] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
+  const [pinnedComment, setPinnedComment] = useState(null);
 
   const AccessToken = localStorage.getItem('accessToken');
   const fetchComments = async (cursor, size = 3) => {
@@ -52,15 +53,28 @@ export const useComments = () => {
     }
   };
 
+  const getPinnedComment = async () => {
+    try {
+      const response = await axios.get(`/review/${reviewId}/fixedComment`);
+      const fixedComment = response.data;
+      console.log('고정댓글:', fixedComment);
+      setPinnedComment(fixedComment);
+      return fixedComment;
+    } catch (error) {
+      return console.log('고정 댓글 get 에러:', error);
+    }
+  };
+
   const convertDateArrayToDate = (dateArray) => {
     const [year, month, day, hour, minute, second, milliseconds] = dateArray;
     return new Date(year, month - 1, day, hour, minute, second, milliseconds); // 월 -1 보정
   }; // 배열 형식 날짜 형변환
 
   useEffect(() => {
+    getPinnedComment();
     fetchComments(null, 3);
   }, []);
 
   console.log(' hasNext:', hasNext, 'cursorId:', cursorId);
-  return { fetchComments, comments, convertDateArrayToDate, hasNext, cursorId, reviewId };
+  return { fetchComments, pinnedComment, comments, convertDateArrayToDate, hasNext, cursorId, reviewId };
 };

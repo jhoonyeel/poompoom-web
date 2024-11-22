@@ -51,6 +51,7 @@ const Nickname = styled(Link)`
   font-weight: 400;
   font-size: 24px;
   text-decoration: none;
+  font-family: 'YEONGJUPunggiGinsengTTF';
 `;
 
 const AdditionalInfo = styled.div`
