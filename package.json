@@ -2,7 +2,6 @@
   "name": "poompoom-web",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://TwoSSome.github.io/poompoom-web",
   "dependencies": {
     "@craco/craco": "^7.1.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -72,10 +71,6 @@
     "prettier": "^3.3.3"
   },
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/TwoSSome/poompoom-web.git"
-  },
   "author": "dekoms <dekoms@naver.com>",
   "license": "MIT"
 }

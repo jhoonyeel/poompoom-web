@@ -36,8 +36,8 @@ export const LoverImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   border: 5px solid #fff;
   box-shadow:

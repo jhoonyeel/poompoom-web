@@ -23,7 +23,7 @@ export default function ReviewWritePage() {
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem('userData'));
-  const nickname = user.nickname;
+  const nickname = 'test' || user.nickname;
 
   const { userData } = useLogin();
   const profilePhoto = useFetchProfilePicture(userData?.memberId); // 프로필 사진을 가져오는 커스텀 훅 호출

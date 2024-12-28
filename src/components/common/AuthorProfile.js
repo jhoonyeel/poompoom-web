@@ -5,7 +5,16 @@ export default function AuthorProfile({ isContentHovered, profilePhoto, navigate
   return (
     <Wrapper onClick={navigatePath(`/profile`)}>
       <AuthorImgBox>
-        <AuthorImg src={profilePhoto} alt="프로필 이미지" />
+        <AuthorImg
+          src={
+            profilePhoto ===
+            'https://twossome-bucket.s3.ap-northeast-2.amazonaws.com/050700f4-6898-44a0-a6dc-45bd600c527b.png'
+              ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWhkDAMzHzBXvWnJTeTRAx6OkLGDLJVn3lYQ&s'
+              : profilePhoto
+          }
+          alt="프로필 이미지"
+        />
+        {/* <AuthorImg src={profilePhoto} alt="프로필 이미지" /> */}
       </AuthorImgBox>
       <FireCrackerIcon $isContentHovered={isContentHovered} />
     </Wrapper>

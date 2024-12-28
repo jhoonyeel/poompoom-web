@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const PageContainer = styled.div`
-  height: 80vh;
+  height: 800px;
   overflow: hidden;
   display: flex;
   flex-direction: column;

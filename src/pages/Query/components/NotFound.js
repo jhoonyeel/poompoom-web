@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Eyes } from '../../../assets/eyes.svg';
+import { useFetchFailKeyword } from '../../../hooks/useFetchFailKeyword';
+
+const failtag = ['사진', '키링', '에그타르트', '미니어처', '여행', '초콜릿', '보습'];
 
 export function NotFound({ searchContent, currentKeyword, onRetry }) {
-  // const { failKeyword } = useFetchFailKeyword();
-  const tag = '초콜릿';
+  const { failKeyword } = useFetchFailKeyword();
+  const randomTag = failtag[Math.floor(Math.random() * failtag.length)];
+
+  const tag = failKeyword?.tag || randomTag;
   // console.log(failKeyword);
 
   useEffect(() => {

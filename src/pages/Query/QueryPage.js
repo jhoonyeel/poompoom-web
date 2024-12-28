@@ -62,6 +62,8 @@ export default function QueryPage() {
   const handleRetry = (retryKeyword) => {
     setIsRetrying(true);
     setCurrentKeyword(retryKeyword);
+    // 일정 시간 후 상태 리셋
+    setTimeout(() => setIsRetrying(false), 1000);
   };
 
   return (
