@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import Loading from './components/Loading';
+import Loading from '../components/Loading';
 
 // eslint-disable-next-line no-unused-vars
 export default function ProtectedRoute({ element: Component, isAuthenticated, ...rest }) {
