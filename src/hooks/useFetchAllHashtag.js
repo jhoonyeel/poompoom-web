@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from '../apis/axios';
 
-export function useFetchAllHashtags() {
+export function useFetchAllHashtag() {
   const [allHashtags, setAllHashtags] = useState([]);
   const [error, setError] = useState(null);
 

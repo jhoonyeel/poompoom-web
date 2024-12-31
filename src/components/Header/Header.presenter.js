@@ -1,23 +1,24 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import profileDummyPhoto from '../../assets/ProfilePhoto.svg';
+import { INITIAL_PROFILE } from '../../constants/initialProfile';
+import { getMyProfile } from '../../services/profile/getMyProfile';
 import SearchBar from '../SearchBar/SearchBar.container';
 import * as S from './Header.styles';
 
 export default function HeaderUI({ showSearchBar, navigatePath }) {
-  const [profile, setProfile] = useState('');
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`profile/my`);
-      setProfile(response.data);
-      console.log(profile);
-    } catch (error) {
-      console.log('프로필 에러', error);
-    }
-  };
+  const [profile, setProfile] = useState(INITIAL_PROFILE);
 
   useEffect(() => {
-    fetchData();
+    const fetchProfile = async () => {
+      try {
+        const profileData = await getMyProfile(); // 서비스 함수 호출
+        setProfile(profileData);
+      } catch (err) {
+        console.error('프로필 가져오기 에러:', err.message);
+      }
+    };
+
+    fetchProfile(); // 컴포넌트 마운트 시 프로필 데이터 가져오기
   }, []);
 
   console.log(profile.profileImagePath);
