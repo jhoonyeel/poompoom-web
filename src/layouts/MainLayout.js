@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom';
-import * as S from '../App.styles';
 import Footer from '../components/Footer/Footer.container';
 import Header from '../components/Header/Header.container';
+import * as S from './Layout.styles';
 
 export function MainLayout() {
   return (
-    <>
+    <S.AppLayout>
       <S.HeaderContainer>
         <Header />
       </S.HeaderContainer>
@@ -13,6 +13,6 @@ export function MainLayout() {
       <S.FooterContainer>
         <Footer />
       </S.FooterContainer>
-    </>
+    </S.AppLayout>
   );
 }
