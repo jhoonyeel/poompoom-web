@@ -39,3 +39,6 @@ export { default as LoverPage } from './Lover/LoverPage';
 export { default as ConnectGidePage } from './LoverSet/ConnectGuidePage';
 export { default as SetRecommendPage } from './LoverSet/SetRecommendPage';
 export { default as SetValuePage } from './LoverSet/SetValuePage';
+
+// Calender Page
+export { default as CalenderPage } from './Calendar/CalendarPage';
