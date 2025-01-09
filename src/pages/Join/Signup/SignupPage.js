@@ -26,6 +26,8 @@ export default function SignupPage() {
   const [idCheckMessage, setIdCheckMessage] = useState('');
   const [tagMessage, setTagMessage] = useState('');
   const [isIdValid, setIsIdValid] = useState(false);
+  const [isEmailVerified, setIsEmailVerified] = useState(false); // 이메일 인증 여부
+  const [isVerificationCodeVerified, setIsVerificationCodeVerified] = useState(false); // 인증번호 확인 여부
 
   const email = watch('email');
   const verificationCode = watch('verificationCode');
@@ -35,9 +37,11 @@ export default function SignupPage() {
       const result = await axios.post(`/${email}/send`);
       console.log('이메일 인증 요청 성공', result.data);
       setEmailSentMessage('이메일 인증 코드가 발송되었습니다.');
+      setIsEmailVerified(true);
     } catch (error) {
       console.error('이메일 인증 요청 실패', error.response?.data);
       setEmailSentMessage(error.response?.data?.message || '중복되거나 잘못된 이메일입니다.');
+      setIsEmailVerified(false);
     }
   };
 
@@ -46,9 +50,11 @@ export default function SignupPage() {
       const result = await axios.post(`/${email}/check`, { authNum: verificationCode });
       console.log('인증번호 확인 성공', result.data);
       setVerificationMessage('인증번호 확인에 성공했습니다.');
+      setIsVerificationCodeVerified(true);
     } catch (error) {
       console.error('인증번호 확인 실패', error.response?.data);
       setVerificationMessage('인증번호 확인에 실패했습니다.');
+      setIsVerificationCodeVerified(false);
     }
   };
 
@@ -75,6 +81,16 @@ export default function SignupPage() {
   };
 
   const onSubmit = async (data) => {
+    if (!isEmailVerified) {
+      setEmailSentMessage('이메일 인증을 완료해 주세요.');
+      return;
+    }
+
+    if (!isVerificationCodeVerified) {
+      setVerificationMessage('올바를 인증번호를 작성해 주세요.');
+      return;
+    }
+
     const storedTags = localStorage.getItem('signUpTag');
     if (!storedTags) {
       setTagMessage('프로필 태그를 설정해 주세요.');
@@ -82,7 +98,7 @@ export default function SignupPage() {
     }
 
     if (!isIdValid) {
-      setIdCheckMessage('아이디 중복 체크를 해주세요.');
+      setIdCheckMessage('아이디 중복 여부를 확인해 주세요.');
       return;
     }
 

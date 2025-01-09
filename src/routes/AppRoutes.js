@@ -24,6 +24,7 @@ import {
   SetRecommendPage,
   SetValuePage,
   Welcome,
+  CalenderPage,
 } from '../pages/index';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -80,8 +81,9 @@ export function AppRoutes() {
         <Route path="/profile/*" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated} />} />
         <Route
           path="/profile/edit"
-          element={<ProtectedRoute element={ProfileEditPage} isAuthenticated={isAuthenticated()} />}
+          element={<ProtectedRoute element={ProfileEditPage} isAuthenticated={isAuthenticated} />}
         />
+        <Route path="/Calender" element={<ProtectedRoute element={CalenderPage} isAuthenticated={isAuthenticated} />} />
       </Route>
 
       {/* HeaderOnlyLayout: Header only */}
