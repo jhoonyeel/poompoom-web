@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import CalendarView from './components/CalendarView/CalendarView';
 import Sidebar from './components/Sidebar/Sidebar';
-import CalenderView from './components/CalendarView/CalendarView';
 import DatePlanModal from './components/Modal/DatePlanModal';
 
 export default function CalendarPage() {
@@ -14,17 +14,15 @@ export default function CalendarPage() {
   return (
     <Container>
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <CalenderView />
+      <CalendarView />
       <DatePlanModal />
     </Container>
   );
 }
 
 const Container = styled.div`
-  position: relative;
   width: 100%;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   margin: 0;
