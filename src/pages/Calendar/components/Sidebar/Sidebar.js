@@ -9,19 +9,13 @@ import Theme from './Section/Theme';
 import ImportCalender from './Section/ImportPlan';
 import AddDatePlan from './Section/AddDatePlan';
 import DatePlanModal from '../Modal/DatePlanModal';
+import useModal from '../../../../hooks/useModal';
 
 export default function Sidebar({ isOpen, toggleSidebar }) {
   const [isAddDatePlan, setAddDatePlan] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isOpen: isModalOpen, openModal, closeModal } = useModal();
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
+  console.log('모달', isModalOpen);
   return (
     <SidebarWrapper isOpen={isOpen}>
       <ToggleButton onClick={toggleSidebar}>{isOpen ? 'Close' : 'Open'}</ToggleButton>
@@ -39,10 +33,10 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
             <ImportCalender />
           </SidebarContent>
         ))}
-
       {isModalOpen && (
         <Modal>
-          <DatePlanModal closeModal={closeModal} />
+          dsdsds
+          <DatePlanModal isModalOpen={isModalOpen} closeModal={closeModal} />
         </Modal>
       )}
     </SidebarWrapper>

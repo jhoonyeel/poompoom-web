@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Sidebar from './components/Sidebar/Sidebar';
 import CalenderView from './components/CalendarView/CalendarView';
+import DatePlanModal from './components/Modal/DatePlanModal';
 
 export default function CalendarPage() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -13,8 +14,8 @@ export default function CalendarPage() {
   return (
     <Container>
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-
       <CalenderView />
+      <DatePlanModal />
     </Container>
   );
 }
