@@ -11,6 +11,7 @@ import LoginSocial from '../pages/OAuth/LoginSocial';
 import SocialSignUp from '../pages/OAuth/SignUp/SignUp.container';
 import SignUpSocial from '../pages/OAuth/SignUpSocial';
 import {
+  CalendarPage,
   ConnectGidePage,
   HomePage,
   LoverPage,
@@ -24,7 +25,6 @@ import {
   SetRecommendPage,
   SetValuePage,
   Welcome,
-  CalenderPage,
 } from '../pages/index';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -83,7 +83,7 @@ export function AppRoutes() {
           path="/profile/edit"
           element={<ProtectedRoute element={ProfileEditPage} isAuthenticated={isAuthenticated} />}
         />
-        <Route path="/Calender" element={<ProtectedRoute element={CalenderPage} isAuthenticated={isAuthenticated} />} />
+        <Route path="/calendar" element={<ProtectedRoute element={CalendarPage} isAuthenticated={isAuthenticated} />} />
       </Route>
 
       {/* HeaderOnlyLayout: Header only */}
