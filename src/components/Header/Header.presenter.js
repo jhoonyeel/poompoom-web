@@ -42,6 +42,7 @@ export default function HeaderUI({ showSearchBar, navigatePath }) {
           <S.MenuItem onClick={navigatePath('/review')}>MOOD VIEW</S.MenuItem>
           <S.MenuItem onClick={navigatePath('/lover/connect/guide')}>MY LOVER</S.MenuItem>
           <S.MenuItem onClick={navigatePath('/profile/latest')}>OPTIOIN</S.MenuItem>
+          <S.MenuItem onClick={navigatePath('/calender')}>Calendar</S.MenuItem>
         </S.MenuBar>
       </S.RightBox>
     </S.Wrapper>
