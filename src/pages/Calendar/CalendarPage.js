@@ -1,12 +1,12 @@
 import styled from 'styled-components';
+import CalendarView from './components/CalendarView/CalendarView';
 import Sidebar from './components/Sidebar/Sidebar';
-import CalenderView from './components/CalendarView/CalendarView';
 
-export default function CalenderPage() {
+export default function CalendarPage() {
   return (
     <Container>
       <Sidebar />
-      <CalenderView />
+      <CalendarView />
     </Container>
   );
 }
@@ -14,7 +14,6 @@ export default function CalenderPage() {
 const Container = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   margin: 0;

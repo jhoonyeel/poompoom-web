@@ -41,4 +41,4 @@ export { default as SetRecommendPage } from './LoverSet/SetRecommendPage';
 export { default as SetValuePage } from './LoverSet/SetValuePage';
 
 // Calender Page
-export { default as CalenderPage } from './Calendar/CalendarPage';
+export { default as CalendarPage } from './Calendar/CalendarPage';
