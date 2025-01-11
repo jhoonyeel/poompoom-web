@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
+const user = JSON.parse(localStorage.getItem('userData'));
+
 export default function EventModal({ onClose, onSubmit }) {
   const [eventData, setEventData] = useState({
     title: '',
@@ -8,6 +10,7 @@ export default function EventModal({ onClose, onSubmit }) {
     startDate: '',
     endDate: '',
     memo: '',
+    writer: '',
   });
 
   const categories = [
@@ -33,7 +36,8 @@ export default function EventModal({ onClose, onSubmit }) {
       alert('종료 날짜는 시작 날짜보다 늦어야 합니다.');
       return;
     }
-    onSubmit(eventData);
+    const eventToSubmit = { ...eventData, writer: user?.memberId };
+    onSubmit(eventToSubmit);
     onClose(); // Close the modal after submission
   };
 
