@@ -31,16 +31,24 @@ export default function PoomPoomLog({ posts }) {
   return (
     <Container>
       <SidebarTitle>&lt; 품품로그 &gt;</SidebarTitle>
-      <LogContainer>
-        {recentPostsWithImages.map((post, index) => (
-          <LogBox key={index} onClick={() => handleLogBoxClick(index)}>
-            {post.images && post.images[0] && <Thumbnail src={post.images[0]} alt={`Post ${index} Thumbnail`} />}
-            <HoverDate>
-              {new Date(post.createdAt).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' })}
-            </HoverDate>
-          </LogBox>
-        ))}
-      </LogContainer>
+      {recentPostsWithImages.length === 0 ? (
+        <NoPostsMessage>게시글이 없습니다. 게시글을 추가해보세요!</NoPostsMessage>
+      ) : (
+        <LogContainer>
+          {recentPostsWithImages.map((post, index) => (
+            <LogBox key={index} onClick={() => handleLogBoxClick(index)}>
+              {post.images && post.images.length > 0 ? (
+                <Thumbnail src={post.images[0]} alt={`Post ${index} Thumbnail`} />
+              ) : (
+                <NoImageText>사진 없는 게시글</NoImageText>
+              )}
+              <HoverDate>
+                {new Date(post.createdAt).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' })}
+              </HoverDate>
+            </LogBox>
+          ))}
+        </LogContainer>
+      )}
       {selectedPostIndex !== null && (
         <PostDetailModal
           post={recentPostsWithImages[selectedPostIndex]}
@@ -53,6 +61,24 @@ export default function PoomPoomLog({ posts }) {
     </Container>
   );
 }
+const NoImageText = styled.div`
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px;
+  border-radius: 10px;
+`;
+
+const NoPostsMessage = styled.div`
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 16px;
+  color: rgb(99, 87, 93);
+  font-weight: bold;
+  margin-top: 20px;
+`;
 
 const LogContainer = styled.div`
   display: grid;
