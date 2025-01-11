@@ -11,9 +11,9 @@ import AddDatePlan from './Section/AddDatePlan';
 import DatePlanModal from '../Modal/DatePlanModal';
 import useModal from '../../../../hooks/useModal';
 
-export default function Sidebar({ isOpen, toggleSidebar }) {
+export default function Sidebar({ isOpen, toggleSidebar, posts }) {
   const [isAddDatePlan, setAddDatePlan] = useState(false);
-  const { isOpen: isModalOpen, openModal, closeModal } = useModal();
+  const { isOpen: isModalOpen, closeModal } = useModal();
 
   console.log('모달', isModalOpen);
   return (
@@ -26,7 +26,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           <SidebarContent>
             <Counter />
             <Search />
-            <PoomPoomLog setAddDatePlan={setAddDatePlan} openModal={openModal} />
+            <PoomPoomLog posts={posts} />
             <DatePlan />
             <Alarm />
             <Theme />
@@ -35,7 +35,6 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
         ))}
       {isModalOpen && (
         <Modal>
-          dsdsds
           <DatePlanModal isModalOpen={isModalOpen} closeModal={closeModal} />
         </Modal>
       )}

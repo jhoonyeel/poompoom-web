@@ -5,13 +5,12 @@ import EventDetailModal from './EventDetailModal';
 import EventModal from './EventModal';
 import PostModal from './PostModal';
 
-export default function CalendarView() {
+export default function CalendarView({ posts, setPosts }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [events, setEvents] = useState([]); // 이벤트 데이터를 배열로 관리
   const [selectedEvent, setSelectedEvent] = useState(null); // 선택된 이벤트
   const [isPostModalOpen, setIsPostModalOpen] = useState(false); // 게시글 모달 상태
-  const [posts, setPosts] = useState({}); // 게시글 데이터 {eventId: [posts]}
 
   const handleEventSubmit = (eventData) => {
     // 이벤트 ID를 부여
