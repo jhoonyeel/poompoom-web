@@ -5,37 +5,24 @@ import EventDetailModal from './EventDetailModal';
 import EventModal from './EventModal';
 import PostModal from './PostModal';
 
-export default function CalendarView() {
+export default function CalendarView({
+  posts,
+  events,
+  setEvents,
+  selectedEvent,
+  isPostModalOpen,
+  setIsPostModalOpen,
+  handleEventClick,
+  handleCloseDetailModal,
+  handlePostSubmit,
+}) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [events, setEvents] = useState([]); // 이벤트 데이터를 배열로 관리
-  const [selectedEvent, setSelectedEvent] = useState(null); // 선택된 이벤트
-  const [isPostModalOpen, setIsPostModalOpen] = useState(false); // 게시글 모달 상태
-  const [posts, setPosts] = useState({}); // 게시글 데이터 {eventId: [posts]}
 
   const handleEventSubmit = (eventData) => {
     // 이벤트 ID를 부여
     const newEvent = { ...eventData, id: Date.now() }; // 고유 ID
     setEvents((prevEvents) => [...prevEvents, newEvent]); // 새로운 이벤트 추가
-  };
-
-  const handleEventClick = (event) => {
-    setSelectedEvent(event); // 선택된 이벤트 설정
-  };
-
-  const handleCloseDetailModal = () => {
-    setSelectedEvent(null); // 이벤트 선택 해제
-  };
-
-  const handlePostSubmit = (post) => {
-    if (!selectedEvent || !selectedEvent.id) return;
-
-    setPosts((prevPosts) => ({
-      ...prevPosts,
-      [selectedEvent.id]: [...(prevPosts[selectedEvent.id] || []), post].sort((a, b) => a.title.localeCompare(b.title)),
-    }));
-
-    setIsPostModalOpen(false); // 게시글 작성 모달 닫기
   };
 
   // Helper functions

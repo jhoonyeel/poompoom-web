@@ -6,6 +6,7 @@ export default function PostModal({ onClose, onSubmit }) {
     title: '',
     content: '',
     images: [], // 이미지 파일을 저장하는 배열
+    createdAt: new Date().toISOString(), // 게시글 작성 시 현재 날짜 및 시간 추가
   });
 
   const handleInputChange = (e) => {
@@ -58,6 +59,7 @@ export default function PostModal({ onClose, onSubmit }) {
               <ImagePreview key={index} src={image} alt={`Uploaded ${index}`} />
             ))}
           </ImagePreviewContainer>
+          <DateDisplay>작성 날짜: {new Date(postData.createdAt).toLocaleString()}</DateDisplay>
           <ButtonContainer>
             <Button type="submit">저장</Button>
             <Button type="button" onClick={onClose}>
@@ -147,6 +149,12 @@ const ImagePreview = styled.img`
   border-radius: 4px;
   object-fit: cover;
   border: 1px solid #ccc;
+`;
+
+const DateDisplay = styled.div`
+  font-size: 12px;
+  color: #666;
+  text-align: right;
 `;
 
 const ButtonContainer = styled.div`

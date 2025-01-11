@@ -46,7 +46,7 @@ const ProfileSection = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding-top: 200px;
+  padding-top: 300px;
 `;
 const ProfileContainer = styled.div``;
 const Name = styled.div``;

@@ -1,13 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function PostDetailModal({ post, onClose }) {
-  console.log('PostDetailModal Opened:', post);
-
+export default function PostDetailModal({ post, onClose, onNext, onPrevious, showNavigation }) {
   return (
     <Modal>
       <ModalContent>
-        <ModalHeader>{post.title}</ModalHeader>
+        <ModalHeader>
+          {showNavigation && <NavigationButton onClick={onPrevious}>&lt;</NavigationButton>}
+          <TitleContainer>
+            {' '}
+            <Title>{post.title}</Title>
+            <DateDisplay>
+              {new Date(post.createdAt).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              })}
+            </DateDisplay>
+          </TitleContainer>
+
+          {showNavigation && <NavigationButton onClick={onNext}>&gt;</NavigationButton>}
+        </ModalHeader>
         <Content>
           <TextContent>{post.content}</TextContent>
           {post.images && post.images.length > 0 && (
@@ -18,9 +31,7 @@ export default function PostDetailModal({ post, onClose }) {
             </ImageGallery>
           )}
         </Content>
-        <ButtonContainer>
-          <Button onClick={onClose}>닫기</Button>
-        </ButtonContainer>
+        <CloseButton onClick={onClose}>닫기</CloseButton>
       </ModalContent>
     </Modal>
   );
@@ -51,10 +62,29 @@ const ModalContent = styled.div`
   overflow-y: auto;
 `;
 
-const ModalHeader = styled.h2`
+const ModalHeader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 16px;
   font-size: 18px;
   font-weight: bold;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+const Title = styled.h2`
+  font-size: 18px;
+  flex-grow: 1;
+  text-align: center;
+`;
+
+const DateDisplay = styled.span`
+  font-size: 14px;
+  color: gray;
 `;
 
 const Content = styled.div`
@@ -83,19 +113,21 @@ const Image = styled.img`
   border: 1px solid #ccc;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
+const NavigationButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+  margin: 0 50px;
 `;
 
-const Button = styled.button`
-  background: #007bff;
+const CloseButton = styled.button`
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  background-color: red;
   color: white;
   border: none;
-  padding: 8px 16px;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: 4px;
-  &:hover {
-    background: #0056b3;
-  }
 `;

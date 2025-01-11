@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import Counter from './Section/Counter';
 import Search from './Section/Search';
-import PoomPoomLog from './Section/PoomPoomLog';
 import DatePlan from './Section/DatePlan';
 import Alarm from './Section/Alarm';
 import Theme from './Section/Theme';
@@ -10,10 +9,20 @@ import ImportCalender from './Section/ImportPlan';
 import AddDatePlan from './Section/AddDatePlan';
 import DatePlanModal from '../Modal/DatePlanModal';
 import useModal from '../../../../hooks/useModal';
+import PoomPoom from './Section/PoomPoom';
 
-export default function Sidebar({ isOpen, toggleSidebar }) {
+export default function Sidebar({
+  isOpen,
+  toggleSidebar,
+  posts,
+  events,
+  selectedEvent,
+  handleCloseDetailModal,
+  setIsPostModalOpen,
+  handleEventClick,
+}) {
   const [isAddDatePlan, setAddDatePlan] = useState(false);
-  const { isOpen: isModalOpen, openModal, closeModal } = useModal();
+  const { isOpen: isModalOpen, closeModal } = useModal();
 
   console.log('모달', isModalOpen);
   return (
@@ -26,7 +35,14 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           <SidebarContent>
             <Counter />
             <Search />
-            <PoomPoomLog setAddDatePlan={setAddDatePlan} openModal={openModal} />
+            <PoomPoom
+              events={events}
+              posts={posts}
+              selectedEvent={selectedEvent}
+              handleCloseDetailModal={handleCloseDetailModal}
+              setIsPostModalOpen={setIsPostModalOpen}
+              handleEventClick={handleEventClick}
+            />
             <DatePlan />
             <Alarm />
             <Theme />
@@ -35,7 +51,6 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
         ))}
       {isModalOpen && (
         <Modal>
-          dsdsds
           <DatePlanModal isModalOpen={isModalOpen} closeModal={closeModal} />
         </Modal>
       )}
@@ -56,7 +71,7 @@ const Modal = styled.div`
 
 const SidebarWrapper = styled.div`
   width: ${({ isOpen }) => (isOpen ? '320px' : '0')};
-  height: 982px;
+  height: 1000px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
