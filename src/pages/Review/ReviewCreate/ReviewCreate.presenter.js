@@ -1,4 +1,5 @@
 import placeholderPhoto from '../../../assets/DummyPhoto.svg';
+import profileDummyPhoto from '../../../assets/ProfilePhoto.svg';
 import * as S from './ReviewCreate.style';
 
 export default function ReviewWriteUI({
@@ -7,7 +8,6 @@ export default function ReviewWriteUI({
   reviewData,
   setReviewData,
   setActiveImageIndex,
-  // eslint-disable-next-line no-unused-vars
   profilePhoto,
   handleManageImage,
   handleDeleteImage,
@@ -74,11 +74,7 @@ export default function ReviewWriteUI({
           <S.ReviewContentContainer>
             <S.ReviewContentHeader>
               <S.AuthorCircleBox>
-                <S.AuthorImg
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWhkDAMzHzBXvWnJTeTRAx6OkLGDLJVn3lYQ&s"
-                  alt="프로필 이미지"
-                />
-                {/* <S.AuthorImg src={profilePhoto || profileDummyPhoto} alt="프로필 이미지" /> */}
+                <S.AuthorImg src={profilePhoto || profileDummyPhoto} alt="프로필 이미지" />
               </S.AuthorCircleBox>
               <S.Nickname>@{nickname}</S.Nickname>
               <S.ReviewTypeBtn
@@ -144,7 +140,7 @@ export default function ReviewWriteUI({
                 </S.LabelContainer>
                 <S.LabelContainer>
                   <S.InfoTitle>제품 정보(링크)</S.InfoTitle>
-                  <S.InfoInput name="item_url" type="text" value={reviewData.item_url} onChange={handleInputChange} />
+                  <S.InfoInput name="item_url" type="text" onChange={handleInputChange} />
                 </S.LabelContainer>
                 <S.LabelContainer>
                   <S.InfoTitle>가격</S.InfoTitle>

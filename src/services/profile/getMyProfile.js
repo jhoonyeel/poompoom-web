@@ -7,7 +7,7 @@ import axios from '../../apis/axios';
  */
 export const getMyProfile = async () => {
   try {
-    const response = await axios.get('/profile/my');
+    const response = await axios.get(`/profile/my`);
     return response.data; // 필요한 데이터만 반환
   } catch (error) {
     console.error('내 프로필 가져오기 에러:', error.message);

@@ -16,7 +16,7 @@ export default function ReviewPostAuthorUI({
     <Wrapper>
       <AuthorProfile isContentHovered={isContentHovered} profilePhoto={profilePhoto} navigatePath={navigatePath} />
       <AuthorInfo>
-        <Nickname to="/profile">{`@${nickname}` || '@닉네임'}</Nickname>
+        <Nickname to="/profile">{`@${nickname}`}</Nickname>
         <AdditionalInfo>
           <ReviewType>{reviewType === 'GIVEN' ? '준 선물' : '받은 선물'}</ReviewType>
           {nickname !== currentUser?.nickname && (

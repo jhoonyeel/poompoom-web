@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from '../../apis/axios';
 import placeholderPhoto from '../../assets/DummyPhoto.svg';
 import profileDummyPhoto from '../../assets/ProfilePhoto.svg';
 import { useFetchProfilePicture } from '../../hooks/useFetchProfilePicture';
 import { useLogin } from '../../hooks/useLogin';
-import { CATEGORIES } from '../../shared/categories';
-import { ITEM } from '../../shared/item';
+import { getOneReview } from '../../services/reviewArticle/getOneReview';
+import { updateReview } from '../../services/reviewArticle/updateReview';
+import { CATEGORIES, ITEM } from '../../shared/constants';
 import * as S from './ReviewEdit.style';
 
 export default function ReviewEditPage() {
@@ -37,31 +37,29 @@ export default function ReviewEditPage() {
   const allImages = [...existingImages, ...newImages.map((file) => URL.createObjectURL(file))];
 
   // 기존 데이터 가져오기
-  const fetchReviewData = async () => {
-    try {
-      const response = await axios.get(`/review/${reviewId}`);
-      console.log('Fetched data:', response.data);
-      const { body, price, whereBuy, hashTags, reviewType, photos, item_url, item, nickname, profileImage } =
-        response.data;
-      console.log(body);
-      setReviewData({
-        content: body,
-        price: price.toString(),
-        source: whereBuy,
-        category: hashTags[0].name,
-        reviewType,
-        item,
-        item_url,
-        nickname,
-        profileImage,
-      });
-      setExistingImages(photos);
-    } catch (error) {
-      console.error(`/review/${reviewId} 에러:`, error);
-    }
-  };
   useEffect(() => {
-    fetchReviewData();
+    const loadReviewData = async () => {
+      try {
+        const data = await getOneReview(reviewId); // API 호출
+        const { body, price, whereBuy, hashTags, reviewType, photos, item_url, item, nickname, profileImage } = data;
+        console.log(body);
+        setReviewData({
+          content: body,
+          price: price.toString(),
+          source: whereBuy,
+          category: hashTags[0].name,
+          reviewType,
+          item,
+          item_url,
+          nickname,
+          profileImage,
+        });
+        setExistingImages(photos);
+      } catch (error) {
+        console.error('리뷰 데이터를 가져오는 중 에러:', error);
+      }
+    };
+    loadReviewData();
   }, [reviewId]);
 
   const handleManageImage = (e) => {
@@ -133,16 +131,14 @@ export default function ReviewEditPage() {
     });
 
     try {
-      const response = await axios.post(`/review/update/${reviewId}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log('Success:', response.data);
+      const response = await updateReview(reviewId, formData); // API 호출
+      console.log('Success:', response);
       navigate(`/review/${reviewId}`);
     } catch (error) {
-      console.error(`/review/update/${reviewId} 애러:`, error);
+      console.error('리뷰 업데이트 중 에러:', error);
     }
+
+    navigate(`/review/${reviewId}`);
   };
 
   const nextImage = (e) => {
