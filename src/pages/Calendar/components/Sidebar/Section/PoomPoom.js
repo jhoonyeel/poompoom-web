@@ -76,7 +76,11 @@ export default function PoomPoom({
   useEffect(() => {
     const recentPosts = Object.values(posts)
       .flat()
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .sort((a, b) => {
+        const dateA = new Date(a.selectedDate || a.createdAt);
+        const dateB = new Date(b.selectedDate || b.createdAt);
+        return dateB - dateA; // 최신순 정렬
+      })
       .slice(0, 6);
 
     setRecentPostsWithImages(recentPosts);
@@ -128,7 +132,7 @@ export default function PoomPoom({
                       <S.NoImageText>사진 없는 게시글</S.NoImageText>
                     )}
                     <S.HoverDate>
-                      {new Date(post.createdAt).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' })}
+                      {new Date(post.selectedDate).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' })}
                     </S.HoverDate>
                   </S.LogBox>
                 ))}
