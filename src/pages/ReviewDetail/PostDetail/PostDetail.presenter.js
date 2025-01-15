@@ -63,7 +63,7 @@ export default function ReviewDetailUI({
           <S.AdditionalInfoContainer onClick={handleWhereBuyClick}>
             <LinkImg />
             <S.AdditionalInfoWrapper>
-              <S.AdditionalInfoText> {whereBuy || `경산 다이소 영남대점`}</S.AdditionalInfoText>
+              <S.AdditionalInfoText> {whereBuy}</S.AdditionalInfoText>
               <S.Price>{price}</S.Price>
             </S.AdditionalInfoWrapper>
           </S.AdditionalInfoContainer>
@@ -74,15 +74,9 @@ export default function ReviewDetailUI({
             <S.PostHeader>
               <S.AuthorInfo>
                 <S.AuthorImgBox>
-                  <S.AuthorImg
-                    src={
-                      profileImage ||
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWhkDAMzHzBXvWnJTeTRAx6OkLGDLJVn3lYQ&s'
-                    }
-                    alt="프로필 사진"
-                  />
+                  <S.AuthorImg src={profileImage} alt="프로필 사진" />
                 </S.AuthorImgBox>
-                <S.AuthorNickname to="/profile">@ {nickname || 'test'}</S.AuthorNickname>
+                <S.AuthorNickname to="/profile">@ {nickname}</S.AuthorNickname>
               </S.AuthorInfo>
               <S.TypeText>Lover에게 {reviewType === 'GIVEN' ? '주는 선물' : '받은 선물'}</S.TypeText>
               {isMyPost ? <OverflowMenuComponent onUpdate={onUpdate} onDelete={onDelete} /> : <FollowButton />}
