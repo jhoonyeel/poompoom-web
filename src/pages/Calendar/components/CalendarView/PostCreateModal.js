@@ -1,26 +1,73 @@
-import React, { useState } from 'react';
+/* eslint-disable no-plusplus */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-use-before-define */
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
-export default function PostModal({ onClose, onSubmit }) {
+export default function PostCreateModal({ onClose, onSubmit }) {
   const [postData, setPostData] = useState({
     title: '',
     content: '',
-    images: [], // 이미지 파일을 저장하는 배열
-    createdAt: new Date().toISOString(), // 게시글 작성 시 현재 날짜 및 시간 추가
+    createdAt: new Date().toISOString(),
   });
+  const contentRef = useRef(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPostData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const handlePaste = (e) => {
+    const clipboardItems = e.clipboardData.items;
+    for (let i = 0; i < clipboardItems.length; i++) {
+      const item = clipboardItems[i];
+      if (item.type.startsWith('image/')) {
+        const file = item.getAsFile();
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+          insertImage(event.target.result);
+        };
+
+        reader.readAsDataURL(file);
+        e.preventDefault();
+      }
+    }
+  };
+
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
-    const imageUrls = files.map((file) => URL.createObjectURL(file)); // 이미지 미리보기 URL 생성
-    setPostData((prevData) => ({
-      ...prevData,
-      images: [...prevData.images, ...imageUrls],
-    }));
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        insertImage(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const insertImage = (imageUrl) => {
+    const contentEditable = contentRef.current;
+    const selection = window.getSelection();
+    const range = selection.getRangeAt(0);
+
+    const img = document.createElement('img');
+    img.src = imageUrl;
+    img.style.maxWidth = '100%';
+    img.style.height = 'auto';
+
+    range.insertNode(img);
+    range.collapse(false);
+
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    saveContent();
+  };
+
+  const saveContent = () => {
+    const contentEditable = contentRef.current;
+    setPostData((prevData) => ({ ...prevData, content: contentEditable.innerHTML }));
   };
 
   const handleSubmit = (e) => {
@@ -40,25 +87,18 @@ export default function PostModal({ onClose, onSubmit }) {
           </Label>
           <Label>
             본문:
-            <Textarea
-              name="content"
-              value={postData.content}
-              onChange={handleInputChange}
+            <ContentEditable
+              ref={contentRef}
+              contentEditable
+              onInput={saveContent}
+              onPaste={handlePaste}
               placeholder="여기에 본문을 작성하세요..."
-              required
             />
           </Label>
-          <Label>
+          <ImageUploadButton>
             사진 추가:
-            <ImageUploadButton>
-              <input type="file" accept="image/*" multiple onChange={handleImageUpload} />
-            </ImageUploadButton>
-          </Label>
-          <ImagePreviewContainer>
-            {postData.images.map((image, index) => (
-              <ImagePreview key={index} src={image} alt={`Uploaded ${index}`} />
-            ))}
-          </ImagePreviewContainer>
+            <input type="file" accept="image/*" multiple onChange={handleImageUpload} />
+          </ImageUploadButton>
           <DateDisplay>작성 날짜: {new Date(postData.createdAt).toLocaleString()}</DateDisplay>
           <ButtonContainer>
             <Button type="submit">저장</Button>
@@ -83,7 +123,7 @@ const Modal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000; /* 높은 z-index로 EventDetailModal 위에 렌더링 */
+  z-index: 2000;
 `;
 
 const ModalContent = styled.div`
@@ -119,13 +159,14 @@ const Input = styled.input`
   border-radius: 4px;
 `;
 
-const Textarea = styled.textarea`
+const ContentEditable = styled.div`
   padding: 8px;
   margin-top: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  resize: none;
-  height: 150px;
+  min-height: 150px;
+  overflow-y: auto;
+  white-space: pre-wrap;
 `;
 
 const ImageUploadButton = styled.div`
@@ -134,21 +175,6 @@ const ImageUploadButton = styled.div`
   input[type='file'] {
     display: block;
   }
-`;
-
-const ImagePreviewContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-`;
-
-const ImagePreview = styled.img`
-  width: 80px;
-  height: 80px;
-  border-radius: 4px;
-  object-fit: cover;
-  border: 1px solid #ccc;
 `;
 
 const DateDisplay = styled.div`

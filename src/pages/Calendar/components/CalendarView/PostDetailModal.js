@@ -8,7 +8,6 @@ export default function PostDetailModal({ post, onClose, onNext, onPrevious, sho
         <ModalHeader>
           {showNavigation && <NavigationButton onClick={onPrevious}>&lt;</NavigationButton>}
           <TitleContainer>
-            {' '}
             <Title>{post.title}</Title>
             <DateDisplay>
               {new Date(post.createdAt).toLocaleDateString('en-US', {
@@ -22,7 +21,7 @@ export default function PostDetailModal({ post, onClose, onNext, onPrevious, sho
           {showNavigation && <NavigationButton onClick={onNext}>&gt;</NavigationButton>}
         </ModalHeader>
         <Content>
-          <TextContent>{post.content}</TextContent>
+          <TextContent dangerouslySetInnerHTML={{ __html: post.content }} />
           {post.images && post.images.length > 0 && (
             <ImageGallery>
               {post.images.map((image, index) => (
@@ -94,7 +93,7 @@ const Content = styled.div`
   gap: 16px;
 `;
 
-const TextContent = styled.p`
+const TextContent = styled.div`
   white-space: pre-line;
   line-height: 1.5;
 `;

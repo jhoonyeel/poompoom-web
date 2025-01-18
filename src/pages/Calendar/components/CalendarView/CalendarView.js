@@ -1,9 +1,9 @@
 /* eslint-disable no-plusplus */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import EventCreateModal from './EventCreateModal';
 import EventDetailModal from './EventDetailModal';
-import EventModal from './EventModal';
-import PostModal from './PostModal';
+import PostCreateModal from './PostCreateModal';
 
 export default function CalendarView({
   posts,
@@ -48,7 +48,10 @@ export default function CalendarView({
     calendarDates.push(day);
   }
 
-  const today = new Date();
+  const removeTimeFromDate = (date) => {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  };
+  const today = removeTimeFromDate(new Date());
 
   return (
     <CalendarWrapper>
@@ -70,11 +73,16 @@ export default function CalendarView({
             today.getMonth() === currentDate.getMonth() &&
             today.getDate() === day;
 
-          const dateKey = day ? new Date(currentDate.getFullYear(), currentDate.getMonth(), day) : null;
+          const dateKey = day
+            ? removeTimeFromDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), day))
+            : null;
 
           // Filter events that match the current date
           const dayEvents = events.filter(
-            (event) => dateKey && new Date(event.startDate) <= dateKey && new Date(event.endDate) >= dateKey,
+            (event) =>
+              dateKey &&
+              removeTimeFromDate(new Date(event.startDate)) <= dateKey &&
+              removeTimeFromDate(new Date(event.endDate)) >= dateKey,
           );
 
           return (
@@ -94,7 +102,7 @@ export default function CalendarView({
         })}
       </DateGrid>
       <AddEventButton onClick={() => setIsModalOpen(true)}>Add Event</AddEventButton>
-      {isModalOpen && <EventModal onClose={() => setIsModalOpen(false)} onSubmit={handleEventSubmit} />}
+      {isModalOpen && <EventCreateModal onClose={() => setIsModalOpen(false)} onSubmit={handleEventSubmit} />}
       {selectedEvent && (
         <EventDetailModal
           event={selectedEvent}
@@ -103,7 +111,7 @@ export default function CalendarView({
           onWritePost={() => setIsPostModalOpen(true)}
         />
       )}
-      {isPostModalOpen && <PostModal onClose={() => setIsPostModalOpen(false)} onSubmit={handlePostSubmit} />}
+      {isPostModalOpen && <PostCreateModal onClose={() => setIsPostModalOpen(false)} onSubmit={handlePostSubmit} />}
     </CalendarWrapper>
   );
 }
