@@ -7,25 +7,40 @@ import DatePlanModal from './components/Modal/DatePlanModal';
 export default function CalendarPage() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [posts, setPosts] = useState({}); // 게시글 데이터 {eventId: [posts]}
+  const [Logs, setLogs] = useState({}); // 로그 데이터
   const [events, setEvents] = useState([]); // 이벤트 데이터를 배열로 관리
   const [selectedEvent, setSelectedEvent] = useState(null); // 선택된 이벤트
   const [isPostModalOpen, setIsPostModalOpen] = useState(false); // 게시글 모달 상태
+  const [ClickedDate, setClickedDate] = useState(null);
 
-  const handleEventClick = (event) => {
+  const handleEventClick = (event, setDate) => {
     setSelectedEvent(event); // 선택된 이벤트 설정
+    if (setDate) setClickedDate(setDate);
   };
 
   const handleCloseDetailModal = () => {
     setSelectedEvent(null); // 이벤트 선택 해제
+    setClickedDate(null);
   };
 
   const handlePostSubmit = (post) => {
     if (!selectedEvent || !selectedEvent.id) return;
 
-    setPosts((prevPosts) => ({
-      ...prevPosts,
-      [selectedEvent.id]: [...(prevPosts[selectedEvent.id] || []), post].sort((a, b) => a.title.localeCompare(b.title)),
-    }));
+    if (post.type === 'plan') {
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        [selectedEvent.id]: [...(prevPosts[selectedEvent.id] || []), post].sort((a, b) =>
+          a.title.localeCompare(b.title),
+        ),
+      }));
+    } else {
+      setLogs((prevPosts) => ({
+        ...prevPosts,
+        [selectedEvent.id]: [...(prevPosts[selectedEvent.id] || []), post].sort((a, b) =>
+          a.title.localeCompare(b.title),
+        ),
+      }));
+    }
 
     setIsPostModalOpen(false); // 게시글 작성 모달 닫기
   };
@@ -50,12 +65,14 @@ export default function CalendarPage() {
       />
       <CalendarView
         posts={posts}
+        Logs={Logs}
         events={events}
         setEvents={setEvents}
         selectedEvent={selectedEvent}
         isPostModalOpen={isPostModalOpen}
         setIsPostModalOpen={setIsPostModalOpen}
         handleEventClick={handleEventClick}
+        ClickedDate={ClickedDate}
         handleCloseDetailModal={handleCloseDetailModal}
         handlePostSubmit={handlePostSubmit}
       />

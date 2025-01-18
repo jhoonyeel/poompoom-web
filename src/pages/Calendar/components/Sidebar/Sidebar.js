@@ -9,7 +9,7 @@ import ImportCalender from './Section/ImportPlan';
 import AddDatePlan from './Section/AddDatePlan';
 import DatePlanModal from '../Modal/DatePlanModal';
 import useModal from '../../../../hooks/useModal';
-import PoomPoom from './Section/PoomPoom';
+import Event from './Section/Event';
 
 export default function Sidebar({
   isOpen,
@@ -42,7 +42,7 @@ export default function Sidebar({
             <SidebarContent>
               <Counter />
               <Search />
-              <PoomPoom
+              <Event
                 events={events}
                 posts={posts}
                 selectedEvent={selectedEvent}
@@ -50,8 +50,8 @@ export default function Sidebar({
                 setIsPostModalOpen={setIsPostModalOpen}
                 handleEventClick={handleEventClick}
               />
-              <DatePlan />
-              <Alarm />
+              <DatePlan posts={posts} />
+              <Alarm posts={posts} events={events} />
               <Theme />
               <ImportCalender />
             </SidebarContent>

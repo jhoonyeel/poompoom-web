@@ -9,8 +9,8 @@ export default function EventModal({ onClose, onSubmit }) {
     category: null, // 카테고리 객체를 저장
     startDate: '',
     endDate: '',
-    memo: '',
     writer: '',
+    createdAt: new Date().toISOString(), // 알람 생성용 작성시간 추가
   });
 
   const categories = [
@@ -36,7 +36,12 @@ export default function EventModal({ onClose, onSubmit }) {
       alert('종료 날짜는 시작 날짜보다 늦어야 합니다.');
       return;
     }
-    const eventToSubmit = { ...eventData, writer: user?.memberId };
+    const eventToSubmit = {
+      ...eventData,
+      ...(eventData.memo !== undefined && { memo: eventData.memo }),
+      // 카테고리에 따라 메모 필드 추가
+      writer: user?.memberId,
+    };
     onSubmit(eventToSubmit);
     onClose(); // Close the modal after submission
   };
@@ -79,10 +84,15 @@ export default function EventModal({ onClose, onSubmit }) {
               <Input type="date" name="endDate" value={eventData.endDate} onChange={handleInputChange} required />
             </Label>
           </div>
-          <Label>
-            메모:
-            <Textarea name="memo" value={eventData.memo} onChange={handleInputChange} maxLength={800} />
-          </Label>
+          {['남자친구', '여자친구'].includes(eventData.category?.label) && (
+            <Label>
+              메모:
+              <Textarea name="memo" value={eventData.memo} onChange={handleInputChange} maxLength={800} />
+            </Label>
+          )}
+
+          {/* value:memo - 객체의 속성이 존재하지 않아도 undefined가 반환됨 */}
+
           <div style={{ display: 'flex' }}>
             <SubmitButton type="submit">저장</SubmitButton>
             <CancelButton type="button" onClick={onClose}>

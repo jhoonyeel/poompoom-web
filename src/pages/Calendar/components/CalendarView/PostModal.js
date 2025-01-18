@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-export default function PostModal({ onClose, onSubmit }) {
+export default function PostModal({ onClose, onSubmit, postType, ClickedDate }) {
   const [postData, setPostData] = useState({
     title: '',
     content: '',
     images: [], // 이미지 파일을 저장하는 배열
     createdAt: new Date().toISOString(), // 게시글 작성 시 현재 날짜 및 시간 추가
+    type: postType,
   });
 
   const handleInputChange = (e) => {
@@ -34,6 +35,7 @@ export default function PostModal({ onClose, onSubmit }) {
       <ModalContent>
         <ModalHeader>게시글 작성</ModalHeader>
         <Form onSubmit={handleSubmit}>
+          {ClickedDate && <Label>일정 날짜: {new Date(ClickedDate).toLocaleDateString()}</Label>}
           <Label>
             제목:
             <Input name="title" value={postData.title} onChange={handleInputChange} required />

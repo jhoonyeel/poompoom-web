@@ -4,20 +4,24 @@ import styled from 'styled-components';
 import EventDetailModal from './EventDetailModal';
 import EventModal from './EventModal';
 import PostModal from './PostModal';
+import LogModal from './LogModal';
 
 export default function CalendarView({
   posts,
+  Logs,
   events,
   setEvents,
   selectedEvent,
   isPostModalOpen,
   setIsPostModalOpen,
   handleEventClick,
+  ClickedDate,
   handleCloseDetailModal,
   handlePostSubmit,
 }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [postType, setPostType] = useState(''); // 게시글 타입
 
   const handleEventSubmit = (eventData) => {
     // 이벤트 ID를 부여
@@ -49,6 +53,18 @@ export default function CalendarView({
   }
 
   const today = new Date();
+
+  const onWritePlan = () => {
+    setIsPostModalOpen(true);
+    setPostType('plan');
+  };
+
+  const onWriteLog = () => {
+    setIsPostModalOpen(true);
+    setPostType('log');
+  };
+
+  console.log('Logs', Logs);
 
   return (
     <CalendarWrapper>
@@ -84,7 +100,7 @@ export default function CalendarView({
                 <EventTag
                   key={idx}
                   style={{ background: event.category.color }}
-                  onClick={() => handleEventClick(event)}
+                  onClick={() => handleEventClick(event, dateKey)}
                 >
                   {event.title}
                 </EventTag>
@@ -100,10 +116,31 @@ export default function CalendarView({
           event={selectedEvent}
           onClose={handleCloseDetailModal}
           posts={posts[selectedEvent.id] || []}
-          onWritePost={() => setIsPostModalOpen(true)}
+          Logs={Logs[selectedEvent.id] || []}
+          onWritePlan={onWritePlan}
+          onWriteLog={onWriteLog}
+          ClickedDate={ClickedDate}
+          setPostType={setPostType}
+          postType={postType}
         />
       )}
-      {isPostModalOpen && <PostModal onClose={() => setIsPostModalOpen(false)} onSubmit={handlePostSubmit} />}
+
+      {isPostModalOpen &&
+        (postType === 'plan' ? (
+          <PostModal
+            onClose={() => setIsPostModalOpen(false)}
+            onSubmit={handlePostSubmit}
+            postType={postType}
+            ClickedDate={ClickedDate}
+          />
+        ) : (
+          <LogModal
+            onClose={() => setIsPostModalOpen(false)}
+            onSubmit={handlePostSubmit}
+            postType={postType}
+            ClickedDate={ClickedDate}
+          />
+        ))}
     </CalendarWrapper>
   );
 }
