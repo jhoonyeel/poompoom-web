@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const user = JSON.parse(localStorage.getItem('userData'));
 
-export default function EventModal({ onClose, onSubmit }) {
+export default function EventCreateModal({ onClose, onSubmit }) {
   const [eventData, setEventData] = useState({
     title: '',
     category: null, // 카테고리 객체를 저장
@@ -27,7 +27,7 @@ export default function EventModal({ onClose, onSubmit }) {
   };
 
   const handleCategoryChange = (category) => {
-    setEventData({ ...eventData, category }); // 전체 객체를 저장
+    setEventData({ ...eventData, category, memo: '' }); // 전체 객체를 저장
   };
 
   const handleFormSubmit = (e) => {
@@ -42,6 +42,7 @@ export default function EventModal({ onClose, onSubmit }) {
   };
 
   const selectedCategoryLabel = eventData.category?.label;
+  const isMemoVisible = !['남자친구', '여자친구'].includes(selectedCategoryLabel);
 
   return (
     <Modal>
@@ -79,10 +80,12 @@ export default function EventModal({ onClose, onSubmit }) {
               <Input type="date" name="endDate" value={eventData.endDate} onChange={handleInputChange} required />
             </Label>
           </div>
-          <Label>
-            메모:
-            <Textarea name="memo" value={eventData.memo} onChange={handleInputChange} maxLength={800} />
-          </Label>
+          {isMemoVisible && (
+            <Label>
+              메모:
+              <Textarea name="memo" value={eventData.memo} onChange={handleInputChange} maxLength={800} />
+            </Label>
+          )}
           <div style={{ display: 'flex' }}>
             <SubmitButton type="submit">저장</SubmitButton>
             <CancelButton type="button" onClick={onClose}>

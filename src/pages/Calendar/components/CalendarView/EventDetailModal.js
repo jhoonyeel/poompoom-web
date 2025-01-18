@@ -25,6 +25,8 @@ export default function EventDetailModal({ event, posts, onClose, onWritePost })
   // 선택된 게시글 찾기
   const selectedPost = posts.find((post) => String(post.id) === String(selectedPostId)) || null;
 
+  const shouldHideMemoAndPostButton = ['남자친구', '여자친구'].includes(event.category.label);
+
   return (
     <>
       <Modal>
@@ -36,9 +38,11 @@ export default function EventDetailModal({ event, posts, onClose, onWritePost })
           <Detail>
             <strong>날짜:</strong> {event.startDate} ~ {event.endDate}
           </Detail>
-          <Detail>
-            <strong>메모:</strong> {event.memo}
-          </Detail>
+          {!shouldHideMemoAndPostButton && (
+            <Detail>
+              <strong>메모:</strong> {event.memo}
+            </Detail>
+          )}
           {posts.length > 0 && (
             <Detail>
               <strong>게시글:</strong>
@@ -68,7 +72,7 @@ export default function EventDetailModal({ event, posts, onClose, onWritePost })
           )}
           <ButtonContainer>
             <Button onClick={onClose}>닫기</Button>
-            <Button onClick={onWritePost}>게시글 작성하기</Button>
+            {!shouldHideMemoAndPostButton && <Button onClick={onWritePost}>게시글 작성하기</Button>}
           </ButtonContainer>
         </ModalContent>
       </Modal>
