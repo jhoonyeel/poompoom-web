@@ -8,7 +8,7 @@ export default function PostCreateModal({ onClose, onSubmit }) {
   const [postData, setPostData] = useState({
     title: '',
     content: '',
-    createdAt: new Date().toISOString(),
+    createdAt: new Date().toISOString(), // 게시글 작성 시 현재 날짜 및 시간 추가
   });
   const contentRef = useRef(null);
 
@@ -99,7 +99,19 @@ export default function PostCreateModal({ onClose, onSubmit }) {
             사진 추가:
             <input type="file" accept="image/*" multiple onChange={handleImageUpload} />
           </ImageUploadButton>
-          <DateDisplay>작성 날짜: {new Date(postData.createdAt).toLocaleString()}</DateDisplay>
+          <Label>
+            날짜 선택:
+            <Input
+              type="date"
+              name="selectedDate"
+              value={postData.selectedDate || ''}
+              onChange={(e) => setPostData({ ...postData, selectedDate: e.target.value })}
+            />
+          </Label>
+          <DateDisplay>
+            선택한 날짜:{' '}
+            {postData.selectedDate ? new Date(postData.selectedDate).toLocaleDateString() : '날짜를 선택해주세요'}
+          </DateDisplay>
           <ButtonContainer>
             <Button type="submit">저장</Button>
             <Button type="button" onClick={onClose}>
