@@ -6,7 +6,7 @@ import LogDetailModal from './LogDetailModal';
 export default function EventDetailModal({
   event,
   posts,
-  Logs,
+  logs,
   onClose,
   onWritePlan,
   onWriteLog,
@@ -36,12 +36,12 @@ export default function EventDetailModal({
   };
 
   const selectedItem =
-    setPostType === 'post'
+    postType === 'post'
       ? posts?.find((post) => String(post.id) === String(selectedItemId)) || null
-      : Logs?.find((log) => String(log.id) === String(selectedItemId)) || null;
+      : logs?.find((log) => String(log.id) === String(selectedItemId)) || null;
 
-  console.log('logs', Logs);
-  console.log('ttt:', postType, 'id:', selectedItemId, 'item:', selectedItem);
+  const shouldHideMemoAndPostButton = ['남자친구', '여자친구'].includes(event.category.label);
+
   return (
     <>
       <Modal>
@@ -56,9 +56,11 @@ export default function EventDetailModal({
           <Detail>
             {ClickedDate && `선택: ${new Date(ClickedDate).toLocaleDateString('ko-KR', { day: 'numeric' })}`}
           </Detail>
-          <Detail>
-            <strong>메모:</strong> {event.memo}
-          </Detail>
+          {shouldHideMemoAndPostButton && (
+            <Detail>
+              <strong>메모:</strong> {event.memo}
+            </Detail>
+          )}
 
           {Array.isArray(posts) && posts.length > 0 && (
             <Detail>
@@ -69,7 +71,7 @@ export default function EventDetailModal({
                   style={{ marginRight: '8px' }}
                 >
                   <option value="" disabled>
-                    게시글 선택
+                    플랜 선택
                   </option>
                   {posts.map((post) => (
                     <option key={post.id} value={String(post.id)}>
@@ -80,10 +82,8 @@ export default function EventDetailModal({
               </div>
             </Detail>
           )}
-
-          {Array.isArray(Logs) && Logs.length > 0 && (
+          {Array.isArray(logs) && logs.length > 0 && (
             <Detail>
-              <strong>회고록:</strong>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <select
                   onChange={(e) => handleSelection(e, 'log')}
@@ -93,7 +93,7 @@ export default function EventDetailModal({
                   <option value="" disabled>
                     회고록 선택
                   </option>
-                  {Logs.map((log) => (
+                  {logs.map((log) => (
                     <option key={log.id} value={String(log.id)}>
                       {log.title}
                     </option>
@@ -103,16 +103,18 @@ export default function EventDetailModal({
             </Detail>
           )}
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '16px' }}>
-            <ViewButton onClick={handleView} disabled={!selectedItemId}>
-              상세보기
-            </ViewButton>
+          <ViewButton onClick={handleView} disabled={!selectedItemId}>
+            상세보기
+          </ViewButton>
+          {!shouldHideMemoAndPostButton && (
             <ButtonContainer>
-              <Button onClick={onClose}>닫기</Button>
               <Button onClick={onWritePlan}>데이트 플랜 작성하기</Button>
               <Button onClick={onWriteLog}>회고록 작성하기</Button>
             </ButtonContainer>
-          </div>
+          )}
+          <ButtonContainer>
+            <Button onClick={onClose}>닫기</Button>
+          </ButtonContainer>
         </ModalContent>
       </Modal>
 
@@ -177,14 +179,13 @@ const Button = styled.button`
 `;
 
 const ViewButton = styled.button`
-  background: #28a745;
-  color: white;
-  border: none;
-  padding: 6px 12px;
+  width: fit-content;
+  height: 32px;
+  padding: 6px;
   cursor: pointer;
   border-radius: 4px;
   &:hover {
-    background: #218838;
+    background: rgb(174, 213, 159);
   }
   &:disabled {
     background: #6c757d;

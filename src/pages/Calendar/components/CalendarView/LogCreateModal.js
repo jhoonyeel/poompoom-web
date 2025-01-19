@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-export default function LogModal({ onClose, onSubmit, postType, ClickedDate, initialLogData = {} }) {
+export default function LogCreateModal({ onClose, onSubmit, postType, ClickedDate, initialLogData = {} }) {
   const [logData, setLogData] = useState({
     title: initialLogData.title || '',
     body: initialLogData.body || '',
     photos: initialLogData.photos || [],
     createdAt: new Date().toISOString(),
     type: postType,
+    id: new Date(),
   });
 
   const handleInputChange = (e) => {

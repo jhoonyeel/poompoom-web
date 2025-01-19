@@ -7,10 +7,11 @@ import DatePlanModal from './components/Modal/DatePlanModal';
 export default function CalendarPage() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [posts, setPosts] = useState({}); // 게시글 데이터 {eventId: [posts]}
-  const [Logs, setLogs] = useState({}); // 로그 데이터
+  const [logs, setLogs] = useState({}); // 로그 데이터
   const [events, setEvents] = useState([]); // 이벤트 데이터를 배열로 관리
   const [selectedEvent, setSelectedEvent] = useState(null); // 선택된 이벤트
-  const [isPostModalOpen, setIsPostModalOpen] = useState(false); // 게시글 모달 상태
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false);
+  const [isLogModalOpen, setIsLogModalOpen] = useState(false);
   const [ClickedDate, setClickedDate] = useState(null);
 
   const handleEventClick = (event, setDate) => {
@@ -57,20 +58,23 @@ export default function CalendarPage() {
         isOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
         posts={posts}
+        logs={logs}
         events={events}
         selectedEvent={selectedEvent}
         handleCloseDetailModal={handleCloseDetailModal}
-        setIsPostModalOpen={setIsPostModalOpen}
+        setIsLogModalOpen={setIsLogModalOpen}
         handleEventClick={handleEventClick}
       />
       <CalendarView
         posts={posts}
-        Logs={Logs}
+        logs={logs}
         events={events}
         setEvents={setEvents}
         selectedEvent={selectedEvent}
         isPostModalOpen={isPostModalOpen}
         setIsPostModalOpen={setIsPostModalOpen}
+        isLogModalOpen={isLogModalOpen}
+        setIsLogModalOpen={setIsLogModalOpen}
         handleEventClick={handleEventClick}
         ClickedDate={ClickedDate}
         handleCloseDetailModal={handleCloseDetailModal}

@@ -29,14 +29,7 @@ export default function HeaderUI({ showSearchBar, navigatePath }) {
       {showSearchBar && <SearchBar />}
       <S.RightBox>
         <S.LoverImgBox onClick={navigatePath('/lovers-profile')}>
-          <S.LoverImg
-            src={
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWhkDAMzHzBXvWnJTeTRAx6OkLGDLJVn3lYQ&s' ||
-              profileDummyPhoto
-            }
-            alt="프로필 이미지"
-          />
-          {/* <S.LoverImg src={profile.profileImagePath || profileDummyPhoto} alt="프로필 이미지" /> */}
+          <S.LoverImg src={profile.profileImagePath || profileDummyPhoto} alt="프로필 이미지" />
         </S.LoverImgBox>
         <S.MenuBar>
           <S.MenuItem onClick={navigatePath('/review')}>MOOD VIEW</S.MenuItem>

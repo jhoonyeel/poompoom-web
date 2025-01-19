@@ -1,12 +1,11 @@
 /* eslint-disable camelcase */
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../../../apis/axios';
 // eslint-disable-next-line import/named
 import { useFetchProfilePicture } from '../../../hooks/useFetchProfilePicture';
 import { useLogin } from '../../../hooks/useLogin';
-import { CATEGORIES } from '../../../shared/categories';
-import { ITEM } from '../../../shared/item';
+import { createReview } from '../../../services/reviewArticle/createReview';
+import { CATEGORIES, ITEM } from '../../../shared/constants';
 import ReviewWriteUI from './ReviewCreate.presenter';
 
 export default function ReviewWritePage() {
@@ -19,11 +18,12 @@ export default function ReviewWritePage() {
     content: '',
     category: CATEGORIES[0],
     item: '',
+    item_url: '',
   });
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem('userData'));
-  const nickname = 'test' || user.nickname;
+  const nickname = user.nickname;
 
   const { userData } = useLogin();
   const profilePhoto = useFetchProfilePicture(userData?.memberId); // 프로필 사진을 가져오는 커스텀 훅 호출
@@ -58,7 +58,7 @@ export default function ReviewWritePage() {
       return;
     }
 
-    const { content, price, source, category, reviewType, item } = reviewData;
+    const { content, price, source, category, reviewType, item, item_url } = reviewData;
     if (!content || !price || !source || !category || !reviewType || !item) {
       alert('모든 필드를 입력해주세요.');
       return;
@@ -72,6 +72,7 @@ export default function ReviewWritePage() {
       category,
       reviewType,
       item,
+      item_url,
     });
 
     // 파일 업로드를 지원하는 multipart 요청을 생성하기 위해 formData 객체 생성
@@ -83,15 +84,11 @@ export default function ReviewWritePage() {
     });
 
     try {
-      const response = await axios.post(`/review/create`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log('Success:', response.data);
-      navigate('/review');
+      const responseData = await createReview(formData);
+      navigate(`/review/${responseData.createdId}`);
     } catch (error) {
-      console.error('/review/create 에러:', error);
+      console.error('리뷰 작성 에러:', error);
+      alert(error.message);
     }
   };
 

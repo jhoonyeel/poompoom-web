@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import axios from 'axios';
-import LogModal from './LogModal';
+import LogCreateModal from './LogCreateModal';
 
 export default function LogDetailModal({ log, onClose, ClickedDate }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -30,7 +30,7 @@ export default function LogDetailModal({ log, onClose, ClickedDate }) {
 
   if (isEditing) {
     return (
-      <LogModal
+      <LogCreateModal
         onClose={() => setIsEditing(false)}
         onSubmit={async (updatedLog) => {
           try {
@@ -103,28 +103,36 @@ const DeleteConfirmation = styled.div`
 `;
 
 const Modal = styled.div`
-  /* 기존 스타일 재활용 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
 `;
 
 const ModalContent = styled.div`
-  /* 기존 스타일 재활용 */
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 600px;
+  height: 600px;
+  overflow-y: auto;
 `;
 
-const ButtonContainer = styled.div`
-  /* 기존 스타일 재활용 */
-`;
+const ButtonContainer = styled.div``;
 
-const Button = styled.button`
-  /* 기존 스타일 재활용 */
-`;
+const Button = styled.button``;
 
-const ImagePreviewContainer = styled.div`
-  /* 기존 스타일 재활용 */
-`;
+const ImagePreviewContainer = styled.div``;
 
-const ImagePreview = styled.img`
-  /* 기존 스타일 재활용 */
-`;
+const ImagePreview = styled.img``;
 
 const DateDisplay = styled.div`
   font-size: 0.9rem;
@@ -142,6 +150,4 @@ const DetailBody = styled.div`
   }
 `;
 
-const ModalHeader = styled.h2`
-  /* 기존 스타일 재활용 */
-`;
+const ModalHeader = styled.h2``;

@@ -71,11 +71,11 @@ export default function Event({
   }, [events]); // 최신 일정 4개
 
   const handlePrevSection = () => {
-    setCurrentSectionIndex((prev) => (prev === 0 ? 3 : prev - 1));
+    setCurrentSectionIndex((prev) => (prev === 0 ? 2 : prev - 1));
   };
 
   const handleNextSection = () => {
-    setCurrentSectionIndex((prev) => (prev === 3 ? 0 : prev + 1));
+    setCurrentSectionIndex((prev) => (prev === 2 ? 0 : prev + 1));
   };
   return (
     <Container>

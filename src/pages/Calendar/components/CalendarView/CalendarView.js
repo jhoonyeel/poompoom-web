@@ -1,19 +1,21 @@
 /* eslint-disable no-plusplus */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import EventCreateModal from './EventCreateModal';
 import EventDetailModal from './EventDetailModal';
-import EventModal from './EventModal';
-import PostModal from './PostModal';
-import LogModal from './LogModal';
+import PostCreateModal from './PostCreateModal';
+import LogCreateModal from './LogCreateModal';
 
 export default function CalendarView({
   posts,
-  Logs,
+  logs,
   events,
   setEvents,
   selectedEvent,
   isPostModalOpen,
   setIsPostModalOpen,
+  isLogModalOpen,
+  setIsLogModalOpen,
   handleEventClick,
   ClickedDate,
   handleCloseDetailModal,
@@ -52,7 +54,10 @@ export default function CalendarView({
     calendarDates.push(day);
   }
 
-  const today = new Date();
+  const removeTimeFromDate = (date) => {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  };
+  const today = removeTimeFromDate(new Date());
 
   const onWritePlan = () => {
     setIsPostModalOpen(true);
@@ -60,11 +65,12 @@ export default function CalendarView({
   };
 
   const onWriteLog = () => {
-    setIsPostModalOpen(true);
+    setIsLogModalOpen(true);
     setPostType('log');
   };
 
-  console.log('Logs', Logs);
+  console.log('posts', posts);
+  console.log('Logs', logs);
 
   return (
     <CalendarWrapper>
@@ -86,11 +92,16 @@ export default function CalendarView({
             today.getMonth() === currentDate.getMonth() &&
             today.getDate() === day;
 
-          const dateKey = day ? new Date(currentDate.getFullYear(), currentDate.getMonth(), day) : null;
+          const dateKey = day
+            ? removeTimeFromDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), day))
+            : null;
 
           // Filter events that match the current date
           const dayEvents = events.filter(
-            (event) => dateKey && new Date(event.startDate) <= dateKey && new Date(event.endDate) >= dateKey,
+            (event) =>
+              dateKey &&
+              removeTimeFromDate(new Date(event.startDate)) <= dateKey &&
+              removeTimeFromDate(new Date(event.endDate)) >= dateKey,
           );
 
           return (
@@ -110,13 +121,13 @@ export default function CalendarView({
         })}
       </DateGrid>
       <AddEventButton onClick={() => setIsModalOpen(true)}>Add Event</AddEventButton>
-      {isModalOpen && <EventModal onClose={() => setIsModalOpen(false)} onSubmit={handleEventSubmit} />}
+      {isModalOpen && <EventCreateModal onClose={() => setIsModalOpen(false)} onSubmit={handleEventSubmit} />}
       {selectedEvent && (
         <EventDetailModal
           event={selectedEvent}
           onClose={handleCloseDetailModal}
           posts={posts[selectedEvent.id] || []}
-          Logs={Logs[selectedEvent.id] || []}
+          logs={logs[selectedEvent.id] || []}
           onWritePlan={onWritePlan}
           onWriteLog={onWriteLog}
           ClickedDate={ClickedDate}
@@ -125,22 +136,22 @@ export default function CalendarView({
         />
       )}
 
-      {isPostModalOpen &&
-        (postType === 'plan' ? (
-          <PostModal
-            onClose={() => setIsPostModalOpen(false)}
-            onSubmit={handlePostSubmit}
-            postType={postType}
-            ClickedDate={ClickedDate}
-          />
-        ) : (
-          <LogModal
-            onClose={() => setIsPostModalOpen(false)}
-            onSubmit={handlePostSubmit}
-            postType={postType}
-            ClickedDate={ClickedDate}
-          />
-        ))}
+      {isPostModalOpen && (
+        <PostCreateModal
+          onClose={() => setIsPostModalOpen(false)}
+          onSubmit={handlePostSubmit}
+          postType={postType}
+          ClickedDate={ClickedDate}
+        />
+      )}
+      {isLogModalOpen && (
+        <LogCreateModal
+          onClose={() => setIsLogModalOpen(false)}
+          onSubmit={handlePostSubmit}
+          postType={postType}
+          ClickedDate={ClickedDate}
+        />
+      )}
     </CalendarWrapper>
   );
 }

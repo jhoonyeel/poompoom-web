@@ -15,6 +15,7 @@ export default function Sidebar({
   isOpen,
   toggleSidebar,
   posts,
+  logs,
   events,
   selectedEvent,
   handleCloseDetailModal,
@@ -50,8 +51,8 @@ export default function Sidebar({
                 setIsPostModalOpen={setIsPostModalOpen}
                 handleEventClick={handleEventClick}
               />
-              <DatePlan posts={posts} />
-              <Alarm posts={posts} events={events} />
+              <DatePlan posts={posts} logs={logs} />
+              <Alarm posts={posts} events={events} logs={logs} />
               <Theme />
               <ImportCalender />
             </SidebarContent>

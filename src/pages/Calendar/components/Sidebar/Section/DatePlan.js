@@ -2,121 +2,114 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { Button, Container, Section, SectionTitle, SectionWrapper } from '../Style';
 import PostDetailModal from '../../CalendarView/PostDetailModal';
+import LogDetailModal from '../../CalendarView/LogDetailModal';
 
-export default function DatePlan({ posts }) {
-  const [selectedPostIndex, setSelectedPostIndex] = useState(null);
-  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-  const [recentPosts, setRecentPosts] = useState([]);
+// 데이터 정렬 및 최신 항목 추출
+function useRecentItems(data, count) {
+  const [recentItems, setRecentItems] = useState([]);
 
   useEffect(() => {
-    const recentPost = Object.values(posts)
+    const sortedItems = Object.values(data)
       .flat()
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      .slice(0, 6);
+      .slice(0, count);
 
-    setRecentPosts(recentPost);
-  }, [posts]); // 최신 게시글 6개
+    setRecentItems(sortedItems);
+  }, [data, count]);
 
-  const handlePrevSection = () => {
-    setCurrentSectionIndex((prev) => (prev === 0 ? 1 : prev - 1));
-  };
+  return recentItems;
+}
 
-  const handleNextSection = () => {
-    setCurrentSectionIndex((prev) => (prev === 1 ? 0 : prev + 1));
-  };
+// 공통 리스트 컴포넌트
+function ItemList({ items, onItemClick, noDataMessage }) {
+  return items.length === 0 ? (
+    <NoMessage>{noDataMessage}</NoMessage>
+  ) : (
+    <LogContainer>
+      {items.map((item, index) => (
+        <LogBox key={index} onClick={() => onItemClick(index)}>
+          {item.images && item.images.length > 0 ? (
+            <Thumbnail src={item.images[0]} alt={`Item ${index} Thumbnail`} />
+          ) : (
+            <NoImageText>사진 없음</NoImageText>
+          )}
+          <HoverDate>
+            {new Date(item.createdAt).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' })}
+          </HoverDate>
+        </LogBox>
+      ))}
+    </LogContainer>
+  );
+}
 
-  // 선택된 게시글 인덱스 설정
-  const handleLogBoxClick = (index) => {
-    setSelectedPostIndex(index);
-  };
+export default function DatePlan({ posts, logs }) {
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
 
-  // 6개의 최신 게시글끼리 순환하는 버튼
-  const moveToNextPost = () => {
-    setSelectedPostIndex((prevIndex) => (prevIndex + 1) % recentPosts.length);
-  };
+  const recentPosts = useRecentItems(posts, 3);
+  const recentLogs = useRecentItems(logs, 6);
 
-  const moveToPreviousPost = () => {
-    setSelectedPostIndex((prevIndex) => (prevIndex - 1 + recentPosts.length) % recentPosts.length);
-  };
+  const closeDetailModal = () => setSelectedIndex(null);
+  const handlePrevSection = () => setCurrentSectionIndex((prev) => (prev === 0 ? 1 : prev - 1));
+  const handleNextSection = () => setCurrentSectionIndex((prev) => (prev === 1 ? 0 : prev + 1));
 
-  const closePostDetailModal = () => {
-    setSelectedPostIndex(null);
-  };
+  const currentItems = currentSectionIndex === 0 ? recentPosts : recentLogs;
 
   return (
     <Container>
       <SectionWrapper>
         <Button onClick={handlePrevSection}>{'<'}</Button>
 
-        {/* 첫 번째 섹션 - 품품로그 */}
-        {currentSectionIndex === 0 && (
-          <Section>
-            <SectionTitle> 품품로그 </SectionTitle>
-            {recentPosts.length === 0 ? (
-              <NoPostsMessage>게시글이 없습니다. 게시글을 추가해보세요!</NoPostsMessage>
-            ) : (
-              <LogContainer>
-                {recentPosts.map((post, index) => (
-                  <LogBox key={index} onClick={() => handleLogBoxClick(index)}>
-                    {post.images && post.images.length > 0 ? (
-                      <Thumbnail src={post.images[0]} alt={`Post ${index} Thumbnail`} />
-                    ) : (
-                      <NoImageText>사진 없는 게시글</NoImageText>
-                    )}
-                    <HoverDate>
-                      {new Date(post.createdAt).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' })}
-                    </HoverDate>
-                  </LogBox>
-                ))}
-              </LogContainer>
-            )}
-            {selectedPostIndex !== null && (
-              <PostDetailModal
-                post={recentPosts[selectedPostIndex]}
-                onClose={closePostDetailModal}
-                onNext={moveToNextPost}
-                onPrevious={moveToPreviousPost}
-                showNavigation
-              />
-            )}
-          </Section>
+        <Section>
+          <SectionTitle>{currentSectionIndex === 0 ? '데이트 플랜' : '품품로그'}</SectionTitle>
+          <ItemList
+            items={currentItems}
+            onItemClick={setSelectedIndex}
+            noDataMessage={
+              currentSectionIndex === 0 ? '게시글이 없습니다. 추가해보세요!' : '로그가 없습니다. 기록해보세요!'
+            }
+          />
+        </Section>
+
+        {selectedIndex !== null && currentSectionIndex === 0 && (
+          <PostDetailModal
+            post={recentPosts[selectedIndex]}
+            onClose={closeDetailModal}
+            onNext={() => setSelectedIndex((prev) => (prev + 1) % recentPosts.length)}
+            onPrevious={() => setSelectedIndex((prev) => (prev - 1 + recentPosts.length) % recentPosts.length)}
+            showNavigation
+          />
         )}
-        {/* 두번째 섹션 - 데이트 플랜 */}
-        {currentSectionIndex === 1 && (
-          <Section>
-            <SectionTitle> 데이트 플랜 </SectionTitle>
-            <PlanWrapper>
-              <PlanBox />
-              <PlanBox />
-              <PlanBox />
-            </PlanWrapper>
-          </Section>
+
+        {selectedIndex !== null && currentSectionIndex === 1 && (
+          <LogDetailModal log={recentLogs[selectedIndex]} onClose={closeDetailModal} />
         )}
+
         <Button onClick={handleNextSection}>{'>'}</Button>
       </SectionWrapper>
     </Container>
   );
 }
 
-const PlanBox = styled.div`
-  background-color: #f6f6f6;
-  height: 55px;
-  width: 79px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+// const PlanBox = styled.div`
+//   background-color: #f6f6f6;
+//   height: 55px;
+//   width: 79px;
+//   border-radius: 10px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
 
-  &:hover {
-    transition: all 0.2s ease-out;
-    background-color: rgb(219, 219, 219);
-  }
-`;
-const PlanWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-`;
+//   &:hover {
+//     transition: all 0.2s ease-out;
+//     background-color: rgb(219, 219, 219);
+//   }
+// `;
+// const PlanWrapper = styled.div`
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+// `;
 const LogBox = styled.div`
   width: 100%;
   height: 100%;
@@ -171,7 +164,7 @@ const NoImageText = styled.div`
   border-radius: 10px;
 `;
 
-const NoPostsMessage = styled.div`
+const NoMessage = styled.div`
   padding: 20px;
   border-radius: 10px;
   text-align: center;
