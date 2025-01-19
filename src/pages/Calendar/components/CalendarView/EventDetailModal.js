@@ -38,7 +38,7 @@ export default function EventDetailModal({ event, posts, onClose, onWritePost })
           <Detail>
             <strong>날짜:</strong> {event.startDate} ~ {event.endDate}
           </Detail>
-          {!shouldHideMemoAndPostButton && (
+          {shouldHideMemoAndPostButton && (
             <Detail>
               <strong>메모:</strong> {event.memo}
             </Detail>
