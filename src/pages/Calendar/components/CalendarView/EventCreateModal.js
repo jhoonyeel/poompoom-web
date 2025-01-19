@@ -80,7 +80,7 @@ export default function EventCreateModal({ onClose, onSubmit }) {
               <Input type="date" name="endDate" value={eventData.endDate} onChange={handleInputChange} required />
             </Label>
           </div>
-          {isMemoVisible && (
+          {!isMemoVisible && (
             <Label>
               메모:
               <Textarea name="memo" value={eventData.memo} onChange={handleInputChange} maxLength={800} />
