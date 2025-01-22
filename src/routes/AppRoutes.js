@@ -14,7 +14,6 @@ import {
   CalendarPage,
   ConnectGidePage,
   HomePage,
-  LoverPage,
   ProfileEditPage,
   ProfilePage,
   QueryPage,
@@ -65,7 +64,6 @@ export function AppRoutes() {
           element={<ProtectedRoute element={ReviewEditPage} isAuthenticated={isAuthenticated} />}
         />
 
-        <Route path="/lover" element={<ProtectedRoute element={LoverPage} isAuthenticated={isAuthenticated} />} />
         <Route
           path="/lover/connect/guide"
           element={<ProtectedRoute element={ConnectGidePage} isAuthenticated={isAuthenticated} />}

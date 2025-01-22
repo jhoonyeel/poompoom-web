@@ -4,11 +4,13 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
-export default function PostCreateModal({ onClose, onSubmit }) {
+export default function PostCreateModal({ onClose, onSubmit, postType, ClickedDate }) {
   const [postData, setPostData] = useState({
     title: '',
     content: '',
     createdAt: new Date().toISOString(), // 게시글 작성 시 현재 날짜 및 시간 추가
+    type: postType,
+    id: new Date(),
   });
   const contentRef = useRef(null);
 
@@ -80,6 +82,7 @@ export default function PostCreateModal({ onClose, onSubmit }) {
     <Modal>
       <ModalContent>
         <ModalHeader>게시글 작성</ModalHeader>
+        {ClickedDate && <Label>일정 날짜: {new Date(ClickedDate).toLocaleDateString()}</Label>}
         <Form onSubmit={handleSubmit}>
           <Label>
             제목:

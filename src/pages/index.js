@@ -35,7 +35,6 @@ export { default as ReviewDetailPage } from './ReviewDetail/PostDetail/PostDetai
 export { default as Welcome } from './Welcome/Welcome';
 
 // Lover Pages
-export { default as LoverPage } from './Lover/LoverPage';
 export { default as ConnectGidePage } from './LoverSet/ConnectGuidePage';
 export { default as SetRecommendPage } from './LoverSet/SetRecommendPage';
 export { default as SetValuePage } from './LoverSet/SetValuePage';

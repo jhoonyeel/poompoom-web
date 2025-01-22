@@ -26,3 +26,32 @@ export const PlusButton = styled.button`
   line-height: 22px;
   margin: auto;
 `;
+
+export const Button = styled.button`
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 7%;
+  ${(props) => (props.children === '<' ? 'left: 30px;' : 'right: 30px;')}
+  transform: translateY(-50%);
+`;
+
+export const SectionWrapper = styled.div`
+  position: relative;
+  width: 300px;
+  height: 250px;
+  border-radius: 8px;
+`;
+
+export const Section = styled.div`
+  padding: 10px;
+  gap: 10px;
+`;
+
+export const SectionTitle = styled.h3`
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+`;

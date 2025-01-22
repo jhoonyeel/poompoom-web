@@ -9,12 +9,13 @@ import ImportCalender from './Section/ImportPlan';
 import AddDatePlan from './Section/AddDatePlan';
 import DatePlanModal from '../Modal/DatePlanModal';
 import useModal from '../../../../hooks/useModal';
-import PoomPoom from './Section/PoomPoom';
+import Event from './Section/Event';
 
 export default function Sidebar({
   isOpen,
   toggleSidebar,
   posts,
+  logs,
   events,
   selectedEvent,
   handleCloseDetailModal,
@@ -25,36 +26,44 @@ export default function Sidebar({
   const { isOpen: isModalOpen, closeModal } = useModal();
 
   console.log('모달', isModalOpen);
+
+  console.log('isoepn', isOpen);
   return (
-    <SidebarWrapper isOpen={isOpen}>
-      <ToggleButton onClick={toggleSidebar}>{isOpen ? 'Close' : 'Open'}</ToggleButton>
-      {isOpen &&
-        (isAddDatePlan ? (
-          <AddDatePlan setAddDatePlan={setAddDatePlan} closeModal={closeModal} />
-        ) : (
-          <SidebarContent>
-            <Counter />
-            <Search />
-            <PoomPoom
-              events={events}
-              posts={posts}
-              selectedEvent={selectedEvent}
-              handleCloseDetailModal={handleCloseDetailModal}
-              setIsPostModalOpen={setIsPostModalOpen}
-              handleEventClick={handleEventClick}
-            />
-            <DatePlan />
-            <Alarm />
-            <Theme />
-            <ImportCalender />
-          </SidebarContent>
-        ))}
-      {isModalOpen && (
-        <Modal>
-          <DatePlanModal isModalOpen={isModalOpen} closeModal={closeModal} />
-        </Modal>
-      )}
-    </SidebarWrapper>
+    <div>
+      <ToggleButton isOpen={isOpen} onClick={toggleSidebar}>
+        {isOpen ? 'Close' : 'Open'}
+      </ToggleButton>
+      <SidebarWrapper isOpen={isOpen}>
+        {isOpen &&
+          (isAddDatePlan ? (
+            <SidebarContent>
+              <AddDatePlan setAddDatePlan={setAddDatePlan} closeModal={closeModal} />
+            </SidebarContent>
+          ) : (
+            <SidebarContent>
+              <Counter />
+              <Search />
+              <Event
+                events={events}
+                posts={posts}
+                selectedEvent={selectedEvent}
+                handleCloseDetailModal={handleCloseDetailModal}
+                setIsPostModalOpen={setIsPostModalOpen}
+                handleEventClick={handleEventClick}
+              />
+              <DatePlan posts={posts} logs={logs} />
+              <Alarm posts={posts} events={events} logs={logs} />
+              <Theme />
+              <ImportCalender />
+            </SidebarContent>
+          ))}
+        {isModalOpen && (
+          <Modal>
+            <DatePlanModal isModalOpen={isModalOpen} closeModal={closeModal} />
+          </Modal>
+        )}
+      </SidebarWrapper>
+    </div>
   );
 }
 
@@ -69,15 +78,37 @@ const Modal = styled.div`
   z-index: 1000;
 `;
 
+const SidebarContent = styled.div``;
+
+const ToggleButton = styled.button`
+  position: absolute;
+  top: 400px;
+  left: ${({ isOpen }) => (isOpen ? '320px' : '0px')};
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  z-index: 99999;
+
+  &:hover {
+    background-color: rgb(250, 217, 217);
+  }
+
+  transition: left 0.3s ease;
+`;
+
 const SidebarWrapper = styled.div`
-  width: ${({ isOpen }) => (isOpen ? '320px' : '0')};
+  position: relative;
+  width: ${({ isOpen }) => (isOpen ? '320px' : '0px')};
   height: 1000px;
-  overflow-y: auto;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 2px solid rgb(204, 204, 204);
+  transition: width 0.3s ease; /* 애니메이션 효과 추가 */
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -92,25 +123,5 @@ const SidebarWrapper = styled.div`
     &::-webkit-scrollbar-thumb {
       background: rgb(211, 206, 206);
     }
-  }
-`;
-
-const SidebarContent = styled.div`
-  position: relative;
-`;
-
-const ToggleButton = styled.button`
-  position: absolute;
-  top: 10px;
-  left: 30px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 8px 12px;
-  cursor: pointer;
-  z-index: 1;
-
-  &:hover {
-    background-color: rgb(250, 217, 217);
   }
 `;

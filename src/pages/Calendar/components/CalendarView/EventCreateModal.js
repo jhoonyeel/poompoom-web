@@ -9,8 +9,8 @@ export default function EventCreateModal({ onClose, onSubmit }) {
     category: null, // 카테고리 객체를 저장
     startDate: '',
     endDate: '',
-    memo: '',
     writer: '',
+    createdAt: new Date().toISOString(), // 알람 생성용 작성시간 추가
   });
 
   const categories = [
@@ -36,13 +36,18 @@ export default function EventCreateModal({ onClose, onSubmit }) {
       alert('종료 날짜는 시작 날짜보다 늦어야 합니다.');
       return;
     }
-    const eventToSubmit = { ...eventData, writer: user?.memberId };
+    const eventToSubmit = {
+      ...eventData,
+      ...(eventData.memo !== undefined && { memo: eventData.memo }),
+      // 카테고리 종류에 따른 메모 필드 추가
+      writer: user?.memberId,
+    };
     onSubmit(eventToSubmit);
-    onClose(); // Close the modal after submission
+    onClose();
   };
 
   const selectedCategoryLabel = eventData.category?.label;
-  const isMemoVisible = !['남자친구', '여자친구'].includes(selectedCategoryLabel);
+  const isMemoVisible = ['남자친구', '여자친구'].includes(selectedCategoryLabel);
 
   return (
     <Modal>
@@ -80,12 +85,14 @@ export default function EventCreateModal({ onClose, onSubmit }) {
               <Input type="date" name="endDate" value={eventData.endDate} onChange={handleInputChange} required />
             </Label>
           </div>
-          {!isMemoVisible && (
+          {isMemoVisible && (
             <Label>
               메모:
               <Textarea name="memo" value={eventData.memo} onChange={handleInputChange} maxLength={800} />
             </Label>
           )}
+          {/* 개인 일정(태그-남자친구,여자친구)의 경우 메모만 존재하며 게시글 및 회고록 작성 불가 */}
+          {/* value:eventData.memo - 객체 내 속성 부재 시 undefined 반환됨 */}
           <div style={{ display: 'flex' }}>
             <SubmitButton type="submit">저장</SubmitButton>
             <CancelButton type="button" onClick={onClose}>

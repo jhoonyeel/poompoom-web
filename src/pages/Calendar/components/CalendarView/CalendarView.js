@@ -4,20 +4,26 @@ import styled from 'styled-components';
 import EventCreateModal from './EventCreateModal';
 import EventDetailModal from './EventDetailModal';
 import PostCreateModal from './PostCreateModal';
+import LogCreateModal from './LogCreateModal';
 
 export default function CalendarView({
   posts,
+  logs,
   events,
   setEvents,
   selectedEvent,
   isPostModalOpen,
   setIsPostModalOpen,
+  isLogModalOpen,
+  setIsLogModalOpen,
   handleEventClick,
+  ClickedDate,
   handleCloseDetailModal,
   handlePostSubmit,
 }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [postType, setPostType] = useState(''); // 게시글 타입
 
   const handleEventSubmit = (eventData) => {
     // 이벤트 ID를 부여
@@ -52,6 +58,19 @@ export default function CalendarView({
     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
   };
   const today = removeTimeFromDate(new Date());
+
+  const onWritePlan = () => {
+    setIsPostModalOpen(true);
+    setPostType('plan');
+  };
+
+  const onWriteLog = () => {
+    setIsLogModalOpen(true);
+    setPostType('log');
+  };
+
+  console.log('posts', posts);
+  console.log('Logs', logs);
 
   return (
     <CalendarWrapper>
@@ -92,7 +111,7 @@ export default function CalendarView({
                 <EventTag
                   key={idx}
                   style={{ background: event.category.color }}
-                  onClick={() => handleEventClick(event)}
+                  onClick={() => handleEventClick(event, dateKey)}
                 >
                   {event.title}
                 </EventTag>
@@ -108,10 +127,31 @@ export default function CalendarView({
           event={selectedEvent}
           onClose={handleCloseDetailModal}
           posts={posts[selectedEvent.id] || []}
-          onWritePost={() => setIsPostModalOpen(true)}
+          logs={logs[selectedEvent.id] || []}
+          onWritePlan={onWritePlan}
+          onWriteLog={onWriteLog}
+          ClickedDate={ClickedDate}
+          setPostType={setPostType}
+          postType={postType}
         />
       )}
-      {isPostModalOpen && <PostCreateModal onClose={() => setIsPostModalOpen(false)} onSubmit={handlePostSubmit} />}
+
+      {isPostModalOpen && (
+        <PostCreateModal
+          onClose={() => setIsPostModalOpen(false)}
+          onSubmit={handlePostSubmit}
+          postType={postType}
+          ClickedDate={ClickedDate}
+        />
+      )}
+      {isLogModalOpen && (
+        <LogCreateModal
+          onClose={() => setIsLogModalOpen(false)}
+          onSubmit={handlePostSubmit}
+          postType={postType}
+          ClickedDate={ClickedDate}
+        />
+      )}
     </CalendarWrapper>
   );
 }
