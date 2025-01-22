@@ -91,6 +91,7 @@ export default function EventCreateModal({ onClose, onSubmit }) {
               <Textarea name="memo" value={eventData.memo} onChange={handleInputChange} maxLength={800} />
             </Label>
           )}
+          {/* 개인 일정(태그-남자친구,여자친구)의 경우 메모만 존재하며 게시글 및 회고록 작성 불가 */}
           {/* value:eventData.memo - 객체 내 속성 부재 시 undefined 반환됨 */}
           <div style={{ display: 'flex' }}>
             <SubmitButton type="submit">저장</SubmitButton>
