@@ -44,7 +44,7 @@ export default function ConnectGuidePage() {
           <Text>치수 질문</Text>
         </QRContainer>
         <QRContainer>
-          <Box onClick={handleOnModal}>연인 신청 하기</Box>
+          <Box onClick={handleOnModal}>연인 신청 (클릭)</Box>
           <Text>연동서비스 활성화 완료</Text>
         </QRContainer>
 

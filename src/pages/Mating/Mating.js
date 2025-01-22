@@ -16,7 +16,7 @@ export default function MatingModal({ closeModal, isMatingOpen }) {
           headers: { Authorization: `Bearer ${AccessToken}` },
         });
         setRequests(response.data.mateId);
-        console.log('연인신청현황:', response.data);
+        console.log('연인신청현황.:', response.data);
 
         let Status = '';
         if (response.data.status === 'OFFER') {
