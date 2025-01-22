@@ -44,17 +44,18 @@ export default function Counter() {
     calculateMilestones(diffDays);
   };
 
+  const user = JSON.parse(localStorage.getItem('userData'));
   return (
     <Container>
       <ProfileSection>
         <ProfileContainer>
           <ProfileImg />
-          <Name>솔</Name>
+          <Name>{user?.nickname}</Name>
         </ProfileContainer>
         <CalenderHeart />
         <ProfileContainer>
           <ProfileImg />
-          <Name>미야</Name>
+          <Name>연인 연동하기</Name>
         </ProfileContainer>
       </ProfileSection>
       <CountSection>

@@ -2,13 +2,20 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Lottie from 'react-lottie';
 import checkAnimation from '../../assets/Lottie-Animation/checkAnimation.json';
+import useModal from '../../hooks/useModal';
+import MatingModal from '../Mating/Mating';
 
 const defaultOptions = { loop: false, animationData: checkAnimation };
 
 export default function ConnectGuidePage() {
+  const { isOpen, openModal, closeModal } = useModal();
   const navigate = useNavigate();
   const handleOnClick = (path) => () => {
     navigate(path);
+  };
+
+  const handleOnModal = () => {
+    openModal();
   };
 
   const allAnswers = JSON.parse(localStorage.getItem('allAnswers')) || { connect: false, recommend: false, dd: false };
@@ -37,9 +44,11 @@ export default function ConnectGuidePage() {
           <Text>치수 질문</Text>
         </QRContainer>
         <QRContainer>
-          <Box>서비스 준비중입니다!</Box>
+          <Box onClick={handleOnModal}>연인 신청 하기</Box>
           <Text>연동서비스 활성화 완료</Text>
         </QRContainer>
+
+        <MatingModal closeModal={closeModal} isMatingOpen={isOpen} />
       </Body>
       <Button onClick={handleOnClick('/review')}>Gogosing</Button>
     </Container>
@@ -85,6 +94,7 @@ const Box = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 const BoxText = styled.div``;

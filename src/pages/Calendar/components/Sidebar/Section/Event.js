@@ -84,7 +84,7 @@ export default function Event({
         {/* 첫첫 번째 섹션 - 나의 일정 */}
         {currentSectionIndex === 0 && (
           <Section>
-            <SectionTitle>{user.username}의 일정</SectionTitle>
+            <SectionTitle>{user.nickname}의 일정</SectionTitle>
             {myEvents.length > 0 ? (
               myEvents.map((event) => (
                 <EventListItem key={event.writer} event={event} onClick={() => handleEventClick(event)} />
