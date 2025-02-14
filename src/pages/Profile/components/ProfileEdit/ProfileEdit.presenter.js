@@ -1,30 +1,16 @@
 import * as S from './ProfileEdit.styles';
 
-export default function ProfileEditUI({ handleOnClick }) {
+export default function ProfileEditUI({ handleLogout }) {
   return (
-    <S.Container>
+    <S.Wrapper>
       <S.Title>설정 탭</S.Title>
-      <S.ListContainer>
-        <S.List>내 포인트</S.List>
-        <S.List>
-          구독 리스트
-          <S.FollowerList />
-        </S.List>
-        <S.List>
-          <S.Router onClick={handleOnClick('/profile/bookmark')}>북마크</S.Router>
-        </S.List>
-        <S.List>
-          <S.Router onClick={handleOnClick('/profile/like')}>좋아요</S.Router>
-        </S.List>
-        <S.List>
-          <S.Router onClick={handleOnClick('/profile/latest')}>최근 본 게시물</S.Router>
-        </S.List>
-        <S.List>
-          <S.Router onClick={handleOnClick('/profile/wrote')}>내가 쓴 게시물</S.Router>
-        </S.List>
-        <S.List>로그인 정보 수정</S.List>
-        <S.List>로그아웃</S.List>
-      </S.ListContainer>
-    </S.Container>
+      <S.List>내 포인트</S.List>
+      <S.List>
+        팔로우 리스트
+        <S.FollowerList />
+      </S.List>
+      <S.List>로그인 정보 수정</S.List>
+      <S.List onClick={handleLogout}>로그아웃</S.List>
+    </S.Wrapper>
   );
 }

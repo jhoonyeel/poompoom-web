@@ -1,8 +1,12 @@
-import { useNavigatePath } from '../../../../hooks/useNavigatePath';
+import { logout } from '../../../../apis/authService';
 import ProfileEditUI from './ProfileEdit.presenter';
 
 export default function ProfileEdit() {
-  const navigatePath = useNavigatePath();
+  const handleLogout = () => {
+    logout();
 
-  return <ProfileEditUI navigatePath={navigatePath} />;
+    window.location.href = '/';
+  };
+
+  return <ProfileEditUI handleLogout={handleLogout} />;
 }
