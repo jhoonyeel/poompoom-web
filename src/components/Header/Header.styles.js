@@ -6,7 +6,9 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  width: 100%;
+  margin: 0 auto;
+  min-width: 1028px;
+  width: 80%;
   max-height: 15vh;
   height: 100%;
 
