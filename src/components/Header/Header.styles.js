@@ -6,9 +6,8 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  margin: 0 auto;
-  min-width: 1028px;
-  width: 80%;
+  width: 100%;
+  max-height: 15vh;
   height: 100%;
 
   &::after {
@@ -65,8 +64,8 @@ export const MenuItem = styled.li`
   font-family: 'Shrikhand';
   font-style: italic;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 1.375;
   position: relative;
   color: #072623;
 

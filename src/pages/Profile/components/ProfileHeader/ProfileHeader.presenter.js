@@ -4,6 +4,7 @@ import profileDummyPhoto from '../../../../assets/ProfilePhoto.svg';
 import * as S from './ProfileHeader.styles';
 
 export default function ProfileHeaderUI({ profile, navigatePath }) {
+  console.log(profile);
   return (
     <S.Container>
       <ProfileImgWrapper>

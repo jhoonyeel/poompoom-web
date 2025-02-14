@@ -68,7 +68,7 @@ export default function QueryPage() {
 
   return (
     <Wrapper>
-      <PostFilterContainer className="sticky">
+      <PostFilterContainer>
         <PostFilter />
       </PostFilterContainer>
 

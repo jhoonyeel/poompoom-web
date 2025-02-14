@@ -11,7 +11,9 @@ export const HeaderContainer = styled.header`
   top: 0;
   left: 0;
   z-index: 100;
-  width: 100%;
+  margin: 0 auto;
+  min-width: 1028px;
+  width: 80%;
   height: 15vh;
   background-color: #fff;
 `;
