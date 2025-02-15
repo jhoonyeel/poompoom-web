@@ -24,11 +24,11 @@ export default function HeaderUI({ showSearchBar, navigatePath }) {
   console.log(profile.profileImagePath);
 
   return (
-    <S.Wrapper className="sticky">
+    <S.Wrapper>
       <S.LogoIcon onClick={navigatePath('/')} />
       {showSearchBar && <SearchBar />}
       <S.RightBox>
-        <S.LoverImgBox onClick={navigatePath('/lovers-profile')}>
+        <S.LoverImgBox onClick={navigatePath('/calendar')}>
           <S.LoverImg src={profile.profileImagePath || profileDummyPhoto} alt="프로필 이미지" />
         </S.LoverImgBox>
         <S.MenuBar>

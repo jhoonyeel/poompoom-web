@@ -1,5 +1,10 @@
 import ProfileEdit from './components/ProfileEdit/ProfileEdit.container';
+import * as S from './components/ProfileEdit/ProfileEdit.styles';
 
 export default function ProfileEditPage() {
-  return <ProfileEdit />;
+  return (
+    <S.Container>
+      <ProfileEdit />
+    </S.Container>
+  );
 }
