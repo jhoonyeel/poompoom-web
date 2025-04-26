@@ -8,10 +8,9 @@
 | 분류 | 기술 스택 |
 |:----|:----------|
 | Frontend | React, TypeScript, Vite, Emotion (기존: JavaScript, styled-components) |
-| Backend (BFF) | Express (개인 개선 버전) |
-| DevOps | Vercel (Frontend), Render (Backend) |
+| Backend | Express (간단한 API 서버 구축) |
+| Hosting | Vercel (Frontend), Render (Backend) |
 | Tools | ESLint, Prettier (Airbnb Style), Stylelint, Github Actions |
-| Collaboration | Git, Github |
 
 ### ✅ Application UI
 
