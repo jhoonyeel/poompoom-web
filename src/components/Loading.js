@@ -1,6 +1,6 @@
 import Lottie from 'react-lottie';
 import styled from 'styled-components';
-import LoadingAnimation from '../assets/Lottie-Animation/presentLoading.json';
+import LoadingAnimation from '../animation/presentLoading.json';
 
 const defaultOptions = { loop: true, animationData: LoadingAnimation };
 

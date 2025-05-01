@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import PostFilter from '../../components/PostFilter/PostFilter.container';
 // import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
-import { ScrollToTopButton } from '../../components/common/ScrollToTopButton';
+import { ScrollToTopButton } from '../../components/ScrollToTopButton';
 import LatestGallery from './components/Section/LatestGallery/LatestGallery.container';
 import SearchGallery from './components/Section/SearchGallery/SearchGallery.container';
 import SubAccount from './components/Section/SubAccount/SubAccount.container';

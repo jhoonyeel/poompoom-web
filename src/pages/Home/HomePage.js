@@ -12,7 +12,7 @@ import { ReactComponent as Ranking } from '../../assets/HomeRanking.svg';
 import { ReactComponent as MainBackground } from '../../assets/MainBackground.svg';
 import { ReactComponent as Season } from '../../assets/Season.svg';
 import { ReactComponent as SeasonBk } from '../../assets/SeasonBackground.svg';
-import { ScrollToTopButton } from '../../components/common/ScrollToTopButton';
+import { ScrollToTopButton } from '../../components/ScrollToTopButton';
 import { useFetchRecommendations } from '../../hooks/useFetchRecommendations';
 import { useNavigatePath } from '../../hooks/useNavigatePath';
 

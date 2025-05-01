@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import FollowButton from '../../../../../components/common/FollowBtutton';
+import FollowButton from '../../../../../deprecated/features/follow/components/FollowBtutton';
 
 export default function SubAccountUI({ loaderRef, subAccounts, getNickname, navigatePath }) {
   return (
