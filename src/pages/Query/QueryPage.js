@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../apis/axios';
-import { ScrollToTopButton } from '../../components/common/ScrollToTopButton';
 import PostFilter from '../../components/PostFilter/PostFilter.container';
 import ReviewPostCard from '../../components/ReviewPostCard/ReviewPostCard.container';
+import { ScrollToTopButton } from '../../components/ScrollToTopButton';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 import { NotFound } from './components/NotFound';
 

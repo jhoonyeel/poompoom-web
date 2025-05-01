@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import AuthorProfile from '../../common/AuthorProfile';
-import FollowButton from '../../common/FollowBtutton';
+import FollowButton from '../../../deprecated/features/follow/components/FollowBtutton';
+import AuthorProfile from './AuthorProfile';
 
 export default function ReviewPostAuthorUI({
   profilePhoto,

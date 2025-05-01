@@ -2,8 +2,8 @@ import { faBookmark as emptyBookmark, faHeart as emptyHeart } from '@fortawesome
 import { faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as LinkImg } from '../../../assets/LinkImg.svg';
 import OverflowMenuComponent from '../../../atoms/OverflowMenuComponent';
-import CommentWrite from '../../../components/Comment/CommentWrite';
-import FollowButton from '../../../components/common/FollowBtutton';
+import CommentWrite from '../../../deprecated/features/comment/components/CommentWrite';
+import FollowButton from '../../../deprecated/features/follow/components/FollowBtutton';
 import * as S from './PostDetail.styles';
 
 export default function ReviewDetailUI({

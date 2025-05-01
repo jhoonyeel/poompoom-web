@@ -11,8 +11,6 @@ import LoginSocial from '../pages/OAuth/LoginSocial';
 import SocialSignUp from '../pages/OAuth/SignUp/SignUp.container';
 import SignUpSocial from '../pages/OAuth/SignUpSocial';
 import {
-  CalendarPage,
-  ConnectGidePage,
   HomePage,
   ProfileEditPage,
   ProfilePage,
@@ -21,15 +19,13 @@ import {
   ReviewDetailPage,
   ReviewEditPage,
   ReviewPage,
-  SetRecommendPage,
-  SetValuePage,
   Welcome,
 } from '../pages/index';
 import ProtectedRoute from './ProtectedRoute';
 
 const isAuthenticated = async () => {
   // AT 만료여부 확인해서 새로운 AT인지 확인해야 함.
-  return localStorage.getItem('accessToken') !== null;
+  return true || localStorage.getItem('accessToken') !== null;
 };
 
 export function AppRoutes() {
@@ -63,25 +59,11 @@ export function AppRoutes() {
           path="/review/update/:reviewId"
           element={<ProtectedRoute element={ReviewEditPage} isAuthenticated={isAuthenticated} />}
         />
-
-        <Route
-          path="/lover/connect/guide"
-          element={<ProtectedRoute element={ConnectGidePage} isAuthenticated={isAuthenticated} />}
-        />
-        <Route
-          path="/lover/connect"
-          element={<ProtectedRoute element={SetValuePage} isAuthenticated={isAuthenticated} />}
-        />
-        <Route
-          path="/lover/recommend"
-          element={<ProtectedRoute element={SetRecommendPage} isAuthenticated={isAuthenticated} />}
-        />
         <Route path="/profile/*" element={<ProtectedRoute element={ProfilePage} isAuthenticated={isAuthenticated} />} />
         <Route
           path="/profile/edit"
           element={<ProtectedRoute element={ProfileEditPage} isAuthenticated={isAuthenticated} />}
         />
-        <Route path="/calendar" element={<ProtectedRoute element={CalendarPage} isAuthenticated={isAuthenticated} />} />
       </Route>
 
       {/* HeaderOnlyLayout: Header only */}
