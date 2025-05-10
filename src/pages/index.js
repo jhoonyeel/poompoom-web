@@ -1,35 +1,30 @@
-// Home Page
-export { default as HomePage } from './Home/HomePage';
-
 // Join Pages
-export { default as SignUpPresenter } from './Join/Signup/SignUp.presenter';
-export { default as SignupPage } from './Join/Signup/SignupPage';
-export { default as SignupTagContainer } from './Join/SignupTag/SignupTag.container';
-export { default as SignupTagPresenter } from './Join/SignupTag/SignUpTag.presenter';
+export { default as JoinRoute } from './join/index';
+export { default as ProfileTagRoute } from './profile-tag/index';
+export { default as SocialJoinRoute } from './social-join/index';
 
 // Login Pages
-export { default as LoginContainer } from './Login/Login.container';
-export { default as LoginPresenter } from './Login/Login.presenter';
-export { default as LoginPage } from './Login/LoginPage';
+export { default as LoginRoute } from './login/index';
 
-// OAuth Pages
-export { default as LoginSocial } from './OAuth/LoginSocial';
-export { default as OAuthSignupContainer } from './OAuth/SignUp/SignUp.container';
-export { default as OAuthSignupPresenter } from './OAuth/SignUp/SignUp.presenter';
-export { default as SignUpSocial } from './OAuth/SignUpSocial';
-
-// Profile Pages
-export { default as ProfileEditPage } from './Profile/ProfileEditPage';
-export { default as ProfilePage } from './Profile/ProfilePage';
-
-// Query Page
-export { default as QueryPage } from './Query/QueryPage';
-
-// Review Pages
-export { default as ReviewCreatePage } from './Review/ReviewCreate/ReviewCreatePage';
-export { default as ReviewEditPage } from './Review/ReviewEditPage';
-export { default as ReviewPage } from './Review/ReviewPage';
-export { default as ReviewDetailPage } from './ReviewDetail/PostDetail/PostDetail.container';
+// Find Pages
+export { default as FindPasswordRoute } from './find-password/index';
+export { default as FindUsernameRoute } from './find-username/index';
 
 // Welcome Pages
-export { default as Welcome } from './Welcome/Welcome';
+export { default as WelcomeRoute } from './welcome/index';
+
+// Home Page
+export { default as HomeRoute } from './home/index';
+
+// Review Pages
+export { default as ReviewCreateRoute } from './review-create/index';
+export { default as ReviewDetailRoute } from './review-detail/index';
+export { default as ReviewEditRoute } from './review-edit/index';
+export { default as ReviewListRoute } from './review-list/index';
+
+// Search Page
+export { default as ReviewSearchRoute } from './review-search/index';
+
+// Profile Pages
+export { default as ProfileEditRoute } from './profile-edit/index';
+export { default as ProfileRoute } from './profile/index';
