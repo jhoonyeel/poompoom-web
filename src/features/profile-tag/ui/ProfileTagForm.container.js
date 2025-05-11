@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import JoinTagUI from './JoinTag.presenter';
+import ProfileTagFormUI from './ProfileTagForm.presenter';
 
-export default function JoinTag() {
+export default function ProfileTagForm() {
   const initialButtons = [
     { id: 1, value: '' },
     { id: 2, value: '' },
@@ -30,7 +30,7 @@ export default function JoinTag() {
   };
 
   return (
-    <JoinTagUI
+    <ProfileTagFormUI
       buttons={buttons}
       selectedAgeLabel={selectedAgeLabel}
       setSelectedAgeLabel={setSelectedAgeLabel}

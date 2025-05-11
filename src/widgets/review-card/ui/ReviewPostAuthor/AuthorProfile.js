@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as FireCracker } from '../../../../shared/assets/FireCraker.svg';
+import { ReactComponent as FireCracker } from '../../assets/FireCraker.svg';
 
 export default function AuthorProfile({ isContentHovered, profilePhoto, navigatePath }) {
   return (

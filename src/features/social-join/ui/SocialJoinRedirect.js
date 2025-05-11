@@ -21,7 +21,7 @@ export default function SocialJoinRedirect() {
       localStorage.setItem('accessToken', response.data.access);
       localStorage.setItem('refreshToken', response.data.refresh);
 
-      navigate('/signUp/social/form');
+      navigate('/social-join');
     } catch (error) {
       console.error('JWT 인증 실패:', error);
     }

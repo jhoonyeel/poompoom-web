@@ -3,14 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import { ReactComponent as EmptyProfileImg } from '../../../../assets/EmptyProfile/EmptyProfileComment.svg';
 import * as S from './Comment.style';
 
-import { useDeleteComment } from '../hooks/useDeleteComment';
-
-import useModal from '../../../../hooks/useModal';
-import { useOutsideClick } from '../../../../hooks/useOutsideClick';
+import useModal from '../../../shared/hooks/useModal';
+import { ReactComponent as EmptyProfileImg } from '../assets/EmptyProfileComment.svg';
 import { MODAL_MESSAGE } from '../constants/CommentModalState';
+import { useDeleteComment } from '../hooks/useDeleteComment';
+import { useOutsideClick } from '../hooks/useOutsideClick';
 import ConfirmModal from './ConfirmModal';
 import DropDownOption from './DropDownOption';
 import EditComment from './EditComment';

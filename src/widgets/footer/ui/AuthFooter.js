@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as LogFooter } from '../../../shared/assets/Footer/Footer.svg';
+import { ReactComponent as LogFooter } from '../../../shared/assets/Footer.svg';
 
 export default function AuthFooterUI() {
   return (

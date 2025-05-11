@@ -1,20 +1,20 @@
 import styled from 'styled-components';
-import { ReactComponent as CardNews } from '../../shared/assets/CardNews.svg';
-import { ReactComponent as Anniversary } from '../../shared/assets/Category/Anniversary.svg';
-import { ReactComponent as Apology } from '../../shared/assets/Category/Apology.svg';
-import { ReactComponent as Birthday } from '../../shared/assets/Category/Birthday.svg';
-import { ReactComponent as Christmas } from '../../shared/assets/Category/Christmas.svg';
-import { ReactComponent as D100 } from '../../shared/assets/Category/D100.svg';
-import { ReactComponent as Light } from '../../shared/assets/Category/Light.svg';
-import { ReactComponent as Lose } from '../../shared/assets/Category/Lose.svg';
-import { ReactComponent as Propose } from '../../shared/assets/Category/Propose.svg';
-import { ReactComponent as Ranking } from '../../shared/assets/HomeRanking.svg';
-import { ReactComponent as MainBackground } from '../../shared/assets/MainBackground.svg';
-import { ReactComponent as Season } from '../../shared/assets/Season.svg';
-import { ReactComponent as SeasonBk } from '../../shared/assets/SeasonBackground.svg';
-import { useFetchRecommendations } from '../../shared/hooks/useFetchRecommendations';
-import { useNavigatePath } from '../../shared/hooks/useNavigatePath';
-import { ScrollToTopButton } from '../../shared/ui/ScrollToTopButton';
+import { useFetchRecommendations } from '../../../shared/hooks/useFetchRecommendations';
+import { useNavigatePath } from '../../../shared/hooks/useNavigatePath';
+import { ScrollToTopButton } from '../../../shared/ui/ScrollToTopButton';
+import { ReactComponent as CardNews } from '../assets/CardNews.svg';
+import { ReactComponent as Anniversary } from '../assets/Category/Anniversary.svg';
+import { ReactComponent as Apology } from '../assets/Category/Apology.svg';
+import { ReactComponent as Birthday } from '../assets/Category/Birthday.svg';
+import { ReactComponent as Christmas } from '../assets/Category/Christmas.svg';
+import { ReactComponent as D100 } from '../assets/Category/D100.svg';
+import { ReactComponent as Light } from '../assets/Category/Light.svg';
+import { ReactComponent as Lose } from '../assets/Category/Lose.svg';
+import { ReactComponent as Propose } from '../assets/Category/Propose.svg';
+import { ReactComponent as Ranking } from '../assets/HomeRanking.svg';
+import { ReactComponent as MainBackground } from '../assets/MainBackground.svg';
+import { ReactComponent as Season } from '../assets/Season.svg';
+import { ReactComponent as SeasonBk } from '../assets/SeasonBackground.svg';
 
 export default function Home() {
   const { recommendations } = useFetchRecommendations();
@@ -41,14 +41,14 @@ export default function Home() {
       <CategorySection>
         <CategoryBox>
           <CategoryList>
-            <D100 width="170px" onClick={navigatePath('/review/query-result?searchContent=100일')} />
-            <Apology width="170px" onClick={navigatePath('/review/query-result?searchContent=사과의+선물')} />
-            <Light width="170px" onClick={navigatePath('/review/query-result?searchContent=가벼운+선물')} />
-            <Birthday width="170px" onClick={navigatePath('/review/query-result?searchContent=생일')} />
-            <Propose width="170px" onClick={navigatePath('/review/query-result?searchContent=청혼')} />
-            <Lose width="170px" onClick={navigatePath('/review/query-result?searchContent=로맨틱+데이')} />
-            <Anniversary width="170px" onClick={navigatePath('/review/query-result?searchContent=n주년')} />
-            <Christmas width="170px" onClick={navigatePath('/review/query-result?searchContent=크리스마스')} />
+            <D100 width="170px" onClick={navigatePath('/review/search?searchContent=100일')} />
+            <Apology width="170px" onClick={navigatePath('/review/search?searchContent=사과의+선물')} />
+            <Light width="170px" onClick={navigatePath('/review/search?searchContent=가벼운+선물')} />
+            <Birthday width="170px" onClick={navigatePath('/review/search?searchContent=생일')} />
+            <Propose width="170px" onClick={navigatePath('/review/search?searchContent=청혼')} />
+            <Lose width="170px" onClick={navigatePath('/review/search?searchContent=로맨틱+데이')} />
+            <Anniversary width="170px" onClick={navigatePath('/review/search?searchContent=n주년')} />
+            <Christmas width="170px" onClick={navigatePath('/review/search?searchContent=크리스마스')} />
           </CategoryList>
           <CardNews width="380px" />
         </CategoryBox>

@@ -23,7 +23,7 @@ export default function SearchBar() {
 
   const handleSearch = (keyword = searchTerm) => {
     const params = new URLSearchParams({ searchContent: keyword });
-    navigate(`/review/query-result?${params.toString()}`);
+    navigate(`/review/search?${params.toString()}`);
   };
 
   const handleRecommendationClick = (keyword) => {

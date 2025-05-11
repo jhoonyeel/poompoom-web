@@ -40,8 +40,8 @@ export function AppRoutes() {
         <Route path="/login" element={<LoginRoute />} />
         <Route path="/social-login/redirect" element={<SocialLoginRedirect />} />
         <Route path="/welcome" element={<WelcomeRoute />} />
-        <Route path="/find/id" element={<FindUsernameRoute />} />
-        <Route path="/find/pw" element={<FindPasswordRoute />} />
+        <Route path="/find/username" element={<FindUsernameRoute />} />
+        <Route path="/find/password" element={<FindPasswordRoute />} />
       </Route>
 
       {/* MainLayout: Header + Footer */}

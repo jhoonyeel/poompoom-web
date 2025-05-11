@@ -2,7 +2,7 @@ import { faBookmark as emptyBookmark, faHeart as emptyHeart } from '@fortawesome
 import { faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
 import CommentWrite from '../../../../deprecated/features/comment/components/CommentWrite';
 import FollowButton from '../../../../deprecated/features/follow/components/FollowBtutton';
-import { ReactComponent as LinkImg } from '../../../../shared/assets/LinkImg.svg';
+import { ReactComponent as LinkImg } from '../../assets/LinkImg.svg';
 import OverflowMenuComponent from '../OverflowMenuComponent';
 import * as S from './ReviewDetail.styles';
 

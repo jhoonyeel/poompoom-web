@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import Cursor from '../../../../../shared/assets/HorizontalCursor.svg';
 import ReviewPostCard from '../../../../../widgets/review-card/ui/ReviewPostCard.container';
+import Cursor from '../../../assets/HorizontalCursor.svg';
 
 export default function SubGalleryUI({ subPosts, loader }) {
   const postListRef = useRef(null);

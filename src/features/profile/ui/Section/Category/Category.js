@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as EmptyCategory } from '../../../../../shared/assets/BookMark/Category.svg';
+import { ReactComponent as EmptyCategory } from '../../../assets/Category.svg';
 
 export default function Category() {
   const [category, setCategory] = useState([]);

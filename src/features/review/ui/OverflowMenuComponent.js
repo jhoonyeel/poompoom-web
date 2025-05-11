@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as Delete } from '../../../shared/assets/Delete.svg';
-import { ReactComponent as Edit } from '../../../shared/assets/Edit.svg';
-import { ReactComponent as OverflowMenu } from '../../../shared/assets/OverflowMenu.svg';
+import { ReactComponent as Delete } from '../assets/Delete.svg';
+import { ReactComponent as Edit } from '../assets/Edit.svg';
+import { ReactComponent as OverflowMenu } from '../assets/OverflowMenu.svg';
 
 export default function OverflowMenuComponent({ onUpdate, onDelete }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

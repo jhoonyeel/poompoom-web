@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as Footer } from '../../../shared/assets/Footer.svg';
+import { ReactComponent as FooterBackground } from '../assets/FooterBackground.svg';
 
 export const Wrapper = styled.div`
   /* width: 80%; */
@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   min-width: max-content;
   height: 100%;
 `;
-export const FooterIcon = styled(Footer)`
+export const FooterBackgroundIcon = styled(FooterBackground)`
   width: 100%;
   height: 100%;
   object-fit: cover;

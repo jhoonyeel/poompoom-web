@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { ReactComponent as LogFooter } from '../../../shared/assets/Footer/Footer.svg';
-import { ReactComponent as Logo } from '../../../shared/assets/Login/SmallLogo.svg';
+import { ReactComponent as LogFooter } from '../../../shared/assets/Footer.svg';
+import { ReactComponent as Logo } from '../../../shared/assets/SmallLogo.svg';
 
 export const Wrapper = styled.div`
   display: flex;

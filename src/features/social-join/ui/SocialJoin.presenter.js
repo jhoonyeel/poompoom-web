@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { ReactComponent as SignUpTitle } from '../../../shared/assets/Login/CreateAccount.svg';
+import { ReactComponent as SignUpTitle } from '../../../shared/assets/CreateAccount.svg';
 import { useInputFocus } from '../../../shared/hooks/useInputFocus';
 import AuthFooterUI from '../../../widgets/footer/ui/AuthFooter';
 import ProfileTag from '../../profile-tag/ui/ProfileTag';

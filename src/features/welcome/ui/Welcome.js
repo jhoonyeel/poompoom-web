@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Calender } from '../../../shared/assets/Login/Calender.svg';
-import { ReactComponent as Location } from '../../../shared/assets/Login/Location.svg';
-import { ReactComponent as Present } from '../../../shared/assets/Login/Present.svg';
-import { ReactComponent as Title } from '../../../shared/assets/Login/Welcome.svg';
+import { ReactComponent as Calender } from '../assets/Calender.svg';
+import { ReactComponent as Location } from '../assets/Location.svg';
+import { ReactComponent as Present } from '../assets/Present.svg';
+import { ReactComponent as Title } from '../assets/Welcome.svg';
 import * as S from './Welcomes.styles';
 
 export default function Welcome() {

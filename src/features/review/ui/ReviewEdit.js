@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import placeholderPhoto from '../../../shared/assets/DummyPhoto.svg';
 import profileDummyPhoto from '../../../shared/assets/ProfilePhoto.svg';
 import { getOneReview } from '../api/getOneReview';
 import { updateReview } from '../api/updateReview';
+import placeholderPhoto from '../assets/DummyPhoto.svg';
 import { useFetchProfilePicture } from '../hooks/useFetchProfilePicture';
 import { useLogin } from '../hooks/useLogin';
 import { CATEGORIES, ITEM } from '../model/constants';

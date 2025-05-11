@@ -72,7 +72,7 @@ export default function ReviewDetail() {
   };
 
   const onUpdate = () => {
-    navigate(`/review/update/${reviewId}`);
+    navigate(`/review/edit/${reviewId}`);
   };
   const onDelete = async () => {
     try {

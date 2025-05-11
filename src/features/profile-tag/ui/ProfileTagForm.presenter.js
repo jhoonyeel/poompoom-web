@@ -2,9 +2,9 @@ import AgeSlider from './AgeSlider';
 import Gender from './Gender';
 import Interest from './Interest';
 import Job from './Job';
-import * as S from './JoinTag.styles';
+import * as S from './ProfileTagForm.styles';
 
-export default function JoinTagUI({
+export default function ProfileTagFormUI({
   buttons,
   setSelectedButton,
   setSelectedAgeLabel,

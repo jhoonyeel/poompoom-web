@@ -8,7 +8,7 @@ export default function ProfileTag() {
     <>
       <HeaderText>Profile-Tag</HeaderText>
       <InputWrapper>
-        <TagButton onClick={navigatePath('/signup/tag')}>프로필 태그 선택</TagButton>
+        <TagButton onClick={navigatePath('/signup/profile-tag')}>프로필 태그 선택</TagButton>
         <TagText>태그를 먼저 선택해주세요!</TagText>
       </InputWrapper>
     </>

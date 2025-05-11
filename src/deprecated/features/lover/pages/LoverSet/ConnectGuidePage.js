@@ -1,8 +1,8 @@
 import Lottie from 'react-lottie';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import checkAnimation from '../../../../../animation/presentLoading.json';
-import useModal from '../../../../../hooks/useModal';
+import checkAnimation from '../../../../../shared/assets/presentLoading.json';
+import useModal from '../../../../shared/hooks/useModal';
 import MatingModal from '../../components/Mating/Mating';
 
 const defaultOptions = { loop: false, animationData: checkAnimation };
