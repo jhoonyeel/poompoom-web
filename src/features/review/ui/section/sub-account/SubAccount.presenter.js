@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import FollowButton from '../../../../../deprecated/features/follow/components/FollowBtutton';
 
 export default function SubAccountUI({ loaderRef, subAccounts, getNickname, navigatePath }) {
   return (
@@ -14,7 +13,7 @@ export default function SubAccountUI({ loaderRef, subAccounts, getNickname, navi
                 <AuthorImg src={account.profileImagePath} alt="프로필 이미지" />
               </AuthorImgBox>
               <Nickname to="/profile">{`@${getNickname(account.nickName)}`}</Nickname>
-              <FollowButton memberId={account.memberId} />
+              {/* <FollowButton memberId={account.memberId} /> */}
             </AuthorInfo>
             <HashtagList>
               {account.profileTags &&

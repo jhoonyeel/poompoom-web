@@ -1,22 +1,11 @@
-import { ReactComponent as LoginTitle } from '../../../shared/assets/Login/LogInTitle.svg';
-import { ReactComponent as GoogleLogo } from '../../../shared/assets/Login/LogoIcon/Google.svg';
-import { ReactComponent as KakaoLogo } from '../../../shared/assets/Login/LogoIcon/Kakao.svg';
-import { ReactComponent as NaverLogo } from '../../../shared/assets/Login/LogoIcon/Naver.svg';
+import { ReactComponent as KakaoLogo } from '../assets/Kakao.svg';
+import { ReactComponent as LoginTitle } from '../assets/LogInTitle.svg';
 import * as S from './Login.styles';
 
 import { useInputFocus } from '../../../shared/hooks/useInputFocus';
 import AuthFooterUI from '../../../widgets/footer/ui/AuthFooter';
 
-export default function LoginUI({
-  handleSubmitLogin,
-  username,
-  setUsername,
-  password,
-  setPassword,
-  onGoogleLogin,
-  onNaverLogin,
-  onKakaoLogin,
-}) {
+export default function LoginUI({ handleSubmitLogin, username, setUsername, password, setPassword, onKakaoLogin }) {
   const { isFocused, handleFocus, handleBlur } = useInputFocus();
   return (
     <>
@@ -28,12 +17,6 @@ export default function LoginUI({
         </S.Header>
 
         <S.LogoContainer>
-          <S.LogoWrapper>
-            <NaverLogo onClick={onNaverLogin} />
-          </S.LogoWrapper>
-          <S.LogoWrapper>
-            <GoogleLogo onClick={onGoogleLogin} />
-          </S.LogoWrapper>
           <S.LogoWrapper>
             <KakaoLogo onClick={onKakaoLogin} />
           </S.LogoWrapper>
@@ -79,11 +62,11 @@ export default function LoginUI({
 
         <S.LinkWrapper>
           <S.LinkInnerWrapper>
-            <S.CustomLink to="/find/id">아이디 찾기</S.CustomLink>
+            <S.CustomLink to="/find/username">아이디 찾기</S.CustomLink>
             <S.Line>|</S.Line>
-            <S.CustomLink to="/find/pw">비밀번호 찾기</S.CustomLink>
+            <S.CustomLink to="/find/password">비밀번호 찾기</S.CustomLink>
           </S.LinkInnerWrapper>
-          <S.CustomLink to="/signup">회원가입</S.CustomLink>
+          <S.CustomLink to="/join">회원가입</S.CustomLink>
         </S.LinkWrapper>
       </S.LoginContainer>
       <AuthFooterUI />

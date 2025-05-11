@@ -2,7 +2,7 @@
 import { ReactComponent as SignUpTitle } from '../../../shared/assets/CreateAccount.svg';
 import { useInputFocus } from '../../../shared/hooks/useInputFocus';
 import AuthFooterUI from '../../../widgets/footer/ui/AuthFooter';
-import ProfileTag from '../../profile-tag/ui/ProfileTag';
+import ProfileTagForm from '../../profile-tag/ui/ProfileTagForm.container';
 import * as S from './Join.style';
 
 export default function JoinUI({
@@ -31,7 +31,9 @@ export default function JoinUI({
         <S.Header>
           <SignUpTitle />
         </S.Header>
-        <ProfileTag /> <S.ErrorMessage>{tagMessage}</S.ErrorMessage>
+        <ProfileTagForm />
+        <S.ErrorMessage>{tagMessage}</S.ErrorMessage>
+
         <S.HeaderText>information</S.HeaderText>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <S.InputContainer>

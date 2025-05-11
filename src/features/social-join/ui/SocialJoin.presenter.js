@@ -2,7 +2,7 @@
 import { ReactComponent as SignUpTitle } from '../../../shared/assets/CreateAccount.svg';
 import { useInputFocus } from '../../../shared/hooks/useInputFocus';
 import AuthFooterUI from '../../../widgets/footer/ui/AuthFooter';
-import ProfileTag from '../../profile-tag/ui/ProfileTag';
+import ProfileTagForm from '../../profile-tag/ui/ProfileTagForm.container';
 import * as S from './SocialJoin.styles';
 
 export default function SocialJoinUI({
@@ -27,7 +27,7 @@ export default function SocialJoinUI({
           <SignUpTitle />
           <S.SocialText>with-Social</S.SocialText>
         </S.Header>
-        <ProfileTag />
+        <ProfileTagForm />
         <S.ErrorMessage>{tagMessage}</S.ErrorMessage>
 
         <S.HeaderText>information</S.HeaderText>
