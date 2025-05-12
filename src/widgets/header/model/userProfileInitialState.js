@@ -1,4 +1,4 @@
-export const INITIAL_PROFILE = {
+export const USER_PROFILE_INITIAL_STATE = {
   nickName: '',
   profileImagePath: '',
   profileTagList: [],

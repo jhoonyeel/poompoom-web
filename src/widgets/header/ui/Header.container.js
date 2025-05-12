@@ -4,7 +4,7 @@ import HeaderUI from './Header.presenter';
 
 export default function Header() {
   const location = useLocation();
-  const showSearchBar = location.pathname === '/review' || location.pathname === '/review/query-result';
+  const showSearchBar = location.pathname === '/review' || location.pathname === '/review/search';
 
   const navigatePath = useNavigatePath();
 

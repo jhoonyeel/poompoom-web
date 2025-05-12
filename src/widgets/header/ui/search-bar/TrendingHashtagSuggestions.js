@@ -1,8 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
-import { useFetchRecommendations } from '../../../shared/hooks/useFetchRecommendations';
+import { useFetchRecommendations } from '../../../../shared/hooks/useFetchRecommendations';
 
-export function Recommendations({ handleRecommendationClick }) {
+export function TrendingHashtagSuggestions({ handleRecommendationClick }) {
   const { recommendations } = useFetchRecommendations();
 
   return (

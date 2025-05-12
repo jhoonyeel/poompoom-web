@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from '../../../shared/lib/axios';
 
-export function useFetchAllHashtag() {
+export function useSearchHashtags() {
   const [allHashtags, setAllHashtags] = useState([]);
   const [error, setError] = useState(null);
 

@@ -1,6 +1,6 @@
-import React, { forwardRef } from 'react';
-import { Recommendations } from './Recommendations';
+import { forwardRef } from 'react';
 import * as S from './SearchBar.styles';
+import { TrendingHashtagSuggestions } from './TrendingHashtagSuggestions';
 
 const SearchBarUI = forwardRef(
   (
@@ -39,10 +39,10 @@ const SearchBarUI = forwardRef(
         <S.SearchBtn type="button" onClick={handleSearch} />
       </S.SearchInputContainer>
       {isFocused && searchTerm.length === 0 && (
-        <Recommendations handleRecommendationClick={handleRecommendationClick} />
+        <TrendingHashtagSuggestions handleRecommendationClick={handleRecommendationClick} />
       )}
       {/* {isFocused && searchTerm.length > 0 && (
-        <AutoCompleteKeywords searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <SearchHashtagSuggestions searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       )} */}
     </S.Wrapper>
   ),

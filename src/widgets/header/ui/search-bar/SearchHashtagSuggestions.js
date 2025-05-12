@@ -1,12 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as SearchKeyword } from '../assets/search_keyword.svg';
-import useDebounce from '../hooks/useDebounce';
-import { useFetchAllHashtag } from '../hooks/useFetchAllHashtag';
+import { ReactComponent as SearchKeyword } from '../../assets/search_keyword.svg';
+import { useSearchHashtags } from '../../hooks/useSearchHashtags';
+import useSearchInputDebounce from '../../hooks/useSearchInputDebounce';
 
-export function AutoCompleteKeywords({ searchTerm, setSearchTerm }) {
-  const { allHashtags } = useFetchAllHashtag(); // 모든 해시태그 가져오기
-  const debouncedSearchTerm = useDebounce(searchTerm, 500); // 입력값을 0.5초 지연시킴
+export function SearchHashtagSuggestions({ searchTerm, setSearchTerm }) {
+  const { allHashtags } = useSearchHashtags(); // 모든 해시태그 가져오기
+  const debouncedSearchTerm = useSearchInputDebounce(searchTerm, 500); // 입력값을 0.5초 지연시킴
 
   const filteredHashtags = allHashtags.filter((hashtag) =>
     hashtag.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()),
