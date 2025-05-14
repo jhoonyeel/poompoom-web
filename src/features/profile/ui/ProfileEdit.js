@@ -1,5 +1,5 @@
-import { logout } from '../../login/api/authService';
-import * as S from './ProfileEdit.styles';
+import styled from 'styled-components';
+import { logout } from '../../../shared/api/auth';
 
 export default function ProfileEdit() {
   const handleLogout = () => {
@@ -9,17 +9,45 @@ export default function ProfileEdit() {
   };
 
   return (
-    <S.Container>
-      <S.Wrapper>
-        <S.Title>설정 탭</S.Title>
-        <S.List>내 포인트</S.List>
-        <S.List>
-          팔로우 리스트
-          <S.FollowerList />
-        </S.List>
-        <S.List>로그인 정보 수정</S.List>
-        <S.List onClick={handleLogout}>로그아웃</S.List>
-      </S.Wrapper>
-    </S.Container>
+    <Container>
+      <Wrapper>
+        <Title>설정 탭</Title>
+        <List>로그인 정보 수정</List>
+        <List onClick={handleLogout}>로그아웃</List>
+      </Wrapper>
+    </Container>
   );
 }
+
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 24px auto;
+  width: 80%;
+  min-width: 1028px;
+`;
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+export const Title = styled.div`
+  font-size: 22px;
+  font-weight: bold;
+  text-align: start;
+`;
+export const List = styled.div`
+  width: 100%;
+  color: #8c8c8c;
+  margin: 2rem 1rem;
+  text-align: start;
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+export const Router = styled.div`
+  &:hover {
+    background-color: white;
+    color: black;
+  }
+`;

@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import profileDummyPhoto from '../../../shared/assets/ProfilePhoto.svg';
-import SearchBar from '../../search-bar/ui/SearchBar.container';
-import { getMyProfile } from '../api/getMyProfile';
-import { INITIAL_PROFILE } from '../model/initialProfile';
+import { getUserProfile } from '../api/getUserProfile';
+import { USER_PROFILE_INITIAL_STATE } from '../model/userProfileInitialState';
 import * as S from './Header.styles';
+import SearchBar from './search-bar/SearchBar.container';
 
 export default function HeaderUI({ showSearchBar, navigatePath }) {
-  const [profile, setProfile] = useState(INITIAL_PROFILE);
+  const [profile, setProfile] = useState(USER_PROFILE_INITIAL_STATE);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const profileData = await getMyProfile(); // 서비스 함수 호출
+        const profileData = await getUserProfile(); // 서비스 함수 호출
         setProfile(profileData);
       } catch (err) {
         console.error('프로필 가져오기 에러:', err.message);

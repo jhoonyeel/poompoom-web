@@ -58,7 +58,7 @@ export default function Join() {
     }
   };
 
-  // 아이디 중복 체크 함수 추가
+  // TODO: 아이디 중복 체크 공통 함수 추가
   const checkDuplicateId = async () => {
     try {
       const result = await axios.post('/member/dupidcheck', { username: id });

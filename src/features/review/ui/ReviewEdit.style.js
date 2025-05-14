@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { ReactComponent as Add } from '../../../shared/assets/Add.svg';
-import { ReactComponent as CategorySelect } from '../../../shared/assets/CategorySelect.svg';
+import { ReactComponent as Add } from '../assets/Add.svg';
+import { ReactComponent as CategorySelect } from '../assets/CategorySelect.svg';
 
 export const Wrapper = styled.div`
   margin: 24px auto 0;

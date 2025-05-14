@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as Logo } from '../../../shared/assets/PoomPoom.svg';
+import { ReactComponent as Logo } from '../assets/PoomPoom.svg';
 
 export const Wrapper = styled.div`
   display: flex;

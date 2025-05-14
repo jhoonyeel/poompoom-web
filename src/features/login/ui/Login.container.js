@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../api/authService';
+import { login } from '../../../shared/api/auth';
 import LoginUI from './Login.presenter';
 
 export default function Login() {
@@ -26,14 +26,6 @@ export default function Login() {
     }
   };
 
-  const onGoogleLogin = () => {
-    window.location.href = 'http://goochul.iptime.org:8070/oauth2/authorization/google';
-  };
-
-  const onNaverLogin = () => {
-    window.location.href = 'http://goochul.iptime.org:8070/oauth2/authorization/naver';
-  };
-
   const onKakaoLogin = () => {
     window.location.href = 'http://goochul.iptime.org:8070/oauth2/authorization/kakao';
   };
@@ -45,8 +37,6 @@ export default function Login() {
       password={password}
       setPassword={setPassword}
       handleSubmitLogin={handleSubmitLogin}
-      onGoogleLogin={onGoogleLogin}
-      onNaverLogin={onNaverLogin}
       onKakaoLogin={onKakaoLogin}
     />
   );

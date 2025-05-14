@@ -1,7 +1,6 @@
-// FindPW.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthenticateResetCode, useRequestPasswordReset, useResetPassword } from '../api/useFindPassword';
+import { sendPasswordResetEmail, submitNewPassword, verifyPasswordResetCode } from '../api/passwordReset';
 import FindPasswordUI from './FindPassword.presenter';
 
 export default function FindPassword() {
@@ -12,17 +11,13 @@ export default function FindPassword() {
   const [step, setStep] = useState(1);
   const [error, setError] = useState(null);
 
-  const { requestPasswordReset } = useRequestPasswordReset();
-  const { authenticateResetCode } = useAuthenticateResetCode();
-  const { resetPassword } = useResetPassword();
-
   const navigate = useNavigate();
   const handleOnClick = (path) => () => {
     navigate(path);
   };
 
   const handleRequestReset = async () => {
-    const result = await requestPasswordReset(email, username);
+    const result = await sendPasswordResetEmail(email, username);
     if (result.success) {
       setStep(2);
     } else {
@@ -31,7 +26,7 @@ export default function FindPassword() {
   };
 
   const handleAuthenticate = async () => {
-    const result = await authenticateResetCode(authNum, email);
+    const result = await verifyPasswordResetCode(authNum, email);
     if (result.success) {
       setStep(3);
     } else {
@@ -40,7 +35,7 @@ export default function FindPassword() {
   };
 
   const handleResetPassword = async () => {
-    const result = await resetPassword(newPassword, email);
+    const result = await submitNewPassword(newPassword, email);
     if (result.success) {
       console.log('비밀번호가 성공적으로 재설정되었습니다.');
       handleOnClick('/login');

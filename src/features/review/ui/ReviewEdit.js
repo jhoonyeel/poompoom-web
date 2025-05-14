@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import placeholderPhoto from '../../../shared/assets/DummyPhoto.svg';
 import profileDummyPhoto from '../../../shared/assets/ProfilePhoto.svg';
-import { getOneReview } from '../api/getOneReview';
-import { updateReview } from '../api/updateReview';
+import { REVIEW_ITEM_TYPES } from '../../../shared/constants/reviewItemTypes';
+import { getReviewById, updateReview } from '../api/review';
+import placeholderPhoto from '../assets/DummyPhoto.svg';
 import { useFetchProfilePicture } from '../hooks/useFetchProfilePicture';
 import { useLogin } from '../hooks/useLogin';
-import { CATEGORIES, ITEM } from '../model/constants';
+import { REVIEW_CATEGORIES } from '../model/reviewCategories';
 import * as S from './ReviewEdit.style';
 
 export default function ReviewEdit() {
@@ -19,8 +19,8 @@ export default function ReviewEdit() {
     source: '',
     reviewType: 'RECEIVED',
     content: '',
-    category: CATEGORIES[0],
-    item: ITEM[0],
+    category: REVIEW_CATEGORIES[0],
+    item: REVIEW_ITEM_TYPES[0],
     item_url: '',
     nickname: '',
     profileImage: '',
@@ -40,7 +40,7 @@ export default function ReviewEdit() {
   useEffect(() => {
     const loadReviewData = async () => {
       try {
-        const data = await getOneReview(reviewId); // API 호출
+        const data = await getReviewById(reviewId); // API 호출
         const { body, price, whereBuy, hashTags, reviewType, photos, item_url, item, nickname, profileImage } = data;
         console.log(body);
         setReviewData({
@@ -241,7 +241,7 @@ export default function ReviewEdit() {
                 <S.CategoryTitle>카테고리 선택</S.CategoryTitle>
               </S.CategoryHeader>
               <S.CategoryContainer>
-                {CATEGORIES.map((cat) => (
+                {REVIEW_CATEGORIES.map((cat) => (
                   <S.CategoryBtn
                     key={cat}
                     type="button"
@@ -258,7 +258,7 @@ export default function ReviewEdit() {
                 <S.CategoryTitle>품목 선택</S.CategoryTitle>
               </S.CategoryHeader>
               <S.CategoryContainer>
-                {ITEM.map((itemSell) => (
+                {REVIEW_ITEM_TYPES.map((itemSell) => (
                   <S.CategoryBtn
                     key={itemSell}
                     type="button"

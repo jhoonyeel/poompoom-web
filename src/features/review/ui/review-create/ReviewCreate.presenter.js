@@ -1,5 +1,5 @@
-import placeholderPhoto from '../../../../shared/assets/DummyPhoto.svg';
 import profileDummyPhoto from '../../../../shared/assets/ProfilePhoto.svg';
+import placeholderPhoto from '../../assets/DummyPhoto.svg';
 import * as S from './ReviewCreate.style';
 
 export default function ReviewCreateUI({

@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import PostFilter from '../../../widgets/review-filter/ui/PostFilter.container';
+import PostFilter from '../../../widgets/review-filter/ui/ReviewFilter.container';
 // import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
 import { ScrollToTopButton } from '../../../shared/ui/ScrollToTopButton';
-import LatestGallery from './section/latest-gallery/LatestGallery.container';
-import SearchGallery from './section/search-gallery/SearchGallery.container';
-import SubAccount from './section/sub-account/SubAccount.container';
-import SubGallery from './section/sub-gallery/SubGallery.container';
+import ExploreFeed from './explore-feed/ExploreFeed.container';
+import RecentlyViewdFeed from './recently-viewd-feed/RecentlyViewdFeed.container';
+import RecommendedFeed from './recommended-feed/RecommendedFeed.container';
 
 export default function ReviewList() {
   const [selectedSort, setSelectedSort] = useState('추천순'); // 기본으로 추천순이 선택되도록 설정
@@ -21,18 +20,17 @@ export default function ReviewList() {
 
       <LatestSection>
         <Title>RECENT VIEW</Title>
-        <LatestGallery />
+        <RecentlyViewdFeed />
       </LatestSection>
       <SubSection>
         <Title>HOW ABOUT THIS</Title>
         <SubBodyContent>
-          <SubGallery />
-          <SubAccount />
+          <RecommendedFeed />
         </SubBodyContent>
       </SubSection>
       <SearchSection>
         <Title>ALL MOOD VIEW</Title>
-        <SearchGallery selectedSort={selectedSort} />
+        <ExploreFeed selectedSort={selectedSort} />
       </SearchSection>
 
       <ScrollToTopButton />
