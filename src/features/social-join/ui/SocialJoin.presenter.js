@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { ReactComponent as SignUpTitle } from '../../../shared/assets/CreateAccount.svg';
 import { useInputFocus } from '../../../shared/hooks/useInputFocus';
-import AuthFooterUI from '../../../widgets/footer/ui/AuthFooter';
+import AuthFooter from '../../../widgets/footer/ui/AuthFooter';
 import ProfileTagForm from '../../profile-tag/ui/ProfileTagForm.container';
 import * as S from './SocialJoin.styles';
 
@@ -74,7 +74,7 @@ export default function SocialJoinUI({
           </S.LoginButton>
         </S.Form>
       </S.LoginContainer>
-      <AuthFooterUI />
+      <AuthFooter />
     </>
   );
 }

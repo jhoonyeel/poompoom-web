@@ -1,7 +1,7 @@
-import AgeSlider from './AgeSlider';
-import Gender from './Gender';
-import Interest from './Interest';
-import Job from './Job';
+import AgeSlider from './AgeRangeSelector';
+import Gender from './GenderSelector';
+import Interest from './InterestCategorySelector';
+import Job from './OccupationSelector';
 import * as S from './ProfileTagForm.styles';
 
 export default function ProfileTagFormUI({

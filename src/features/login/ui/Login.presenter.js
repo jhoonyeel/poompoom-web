@@ -3,7 +3,7 @@ import { ReactComponent as LoginTitle } from '../assets/LogInTitle.svg';
 import * as S from './Login.styles';
 
 import { useInputFocus } from '../../../shared/hooks/useInputFocus';
-import AuthFooterUI from '../../../widgets/footer/ui/AuthFooter';
+import AuthFooter from '../../../widgets/footer/ui/AuthFooter';
 
 export default function LoginUI({ handleSubmitLogin, username, setUsername, password, setPassword, onKakaoLogin }) {
   const { isFocused, handleFocus, handleBlur } = useInputFocus();
@@ -69,7 +69,7 @@ export default function LoginUI({ handleSubmitLogin, username, setUsername, pass
           <S.CustomLink to="/join">회원가입</S.CustomLink>
         </S.LinkWrapper>
       </S.LoginContainer>
-      <AuthFooterUI />
+      <AuthFooter />
     </>
   );
 }

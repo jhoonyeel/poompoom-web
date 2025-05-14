@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { useNavigatePath } from '../../../shared/hooks/useNavigatePath';
-import ProfileHeader from './ProfileHeader/ProfileHeader.container';
-import ProfileMenuBox from './ProfileMenuBox/ProfileMenuBox.container';
-import Category from './Section/Category/Category';
-import LatestProfileGallery from './Section/LatestProfileGallery/LatestProfileGallery.container';
-import MineProfileGallery from './Section/MineProfileGallery/MineProfileGallery.container';
+import BookmarkPanel from './bookmark-panel/BookmarkPanel';
+import MyReviewPanel from './my-review-panel/MyReviewPanel.container';
+import ProfileHeader from './profile-header/ProfileHeader.container';
+import ProfileTabMenu from './profile-tab-menu/ProfileTabMenu.container';
+import RecentViewPanel from './recent-view-panel/RecentViewPanel.container';
 
 export default function Profile() {
   const location = useLocation();
@@ -26,16 +26,16 @@ export default function Profile() {
   let profileContent;
   switch (currentPath) {
     case '/profile/bookmark':
-      profileContent = <Category />;
+      profileContent = <BookmarkPanel />;
       break;
     case '/profile/like':
-      profileContent = <MineProfileGallery />;
+      profileContent = <MyReviewPanel />;
       break;
     case '/profile/latest':
-      profileContent = <LatestProfileGallery />;
+      profileContent = <RecentViewPanel />;
       break;
     case '/profile/wrote':
-      profileContent = <MineProfileGallery />;
+      profileContent = <MyReviewPanel />;
       break;
     default:
       break;
@@ -44,7 +44,7 @@ export default function Profile() {
   return (
     <Wrapper>
       <ProfileHeader />
-      <ProfileMenuBox />
+      <ProfileTabMenu />
       {profileContent}
     </Wrapper>
   );

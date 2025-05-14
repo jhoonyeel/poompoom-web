@@ -2,10 +2,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line import/named
-import { createReview } from '../../api/createReview';
+import { REVIEW_ITEM_TYPES } from '../../../../shared/constants/reviewItemTypes';
+import { createReview } from '../../api/review';
 import { useFetchProfilePicture } from '../../hooks/useFetchProfilePicture';
 import { useLogin } from '../../hooks/useLogin';
-import { CATEGORIES, ITEM } from '../../model/constants';
+import { REVIEW_CATEGORIES } from '../../model/reviewCategories';
 import ReviewWriteUI from './ReviewCreate.presenter';
 
 export default function ReviewCreate() {
@@ -16,7 +17,7 @@ export default function ReviewCreate() {
     source: '',
     reviewType: 'RECEIVED',
     content: '',
-    category: CATEGORIES[0],
+    category: REVIEW_CATEGORIES[0],
     item: '',
     item_url: '',
   });
@@ -120,8 +121,8 @@ export default function ReviewCreate() {
       handleSubmit={handleSubmit}
       nextImage={nextImage}
       prevImage={prevImage}
-      CATEGORIES={CATEGORIES}
-      ITEM={ITEM}
+      CATEGORIES={REVIEW_CATEGORIES}
+      ITEM={REVIEW_ITEM_TYPES}
       nickname={nickname}
     />
   );

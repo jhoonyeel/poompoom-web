@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../api/authService';
+import { login } from '../../../shared/api/auth';
 import LoginUI from './Login.presenter';
 
 export default function Login() {

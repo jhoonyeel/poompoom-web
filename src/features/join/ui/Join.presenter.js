@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { ReactComponent as SignUpTitle } from '../../../shared/assets/CreateAccount.svg';
 import { useInputFocus } from '../../../shared/hooks/useInputFocus';
-import AuthFooterUI from '../../../widgets/footer/ui/AuthFooter';
+import AuthFooter from '../../../widgets/footer/ui/AuthFooter';
 import ProfileTagForm from '../../profile-tag/ui/ProfileTagForm.container';
 import * as S from './Join.style';
 
@@ -162,7 +162,7 @@ export default function JoinUI({
         </S.Form>
         <S.ErrorMessage>{tagMessage}</S.ErrorMessage>
       </S.LoginContainer>
-      <AuthFooterUI />
+      <AuthFooter />
     </>
   );
 }
