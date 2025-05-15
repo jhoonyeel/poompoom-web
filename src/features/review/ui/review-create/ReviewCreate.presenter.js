@@ -1,8 +1,8 @@
-import profileDummyPhoto from '../../../../shared/assets/ProfilePhoto.svg';
+import profileDummyPhoto from '@shared/assets/ProfilePhoto.svg';
 import placeholderPhoto from '../../assets/DummyPhoto.svg';
 import * as S from './ReviewCreate.style';
 
-export default function ReviewCreateUI({
+const ReviewCreateUI = ({
   images,
   activeImageIndex,
   reviewData,
@@ -18,7 +18,7 @@ export default function ReviewCreateUI({
   CATEGORIES,
   ITEM,
   nickname,
-}) {
+}) => {
   return (
     <S.Wrapper>
       <S.ReviewCreateForm onSubmit={handleSubmit}>
@@ -55,6 +55,7 @@ export default function ReviewCreateUI({
                   </S.DeleteButton>
                   <S.Dots>
                     {images.map((_, index) => (
+                      // eslint-disable-next-line react/jsx-key
                       <S.Dot
                         active={index === activeImageIndex}
                         onClick={(e) => {
@@ -153,4 +154,6 @@ export default function ReviewCreateUI({
       </S.ReviewCreateForm>
     </S.Wrapper>
   );
-}
+};
+
+export default ReviewCreateUI;

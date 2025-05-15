@@ -1,10 +1,10 @@
+import GlobalStyle from '@shared/styles/GlobalStyle';
+import { basicTheme } from '@shared/theme/Theme';
 import { Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import GlobalStyle from '../shared/styles/GlobalStyle';
-import { basicTheme } from '../shared/theme/Theme';
-import { AppRouter } from './router/AppRouter';
+import AppRouter from './router/AppRouter';
 
-export default function App() {
+const App = () => {
   return (
     <ThemeProvider theme={basicTheme}>
       <GlobalStyle />
@@ -13,4 +13,6 @@ export default function App() {
       </Routes>
     </ThemeProvider>
   );
-}
+};
+
+export default App;

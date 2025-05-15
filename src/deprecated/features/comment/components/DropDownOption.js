@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-export default function DropDownOption({ items }) {
+const DropDownOption = ({ items }) => {
   return (
     <DropDownContainer>
       <ul>
@@ -16,7 +15,9 @@ export default function DropDownOption({ items }) {
       </ul>
     </DropDownContainer>
   );
-}
+};
+
+export default DropDownOption;
 
 const DropDownContainer = styled.div`
   padding: 5px;

@@ -1,10 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
-import ReviewSearch from '../../features/review-search/ui/ReviewSearch';
-import SocialJoinCallback from '../../features/social-join/ui/SocialJoinCallback';
-import SocialLoginCallback from '../../features/social-login/ui/SocialLoginCallback';
-import { HeaderOnlyLayout } from '../../layouts/HeaderOnlyLayout';
-import { MainLayout } from '../../layouts/MainLayout';
-import { NoLayout } from '../../layouts/NoLayout';
+import ReviewSearch from '@features/review-search/ui/ReviewSearch';
+import SocialJoinCallback from '@features/social-join/ui/SocialJoinCallback';
+import SocialLoginCallback from '@features/social-login/ui/SocialLoginCallback';
+import HeaderOnlyLayout from '@layouts/HeaderOnlyLayout';
+import MainLayout from '@layouts/MainLayout';
+import NoLayout from '@layouts/NoLayout';
 import {
   FindPasswordRoute,
   FindUsernameRoute,
@@ -20,7 +19,8 @@ import {
   ReviewListRoute,
   SocialJoinRoute,
   WelcomeRoute,
-} from '../../pages';
+} from '@pages';
+import { Route, Routes } from 'react-router-dom';
 import AuthGuard from './AuthGuard';
 
 const isAuthenticated = async () => {
@@ -28,7 +28,7 @@ const isAuthenticated = async () => {
   return true || localStorage.getItem('accessToken') !== null;
 };
 
-export function AppRouter() {
+const AppRouter = () => {
   return (
     <Routes>
       {/* NoLayout: 인증 페이지 */}
@@ -73,4 +73,6 @@ export function AppRouter() {
       </Route>
     </Routes>
   );
-}
+};
+
+export default AppRouter;

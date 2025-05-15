@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PortalContainer from './PortalContainer';
 
-export default function ConfirmModal({ isOpen, closeModal, onConfirm, ModalMessage }) {
+const ConfirmModal = ({ isOpen, closeModal, onConfirm, ModalMessage }) => {
   return (
     <PortalContainer isVisible={isOpen} id="modal-root">
       <ModalBackdrop onClick={closeModal} />
@@ -14,7 +14,9 @@ export default function ConfirmModal({ isOpen, closeModal, onConfirm, ModalMessa
       </Container>
     </PortalContainer>
   );
-}
+};
+
+export default ConfirmModal;
 
 const ModalBackdrop = styled.div`
   position: fixed;

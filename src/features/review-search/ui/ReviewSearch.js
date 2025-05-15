@@ -1,12 +1,12 @@
+import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll';
+import axios from '@shared/lib/axios';
+import ScrollToTopButton from '@shared/ui/ScrollToTopButton';
+import ReviewPostCard from '@widgets/review-card/ui/ReviewCard.container';
+import PostFilter from '@widgets/review-filter/ui/ReviewFilter.container';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { useInfiniteScroll } from '../../../shared/hooks/useInfiniteScroll';
-import axios from '../../../shared/lib/axios';
-import { ScrollToTopButton } from '../../../shared/ui/ScrollToTopButton';
-import ReviewPostCard from '../../../widgets/review-card/ui/ReviewCard.container';
-import PostFilter from '../../../widgets/review-filter/ui/ReviewFilter.container';
-import { SearchFallback } from './SearchFallback';
+import SearchFallback from './SearchFallback';
 
 const fetchQueryData = async (cursorId, size, keyword) => {
   const res = await axios.get(`/review/search`, {
@@ -17,7 +17,7 @@ const fetchQueryData = async (cursorId, size, keyword) => {
   return { values, nextPageId, hasNext };
 };
 
-export default function ReviewSearch() {
+const ReviewSearch = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const searchContent = params.get('searchContent') || ''; // URL에서 검색어 추출
@@ -90,7 +90,9 @@ export default function ReviewSearch() {
       </QuerySection>
     </Wrapper>
   );
-}
+};
+
+export default ReviewSearch;
 
 const Wrapper = styled.main`
   width: 100%;

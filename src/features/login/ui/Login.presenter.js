@@ -1,11 +1,10 @@
+import { useInputFocus } from '@shared/hooks/useInputFocus';
+import AuthFooter from '@widgets/footer/ui/AuthFooter';
 import { ReactComponent as KakaoLogo } from '../assets/Kakao.svg';
 import { ReactComponent as LoginTitle } from '../assets/LogInTitle.svg';
 import * as S from './Login.styles';
 
-import { useInputFocus } from '../../../shared/hooks/useInputFocus';
-import AuthFooter from '../../../widgets/footer/ui/AuthFooter';
-
-export default function LoginUI({ handleSubmitLogin, username, setUsername, password, setPassword, onKakaoLogin }) {
+const LoginUI = ({ handleSubmitLogin, username, setUsername, password, setPassword, onKakaoLogin }) => {
   const { isFocused, handleFocus, handleBlur } = useInputFocus();
   return (
     <>
@@ -72,4 +71,6 @@ export default function LoginUI({ handleSubmitLogin, username, setUsername, pass
       <AuthFooter />
     </>
   );
-}
+};
+
+export default LoginUI;

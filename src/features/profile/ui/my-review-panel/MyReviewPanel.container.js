@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import axios from '../../../../shared/lib/axios';
+import axios from '@shared/lib/axios';
+import { useEffect, useRef, useState } from 'react';
 import MyReviewPanelUI from './MyReviewPanel.presenter';
 
-export default function MyReviewPanel() {
+const MyReviewPanel = () => {
   const [latestPosts, setLatestPosts] = useState([]);
   const [cursorId, setCursorId] = useState(null);
   const [hasNext, setHasNext] = useState(true);
@@ -72,4 +72,6 @@ export default function MyReviewPanel() {
       <div ref={loader} style={{ height: '20px' }} />
     </>
   );
-}
+};
+
+export default MyReviewPanel;

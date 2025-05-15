@@ -1,13 +1,15 @@
+import ReviewCard from '@widgets/review-card/ui/ReviewCard.container';
 import styled from 'styled-components';
-import ReviewCard from '../../../../widgets/review-card/ui/ReviewCard.container';
 
-export default function ExploreFeedUI({ searchPosts }) {
+const ExploreFeedUI = ({ searchPosts }) => {
   return (
     <Wrapper>
       {searchPosts && searchPosts.map((post, index) => <ReviewCard key={`${post.reviewId}-${index}`} post={post} />)}
     </Wrapper>
   );
-}
+};
+
+export default ExploreFeedUI;
 
 const Wrapper = styled.div`
   display: grid;

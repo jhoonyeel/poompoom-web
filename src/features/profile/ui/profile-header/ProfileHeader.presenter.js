@@ -1,9 +1,9 @@
 /* eslint-disable react/no-array-index-key */
+import profileDummyPhoto from '@shared/assets/ProfilePhoto.svg';
 import styled from 'styled-components';
-import profileDummyPhoto from '../../../../shared/assets/ProfilePhoto.svg';
 import * as S from './ProfileHeader.styles';
 
-export default function ProfileHeaderUI({ profile, navigatePath }) {
+const ProfileHeaderUI = ({ profile, navigatePath }) => {
   console.log(profile);
   return (
     <S.Container>
@@ -23,7 +23,9 @@ export default function ProfileHeaderUI({ profile, navigatePath }) {
       </S.InnerContainer>
     </S.Container>
   );
-}
+};
+
+export default ProfileHeaderUI;
 
 const UserProfile = styled.img`
   width: 100%;

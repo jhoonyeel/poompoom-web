@@ -1,5 +1,7 @@
-import FindUsername from '../../features/find-username/ui/FindUsername';
+import FindUsername from '@features/find-username/ui/FindUsername';
 
-export default function FindUsernameRoute() {
+const FindUsernameRoute = () => {
   return <FindUsername />;
-}
+};
+
+export default FindUsernameRoute;

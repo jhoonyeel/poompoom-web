@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Slider from 'react-slider';
 import styled from 'styled-components';
 
-export default function PriceSlider() {
+const PriceSlider = () => {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(100000); // 기본 최대값 설정
   const [step, setStep] = useState(1000); // 기본 스텝 설정
@@ -38,7 +38,9 @@ export default function PriceSlider() {
       </PriceRange>
     </Wrapper>
   );
-}
+};
+
+export default PriceSlider;
 
 const Wrapper = styled.div`
   position: absolute;

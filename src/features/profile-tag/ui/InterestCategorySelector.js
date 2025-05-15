@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-export default function InterestCategorySelector({ setSelectedButton }) {
+const InterestCategorySelector = ({ setSelectedButton }) => {
   const [hoveredButton, setHoveredButton] = useState('');
 
   const handleHover = (buttonName) => {
@@ -64,9 +64,9 @@ export default function InterestCategorySelector({ setSelectedButton }) {
       </ButtonContainers>
     </Container>
   );
-}
+};
 
-// Styled-components
+export default InterestCategorySelector;
 
 const Container = styled.div`
   font-family: Arial, sans-serif;

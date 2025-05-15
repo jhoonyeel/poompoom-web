@@ -1,5 +1,5 @@
+import axios from '@shared/lib/axios';
 import { useEffect, useState } from 'react';
-import axios from '../../../shared/lib/axios';
 
 export function useSearchHashtags() {
   const [allHashtags, setAllHashtags] = useState([]);

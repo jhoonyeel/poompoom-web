@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
+import profileDummyPhoto from '@shared/assets/ProfilePhoto.svg';
+import { REVIEW_ITEM_TYPES } from '@shared/constants/reviewItemTypes';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import profileDummyPhoto from '../../../shared/assets/ProfilePhoto.svg';
-import { REVIEW_ITEM_TYPES } from '../../../shared/constants/reviewItemTypes';
 import { getReviewById, updateReview } from '../api/review';
 import placeholderPhoto from '../assets/DummyPhoto.svg';
 import { useFetchProfilePicture } from '../hooks/useFetchProfilePicture';
@@ -10,7 +10,7 @@ import { useLogin } from '../hooks/useLogin';
 import { REVIEW_CATEGORIES } from '../model/reviewCategories';
 import * as S from './ReviewEdit.style';
 
-export default function ReviewEdit() {
+const ReviewEdit = () => {
   const { reviewId } = useParams(); // 리뷰 ID를 URL에서 가져옵니다 (수정 모드일 때 필요).
   const navigate = useNavigate();
 
@@ -191,6 +191,7 @@ export default function ReviewEdit() {
                   </S.DeleteButton>
                   <S.Dots>
                     {allImages.map((_, index) => (
+                      // eslint-disable-next-line react/jsx-key
                       <S.Dot
                         active={index === activeImageIndex}
                         onClick={(e) => {
@@ -294,4 +295,6 @@ export default function ReviewEdit() {
       </S.ReviewEditForm>
     </S.Wrapper>
   );
-}
+};
+
+export default ReviewEdit;

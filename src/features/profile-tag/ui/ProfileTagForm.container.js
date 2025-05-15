@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProfileTagFormUI from './ProfileTagForm.presenter';
 
-export default function ProfileTagForm() {
+const ProfileTagForm = () => {
   const initialButtons = [
     { id: 1, value: '' },
     { id: 2, value: '' },
@@ -38,4 +38,6 @@ export default function ProfileTagForm() {
       onClickToBack={onClickToBack}
     />
   );
-}
+};
+
+export default ProfileTagForm;

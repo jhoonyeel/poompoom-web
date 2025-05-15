@@ -3,7 +3,7 @@ import { ReactComponent as SearchKeyword } from '../../assets/search_keyword.svg
 import { useSearchHashtags } from '../../hooks/useSearchHashtags';
 import useSearchInputDebounce from '../../hooks/useSearchInputDebounce';
 
-export function SearchHashtagSuggestions({ searchTerm, setSearchTerm }) {
+const SearchHashtagSuggestions = ({ searchTerm, setSearchTerm }) => {
   const { allHashtags } = useSearchHashtags(); // 모든 해시태그 가져오기
   const debouncedSearchTerm = useSearchInputDebounce(searchTerm, 500); // 입력값을 0.5초 지연시킴
 
@@ -28,7 +28,9 @@ export function SearchHashtagSuggestions({ searchTerm, setSearchTerm }) {
       </KeywordList>
     </Wrapper>
   );
-}
+};
+
+export default SearchHashtagSuggestions;
 
 export const Wrapper = styled.div`
   position: absolute;

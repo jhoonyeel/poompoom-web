@@ -1,5 +1,7 @@
-import Join from '../../features/join/ui/Join.container';
+import Join from '@features/join/ui/Join.container';
 
-export default function JoinRoute() {
+const JoinRoute = () => {
   return <Join />;
-}
+};
+
+export default JoinRoute;

@@ -1,8 +1,8 @@
+import { REVIEW_ITEM_TYPES } from '@shared/constants/reviewItemTypes';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { REVIEW_ITEM_TYPES } from '../../../shared/constants/reviewItemTypes';
 
-export default function ItemTypeDropdown({ selectedItem, setSelectedItem }) {
+const ItemTypeDropdown = ({ selectedItem, setSelectedItem }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -47,7 +47,9 @@ export default function ItemTypeDropdown({ selectedItem, setSelectedItem }) {
       )}
     </Dropdown>
   );
-}
+};
+
+export default ItemTypeDropdown;
 
 const Dropdown = styled.div`
   position: relative;

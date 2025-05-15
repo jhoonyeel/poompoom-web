@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import useIntersectionObserver from '../../../../hooks/useInterSectionObserver';
-import { useComments } from '../../hooks/CommentApis/useComment';
+import { useComments } from '../hooks/useComment';
+import useIntersectionObserver from '../hooks/useInterSectionObserver';
 import CommentList from './CommentList';
 
-export default function CommentContainer() {
+const CommentContainer = () => {
   const { fetchComments, pinnedComment, comments, convertDateArrayToDate, hasNext, cursorId, reviewId } = useComments();
   const { loader } = useIntersectionObserver({
     onIntersect: () => fetchComments(cursorId, 3),
@@ -29,7 +29,9 @@ export default function CommentContainer() {
       )}
     </CommentContainers>
   );
-}
+};
+
+export default CommentContainer;
 
 const CommentContainers = styled.div`
   border: none;

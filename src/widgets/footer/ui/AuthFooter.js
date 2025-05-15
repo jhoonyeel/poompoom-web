@@ -1,7 +1,7 @@
+import { ReactComponent as LogFooter } from '@shared/assets/Footer.svg';
 import styled from 'styled-components';
-import { ReactComponent as LogFooter } from '../../../shared/assets/Footer.svg';
 
-export default function AuthFooter() {
+const AuthFooter = () => {
   return (
     <FooterContainer>
       <FooterBanner />
@@ -13,7 +13,9 @@ export default function AuthFooter() {
       </MenuContainer>
     </FooterContainer>
   );
-}
+};
+
+export default AuthFooter;
 
 export const FooterContainer = styled.div`
   position: relative;

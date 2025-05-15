@@ -1,9 +1,9 @@
+import ReviewPostCard from '@widgets/review-card/ui/ReviewCard.container';
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import ReviewPostCard from '../../../../widgets/review-card/ui/ReviewCard.container';
 import Cursor from '../../assets/HorizontalCursor.svg';
 
-export default function RecommendedFeedUI({ subPosts, loader }) {
+const RecommendedFeedUI = ({ subPosts, loader }) => {
   const postListRef = useRef(null);
 
   useEffect(() => {
@@ -37,7 +37,9 @@ export default function RecommendedFeedUI({ subPosts, loader }) {
       <ScrollTrigger ref={loader} />
     </Wrapper>
   );
-}
+};
+
+export default RecommendedFeedUI;
 
 const Wrapper = styled.div`
   padding-left: 32px;

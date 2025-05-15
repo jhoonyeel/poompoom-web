@@ -1,5 +1,7 @@
-import Profile from '../../features/profile/ui/Profile';
+import Profile from '@features/profile/ui/Profile';
 
-export default function ProfileRoute() {
+const ProfileRoute = () => {
   return <Profile />;
-}
+};
+
+export default ProfileRoute;

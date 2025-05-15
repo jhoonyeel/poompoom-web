@@ -1,5 +1,7 @@
-import ReviewEdit from '../../features/review/ui/ReviewEdit';
+import ReviewEdit from '@features/review/ui/ReviewEdit';
 
-export default function ReviewEditRoute() {
+const ReviewEditRoute = () => {
   return <ReviewEdit />;
-}
+};
+
+export default ReviewEditRoute;

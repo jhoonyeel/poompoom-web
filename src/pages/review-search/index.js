@@ -1,5 +1,7 @@
-import ReviewSearch from '../../features/review-search/ui/ReviewSearch';
+import ReviewSearch from '@features/review-search/ui/ReviewSearch';
 
-export default function SearchRoute() {
+const SearchRoute = () => {
   return <ReviewSearch />;
-}
+};
+
+export default SearchRoute;

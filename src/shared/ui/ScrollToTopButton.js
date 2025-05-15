@@ -1,10 +1,9 @@
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
 import styled from 'styled-components';
 import { useScrollToTop } from '../hooks/useScrollToTop';
 
-export function ScrollToTopButton() {
+const ScrollToTopButton = () => {
   const scrollToTop = useScrollToTop();
 
   return (
@@ -12,7 +11,9 @@ export function ScrollToTopButton() {
       <UpIcon icon={faChevronUp} />
     </Wrapper>
   );
-}
+};
+
+export default ScrollToTopButton;
 
 const Wrapper = styled.div`
   display: flex;

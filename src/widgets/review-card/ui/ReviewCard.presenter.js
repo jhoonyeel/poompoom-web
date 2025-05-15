@@ -5,14 +5,7 @@ import ReviewPostBackground from './CardBackground';
 import ReviewPostHashtags from './CardHashtags';
 import ReviewPostPreview from './CardPreview';
 
-export default function ReviewCardUI({
-  post,
-  randomParticle,
-  isContentHovered,
-  onMouseEnter,
-  onMouseLeave,
-  navigatePath,
-}) {
+const ReviewCardUI = ({ post, randomParticle, isContentHovered, onMouseEnter, onMouseLeave, navigatePath }) => {
   return (
     <Wrapper isContentHovered={isContentHovered}>
       <ReviewPostAuthor
@@ -42,7 +35,9 @@ export default function ReviewCardUI({
       </ReviewPostContent>
     </Wrapper>
   );
-}
+};
+
+export default ReviewCardUI;
 
 const Wrapper = styled.div`
   width: 220px;

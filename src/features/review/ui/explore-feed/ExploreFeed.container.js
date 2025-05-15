@@ -1,10 +1,10 @@
+import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll';
+import axios from '@shared/lib/axios';
 import { useCallback, useEffect, useState } from 'react';
-import { useInfiniteScroll } from '../../../../shared/hooks/useInfiniteScroll';
-import axios from '../../../../shared/lib/axios';
 import { DEFAULT_POST_STATE } from '../../model/reviewInitialState';
 import ExploreFeedUI from './ExploreFeed.presenter';
 
-export default function ExploreFeed({ selectedSort }) {
+const ExploreFeed = ({ selectedSort }) => {
   // fetchSearchData를 useCallback으로 메모이제이션
   const fetchSearchData = useCallback(
     async (cursorId, size) => {
@@ -57,4 +57,6 @@ export default function ExploreFeed({ selectedSort }) {
       <div ref={loaderRef} style={{ height: '15vh', margin: '10px' }} />
     </>
   );
-}
+};
+
+export default ExploreFeed;

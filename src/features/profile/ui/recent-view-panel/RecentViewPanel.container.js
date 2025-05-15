@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import axios from '../../../../shared/lib/axios';
+import axios from '@shared/lib/axios';
+import { useEffect, useRef, useState } from 'react';
 import RecentViewPanelUI from './RecentViewPanel.presenter';
 
-export default function RecentViewPanel() {
+const RecentViewPanel = () => {
   const [latestPosts, setLatestPosts] = useState([]);
   const [cursorId, setCursorId] = useState(0);
   const [hasNext, setHasNext] = useState(true);
@@ -82,4 +82,6 @@ export default function RecentViewPanel() {
       <div ref={loader} style={{ height: '20px' }} />
     </>
   );
-}
+};
+
+export default RecentViewPanel;

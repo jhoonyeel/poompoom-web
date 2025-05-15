@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import axios from '@shared/lib/axios';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../../../shared/lib/axios';
 
-export default function SocialLoginCallback() {
+const SocialLoginCallback = () => {
   const [jwtToken, setJwtToken] = useState(null);
   const [responseData, setResponseData] = useState(null);
   const navigate = useNavigate();
@@ -69,4 +69,6 @@ export default function SocialLoginCallback() {
       )}
     </div>
   );
-}
+};
+
+export default SocialLoginCallback;

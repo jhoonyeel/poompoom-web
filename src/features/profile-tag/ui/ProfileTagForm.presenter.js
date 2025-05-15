@@ -4,13 +4,7 @@ import Interest from './InterestCategorySelector';
 import Job from './OccupationSelector';
 import * as S from './ProfileTagForm.styles';
 
-export default function ProfileTagFormUI({
-  buttons,
-  setSelectedButton,
-  setSelectedAgeLabel,
-  selectedAgeLabel,
-  onClickToBack,
-}) {
+const ProfileTagFormUI = ({ buttons, setSelectedButton, setSelectedAgeLabel, selectedAgeLabel, onClickToBack }) => {
   return (
     <S.ContainerS>
       <S.IntroText>프로필 태그 선택</S.IntroText>
@@ -48,4 +42,6 @@ export default function ProfileTagFormUI({
       <S.SubmitButton onClick={onClickToBack}>회원가입</S.SubmitButton>
     </S.ContainerS>
   );
-}
+};
+
+export default ProfileTagFormUI;

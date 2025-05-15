@@ -1,7 +1,7 @@
+import { useFetchRecommendations } from '@shared/hooks/useFetchRecommendations';
 import styled from 'styled-components';
-import { useFetchRecommendations } from '../../../../shared/hooks/useFetchRecommendations';
 
-export function TrendingHashtagSuggestions({ handleRecommendationClick }) {
+const TrendingHashtagSuggestions = ({ handleRecommendationClick }) => {
   const { recommendations } = useFetchRecommendations();
 
   return (
@@ -21,7 +21,9 @@ export function TrendingHashtagSuggestions({ handleRecommendationClick }) {
       </RecommendList>
     </Wrapper>
   );
-}
+};
+
+export default TrendingHashtagSuggestions;
 
 export const Wrapper = styled.div`
   position: absolute;

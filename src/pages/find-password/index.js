@@ -1,5 +1,7 @@
-import FindPassword from '../../features/find-password/ui/FindPassword.container';
+import FindPassword from '@features/find-password/ui/FindPassword.container';
 
-export default function FindPasswordRoute() {
+const FindPasswordRoute = () => {
   return <FindPassword />;
-}
+};
+
+export default FindPasswordRoute;

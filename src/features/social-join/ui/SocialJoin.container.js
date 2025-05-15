@@ -1,8 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from '@shared/lib/axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import axios from '../../../shared/lib/axios';
 import { schema } from '../model/SocialJoinValidation';
 import SocialJoinUI from './SocialJoin.presenter';
 
@@ -10,7 +10,7 @@ import SocialJoinUI from './SocialJoin.presenter';
  @description 소셜 로그인 페이지
  */
 
-export default function SocialJoin() {
+const SocialJoin = () => {
   const {
     register,
     handleSubmit,
@@ -107,4 +107,6 @@ export default function SocialJoin() {
       onSubmit={onSubmit}
     />
   );
-}
+};
+
+export default SocialJoin;

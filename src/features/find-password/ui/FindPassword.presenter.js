@@ -1,8 +1,7 @@
 // FindPWPresenter.js
-import React from 'react';
 import { Button, Container, ErrorMessage, Header, HeaderText, Input } from './FindPassword.style';
 
-export default function FindPasswordUI({
+const FindPasswordUI = ({
   email,
   setEmail,
   username,
@@ -16,7 +15,7 @@ export default function FindPasswordUI({
   handleRequestReset,
   handleAuthenticate,
   handleResetPassword,
-}) {
+}) => {
   return (
     <Container>
       <Header>
@@ -53,4 +52,6 @@ export default function FindPasswordUI({
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </Container>
   );
-}
+};
+
+export default FindPasswordUI;

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import axios from '@shared/lib/axios';
+import Loading from '@shared/ui/Loading';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../../../shared/lib/axios';
-import Loading from '../../../shared/ui/Loading';
 
-export default function SocialJoinCallback() {
+const SocialJoinCallback = () => {
   const [jwtToken, setJwtToken] = useState(null);
   const [responseData, setResponseData] = useState(null);
   const navigate = useNavigate();
@@ -71,4 +71,6 @@ export default function SocialJoinCallback() {
       )}
     </div>
   );
-}
+};
+
+export default SocialJoinCallback;

@@ -1,5 +1,7 @@
-import ReviewCreate from '../../features/review/ui/review-create/ReviewCreate.container';
+import ReviewCreate from '@features/review/ui/review-create/ReviewCreate.container';
 
-export default function ReviewCreateRoute() {
+const ReviewCreateRoute = () => {
   return <ReviewCreate />;
-}
+};
+
+export default ReviewCreateRoute;

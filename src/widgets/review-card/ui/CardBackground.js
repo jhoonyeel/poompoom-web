@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
-export default function CardBackground({ bodyPhoto }) {
+const CardBackground = ({ bodyPhoto }) => {
   return (
     <Wrapper>
       <BackgroundImg src={bodyPhoto} alt="CardBackground 이미지" />
     </Wrapper>
   );
-}
+};
+
+export default CardBackground;
 
 const Wrapper = styled.div`
   width: 220px;
