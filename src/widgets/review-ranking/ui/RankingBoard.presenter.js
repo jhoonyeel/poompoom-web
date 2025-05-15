@@ -21,7 +21,7 @@ const getZIndex = (index, totalCards, rotation) => {
   return totalCards - adjustedIndex;
 };
 
-const RankingBoardUI = forwardRef(({ ranks, rotation }, ref) => {
+const RankingBoardUI = ({ ranks, rotation }, ref) => {
   return (
     <Wrapper>
       <CardContainer ref={ref} rotation={rotation}>
@@ -40,9 +40,10 @@ const RankingBoardUI = forwardRef(({ ranks, rotation }, ref) => {
       </CardContainer>
     </Wrapper>
   );
-});
+};
+RankingBoardUI.displayName = 'RankingBoardUI';
 
-export default RankingBoardUI;
+export default forwardRef(RankingBoardUI);
 
 const Wrapper = styled.div`
   width: 100%;
