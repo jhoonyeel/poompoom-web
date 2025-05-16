@@ -74,6 +74,15 @@ module.exports = {
       },
     ],
 
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+      },
+    ],
+
     // 파일 확장자에 JSX 허용
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
 
