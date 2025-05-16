@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { ReactComponent as SignUpTitle } from '@shared/assets/CreateAccount.svg';
-import { useInputFocus } from '@shared/hooks/useInputFocus';
-import AuthFooter from '@widgets/footer/ui/AuthFooter';
-import ProfileTagForm from '../../profile-tag/ui/ProfileTagForm.container';
-import * as S from './Join.style';
+import { useInputFocus } from '@shared/hooks/useInputFocus.js';
+import AuthFooter from '@widgets/footer/ui/AuthFooter.js';
+import ProfileTagForm from '../../profile-tag/ui/ProfileTagForm.container.js';
+import * as S from './Join.style.js';
 
 const JoinUI = ({
   register,

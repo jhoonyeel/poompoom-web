@@ -15,7 +15,7 @@ import { ReactComponent as Sixth } from '../assets/Card6.svg';
 import { ReactComponent as Seventh } from '../assets/Card7.svg';
 import { ReactComponent as Eighth } from '../assets/Card8.svg';
 import { ReactComponent as Ninth } from '../assets/Card9.svg';
-import RankingBoardUI from './RankingBoard.presenter';
+import RankingBoardUI from './RankingBoard.presenter.js';
 
 const getOrdinal = (n) => {
   const s = ['th', 'st', 'nd', 'rd'];

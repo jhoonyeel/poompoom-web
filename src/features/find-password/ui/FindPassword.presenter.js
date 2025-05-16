@@ -1,5 +1,5 @@
 // FindPWPresenter.js
-import { Button, Container, ErrorMessage, Header, HeaderText, Input } from './FindPassword.style';
+import { Button, Container, ErrorMessage, Header, HeaderText, Input } from './FindPassword.style.js';
 
 const FindPasswordUI = ({
   email,

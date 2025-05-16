@@ -1,4 +1,4 @@
-import ReviewCreate from '@features/review/ui/review-create/ReviewCreate.container';
+import ReviewCreate from '@features/review/ui/review-create/ReviewCreate.container.js';
 
 const ReviewCreateRoute = () => {
   return <ReviewCreate />;

@@ -1,4 +1,4 @@
-import { REVIEW_ITEM_TYPES } from '@shared/constants/reviewItemTypes';
+import { REVIEW_ITEM_TYPES } from '@shared/constants/reviewItemTypes.js';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 

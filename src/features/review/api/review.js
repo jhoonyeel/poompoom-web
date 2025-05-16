@@ -1,5 +1,5 @@
 /* eslint-disable no-throw-literal */
-import axios from '@shared/lib/axios';
+import axios from '@shared/lib/axios.js';
 
 /**
  * 리뷰 작성 요청

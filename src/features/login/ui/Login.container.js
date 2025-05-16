@@ -1,7 +1,7 @@
-import { login } from '@shared/api/auth';
+import { login } from '@shared/api/auth.js';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginUI from './Login.presenter';
+import LoginUI from './Login.presenter.js';
 
 const Login = () => {
   const [username, setUsername] = useState('');

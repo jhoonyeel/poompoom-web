@@ -3,18 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import * as S from './Comment.style';
+import * as S from './Comment.style.js';
 
 import { ReactComponent as EmptyProfileImg } from '../assets/EmptyProfileComment.svg';
-import { MODAL_MESSAGE } from '../constants/CommentModalState';
-import { useDeleteComment } from '../hooks/useDeleteComment';
-import useModal from '../hooks/useModal';
-import { useOutsideClick } from '../hooks/useOutsideClick';
-import ConfirmModal from './ConfirmModal';
-import DropDownOption from './DropDownOption';
-import EditComment from './EditComment';
-import LikeComment from './LikeComment';
-import PinComment from './PinComment';
+import { MODAL_MESSAGE } from '../constants/CommentModalState.js';
+import { useDeleteComment } from '../hooks/useDeleteComment.js';
+import useModal from '../hooks/useModal.js';
+import { useOutsideClick } from '../hooks/useOutsideClick.js';
+import ConfirmModal from './ConfirmModal.js';
+import DropDownOption from './DropDownOption.js';
+import EditComment from './EditComment.js';
+import LikeComment from './LikeComment.js';
+import PinComment from './PinComment.js';
 
 export const Comment = ({ comment, convertDateArrayToDate, reviewId }) => {
   const { delete: deleteMessage, report } = MODAL_MESSAGE;

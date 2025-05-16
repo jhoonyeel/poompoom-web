@@ -1,8 +1,8 @@
-import AgeSlider from './AgeRangeSelector';
-import Gender from './GenderSelector';
-import Interest from './InterestCategorySelector';
-import Job from './OccupationSelector';
-import * as S from './ProfileTagForm.styles';
+import AgeSlider from './AgeRangeSelector.js';
+import Gender from './GenderSelector.js';
+import Interest from './InterestCategorySelector.js';
+import Job from './OccupationSelector.js';
+import * as S from './ProfileTagForm.styles.js';
 
 const ProfileTagFormUI = ({ buttons, setSelectedButton, setSelectedAgeLabel, selectedAgeLabel, onClickToBack }) => {
   return (

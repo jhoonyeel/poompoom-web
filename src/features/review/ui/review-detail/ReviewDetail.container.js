@@ -1,7 +1,7 @@
-import axios from '@shared/lib/axios';
+import axios from '@shared/lib/axios.js';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import ReviewDetailUI from './ReviewDetail.presenter';
+import ReviewDetailUI from './ReviewDetail.presenter.js';
 
 const ReviewDetail = () => {
   const [like, setLike] = useState(false);

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ReactComponent as SearchKeyword } from '../../assets/search_keyword.svg';
-import { useSearchHashtags } from '../../hooks/useSearchHashtags';
-import useSearchInputDebounce from '../../hooks/useSearchInputDebounce';
+import { useSearchHashtags } from '../../hooks/useSearchHashtags.js';
+import useSearchInputDebounce from '../../hooks/useSearchInputDebounce.js';
 
 const SearchHashtagSuggestions = ({ searchTerm, setSearchTerm }) => {
   const { allHashtags } = useSearchHashtags(); // 모든 해시태그 가져오기

@@ -1,6 +1,6 @@
-import { useNavigatePath } from '@shared/hooks/useNavigatePath';
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
 import { useLocation } from 'react-router-dom';
-import ProfileTabMenuUI from './ProfileTabMenu.presenter';
+import ProfileTabMenuUI from './ProfileTabMenu.presenter.js';
 
 const ProfileMenuBox = () => {
   const location = useLocation();

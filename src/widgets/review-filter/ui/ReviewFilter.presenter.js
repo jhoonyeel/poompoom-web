@@ -1,8 +1,8 @@
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import HoverAnimation from './HoverAnimation';
-import ItemTypeDropdown from './ItemTypeDropdown';
-import PriceSlider from './PriceSlider';
-import * as S from './ReviewFilter.styles';
+import HoverAnimation from './HoverAnimation.js';
+import ItemTypeDropdown from './ItemTypeDropdown.js';
+import PriceSlider from './PriceSlider.js';
+import * as S from './ReviewFilter.styles.js';
 
 const ReviewFilterUI = ({
   selectedSort,

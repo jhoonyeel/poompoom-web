@@ -1,6 +1,6 @@
-import { useFetchRecommendations } from '@shared/hooks/useFetchRecommendations';
-import { useNavigatePath } from '@shared/hooks/useNavigatePath';
-import ScrollToTopButton from '@shared/ui/ScrollToTopButton';
+import { useFetchRecommendations } from '@shared/hooks/useFetchRecommendations.js';
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
+import ScrollToTopButton from '@shared/ui/ScrollToTopButton.js';
 import styled from 'styled-components';
 import { ReactComponent as CardNews } from '../assets/CardNews.svg';
 import { ReactComponent as Anniversary } from '../assets/Category/Anniversary.svg';

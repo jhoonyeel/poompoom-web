@@ -1,4 +1,4 @@
-import axios from '@shared/lib/axios';
+import axios from '@shared/lib/axios.js';
 
 /**
  * 현재 로그인된 사용자의 프로필 데이터를 가져옵니다.

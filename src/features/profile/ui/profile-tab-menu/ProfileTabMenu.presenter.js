@@ -1,4 +1,4 @@
-import * as S from './ProfileTabMenu.styles';
+import * as S from './ProfileTabMenu.styles.js';
 
 const ProfileTabMenuUI = ({ currentPath, navigatePath }) => {
   return (

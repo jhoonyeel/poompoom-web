@@ -1,7 +1,7 @@
-import { useNavigatePath } from '@shared/hooks/useNavigatePath';
-import axios from '@shared/lib/axios';
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
+import axios from '@shared/lib/axios.js';
 import { useEffect, useState } from 'react';
-import ProfileHeaderUI from './ProfileHeader.presenter';
+import ProfileHeaderUI from './ProfileHeader.presenter.js';
 
 const ProfileHeader = () => {
   const [profile, setProfile] = useState('');

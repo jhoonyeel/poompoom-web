@@ -1,4 +1,4 @@
-import Loading from '@shared/ui/Loading';
+import Loading from '@shared/ui/Loading.js';
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 

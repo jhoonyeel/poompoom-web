@@ -1,4 +1,4 @@
-import ReviewDetail from '@features/review/ui/review-detail/ReviewDetail.container';
+import ReviewDetail from '@features/review/ui/review-detail/ReviewDetail.container.js';
 
 const ReviewDetailRoute = () => {
   return <ReviewDetail />;

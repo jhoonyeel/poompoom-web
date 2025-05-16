@@ -1,8 +1,8 @@
-import GlobalStyle from '@shared/styles/GlobalStyle';
-import { basicTheme } from '@shared/theme/Theme';
+import GlobalStyle from '@shared/styles/GlobalStyle.js';
+import { basicTheme } from '@shared/theme/Theme.js';
 import { Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import AppRouter from './router/AppRouter';
+import AppRouter from './router/AppRouter.js';
 
 const App = () => {
   return (

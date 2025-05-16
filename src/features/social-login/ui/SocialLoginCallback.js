@@ -1,4 +1,4 @@
-import axios from '@shared/lib/axios';
+import axios from '@shared/lib/axios.js';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

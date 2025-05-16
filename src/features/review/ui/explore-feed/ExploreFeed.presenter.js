@@ -1,4 +1,4 @@
-import ReviewCard from '@widgets/review-card/ui/ReviewCard.container';
+import ReviewCard from '@widgets/review-card/ui/ReviewCard.container.js';
 import styled from 'styled-components';
 
 const ExploreFeedUI = ({ searchPosts }) => {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import PortalContainer from './PortalContainer';
+import PortalContainer from './PortalContainer.js';
 
 const ConfirmModal = ({ isOpen, closeModal, onConfirm, ModalMessage }) => {
   return (

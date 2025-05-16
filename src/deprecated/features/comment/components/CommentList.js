@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Comment } from './Comment';
+import { Comment } from './Comment.js';
 
 const CommentList = ({ pinnedComment, loader, comments, convertDateArrayToDate, reviewId }) => {
   return (

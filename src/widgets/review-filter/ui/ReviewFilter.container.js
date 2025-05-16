@@ -1,6 +1,6 @@
-import { useNavigatePath } from '@shared/hooks/useNavigatePath';
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
 import { useState } from 'react';
-import ReviewFilterUI from './ReviewFilter.presenter';
+import ReviewFilterUI from './ReviewFilter.presenter.js';
 
 const ReviewFilter = ({ selectedSort, setSelectedSort }) => {
   const [isPriceSliderOpen, setIsPriceSliderOpen] = useState(false); // 가격 슬라이더 열림 상태 관리

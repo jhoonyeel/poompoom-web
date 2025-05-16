@@ -1,4 +1,4 @@
-import Footer from '@widgets/footer/ui/Footer.container';
+import Footer from '@widgets/footer/ui/Footer.container.js';
 import axios from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';

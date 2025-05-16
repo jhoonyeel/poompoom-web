@@ -3,7 +3,7 @@ import { ReactComponent as Calender } from '../assets/Calender.svg';
 import { ReactComponent as Location } from '../assets/Location.svg';
 import { ReactComponent as Present } from '../assets/Present.svg';
 import { ReactComponent as Title } from '../assets/Welcome.svg';
-import * as S from './Welcomes.styles';
+import * as S from './Welcomes.styles.js';
 
 const Welcome = () => {
   const navigate = useNavigate();

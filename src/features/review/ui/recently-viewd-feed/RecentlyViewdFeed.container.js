@@ -1,7 +1,7 @@
-import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll';
-import axios from '@shared/lib/axios';
+import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll.js';
+import axios from '@shared/lib/axios.js';
 import { useEffect, useState } from 'react';
-import RecentlyViewdFeedUI from './RecentlyViewdFeed.presenter';
+import RecentlyViewdFeedUI from './RecentlyViewdFeed.presenter.js';
 
 const fetchLatestData = async (cursorId, size) => {
   const res = await axios.get(`/profile/view`, {

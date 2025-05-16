@@ -1,4 +1,4 @@
-import Welcome from '@features/welcome/ui/Welcome';
+import Welcome from '@features/welcome/ui/Welcome.js';
 
 const WelcomeRoute = () => {
   return <Welcome />;

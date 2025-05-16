@@ -1,7 +1,7 @@
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
-import { useScrollToTop } from '../hooks/useScrollToTop';
+import { useScrollToTop } from '../hooks/useScrollToTop.js';
 
 const ScrollToTopButton = () => {
   const scrollToTop = useScrollToTop();

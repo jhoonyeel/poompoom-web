@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { useComments } from '../hooks/useComment';
-import useIntersectionObserver from '../hooks/useInterSectionObserver';
-import CommentList from './CommentList';
+import { useComments } from '../hooks/useComment.js';
+import useIntersectionObserver from '../hooks/useInterSectionObserver.js';
+import CommentList from './CommentList.js';
 
 const CommentContainer = () => {
   const { fetchComments, pinnedComment, comments, convertDateArrayToDate, hasNext, cursorId, reviewId } = useComments();

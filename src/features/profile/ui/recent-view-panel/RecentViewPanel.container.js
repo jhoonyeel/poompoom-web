@@ -1,6 +1,6 @@
-import axios from '@shared/lib/axios';
+import axios from '@shared/lib/axios.js';
 import { useEffect, useRef, useState } from 'react';
-import RecentViewPanelUI from './RecentViewPanel.presenter';
+import RecentViewPanelUI from './RecentViewPanel.presenter.js';
 
 const RecentViewPanel = () => {
   const [latestPosts, setLatestPosts] = useState([]);

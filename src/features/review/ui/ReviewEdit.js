@@ -1,14 +1,14 @@
 /* eslint-disable camelcase */
 import profileDummyPhoto from '@shared/assets/ProfilePhoto.svg';
-import { REVIEW_ITEM_TYPES } from '@shared/constants/reviewItemTypes';
+import { REVIEW_ITEM_TYPES } from '@shared/constants/reviewItemTypes.js';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getReviewById, updateReview } from '../api/review';
+import { getReviewById, updateReview } from '../api/review.js';
 import placeholderPhoto from '../assets/DummyPhoto.svg';
-import { useFetchProfilePicture } from '../hooks/useFetchProfilePicture';
-import { useLogin } from '../hooks/useLogin';
-import { REVIEW_CATEGORIES } from '../model/reviewCategories';
-import * as S from './ReviewEdit.style';
+import { useFetchProfilePicture } from '../hooks/useFetchProfilePicture.js';
+import { useLogin } from '../hooks/useLogin.js';
+import { REVIEW_CATEGORIES } from '../model/reviewCategories.js';
+import * as S from './ReviewEdit.style.js';
 
 const ReviewEdit = () => {
   const { reviewId } = useParams(); // 리뷰 ID를 URL에서 가져옵니다 (수정 모드일 때 필요).

@@ -1,9 +1,9 @@
 import { faBookmark as emptyBookmark, faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
-import CommentWrite from '../../../../deprecated/features/comment/components/CommentWrite';
+import CommentWrite from '../../../../deprecated/features/comment/components/CommentWrite.js';
 import { ReactComponent as LinkImg } from '../../assets/LinkImg.svg';
-import OverflowMenu from './OverflowMenu';
-import * as S from './ReviewDetail.styles';
+import OverflowMenu from './OverflowMenu.js';
+import * as S from './ReviewDetail.styles.js';
 
 const ReviewDetailUI = ({
   currentImageIndex,

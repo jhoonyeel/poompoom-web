@@ -1,4 +1,4 @@
-import axios from '../lib/axios';
+import axios from '../lib/axios.js';
 
 export const checkDuplicateUsername = async (id) => {
   try {

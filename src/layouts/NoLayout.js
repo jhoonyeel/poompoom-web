@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import * as S from './Layout.styles';
+import * as S from './Layout.styles.js';
 
 const NoLayout = () => {
   return (

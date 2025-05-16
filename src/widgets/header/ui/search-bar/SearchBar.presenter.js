@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
-import * as S from './SearchBar.styles';
-import TrendingHashtagSuggestions from './TrendingHashtagSuggestions';
+import * as S from './SearchBar.styles.js';
+import TrendingHashtagSuggestions from './TrendingHashtagSuggestions.js';
 
 const SearchBarUI = (
   {

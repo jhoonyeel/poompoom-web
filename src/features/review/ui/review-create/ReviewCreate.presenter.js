@@ -1,6 +1,6 @@
 import profileDummyPhoto from '@shared/assets/ProfilePhoto.svg';
 import placeholderPhoto from '../../assets/DummyPhoto.svg';
-import * as S from './ReviewCreate.style';
+import * as S from './ReviewCreate.style.js';
 
 const ReviewCreateUI = ({
   images,

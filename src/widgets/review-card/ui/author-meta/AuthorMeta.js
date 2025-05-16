@@ -1,7 +1,7 @@
-import { useNavigatePath } from '@shared/hooks/useNavigatePath';
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import AuthorProfile from './AuthorProfile';
+import AuthorProfile from './AuthorProfile.js';
 
 const AuthorMeta = ({ profilePhoto, nickname, reviewType, isContentHovered }) => {
   const navigatePath = useNavigatePath();

@@ -1,9 +1,9 @@
-import { useNavigatePath } from '@shared/hooks/useNavigatePath';
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
 import { useState } from 'react';
 import particle1 from '../assets/Particle1.json';
 import particle2 from '../assets/Particle2.json';
 import particle3 from '../assets/Particle3.json';
-import ReviewCardUI from './ReviewCard.presenter';
+import ReviewCardUI from './ReviewCard.presenter.js';
 
 const particleOptions = [
   {

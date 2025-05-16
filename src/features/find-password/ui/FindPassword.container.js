@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { sendPasswordResetEmail, submitNewPassword, verifyPasswordResetCode } from '../api/passwordReset';
-import FindPasswordUI from './FindPassword.presenter';
+import { sendPasswordResetEmail, submitNewPassword, verifyPasswordResetCode } from '../api/passwordReset.js';
+import FindPasswordUI from './FindPassword.presenter.js';
 
 const FindPassword = () => {
   const [email, setEmail] = useState('');

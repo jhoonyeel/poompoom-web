@@ -1,5 +1,5 @@
-import ReviewPostCard from '@widgets/review-card/ui/ReviewCard.container';
-import * as S from './MyReviewPanel.styles';
+import ReviewPostCard from '@widgets/review-card/ui/ReviewCard.container.js';
+import * as S from './MyReviewPanel.styles.js';
 
 const MyReviewPanelUI = ({ latestPosts, handlePostClick }) => {
   return (

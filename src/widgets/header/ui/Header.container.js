@@ -1,6 +1,6 @@
-import { useNavigatePath } from '@shared/hooks/useNavigatePath';
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
 import { useLocation } from 'react-router-dom';
-import HeaderUI from './Header.presenter';
+import HeaderUI from './Header.presenter.js';
 
 const Header = () => {
   const location = useLocation();

@@ -1,5 +1,5 @@
-import axios from '@shared/lib/axios';
-import Loading from '@shared/ui/Loading';
+import axios from '@shared/lib/axios.js';
+import Loading from '@shared/ui/Loading.js';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Comment } from '../assets/PostComment.svg';
-import useWriteComment from '../hooks/useWriteComment';
+import useWriteComment from '../hooks/useWriteComment.js';
 
 const CommentWrite = () => {
   const { reviewId } = useParams();

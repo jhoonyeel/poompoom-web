@@ -1,9 +1,9 @@
 import profileDummyPhoto from '@shared/assets/ProfilePhoto.svg';
 import { useEffect, useState } from 'react';
-import { getUserProfile } from '../api/getUserProfile';
-import { USER_PROFILE_INITIAL_STATE } from '../model/userProfileInitialState';
-import * as S from './Header.styles';
-import SearchBar from './search-bar/SearchBar.container';
+import { getUserProfile } from '../api/getUserProfile.js';
+import { USER_PROFILE_INITIAL_STATE } from '../model/userProfileInitialState.js';
+import * as S from './Header.styles.js';
+import SearchBar from './search-bar/SearchBar.container.js';
 
 const HeaderUI = ({ showSearchBar, navigatePath }) => {
   const [profile, setProfile] = useState(USER_PROFILE_INITIAL_STATE);

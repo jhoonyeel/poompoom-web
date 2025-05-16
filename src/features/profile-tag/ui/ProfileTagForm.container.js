@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProfileTagFormUI from './ProfileTagForm.presenter';
+import ProfileTagFormUI from './ProfileTagForm.presenter.js';
 
 const ProfileTagForm = () => {
   const initialButtons = [

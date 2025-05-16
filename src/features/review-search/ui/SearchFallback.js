@@ -1,7 +1,7 @@
 import { ReactComponent as Eyes } from '@shared/assets/eyes.svg';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { useFetchFailKeyword } from '../hooks/useFetchFailKeyword';
+import { useFetchFailKeyword } from '../hooks/useFetchFailKeyword.js';
 
 const failtag = ['사진', '키링', '에그타르트', '미니어처', '여행', '초콜릿', '보습'];
 

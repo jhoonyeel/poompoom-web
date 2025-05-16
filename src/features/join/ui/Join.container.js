@@ -1,10 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from '@shared/lib/axios';
+import axios from '@shared/lib/axios.js';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { schema } from '../model/JoinValidation';
-import JoinUI from './Join.presenter';
+import { schema } from '../model/JoinValidation.js';
+import JoinUI from './Join.presenter.js';
 
 /** 
  @description 일반 로그인 페이지

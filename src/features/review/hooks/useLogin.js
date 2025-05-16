@@ -1,5 +1,5 @@
-import { login as authServiceLogin, logout as authServiceLogout } from '@shared/api/auth';
-import { useNavigatePath } from '@shared/hooks/useNavigatePath';
+import { login as authServiceLogin, logout as authServiceLogout } from '@shared/api/auth.js';
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
 import { useEffect, useState } from 'react';
 
 export function useLogin() {

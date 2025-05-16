@@ -1,4 +1,4 @@
-import { logout } from '@shared/api/auth';
+import { logout } from '@shared/api/auth.js';
 import styled from 'styled-components';
 
 const ProfileEdit = () => {

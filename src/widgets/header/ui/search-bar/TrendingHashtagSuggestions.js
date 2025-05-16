@@ -1,4 +1,4 @@
-import { useFetchRecommendations } from '@shared/hooks/useFetchRecommendations';
+import { useFetchRecommendations } from '@shared/hooks/useFetchRecommendations.js';
 import styled from 'styled-components';
 
 const TrendingHashtagSuggestions = ({ handleRecommendationClick }) => {

@@ -1,9 +1,9 @@
 import Lottie from 'react-lottie';
 import styled from 'styled-components';
-import ReviewPostAuthor from './author-meta/AuthorMeta';
-import ReviewPostBackground from './CardBackground';
-import ReviewPostHashtags from './CardHashtags';
-import ReviewPostPreview from './CardPreview';
+import ReviewPostAuthor from './author-meta/AuthorMeta.js';
+import ReviewPostBackground from './CardBackground.js';
+import ReviewPostHashtags from './CardHashtags.js';
+import ReviewPostPreview from './CardPreview.js';
 
 const ReviewCardUI = ({ post, randomParticle, isContentHovered, onMouseEnter, onMouseLeave, navigatePath }) => {
   return (

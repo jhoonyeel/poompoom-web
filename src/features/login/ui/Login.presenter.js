@@ -1,8 +1,8 @@
-import { useInputFocus } from '@shared/hooks/useInputFocus';
-import AuthFooter from '@widgets/footer/ui/AuthFooter';
+import { useInputFocus } from '@shared/hooks/useInputFocus.js';
+import AuthFooter from '@widgets/footer/ui/AuthFooter.js';
 import { ReactComponent as KakaoLogo } from '../assets/Kakao.svg';
 import { ReactComponent as LoginTitle } from '../assets/LogInTitle.svg';
-import * as S from './Login.styles';
+import * as S from './Login.styles.js';
 
 const LoginUI = ({ handleSubmitLogin, username, setUsername, password, setPassword, onKakaoLogin }) => {
   const { isFocused, handleFocus, handleBlur } = useInputFocus();

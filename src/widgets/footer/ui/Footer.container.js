@@ -1,4 +1,4 @@
-import FooterUI from './Footer.presenter';
+import FooterUI from './Footer.presenter.js';
 
 const Footer = () => {
   return <FooterUI />;

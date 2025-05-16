@@ -1,8 +1,8 @@
-import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll';
-import axios from '@shared/lib/axios';
+import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll.js';
+import axios from '@shared/lib/axios.js';
 import { useCallback, useEffect, useState } from 'react';
-import { DEFAULT_POST_STATE } from '../../model/reviewInitialState';
-import ExploreFeedUI from './ExploreFeed.presenter';
+import { DEFAULT_POST_STATE } from '../../model/reviewInitialState.js';
+import ExploreFeedUI from './ExploreFeed.presenter.js';
 
 const ExploreFeed = ({ selectedSort }) => {
   // fetchSearchData를 useCallback으로 메모이제이션

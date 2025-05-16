@@ -1,12 +1,12 @@
-import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll';
-import axios from '@shared/lib/axios';
-import ScrollToTopButton from '@shared/ui/ScrollToTopButton';
-import ReviewPostCard from '@widgets/review-card/ui/ReviewCard.container';
-import PostFilter from '@widgets/review-filter/ui/ReviewFilter.container';
+import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll.js';
+import axios from '@shared/lib/axios.js';
+import ScrollToTopButton from '@shared/ui/ScrollToTopButton.js';
+import ReviewPostCard from '@widgets/review-card/ui/ReviewCard.container.js';
+import PostFilter from '@widgets/review-filter/ui/ReviewFilter.container.js';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import SearchFallback from './SearchFallback';
+import SearchFallback from './SearchFallback.js';
 
 const fetchQueryData = async (cursorId, size, keyword) => {
   const res = await axios.get(`/review/search`, {

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import profileDummyPhoto from '@shared/assets/ProfilePhoto.svg';
 import styled from 'styled-components';
-import * as S from './ProfileHeader.styles';
+import * as S from './ProfileHeader.styles.js';
 
 const ProfileHeaderUI = ({ profile, navigatePath }) => {
   console.log(profile);

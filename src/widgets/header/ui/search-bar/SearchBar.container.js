@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SearchBarUI from './SearchBar.presenter';
+import SearchBarUI from './SearchBar.presenter.js';
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState(''); // 검색어 상태

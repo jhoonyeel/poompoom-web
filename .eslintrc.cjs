@@ -24,10 +24,6 @@ module.exports = {
   // ✅ 모듈 해석 관련 설정 (import 경로, 확장자 등)
   settings: {
     'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx'], // Node 해석용: 확장자 생략 허용
-        moduleDirectory: ['node_modules', './src'], // 루트 기준 명확히
-      },
       alias: {
         map: [
           ['@', './src'],
@@ -38,7 +34,6 @@ module.exports = {
           ['@shared', './src/shared'],
           ['@widgets', './src/widgets'],
         ],
-        extensions: ['.js', '.jsx'], // alias 해석용: 확장자 생략 허용
       },
     },
   },
@@ -82,8 +77,8 @@ module.exports = {
       'error',
       'ignorePackages',
       {
-        js: 'never',
-        jsx: 'never',
+        js: 'always',
+        jsx: 'always',
       },
     ],
 

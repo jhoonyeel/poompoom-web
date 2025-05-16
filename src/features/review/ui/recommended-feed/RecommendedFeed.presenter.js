@@ -1,4 +1,4 @@
-import ReviewPostCard from '@widgets/review-card/ui/ReviewCard.container';
+import ReviewPostCard from '@widgets/review-card/ui/ReviewCard.container.js';
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Cursor from '../../assets/HorizontalCursor.svg';

@@ -1,7 +1,7 @@
-import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll';
-import axios from '@shared/lib/axios';
+import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll.js';
+import axios from '@shared/lib/axios.js';
 import { useEffect, useState } from 'react';
-import RecommendedFeedUI from './RecommendedFeed.presenter';
+import RecommendedFeedUI from './RecommendedFeed.presenter.js';
 
 const fetchSubData = async (cursorId, size) => {
   const response = await axios.get(`/review/subscribe`, {
