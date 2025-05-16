@@ -1,5 +1,7 @@
-import FooterUI from './Footer.presenter';
+import FooterUI from './Footer.presenter.js';
 
-export default function Footer() {
+const Footer = () => {
   return <FooterUI />;
-}
+};
+
+export default Footer;

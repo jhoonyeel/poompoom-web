@@ -1,5 +1,7 @@
-import SocialJoin from '../../features/social-join/ui/SocialJoin.container';
+import SocialJoin from '@features/social-join/ui/SocialJoin.container.js';
 
-export default function SocialJoinRoute() {
+const SocialJoinRoute = () => {
   return <SocialJoin />;
-}
+};
+
+export default SocialJoinRoute;

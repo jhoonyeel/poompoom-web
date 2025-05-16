@@ -1,11 +1,10 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Comment } from '../assets/PostComment.svg';
-import useWriteComment from '../hooks/useWriteComment';
+import useWriteComment from '../hooks/useWriteComment.js';
 
-export default function CommentWrite() {
+const CommentWrite = () => {
   const { reviewId } = useParams();
   const { register, handleSubmit, reset, watch } = useForm();
   const { submitComment } = useWriteComment();
@@ -40,7 +39,9 @@ export default function CommentWrite() {
       </form>
     </Container>
   );
-}
+};
+
+export default CommentWrite;
 
 const Container = styled.div`
   border: 4px solid rgba(255, 154, 154, 0.84);

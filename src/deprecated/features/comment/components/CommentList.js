@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Comment } from '../../../../components/Comment/Comment/Comment';
+import { Comment } from './Comment.js';
 
-export default function CommentList({ pinnedComment, loader, comments, convertDateArrayToDate, reviewId }) {
+const CommentList = ({ pinnedComment, loader, comments, convertDateArrayToDate, reviewId }) => {
   return (
     <CommentContainer>
       {pinnedComment && (
@@ -25,7 +25,9 @@ export default function CommentList({ pinnedComment, loader, comments, convertDa
       <div ref={loader} style={{ backgroundColor: 'black', height: '20px' }} />
     </CommentContainer>
   );
-}
+};
+
+export default CommentList;
 
 const CommentContainer = styled.div`
   border: none;

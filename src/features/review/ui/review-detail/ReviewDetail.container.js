@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import axios from '@shared/lib/axios.js';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from '../../../../shared/lib/axios';
-import ReviewDetailUI from './ReviewDetail.presenter';
+import ReviewDetailUI from './ReviewDetail.presenter.js';
 
-export default function ReviewDetail() {
+const ReviewDetail = () => {
   const [like, setLike] = useState(false);
   const [likeAmount, setLikeAmount] = useState(0); // 좋아요 수 상태 추가
   const [bookMark, setBookMark] = useState(false);
@@ -116,4 +116,6 @@ export default function ReviewDetail() {
       {...selectedPost}
     />
   );
-}
+};
+
+export default ReviewDetail;

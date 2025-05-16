@@ -1,14 +1,14 @@
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { useNavigatePath } from '../../../shared/hooks/useNavigatePath';
-import BookmarkPanel from './bookmark-panel/BookmarkPanel';
-import MyReviewPanel from './my-review-panel/MyReviewPanel.container';
-import ProfileHeader from './profile-header/ProfileHeader.container';
-import ProfileTabMenu from './profile-tab-menu/ProfileTabMenu.container';
-import RecentViewPanel from './recent-view-panel/RecentViewPanel.container';
+import BookmarkPanel from './bookmark-panel/BookmarkPanel.js';
+import MyReviewPanel from './my-review-panel/MyReviewPanel.container.js';
+import ProfileHeader from './profile-header/ProfileHeader.container.js';
+import ProfileTabMenu from './profile-tab-menu/ProfileTabMenu.container.js';
+import RecentViewPanel from './recent-view-panel/RecentViewPanel.container.js';
 
-export default function Profile() {
+const Profile = () => {
   const location = useLocation();
   const navigatePath = useNavigatePath();
   const [currentPath, setCurrentPath] = useState('/profile');
@@ -48,7 +48,9 @@ export default function Profile() {
       {profileContent}
     </Wrapper>
   );
-}
+};
+
+export default Profile;
 
 const Wrapper = styled.div`
   width: 80%;

@@ -1,9 +1,9 @@
+import Loading from '@shared/ui/Loading.js';
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import Loading from '../../shared/ui/Loading';
 
 // eslint-disable-next-line no-unused-vars
-export default function AuthGuard({ element: Component, isAuthenticated, ...rest }) {
+const AuthGuard = ({ element: Component, isAuthenticated, ...rest }) => {
   const [loading, setLoading] = useState(true);
   const [authStatus, setAuthStatus] = useState(false);
 
@@ -23,4 +23,6 @@ export default function AuthGuard({ element: Component, isAuthenticated, ...rest
 
   // eslint-disable-next-line react/jsx-props-no-spreading
   return authStatus ? <Component {...rest} /> : <Navigate to="/login" />;
-}
+};
+
+export default AuthGuard;

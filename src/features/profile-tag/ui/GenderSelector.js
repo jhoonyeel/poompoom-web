@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default function GenderSelector({ setSelectedButton }) {
+const GenderSelector = ({ setSelectedButton }) => {
   const handleClick = (name) => {
     setSelectedButton(name);
   };
@@ -15,7 +15,9 @@ export default function GenderSelector({ setSelectedButton }) {
       </ButtonContainer>
     </Container>
   );
-}
+};
+
+export default GenderSelector;
 
 const Container = styled.div`
   font-family: 'S-CoreDream-3Light';

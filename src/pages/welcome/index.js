@@ -1,5 +1,7 @@
-import Welcome from '../../features/welcome/ui/Welcome';
+import Welcome from '@features/welcome/ui/Welcome.js';
 
-export default function WelcomeRoute() {
+const WelcomeRoute = () => {
   return <Welcome />;
-}
+};
+
+export default WelcomeRoute;

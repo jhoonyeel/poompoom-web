@@ -1,9 +1,9 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as EmptyCategory } from '../../assets/Category.svg';
 
-export default function BookmarkPanel() {
+const BookmarkPanel = () => {
   const [category, setCategory] = useState([]);
   const [editCategory, setEditCategory] = useState('');
   const [isVisible, setIsVisible] = useState(false);
@@ -85,7 +85,9 @@ export default function BookmarkPanel() {
       )}
     </CategoryContainer>
   );
-}
+};
+
+export default BookmarkPanel;
 
 const CategoryContainer = styled.div``;
 

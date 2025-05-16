@@ -1,9 +1,9 @@
+import Footer from '@widgets/footer/ui/Footer.container.js';
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import Footer from '../../../widgets/footer/ui/Footer.container';
 
-export default function FindUsername() {
+const FindUsername = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -39,7 +39,9 @@ export default function FindUsername() {
       <Footer />
     </>
   );
-}
+};
+
+export default FindUsername;
 
 const Container = styled.div`
   display: flex;

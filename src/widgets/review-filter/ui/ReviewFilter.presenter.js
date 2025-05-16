@@ -1,35 +1,10 @@
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import React, { useEffect, useRef } from 'react';
-import Lottie from 'react-lottie';
-import writeAnimation from '../assets/PostWrite.json';
-import ItemTypeDropdown from './ItemTypeDropdown';
-import PriceSlider from './PriceSlider';
-import * as S from './ReviewFilter.styles';
+import HoverAnimation from './HoverAnimation.js';
+import ItemTypeDropdown from './ItemTypeDropdown.js';
+import PriceSlider from './PriceSlider.js';
+import * as S from './ReviewFilter.styles.js';
 
-const HoverAnimation = React.memo(({ isHovered }) => {
-  const lottieRef = useRef();
-
-  const defaultOptions = {
-    loop: false,
-    autoplay: false,
-    animationData: writeAnimation,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
-
-  useEffect(() => {
-    if (isHovered) {
-      lottieRef.current.play();
-    } else {
-      lottieRef.current.stop();
-    }
-  }, [isHovered]);
-
-  return <Lottie options={defaultOptions} width="70px" height="100%" isStopped={!isHovered} ref={lottieRef} />;
-});
-
-export default function ReviewFilterUI({
+const ReviewFilterUI = ({
   selectedSort,
   onSortClick,
   isPriceSliderOpen,
@@ -39,7 +14,7 @@ export default function ReviewFilterUI({
   isHovered,
   setIsHovered,
   navigatePath,
-}) {
+}) => {
   return (
     <S.Wrapper>
       <S.AlignBox>
@@ -73,4 +48,6 @@ export default function ReviewFilterUI({
       </S.WriteBox>
     </S.Wrapper>
   );
-}
+};
+
+export default ReviewFilterUI;

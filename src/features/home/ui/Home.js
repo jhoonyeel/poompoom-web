@@ -1,7 +1,7 @@
+import { useFetchRecommendations } from '@shared/hooks/useFetchRecommendations.js';
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
+import ScrollToTopButton from '@shared/ui/ScrollToTopButton.js';
 import styled from 'styled-components';
-import { useFetchRecommendations } from '../../../shared/hooks/useFetchRecommendations';
-import { useNavigatePath } from '../../../shared/hooks/useNavigatePath';
-import { ScrollToTopButton } from '../../../shared/ui/ScrollToTopButton';
 import { ReactComponent as CardNews } from '../assets/CardNews.svg';
 import { ReactComponent as Anniversary } from '../assets/Category/Anniversary.svg';
 import { ReactComponent as Apology } from '../assets/Category/Apology.svg';
@@ -16,7 +16,7 @@ import { ReactComponent as MainBackground } from '../assets/MainBackground.svg';
 import { ReactComponent as Season } from '../assets/Season.svg';
 import { ReactComponent as SeasonBk } from '../assets/SeasonBackground.svg';
 
-export default function Home() {
+const Home = () => {
   const { recommendations } = useFetchRecommendations();
   const navigatePath = useNavigatePath();
 
@@ -75,7 +75,9 @@ export default function Home() {
       <ScrollToTopButton />
     </Wrapper>
   );
-}
+};
+
+export default Home;
 
 const Wrapper = styled.main`
   width: 100%;

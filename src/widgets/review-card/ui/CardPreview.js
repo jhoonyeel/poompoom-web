@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default function CardPreview({ body }) {
+const CardPreview = ({ body }) => {
   const MAX_LENGTH = 80;
   const truncatedBody = body.length > MAX_LENGTH ? `${body.slice(0, MAX_LENGTH)}...` : body;
 
@@ -9,7 +9,9 @@ export default function CardPreview({ body }) {
       <Paragraph>{`${truncatedBody}`}</Paragraph>
     </Wrapper>
   );
-}
+};
+
+export default CardPreview;
 
 const Wrapper = styled.div`
   position: absolute;

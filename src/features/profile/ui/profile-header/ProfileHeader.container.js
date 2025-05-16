@@ -1,9 +1,9 @@
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
+import axios from '@shared/lib/axios.js';
 import { useEffect, useState } from 'react';
-import { useNavigatePath } from '../../../../shared/hooks/useNavigatePath';
-import axios from '../../../../shared/lib/axios';
-import ProfileHeaderUI from './ProfileHeader.presenter';
+import ProfileHeaderUI from './ProfileHeader.presenter.js';
 
-export default function ProfileHeader() {
+const ProfileHeader = () => {
   const [profile, setProfile] = useState('');
   const userData = JSON.parse(localStorage.getItem('userData'));
   const memberId = userData?.memberId;
@@ -25,4 +25,6 @@ export default function ProfileHeader() {
   }, [memberId]);
 
   return <ProfileHeaderUI profile={profile} navigatePath={navigatePath} />;
-}
+};
+
+export default ProfileHeader;

@@ -1,5 +1,7 @@
-import Login from '../../features/login/ui/Login.container';
+import Login from '@features/login/ui/Login.container.js';
 
-export default function LoginRoute() {
+const LoginRoute = () => {
   return <Login />;
-}
+};
+
+export default LoginRoute;

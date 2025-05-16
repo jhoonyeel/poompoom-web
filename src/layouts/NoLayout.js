@@ -1,10 +1,12 @@
 import { Outlet } from 'react-router-dom';
-import * as S from './Layout.styles';
+import * as S from './Layout.styles.js';
 
-export function NoLayout() {
+const NoLayout = () => {
   return (
     <S.AppLayout>
       <Outlet />
     </S.AppLayout>
   );
-}
+};
+
+export default NoLayout;

@@ -1,7 +1,7 @@
+import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll.js';
+import axios from '@shared/lib/axios.js';
 import { useEffect, useState } from 'react';
-import { useInfiniteScroll } from '../../../../shared/hooks/useInfiniteScroll';
-import axios from '../../../../shared/lib/axios';
-import RecentlyViewdFeedUI from './RecentlyViewdFeed.presenter';
+import RecentlyViewdFeedUI from './RecentlyViewdFeed.presenter.js';
 
 const fetchLatestData = async (cursorId, size) => {
   const res = await axios.get(`/profile/view`, {
@@ -11,7 +11,7 @@ const fetchLatestData = async (cursorId, size) => {
   return { values, nextPageId, hasNext };
 };
 
-export default function RecentlyViewdFeed() {
+const RecentlyViewdFeed = () => {
   const { rawData, loaderRef } = useInfiniteScroll({
     fetchFunction: fetchLatestData, // 데이터 fetch 함수
     initialSize: 6, // 초기 로드 데이터 개수
@@ -30,4 +30,6 @@ export default function RecentlyViewdFeed() {
   }, [rawData]);
 
   return <RecentlyViewdFeedUI latestPosts={latestPosts} loader={loaderRef} />;
-}
+};
+
+export default RecentlyViewdFeed;

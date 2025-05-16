@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-export default function EditComment({ body, commentId, reviewId, isEditing, setIsEditing }) {
+const EditComment = ({ body, commentId, reviewId, isEditing, setIsEditing }) => {
   const [editedBody, setEditedBody] = useState(body);
 
   const ChangeComment = async () => {
@@ -41,7 +41,9 @@ export default function EditComment({ body, commentId, reviewId, isEditing, setI
       )}
     </CommentBody>
   );
-}
+};
+
+export default EditComment;
 
 const CommentBody = styled.div`
   font-size: 24px;

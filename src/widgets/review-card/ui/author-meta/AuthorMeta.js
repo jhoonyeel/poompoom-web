@@ -1,9 +1,9 @@
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useNavigatePath } from '../../../../shared/hooks/useNavigatePath';
-import AuthorProfile from './AuthorProfile';
+import AuthorProfile from './AuthorProfile.js';
 
-export default function AuthorMeta({ profilePhoto, nickname, reviewType, isContentHovered }) {
+const AuthorMeta = ({ profilePhoto, nickname, reviewType, isContentHovered }) => {
   const navigatePath = useNavigatePath();
 
   return (
@@ -17,7 +17,9 @@ export default function AuthorMeta({ profilePhoto, nickname, reviewType, isConte
       </AuthorInfo>
     </Wrapper>
   );
-}
+};
+
+export default AuthorMeta;
 
 const Wrapper = styled.div`
   display: flex;

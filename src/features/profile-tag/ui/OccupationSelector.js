@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default function OccupationSelector({ setSelectedButton }) {
+const OccupationSelector = ({ setSelectedButton }) => {
   const handleClick = (name) => {
     setSelectedButton(name);
   };
@@ -21,9 +21,9 @@ export default function OccupationSelector({ setSelectedButton }) {
       </ButtonContainer>
     </Container>
   );
-}
+};
 
-// Styled-components
+export default OccupationSelector;
 
 const Container = styled.div`
   font-family: Arial, sans-serif;

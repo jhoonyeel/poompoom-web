@@ -4,7 +4,7 @@ import { ReactComponent as Delete } from '../../assets/Delete.svg';
 import { ReactComponent as Edit } from '../../assets/Edit.svg';
 import { ReactComponent as MoreIcon } from '../../assets/OverflowMenu.svg';
 
-export default function OverflowMenu({ onUpdate, onDelete }) {
+const OverflowMenu = ({ onUpdate, onDelete }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -43,7 +43,9 @@ export default function OverflowMenu({ onUpdate, onDelete }) {
       )}
     </Wrapper>
   );
-}
+};
+
+export default OverflowMenu;
 
 const Wrapper = styled.div`
   display: flex;

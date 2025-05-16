@@ -1,6 +1,6 @@
+import { ReactComponent as Logo } from '@shared/assets/SmallLogo.svg';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as Logo } from '../../../shared/assets/SmallLogo.svg';
 
 export const LogoSvg = styled(Logo)`
   position: absolute;

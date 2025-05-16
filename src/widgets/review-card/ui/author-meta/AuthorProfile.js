@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ReactComponent as FireCracker } from '../../assets/FireCraker.svg';
 
-export default function AuthorProfile({ isContentHovered, profilePhoto, navigatePath }) {
+const AuthorProfile = ({ isContentHovered, profilePhoto, navigatePath }) => {
   return (
     <Wrapper onClick={navigatePath(`/profile`)}>
       <AuthorImgBox>
@@ -10,7 +10,9 @@ export default function AuthorProfile({ isContentHovered, profilePhoto, navigate
       <FireCrackerIcon $isContentHovered={isContentHovered} />
     </Wrapper>
   );
-}
+};
+
+export default AuthorProfile;
 
 const Wrapper = styled.div`
   position: relative;

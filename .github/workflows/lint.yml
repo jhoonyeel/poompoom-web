@@ -1,0 +1,30 @@
+name: Lint & Format Check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run ESLint Check (no auto-fix)
+        run: yarn lint
+
+      - name: Run Prettier Check (no auto-fix)
+        run: yarn format

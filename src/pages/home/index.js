@@ -1,5 +1,7 @@
-import Home from '../../features/home/ui/Home';
+import Home from '@features/home/ui/Home.js';
 
-export default function HomeRoute() {
+const HomeRoute = () => {
   return <Home />;
-}
+};
+
+export default HomeRoute;

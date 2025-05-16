@@ -1,9 +1,9 @@
+import ReviewPostCard from '@widgets/review-card/ui/ReviewCard.container.js';
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import ReviewPostCard from '../../../../widgets/review-card/ui/ReviewCard.container';
 import Cursor from '../../assets/HorizontalCursor.svg';
 
-export default function RecentlyViewdFeedUI({ latestPosts, loader }) {
+const RecentlyViewdFeedUI = ({ latestPosts, loader }) => {
   const postListRef = useRef(null);
 
   useEffect(() => {
@@ -35,7 +35,9 @@ export default function RecentlyViewdFeedUI({ latestPosts, loader }) {
       <ScrollTrigger ref={loader} />
     </Wrapper>
   );
-}
+};
+
+export default RecentlyViewdFeedUI;
 
 const Wrapper = styled.div`
   padding-left: 32px;

@@ -1,16 +1,10 @@
-import AgeSlider from './AgeRangeSelector';
-import Gender from './GenderSelector';
-import Interest from './InterestCategorySelector';
-import Job from './OccupationSelector';
-import * as S from './ProfileTagForm.styles';
+import AgeSlider from './AgeRangeSelector.js';
+import Gender from './GenderSelector.js';
+import Interest from './InterestCategorySelector.js';
+import Job from './OccupationSelector.js';
+import * as S from './ProfileTagForm.styles.js';
 
-export default function ProfileTagFormUI({
-  buttons,
-  setSelectedButton,
-  setSelectedAgeLabel,
-  selectedAgeLabel,
-  onClickToBack,
-}) {
+const ProfileTagFormUI = ({ buttons, setSelectedButton, setSelectedAgeLabel, selectedAgeLabel, onClickToBack }) => {
   return (
     <S.ContainerS>
       <S.IntroText>프로필 태그 선택</S.IntroText>
@@ -48,4 +42,6 @@ export default function ProfileTagFormUI({
       <S.SubmitButton onClick={onClickToBack}>회원가입</S.SubmitButton>
     </S.ContainerS>
   );
-}
+};
+
+export default ProfileTagFormUI;

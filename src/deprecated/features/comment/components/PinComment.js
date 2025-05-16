@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-export default function PinComment({ isFixed, commentId, reviewId }) {
+const PinComment = ({ isFixed, commentId, reviewId }) => {
   const [isPined, setIsPined] = useState(isFixed);
   const upPinComment = async () => {
     try {
@@ -37,7 +37,9 @@ export default function PinComment({ isFixed, commentId, reviewId }) {
   };
 
   return <PinIcon icon={faMapPin} onClick={handlePinClick} style={{ color: isPined ? '#655f48' : '#bababa' }} />;
-}
+};
+
+export default PinComment;
 
 const PinIcon = styled(FontAwesomeIcon)`
   top: 0;

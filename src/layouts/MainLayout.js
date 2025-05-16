@@ -1,9 +1,9 @@
+import Footer from '@widgets/footer/ui/Footer.container.js';
+import Header from '@widgets/header/ui/Header.container.js';
 import { Outlet } from 'react-router-dom';
-import Footer from '../widgets/footer/ui/Footer.container';
-import Header from '../widgets/header/ui/Header.container';
-import * as S from './Layout.styles';
+import * as S from './Layout.styles.js';
 
-export function MainLayout() {
+const MainLayout = () => {
   return (
     <S.AppLayout>
       <S.HeaderContainer>
@@ -15,4 +15,6 @@ export function MainLayout() {
       </S.FooterContainer>
     </S.AppLayout>
   );
-}
+};
+
+export default MainLayout;

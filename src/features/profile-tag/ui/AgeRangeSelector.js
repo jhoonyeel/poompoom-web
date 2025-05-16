@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
-export default function AgeRangeSelector({ setSelectedButton, setSelectedAgeLabel }) {
+const AgeRangeSelector = ({ setSelectedButton, setSelectedAgeLabel }) => {
   const spots = [
     { label: '10대 후반', position: 10, key: 'teen' },
     { label: '20대 초반', position: 30, key: 'early20s' },
@@ -25,7 +25,9 @@ export default function AgeRangeSelector({ setSelectedButton, setSelectedAgeLabe
       <RangeInput type="range" min={10} max={90} step={20} value={value} onChange={handleChange} />
     </SlideBarContainer>
   );
-}
+};
+
+export default AgeRangeSelector;
 
 const SlideBarContainer = styled.div`
   position: relative;

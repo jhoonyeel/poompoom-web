@@ -1,6 +1,6 @@
+import { login as authServiceLogin, logout as authServiceLogout } from '@shared/api/auth.js';
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
 import { useEffect, useState } from 'react';
-import { login as authServiceLogin, logout as authServiceLogout } from '../../../shared/api/auth';
-import { useNavigatePath } from '../../../shared/hooks/useNavigatePath';
 
 export function useLogin() {
   const [userData, setUserData] = useState(null); // userData 상태 관리

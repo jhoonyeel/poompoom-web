@@ -1,11 +1,11 @@
 import { faBookmark as emptyBookmark, faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
-import CommentWrite from '../../../../deprecated/features/comment/components/CommentWrite';
+import CommentWrite from '../../../../deprecated/features/comment/components/CommentWrite.js';
 import { ReactComponent as LinkImg } from '../../assets/LinkImg.svg';
-import OverflowMenu from './OverflowMenu';
-import * as S from './ReviewDetail.styles';
+import OverflowMenu from './OverflowMenu.js';
+import * as S from './ReviewDetail.styles.js';
 
-export default function ReviewDetailUI({
+const ReviewDetailUI = ({
   currentImageIndex,
   setCurrentImageIndex,
   prevImage,
@@ -31,7 +31,7 @@ export default function ReviewDetailUI({
   handleLike,
   handleBookmark,
   item,
-}) {
+}) => {
   return (
     <div>
       <S.DetailSection>
@@ -50,6 +50,7 @@ export default function ReviewDetailUI({
             <S.RightBtn onClick={nextImage}>›</S.RightBtn>
             <S.Dots>
               {photos.map((_, index) => (
+                // eslint-disable-next-line react/jsx-key
                 <S.Dot
                   active={index === currentImageIndex}
                   onClick={() => {
@@ -111,4 +112,6 @@ export default function ReviewDetailUI({
       </S.CommentSection> */}
     </div>
   );
-}
+};
+
+export default ReviewDetailUI;

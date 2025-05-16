@@ -1,9 +1,9 @@
+import { useNavigatePath } from '@shared/hooks/useNavigatePath.js';
 import { useState } from 'react';
-import { useNavigatePath } from '../../../shared/hooks/useNavigatePath';
 import particle1 from '../assets/Particle1.json';
 import particle2 from '../assets/Particle2.json';
 import particle3 from '../assets/Particle3.json';
-import ReviewCardUI from './ReviewCard.presenter';
+import ReviewCardUI from './ReviewCard.presenter.js';
 
 const particleOptions = [
   {
@@ -32,7 +32,7 @@ const particleOptions = [
   },
 ];
 
-export default function ReviewCard({ post }) {
+const ReviewCard = ({ post }) => {
   const [randomParticle, setRandomParticle] = useState(particleOptions[0]);
   const [isContentHovered, setIsContentHovered] = useState(false);
   const navigatePath = useNavigatePath();
@@ -60,4 +60,6 @@ export default function ReviewCard({ post }) {
       navigatePath={navigatePath}
     />
   );
-}
+};
+
+export default ReviewCard;

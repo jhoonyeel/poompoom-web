@@ -1,6 +1,6 @@
-import * as S from './ProfileTabMenu.styles';
+import * as S from './ProfileTabMenu.styles.js';
 
-export default function ProfileTabMenuUI({ currentPath, navigatePath }) {
+const ProfileTabMenuUI = ({ currentPath, navigatePath }) => {
   return (
     <S.Wrapper>
       <S.Menutab>
@@ -19,4 +19,6 @@ export default function ProfileTabMenuUI({ currentPath, navigatePath }) {
       </S.Menutab>
     </S.Wrapper>
   );
-}
+};
+
+export default ProfileTabMenuUI;

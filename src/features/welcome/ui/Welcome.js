@@ -3,9 +3,9 @@ import { ReactComponent as Calender } from '../assets/Calender.svg';
 import { ReactComponent as Location } from '../assets/Location.svg';
 import { ReactComponent as Present } from '../assets/Present.svg';
 import { ReactComponent as Title } from '../assets/Welcome.svg';
-import * as S from './Welcomes.styles';
+import * as S from './Welcomes.styles.js';
 
-export default function Welcome() {
+const Welcome = () => {
   const navigate = useNavigate();
   const onClickToLogin = () => {
     navigate('/login');
@@ -39,4 +39,6 @@ export default function Welcome() {
       <S.Button onClick={onClickToLogin}>고고싱</S.Button>
     </S.Container>
   );
-}
+};
+
+export default Welcome;

@@ -1,5 +1,7 @@
-import ReviewList from '../../features/review/ui/ReviewList';
+import ReviewList from '@features/review/ui/ReviewList.js';
 
-export default function JoinRoute() {
+const JoinRoute = () => {
   return <ReviewList />;
-}
+};
+
+export default JoinRoute;

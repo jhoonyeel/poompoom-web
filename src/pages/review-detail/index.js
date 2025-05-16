@@ -1,5 +1,7 @@
-import ReviewDetail from '../../features/review/ui/review-detail/ReviewDetail.container';
+import ReviewDetail from '@features/review/ui/review-detail/ReviewDetail.container.js';
 
-export default function ReviewDetailRoute() {
+const ReviewDetailRoute = () => {
   return <ReviewDetail />;
-}
+};
+
+export default ReviewDetailRoute;

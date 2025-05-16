@@ -1,13 +1,13 @@
+import PostFilter from '@widgets/review-filter/ui/ReviewFilter.container.js';
 import { useState } from 'react';
 import styled from 'styled-components';
-import PostFilter from '../../../widgets/review-filter/ui/ReviewFilter.container';
 // import RankingProfileCard from './components/Ranking/RankingProfileCard/RankingProfileCard.container';
-import { ScrollToTopButton } from '../../../shared/ui/ScrollToTopButton';
-import ExploreFeed from './explore-feed/ExploreFeed.container';
-import RecentlyViewdFeed from './recently-viewd-feed/RecentlyViewdFeed.container';
-import RecommendedFeed from './recommended-feed/RecommendedFeed.container';
+import ScrollToTopButton from '@shared/ui/ScrollToTopButton.js';
+import ExploreFeed from './explore-feed/ExploreFeed.container.js';
+import RecentlyViewdFeed from './recently-viewd-feed/RecentlyViewdFeed.container.js';
+import RecommendedFeed from './recommended-feed/RecommendedFeed.container.js';
 
-export default function ReviewList() {
+const ReviewList = () => {
   const [selectedSort, setSelectedSort] = useState('추천순'); // 기본으로 추천순이 선택되도록 설정
 
   return (
@@ -36,7 +36,9 @@ export default function ReviewList() {
       <ScrollToTopButton />
     </Wrapper>
   );
-}
+};
+
+export default ReviewList;
 
 const Wrapper = styled.div`
   margin: 0 auto;

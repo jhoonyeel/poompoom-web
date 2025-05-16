@@ -1,9 +1,9 @@
+import { login } from '@shared/api/auth.js';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../../shared/api/auth';
-import LoginUI from './Login.presenter';
+import LoginUI from './Login.presenter.js';
 
-export default function Login() {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -40,4 +40,6 @@ export default function Login() {
       onKakaoLogin={onKakaoLogin}
     />
   );
-}
+};
+
+export default Login;

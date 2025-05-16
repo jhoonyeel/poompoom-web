@@ -1,10 +1,10 @@
-import React from 'react';
-import * as S from './Footer.styles';
+import * as S from './Footer.styles.js';
 
-export default function FooterUI() {
+const FooterUI = () => {
   return (
     <S.Wrapper>
       <S.FooterBackgroundIcon /> {/* SVG to PNG */}
     </S.Wrapper>
   );
-}
+};
+export default FooterUI;

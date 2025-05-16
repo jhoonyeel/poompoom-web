@@ -1,7 +1,7 @@
+import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll.js';
+import axios from '@shared/lib/axios.js';
 import { useEffect, useState } from 'react';
-import { useInfiniteScroll } from '../../../../shared/hooks/useInfiniteScroll';
-import axios from '../../../../shared/lib/axios';
-import RecommendedFeedUI from './RecommendedFeed.presenter';
+import RecommendedFeedUI from './RecommendedFeed.presenter.js';
 
 const fetchSubData = async (cursorId, size) => {
   const response = await axios.get(`/review/subscribe`, {
@@ -11,7 +11,7 @@ const fetchSubData = async (cursorId, size) => {
   return { values, nextPageId, hasNext };
 };
 
-export default function RecommendedFeed() {
+const RecommendedFeed = () => {
   const { rawData, loaderRef } = useInfiniteScroll({
     fetchFunction: fetchSubData, // 데이터를 가져오는 함수
     initialSize: 10, // 한 번에 가져올 데이터 수
@@ -26,4 +26,6 @@ export default function RecommendedFeed() {
   }, [rawData]);
 
   return <RecommendedFeedUI subPosts={subPosts} loader={loaderRef} />;
-}
+};
+
+export default RecommendedFeed;

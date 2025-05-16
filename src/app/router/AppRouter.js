@@ -1,10 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
-import ReviewSearch from '../../features/review-search/ui/ReviewSearch';
-import SocialJoinCallback from '../../features/social-join/ui/SocialJoinCallback';
-import SocialLoginCallback from '../../features/social-login/ui/SocialLoginCallback';
-import { HeaderOnlyLayout } from '../../layouts/HeaderOnlyLayout';
-import { MainLayout } from '../../layouts/MainLayout';
-import { NoLayout } from '../../layouts/NoLayout';
+import ReviewSearch from '@features/review-search/ui/ReviewSearch.js';
+import SocialJoinCallback from '@features/social-join/ui/SocialJoinCallback.js';
+import SocialLoginCallback from '@features/social-login/ui/SocialLoginCallback.js';
+import HeaderOnlyLayout from '@layouts/HeaderOnlyLayout.js';
+import MainLayout from '@layouts/MainLayout.js';
+import NoLayout from '@layouts/NoLayout.js';
 import {
   FindPasswordRoute,
   FindUsernameRoute,
@@ -20,15 +19,16 @@ import {
   ReviewListRoute,
   SocialJoinRoute,
   WelcomeRoute,
-} from '../../pages';
-import AuthGuard from './AuthGuard';
+} from '@pages';
+import { Route, Routes } from 'react-router-dom';
+import AuthGuard from './AuthGuard.js';
 
 const isAuthenticated = async () => {
   // AT 만료여부 확인해서 새로운 AT인지 확인해야 함.
   return true || localStorage.getItem('accessToken') !== null;
 };
 
-export function AppRouter() {
+const AppRouter = () => {
   return (
     <Routes>
       {/* NoLayout: 인증 페이지 */}
@@ -73,4 +73,6 @@ export function AppRouter() {
       </Route>
     </Routes>
   );
-}
+};
+
+export default AppRouter;

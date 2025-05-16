@@ -1,5 +1,5 @@
+import axios from '@shared/lib/axios.js';
 import { useEffect, useState } from 'react';
-import axios from '../../../shared/lib/axios';
 
 export function useFetchFailKeyword() {
   const [failKeyword, setFailKeyword] = useState();

@@ -1,7 +1,7 @@
+import { logout } from '@shared/api/auth.js';
 import styled from 'styled-components';
-import { logout } from '../../../shared/api/auth';
 
-export default function ProfileEdit() {
+const ProfileEdit = () => {
   const handleLogout = () => {
     logout();
 
@@ -17,7 +17,9 @@ export default function ProfileEdit() {
       </Wrapper>
     </Container>
   );
-}
+};
+
+export default ProfileEdit;
 
 export const Container = styled.div`
   display: flex;

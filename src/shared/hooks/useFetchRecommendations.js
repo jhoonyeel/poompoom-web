@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from '../lib/axios';
+import axios from '../lib/axios.js';
 
 export function useFetchRecommendations() {
   const [recommendations, setRecommendations] = useState([]);

@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
 import { faHeart as heartInactive } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as heartActive } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
+import { useState } from 'react';
+import styled from 'styled-components';
 
-export default function LikeComment({ likeCount, reviewId, commentId, isCommenter, isLiked }) {
+const LikeComment = ({ likeCount, reviewId, commentId, isCommenter, isLiked }) => {
   const [likeStatus, setLikeStatus] = useState(isLiked);
   const [currentLikeCount, setCurrentLikeCount] = useState(likeCount);
 
@@ -32,7 +32,9 @@ export default function LikeComment({ likeCount, reviewId, commentId, isCommente
       )}
     </div>
   );
-}
+};
+
+export default LikeComment;
 
 const HeartIcon = styled(FontAwesomeIcon)`
   color: rgba(255, 154, 154, 0.84);

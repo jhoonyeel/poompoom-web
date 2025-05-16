@@ -2,14 +2,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line import/named
-import { REVIEW_ITEM_TYPES } from '../../../../shared/constants/reviewItemTypes';
-import { createReview } from '../../api/review';
-import { useFetchProfilePicture } from '../../hooks/useFetchProfilePicture';
-import { useLogin } from '../../hooks/useLogin';
-import { REVIEW_CATEGORIES } from '../../model/reviewCategories';
-import ReviewWriteUI from './ReviewCreate.presenter';
+import { REVIEW_ITEM_TYPES } from '@shared/constants/reviewItemTypes.js';
+import { createReview } from '../../api/review.js';
+import { useFetchProfilePicture } from '../../hooks/useFetchProfilePicture.js';
+import { useLogin } from '../../hooks/useLogin.js';
+import { REVIEW_CATEGORIES } from '../../model/reviewCategories.js';
+import ReviewWriteUI from './ReviewCreate.presenter.js';
 
-export default function ReviewCreate() {
+const ReviewCreate = () => {
   const [images, setImages] = useState([]);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [reviewData, setReviewData] = useState({
@@ -126,4 +126,6 @@ export default function ReviewCreate() {
       nickname={nickname}
     />
   );
-}
+};
+
+export default ReviewCreate;

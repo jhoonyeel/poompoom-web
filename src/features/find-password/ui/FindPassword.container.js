@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { sendPasswordResetEmail, submitNewPassword, verifyPasswordResetCode } from '../api/passwordReset';
-import FindPasswordUI from './FindPassword.presenter';
+import { sendPasswordResetEmail, submitNewPassword, verifyPasswordResetCode } from '../api/passwordReset.js';
+import FindPasswordUI from './FindPassword.presenter.js';
 
-export default function FindPassword() {
+const FindPassword = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [authNum, setAuthNum] = useState('');
@@ -61,4 +61,6 @@ export default function FindPassword() {
       handleResetPassword={handleResetPassword}
     />
   );
-}
+};
+
+export default FindPassword;

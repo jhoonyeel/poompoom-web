@@ -1,7 +1,7 @@
-import ReviewPostCard from '../../../../widgets/review-card/ui/ReviewCard.container';
-import * as S from './MyReviewPanel.styles';
+import ReviewPostCard from '@widgets/review-card/ui/ReviewCard.container.js';
+import * as S from './MyReviewPanel.styles.js';
 
-export default function MyReviewPanelUI({ latestPosts, handlePostClick }) {
+const MyReviewPanelUI = ({ latestPosts, handlePostClick }) => {
   return (
     <S.Wrapper>
       <S.GalleryBody>
@@ -14,4 +14,6 @@ export default function MyReviewPanelUI({ latestPosts, handlePostClick }) {
       </S.GalleryBody>
     </S.Wrapper>
   );
-}
+};
+
+export default MyReviewPanelUI;

@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
-export default function CardHashtags({ hashTags }) {
+const CardHashtags = ({ hashTags }) => {
   return (
     <Wrapper>{hashTags && hashTags.map((tag) => <HashtagItem key={tag.id}>{`#${tag.name}`}</HashtagItem>)}</Wrapper>
   );
-}
+};
+
+export default CardHashtags;
 
 const Wrapper = styled.ul`
   display: flex;

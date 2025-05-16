@@ -4,7 +4,7 @@ import LoadingAnimation from '../assets/presentLoading.json';
 
 const defaultOptions = { loop: true, animationData: LoadingAnimation };
 
-export default function Loading() {
+const Loading = () => {
   return (
     <Container>
       <LottieWrapper>
@@ -13,7 +13,9 @@ export default function Loading() {
       <Text>로딩 중입니다...</Text>
     </Container>
   );
-}
+};
+
+export default Loading;
 
 const Container = styled.div`
   display: flex;

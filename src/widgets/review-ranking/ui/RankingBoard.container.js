@@ -15,7 +15,7 @@ import { ReactComponent as Sixth } from '../assets/Card6.svg';
 import { ReactComponent as Seventh } from '../assets/Card7.svg';
 import { ReactComponent as Eighth } from '../assets/Card8.svg';
 import { ReactComponent as Ninth } from '../assets/Card9.svg';
-import RankingBoardUI from './RankingBoard.presenter';
+import RankingBoardUI from './RankingBoard.presenter.js';
 
 const getOrdinal = (n) => {
   const s = ['th', 'st', 'nd', 'rd'];
@@ -23,7 +23,7 @@ const getOrdinal = (n) => {
   return n + (s[(v - 20) % 10] || s[v] || s[0]);
 };
 
-export default function RankingBoard() {
+const RankingBoard = () => {
   const [cards] = useState(['16th', ...Array.from({ length: 15 }, (_, i) => getOrdinal(i + 1))]);
   const [rotation, setRotation] = useState(-0.5);
   const intervalRef = useRef(null);
@@ -57,4 +57,6 @@ export default function RankingBoard() {
   }, []);
 
   return <RankingBoardUI cards={cards} rotation={rotation} ranks={ranks} />;
-}
+};
+
+export default RankingBoard;

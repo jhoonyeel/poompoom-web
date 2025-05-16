@@ -1,5 +1,7 @@
-import ProfileEdit from '../../features/profile/ui/ProfileEdit';
+import ProfileEdit from '@features/profile/ui/ProfileEdit.js';
 
-export default function ProfileEditRoute() {
+const ProfileEditRoute = () => {
   return <ProfileEdit />;
-}
+};
+
+export default ProfileEditRoute;

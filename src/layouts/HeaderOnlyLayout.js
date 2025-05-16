@@ -1,8 +1,8 @@
+import Header from '@widgets/header/ui/Header.container.js';
 import { Outlet } from 'react-router-dom';
-import Header from '../widgets/header/ui/Header.container';
-import * as S from './Layout.styles';
+import * as S from './Layout.styles.js';
 
-export function HeaderOnlyLayout() {
+const HeaderOnlyLayout = () => {
   return (
     <S.AppLayout>
       <S.HeaderContainer>
@@ -11,4 +11,6 @@ export function HeaderOnlyLayout() {
       <Outlet />
     </S.AppLayout>
   );
-}
+};
+
+export default HeaderOnlyLayout;

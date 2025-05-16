@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SearchBarUI from './SearchBar.presenter';
+import SearchBarUI from './SearchBar.presenter.js';
 
-export default function SearchBar() {
+const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState(''); // 검색어 상태
   const [isFocused, setIsFocused] = useState(false); // input focus 상태
   const inputRef = useRef(null);
@@ -52,4 +52,6 @@ export default function SearchBar() {
       ref={inputRef}
     />
   );
-}
+};
+
+export default SearchBar;

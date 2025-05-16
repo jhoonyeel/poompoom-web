@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { ReactComponent as SignUpTitle } from '../../../shared/assets/CreateAccount.svg';
-import { useInputFocus } from '../../../shared/hooks/useInputFocus';
-import AuthFooter from '../../../widgets/footer/ui/AuthFooter';
-import ProfileTagForm from '../../profile-tag/ui/ProfileTagForm.container';
-import * as S from './SocialJoin.styles';
+import { ReactComponent as SignUpTitle } from '@shared/assets/CreateAccount.svg';
+import { useInputFocus } from '@shared/hooks/useInputFocus.js';
+import AuthFooter from '@widgets/footer/ui/AuthFooter.js';
+import ProfileTagForm from '../../profile-tag/ui/ProfileTagForm.container.js';
+import * as S from './SocialJoin.styles.js';
 
-export default function SocialJoinUI({
+const SocialJoinUI = ({
   register,
   handleSubmit,
   errors,
@@ -16,7 +16,7 @@ export default function SocialJoinUI({
   idCheckMessage,
   checkDuplicateId,
   onSubmit,
-}) {
+}) => {
   const { isFocused, handleFocus, handleBlur } = useInputFocus();
 
   return (
@@ -77,4 +77,6 @@ export default function SocialJoinUI({
       <AuthFooter />
     </>
   );
-}
+};
+
+export default SocialJoinUI;
