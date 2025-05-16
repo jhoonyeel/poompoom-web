@@ -25,6 +25,8 @@ jobs:
 
       - name: Run ESLint Check (no auto-fix)
         run: yarn lint
+        working-directory: ${{ github.workspace }}
 
       - name: Run Prettier Check (no auto-fix)
         run: yarn format
+        working-directory: ${{ github.workspace }}
