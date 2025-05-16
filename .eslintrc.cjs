@@ -26,6 +26,7 @@ module.exports = {
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx'], // Node 해석용: 확장자 생략 허용
+        moduleDirectory: ['node_modules', './src'], // 루트 기준 명확히
       },
       alias: {
         map: [
