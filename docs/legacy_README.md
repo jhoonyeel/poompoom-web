@@ -1,16 +1,16 @@
 # poompoom
 
-연인간에 주고 받은 선물을 공유하여 선물 선택의 고민을 덜고, 다양한 후기와 경험을 나눌 수 있는 `선물 후기 공유 플랫폼`입니다.
+연인간에 주고 받은 선물을 공유하여 선물 선택의 고민을 덜고, 다양한 후기와 경험을 나눌 수 있는 `선물 공유 플랫폼`입니다.
 받은 선물이나 준 선물을 플랫폼에 공유하여 실시간 후기와 평가를 확인할 수 있습니다.
 
 ### ✅ 사용 기술 및 개발 환경
 
-| 분류     | 기술 스택                                                  |
-| :------- | :--------------------------------------------------------- |
-| Frontend | React, JavaScript, styled-components, Yarn                 |
-| Backend  | Express (간단한 API 서버 구축)                             |
-| Hosting  | Vercel (Frontend), Render (Backend)                        |
-| Tools    | ESLint, Prettier (Airbnb Style), Stylelint, Github Actions |
+| 분류     | 기술 스택                                                              |
+| :------- | :--------------------------------------------------------------------- |
+| Frontend | React, TypeScript, Vite, Emotion (기존: JavaScript, styled-components) |
+| Backend  | Express (간단한 API 서버 구축)                                         |
+| Hosting  | Vercel (Frontend), Render (Backend)                                    |
+| Tools    | ESLint, Prettier (Airbnb Style), Stylelint, Github Actions             |
 
 ### ✅ Application UI
 

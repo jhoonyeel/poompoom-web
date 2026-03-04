@@ -4,6 +4,7 @@ module.exports = {
     browser: true, // 브라우저 환경 (window, document 등 사용 가능)
     node: true, // Node.js 환경 (require, module 등 사용 가능)
     es6: true, // ES6 문법 사용 가능 (const, let, 화살표 함수 등)
+    jest: true,
   },
 
   // ✅ 코드 분석에 사용할 파서 설정
@@ -79,6 +80,20 @@ module.exports = {
       {
         js: 'always',
         jsx: 'always',
+      },
+    ],
+
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: [
+          '**/test.{js,jsx,ts,tsx}',
+          '**/tests/**',
+          '**/*.test.{js,jsx,ts,tsx}',
+          '**/setupTests.{js,ts}',
+          '**/test-utils.{js,ts}',
+          '**/handlers.{js,ts}',
+        ],
       },
     ],
 
