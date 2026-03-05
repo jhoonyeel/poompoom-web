@@ -25,7 +25,7 @@
 
 ### 🎥 Demo Video
 
-![preview](docs/poompoom-preview.gif)
+<img src="./docs/poompoom-preview.gif" width="100%" alt="PoomPoom demo preview" />
 
 **📺 전체 데모 영상**: [poompoom.gif](./docs/poompoom.gif)
 
